@@ -20,10 +20,11 @@ Or install it yourself as:
 
 This is experimental!
 
-rake pelias:setup
-bundle console
-> Pelias::Street.index_all
-> Pelias::Address.index_all
+    rake pelias:setup
+
+    bundle console
+    > Pelias::Street.index_all
+    > Pelias::Address.index_all
 
 ## Contributing
 
