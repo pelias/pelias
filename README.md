@@ -2,34 +2,28 @@
 
 OpenStreetMap + Elasticsearch 
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'pelias'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install pelias
+## Overview
 
 ## Usage
 
-This is experimental!
+First set up the OpenStreetMap index for streets and addresses:
 
-    rake pelias:setup
+    $ rake openstreetmap:setup
+    $ rake openstreetmap:populate_streets
+    $ rake openstreetmap:populate_addresses
 
-    bundle console
-    > Pelias::Street.index_all
-    > Pelias::Address.index_all
+Then the Geonames index:
 
-## Contributing
+    $ rake geonames:setup
+    $ rake geonames:populate_features
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Then Zetashapes, which depends on the Geonames index above:
+
+    $ rake zetashapes:setup
+    $ rake zetashapes:populate_localities
+    $ rake zetashapes:populate_neighborhoods
+
+Finally the Pelias index, which will reverse geocode the OpenStreetMap addresses and streets into the quattroshapes above.
+
+    $ rake pelias:setup
+    $ rake pelias:build_index

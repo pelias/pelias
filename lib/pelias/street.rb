@@ -2,24 +2,59 @@ module Pelias
 
   class Street < Base
 
-    BULK_INDEX_BATCH_SIZE = 100
+    INDEX = 'pelias'
+    TYPE = 'street'
 
-    def self.index_all
-      results = PG_CLIENT.exec("
-        SELECT osm_id, name,
-          ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS location
-        FROM planet_osm_line
-        WHERE name IS NOT NULL AND highway IS NOT NULL
-      ")
-      results.each_slice(BULK_INDEX_BATCH_SIZE) do |result|
-        ES_CLIENT.bulk body: result.map { |street| { index: {
-          _index: 'pelias', _type: 'street', _id: street['osm_id'],
-          data: {
-            name: street['name'],
-            location: JSON.parse(street['location'])
-          }
-        }}}
-      end
+    def initialize(params)
+      @id = params[:id]
+      @name = params[:name]
+      @location = params[:location]
+      @locality_id = params[:locality_id]
+      @locality_name = params[:locality_name]
+      @locality_alternate_names = params[:locality_alternate_names]
+      @locality_country_code = params[:locality_country_code]
+      @locality_admin1_code = params[:locality_admin1_code]
+      @locality_admin2_code = params[:locality_admin2_code]
+      @locality_admin3_code = params[:locality_admin3_code]
+      @locality_admin4_code = params[:locality_admin4_code]
+      @locality_population = params[:locality_population]
+    end
+
+    def save
+      ES_CLIENT.index(index: INDEX, type: TYPE, id: @id,
+        body: {
+          name: @name,
+          location: @location,
+          locality_id: @locality_id,
+          locality_name: @locality_name,
+          locality_alternate_names: @locality_alternate_names,
+          locality_country_code: @locality_country_code,
+          locality_admin1_code: @locality_admin1_code,
+          locality_admin2_code: @locality_admin2_code,
+          locality_admin3_code: @locality_admin3_code,
+          locality_admin4_code: @locality_admin4_code,
+          locality_population: @locality_population,
+          suggest: generate_suggestions
+        }
+      )
+    end
+
+    def generate_suggestions
+      # TODO take into account alternate names
+      return {
+        input: @name,
+        output: "#{@name} - #{@locality_name}, #{@locality_admin1_code}"
+      }
+    end
+
+    def self.create(params)
+      street = Street.new(params)
+      street.save
+      street
+    end
+
+    def self.find(id)
+      # TODO
     end
 
   end

@@ -1,0 +1,54 @@
+{
+  "mappings": {
+    "feature": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "alternate_names": {
+          "type": "string",
+          "index_name": "alternate_name"
+        },
+        "location": {
+          "type": "geo_point" 
+        },
+        "feature_class": { 
+          "type": "string" 
+        },
+        "feature_code": { 
+          "type": "string" 
+        },
+        "country_code": { 
+          "type": "string" 
+        },
+        "admin1_code": { 
+          "type": "string" 
+        },
+        "admin2_code": { 
+          "type": "string" 
+        },
+        "admin3_code": { 
+          "type": "string" 
+        },
+        "admin4_code": { 
+          "type": "string" 
+        },
+        "population": { 
+          "type": "integer" 
+        },
+        "elevation": { 
+          "type": "integer" 
+        },
+        "dem": { 
+          "type": "integer" 
+        },
+        "timezone": { 
+          "type": "string" 
+        },
+        "modification_date": { 
+          "type": "date" 
+        }
+      }
+    }
+  }
+}

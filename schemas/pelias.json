@@ -1,0 +1,56 @@
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "address": {
+          "tokenizer": "whitespace",
+          "filter": "lowercase"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "locality": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "simple",
+          "search_analyzer": "simple",
+          "payloads": true
+        },
+        "centerpoint": {
+          "type": "geo_point"
+        },
+        "boundaries": {
+          "type": "geo_shape"
+        }
+      }
+    },
+    "street": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "address",
+          "search_analyzer": "address",
+          "payloads": true
+        },
+        "location": {
+          "type": "geo_shape"
+        }
+      }
+    },
+    "address": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "address",
+          "search_analyzer": "address",
+          "payloads": true
+        },
+        "location": {
+          "type": "geo_point"
+        }
+      }
+    }
+  }
+}

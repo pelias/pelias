@@ -16,12 +16,12 @@ GEM
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
-    elasticsearch (0.4.0)
-      elasticsearch-api (= 0.4.0)
-      elasticsearch-transport (= 0.4.0)
-    elasticsearch-api (0.4.0)
+    elasticsearch (0.4.1)
+      elasticsearch-api (= 0.4.1)
+      elasticsearch-transport (= 0.4.1)
+    elasticsearch-api (0.4.1)
       multi_json
-    elasticsearch-transport (0.4.0)
+    elasticsearch-transport (0.4.1)
       faraday
       multi_json
     faraday (0.8.8)
@@ -33,8 +33,13 @@ GEM
     multi_json (1.8.2)
     multipart-post (1.2.0)
     pg (0.17.0)
+    rack (1.5.2)
+    rack-protection (1.5.1)
+      rack
     rake (10.1.0)
     rgeo (0.3.20)
+    rgeo-geojson (0.2.3)
+      rgeo (>= 0.3.7)
     rgeo-shapefile (0.2.3)
       dbf (>= 1.7.0)
       rgeo (>= 0.3.3)
@@ -46,6 +51,11 @@ GEM
     rspec-expectations (2.14.3)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.4)
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    tilt (1.4.1)
 
 PLATFORMS
   ruby
@@ -59,5 +69,7 @@ DEPENDENCIES
   pelias!
   pg
   rake
+  rgeo-geojson
   rgeo-shapefile
   rspec
+  sinatra
