@@ -39,9 +39,15 @@ module Pelias
 
     def generate_suggestions
       # TODO take into account alternate names
+      # TODO fix bug in lat/lon here
       return {
         input: @name,
-        output: "#{@name}, #{@admin1_code}"
+        output: "#{@name}, #{@admin1_code}",
+        payload: {
+          lat: @centerpoint['lon'].to_f,
+          lon: @centerpoint['lat'].to_f,
+          type: 'locality'
+        }
       }
     end
 

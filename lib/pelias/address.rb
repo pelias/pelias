@@ -46,11 +46,16 @@ module Pelias
     def generate_suggestions
       # TODO take into account alternate names
       input = "#{@number} #{@street_name}"
-      output = "#{@number} - #{@street_name} "
+      output = "#{@number} #{@street_name} - "
       output << "#{@locality_name}, #{@locality_admin1_code}"
       return {
         input: input,
-        output: output
+        output: output,
+        payload: {
+          lat: @location['coordinates'][1].to_f,
+          lon: @location['coordinates'][0].to_f,
+          type: 'address'
+        }
       }
     end
 

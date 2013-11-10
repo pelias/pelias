@@ -41,9 +41,15 @@ module Pelias
 
     def generate_suggestions
       # TODO take into account alternate names
+      # TODO need to save centerpoint of street
       return {
         input: @name,
-        output: "#{@name} - #{@locality_name}, #{@locality_admin1_code}"
+        output: "#{@name} - #{@locality_name}, #{@locality_admin1_code}",
+        payload: {
+          lat: @location['coordinates'][0][1].to_f,
+          lon: @location['coordinates'][0][0].to_f,
+          type: 'street'
+        }
       }
     end
 

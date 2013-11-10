@@ -12,7 +12,7 @@ require "pelias/address"
 require "pelias/locality"
 require "pelias/osm"
 require "pelias/search"
-require "pelias/server"
+require "pelias/server/server"
 require "pelias/street"
 require "pelias/version"
 
