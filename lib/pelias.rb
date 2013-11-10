@@ -11,6 +11,8 @@ require "pelias/base"
 require "pelias/address"
 require "pelias/locality"
 require "pelias/osm"
+require "pelias/search"
+require "pelias/server"
 require "pelias/street"
 require "pelias/version"
 
