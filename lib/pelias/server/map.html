@@ -8,21 +8,121 @@ html {
   line-height: 1.2;
   color: #333;
 }
+
 p {
   margin: 0 0 10px 0;
 }
+
 .demo {
   position: relative;
   *z-index: 1;
   margin: 0;
+  text-align: center;
+}
+
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 600px;
+  height: 40px;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+.typeahead {
+  background-color: #fff;
+}
+
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-dropdown-menu {
+  width: 600px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  text-align: left;
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.tt-suggestion {
+  padding: 8px 20px;
+}
+
+.tt-suggestion {
+  border-top: 1px solid #ccc;
+}
+
+.result-type {
+  float: right;
+  font-style: italic;
+}
+
+.result-text {
+  font-weight: bold;
+}
+
+.result-latlng {
+  font-size: 14px;
+}
+
+#map {
+  margin-top: 10px;
+  height: 600px;
 }
 </style>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+<!--[if lte IE 8]>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+<![endif]-->
 </head>
 <body>
 
 <div class="demo">
   <input class="typeahead" type="text" placeholder="suggest...">
 </div>
+
+<div id="map"></div>
 
 <script src="http://twitter.github.io/typeahead.js/js/hogan-2.0.0.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -40,7 +140,29 @@ $('.demo .typeahead').typeahead([
     ].join(''),
     engine: Hogan
   }
-]);
+]).bind('typeahead:selected', function (obj, datum) {
+    console.log(datum.payload);
+    var marker = L.marker([datum.payload.lat, datum.payload.lon]).addTo(map);
+    map.panTo([datum.payload.lat, datum.payload.lon]);
+    if (datum.payload.type=='address') {
+      map.setZoom(17);
+    }
+    else if (datum.payload.type=='street') {
+      map.setZoom(15);
+    }
+    else {
+      map.setZoom(13);
+    }
+});
+</script>
+<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+<script>
+var map = L.map('map').setView([40.68646, -73.98819], 11);
+var osmAttr = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
+var mqTilesAttr = 'Tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />';
+L.tileLayer('http://otile4.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+  attribution: 'Map data ' + osmAttr + ', ' + mqTilesAttr
+}).addTo(map);
 </script>
 </body>
 </html>
