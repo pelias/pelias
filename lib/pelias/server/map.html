@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+<title>Pelias - Search Suggestion Demo</title>
+<style>
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #333;
+}
+p {
+  margin: 0 0 10px 0;
+}
+.demo {
+  position: relative;
+  *z-index: 1;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="demo">
+  <input class="typeahead" type="text" placeholder="suggest...">
+</div>
+
+<script src="http://twitter.github.io/typeahead.js/js/hogan-2.0.0.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.js"></script>
+<script>
+$('.demo .typeahead').typeahead([
+  {
+    name: 'suggestions',
+    valueKey: 'text',
+    remote: 'http://localhost:4567/suggest/%QUERY',
+    template: [
+      '<p class="result-type">{{payload.type}}</p>',
+      '<p class="result-text">{{text}}</p>',
+      '<p class="result-latlng">{{payload.lat}}, {{payload.lon}}</p>'
+    ].join(''),
+    engine: Hogan
+  }
+]);
+</script>
+</body>
+</html>
