@@ -19,7 +19,7 @@ namespace :geonames do
           id: arr[0], body: {
             name: arr[1],
             alternate_names: arr[3],
-            location: { lon: arr[4], lat: arr[5] },
+            location: { lat: arr[4], lon: arr[5] },
             feature_class: arr[6],
             feature_code: arr[7],
             country_code: arr[8],
