@@ -2,6 +2,9 @@ require 'pelias'
 
 namespace :geonames do
 
+  GEONAMES_FILE = 'data/geonames/US.txt' # just us for now
+  GEONAMES_ADMIN1_FILTER = 'NY' # just ny for now
+
   desc "setup index & mappings"
   task :setup do
     schema_file = File.read('schemas/geonames.json')
@@ -11,10 +14,10 @@ namespace :geonames do
 
   desc "populate geonames index"
   task :populate_features do
-    # TODO: this is just US for now
-    File.open('data/geonames/US.txt') do |fp|
+    File.open(GEONAMES_FILE) do |fp|
       fp.each do |line|
         arr = line.chomp.split("\t")
+        next unless arr[10] == GEONAMES_ADMIN1_FILTER
         Pelias::Base::ES_CLIENT.index(index: 'geonames', type: 'feature',
           id: arr[0], body: {
             name: arr[1],
