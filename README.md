@@ -14,24 +14,10 @@ Quattroshapes and Geonames are also required to build the index, as they provide
 
 ## Usage
 
-First set up the OpenStreetMap index for streets and addresses:
-
-    $ rake openstreetmap:setup
+    $ rake pelias:setup
+    $ rake geonames:populate_admin
+    $ rake geonames:populate_features
+    $ rake quattroshapes:populate_neighborhoods
+    $ rake quattroshapes:populate_localities
     $ rake openstreetmap:populate_streets
     $ rake openstreetmap:populate_addresses
-
-Then the Geonames index:
-
-    $ rake geonames:setup
-    $ rake geonames:populate_features
-
-Then Zetashapes, which depends on the Geonames index above:
-
-    $ rake zetashapes:setup
-    $ rake zetashapes:populate_localities
-    $ rake zetashapes:populate_neighborhoods
-
-Finally the Pelias index, which will reverse geocode the OpenStreetMap addresses and streets into the quattroshapes above.
-
-    $ rake pelias:setup
-    $ rake pelias:build_index

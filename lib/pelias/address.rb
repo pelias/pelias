@@ -2,71 +2,54 @@ module Pelias
 
   class Address < Base
 
-    INDEX = 'pelias'
-    TYPE = 'address'
+    attr_accessor :id
+    attr_accessor :number
+    attr_accessor :location
+    attr_accessor :street_id
+    attr_accessor :street_name
+    attr_accessor :locality_id
+    attr_accessor :locality_name
+    attr_accessor :locality_alternate_names
+    attr_accessor :locality_population
+    attr_accessor :neighborhood_id
+    attr_accessor :neighborhood_name
+    attr_accessor :neighborhood_alternate_names
+    attr_accessor :neighborhood_population
+    attr_accessor :country_code
+    attr_accessor :country_name
+    attr_accessor :admin1_code
+    attr_accessor :admin1_name
+    attr_accessor :admin2_code
+    attr_accessor :admin2_name
+    attr_accessor :admin3_code
+    attr_accessor :admin4_code
 
-    def initialize(params)
-      @id = params[:id]
-      @number = params[:number]
-      @location = params[:location]
-      @street_id = params[:street_id]
-      @street_name = params[:street_name]
-      @locality_id = params[:locality_id]
-      @locality_name = params[:locality_name]
-      @locality_alternate_names = params[:locality_alternate_names]
-      @locality_country_code = params[:locality_country_code]
-      @locality_admin1_code = params[:locality_admin1_code]
-      @locality_admin2_code = params[:locality_admin2_code]
-      @locality_admin3_code = params[:locality_admin3_code]
-      @locality_admin4_code = params[:locality_admin4_code]
-      @locality_population = params[:locality_population]
+    def lat
+      (@location['coordinates'] || @location[:coordinates])[1].to_f
     end
 
-    def save
-      ES_CLIENT.index(index: INDEX, type: TYPE, id: @id,
-        body: {
-          number: @number,
-          location: @location,
-          street_id: @street_id,
-          street_name: @street_name,
-          locality_id: @locality_id,
-          locality_name: @locality_name,
-          locality_alternate_names: @locality_alternate_names,
-          locality_country_code: @locality_country_code,
-          locality_admin1_code: @locality_admin1_code,
-          locality_admin2_code: @locality_admin2_code,
-          locality_admin3_code: @locality_admin3_code,
-          locality_admin4_code: @locality_admin4_code,
-          locality_population: @locality_population,
-          suggest: generate_suggestions
-        }
-      )
+    def lon
+      (@location['coordinates'] || @location[:coordinates])[0].to_f
     end
+
+    def self.street_level?
+      true
+    end
+
+    private
 
     def generate_suggestions
       # TODO take into account alternate names
       input = "#{@number} #{@street_name}"
-      output = "#{@number} #{@street_name} - "
-      output << "#{@locality_name}, #{@locality_admin1_code}"
+      input << "#{@locality_name} #{@locality_admin1_code}"
+      output = "#{@number} #{@street_name}"
+      output << " - #{@locality_name}" if @locality_name
+      output << ", #{@locality_admin1_code}" if @locality_admin1_code
       return {
         input: input,
         output: output,
-        payload: {
-          lat: @location['coordinates'][1].to_f,
-          lon: @location['coordinates'][0].to_f,
-          type: 'address'
-        }
+        payload: { lat: lat, lon: lon, type: type }
       }
-    end
-
-    def self.create(params)
-      address = Address.new(params)
-      address.save
-      address
-    end
-
-    def self.find(id)
-      # TODO
     end
 
   end

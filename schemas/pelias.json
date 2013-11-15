@@ -10,6 +10,35 @@
     }
   },
   "mappings": {
+    "geoname": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "simple",
+          "search_analyzer": "simple",
+          "payloads": true
+        },
+        "location": {
+          "type": "geo_shape"
+        }
+      }
+    },
+    "neighborhood": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "simple",
+          "search_analyzer": "simple",
+          "payloads": true
+        },
+        "location": {
+          "type": "geo_shape"
+        },
+        "boundaries": {
+          "type": "geo_shape"
+        }
+      }
+    },
     "locality": {
       "properties": {
         "suggest": {
@@ -18,8 +47,8 @@
           "search_analyzer": "simple",
           "payloads": true
         },
-        "centerpoint": {
-          "type": "geo_point"
+        "location": {
+          "type": "geo_shape"
         },
         "boundaries": {
           "type": "geo_shape"
@@ -36,6 +65,9 @@
         },
         "location": {
           "type": "geo_shape"
+        },
+        "boundaries": {
+          "type": "geo_shape"
         }
       }
     },
@@ -48,7 +80,7 @@
           "payloads": true
         },
         "location": {
-          "type": "geo_point"
+          "type": "geo_shape"
         }
       }
     }

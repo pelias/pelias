@@ -2,65 +2,52 @@ module Pelias
 
   class Street < Base
 
-    INDEX = 'pelias'
-    TYPE = 'street'
+    attr_accessor :id 
+    attr_accessor :name
+    attr_accessor :location
+    attr_accessor :boundaries
+    attr_accessor :locality_id
+    attr_accessor :locality_name
+    attr_accessor :locality_alternate_names
+    attr_accessor :locality_population
+    attr_accessor :neighborhood_id
+    attr_accessor :neighborhood_name
+    attr_accessor :neighborhood_alternate_names
+    attr_accessor :neighborhood_population
+    attr_accessor :country_code
+    attr_accessor :country_name
+    attr_accessor :admin1_code
+    attr_accessor :admin1_name
+    attr_accessor :admin2_code
+    attr_accessor :admin2_name
+    attr_accessor :admin3_code
+    attr_accessor :admin4_code
 
-    def initialize(params)
-      @id = params[:id]
-      @name = params[:name]
-      @location = params[:location]
-      @locality_id = params[:locality_id]
-      @locality_name = params[:locality_name]
-      @locality_alternate_names = params[:locality_alternate_names]
-      @locality_country_code = params[:locality_country_code]
-      @locality_admin1_code = params[:locality_admin1_code]
-      @locality_admin2_code = params[:locality_admin2_code]
-      @locality_admin3_code = params[:locality_admin3_code]
-      @locality_admin4_code = params[:locality_admin4_code]
-      @locality_population = params[:locality_population]
+    def lat
+      (@location['coordinates'] || @location[:coordinates])[1].to_f
     end
 
-    def save
-      ES_CLIENT.index(index: INDEX, type: TYPE, id: @id,
-        body: {
-          name: @name,
-          location: @location,
-          locality_id: @locality_id,
-          locality_name: @locality_name,
-          locality_alternate_names: @locality_alternate_names,
-          locality_country_code: @locality_country_code,
-          locality_admin1_code: @locality_admin1_code,
-          locality_admin2_code: @locality_admin2_code,
-          locality_admin3_code: @locality_admin3_code,
-          locality_admin4_code: @locality_admin4_code,
-          locality_population: @locality_population,
-          suggest: generate_suggestions
-        }
-      )
+    def lon
+      (@location['coordinates'] || @location[:coordinates])[0].to_f
     end
+
+    def self.street_level?
+      true
+    end
+
+    private
 
     def generate_suggestions
       # TODO take into account alternate names
-      # TODO need to save centerpoint of street
+      input = "#{@name} #{@locality_name} #{@locality_admin1_code}"
+      output = @name
+      output << " - #{@locality_name}" if @locality_name
+      output << ", #{@locality_admin1_code}" if @locality_admin1_code
       return {
         input: @name,
         output: "#{@name} - #{@locality_name}, #{@locality_admin1_code}",
-        payload: {
-          lat: @location['coordinates'][0][1].to_f,
-          lon: @location['coordinates'][0][0].to_f,
-          type: 'street'
-        }
+        payload: { lat: lat, lon: lon, type: type }
       }
-    end
-
-    def self.create(params)
-      street = Street.new(params)
-      street.save
-      street
-    end
-
-    def self.find(id)
-      # TODO
     end
 
   end
