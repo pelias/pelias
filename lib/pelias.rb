@@ -24,13 +24,12 @@ module Pelias
   autoload :Osm, 'pelias/osm'
   autoload :Search, 'pelias/search'
 
-  ENV = 'development'
-
-  es_config = YAML::load(File.open('config/elasticsearch.yml'))[ENV]
-  ES_CLIENT = Elasticsearch::Client.new(host: es_config['host'],
-    log: es_config['log'])
-
-  pg_config = YAML::load(File.open('config/postgres.yml'))[ENV]
+  es_config = YAML::load(File.open('config/elasticsearch.yml'))[RACK_ENV]
+  ES_CLIENT = Elasticsearch::Client.new(
+    host: es_config['host'],
+    log: es_config['log']
+  )
+  pg_config = YAML::load(File.open('config/postgres.yml'))[RACK_ENV]
   PG_CLIENT = PG.connect(pg_config)
 
   def self.root
