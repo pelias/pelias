@@ -27,7 +27,8 @@ module Pelias
   ENV = 'development'
 
   es_config = YAML::load(File.open('config/elasticsearch.yml'))[ENV]
-  ES_CLIENT = Elasticsearch::Client.new(es_config)
+  ES_CLIENT = Elasticsearch::Client.new(host: es_config['host'],
+    log: es_config['log'])
 
   pg_config = YAML::load(File.open('config/postgres.yml'))[ENV]
   PG_CLIENT = PG.connect(pg_config)
