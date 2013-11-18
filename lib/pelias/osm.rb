@@ -96,7 +96,7 @@ module Pelias
           query: { match: { name: street_name } },
           filter: {
             geo_shape: {
-              location: { shape: { type: 'envelope', coordinates: [ne, sw] } }
+              center_point:{shape:{type:'envelope',coordinates:[ne, sw]}}
             }
           }
         }

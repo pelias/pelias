@@ -14,16 +14,9 @@ module Pelias
     attr_accessor :admin3_code
     attr_accessor :admin4_code
     attr_accessor :population
-    attr_accessor :location
+    attr_accessor :center_point
+    attr_accessor :center_shape
     attr_accessor :boundaries
-
-    def lat
-      (@location['coordinates'] || @location[:coordinates])[1].to_f
-    end
-
-    def lon
-      (@location['coordinates'] || @location[:coordinates])[0].to_f
-    end
 
     def all_streets
       streets = []
@@ -50,8 +43,6 @@ module Pelias
       end while addresses.count < total_results
       addresses
     end
-
-    private
 
     def generate_suggestions
       # TODO take into account alternate names

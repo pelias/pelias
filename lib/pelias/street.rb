@@ -4,7 +4,8 @@ module Pelias
 
     attr_accessor :id 
     attr_accessor :name
-    attr_accessor :location
+    attr_accessor :center_point
+    attr_accessor :center_shape
     attr_accessor :boundaries
     attr_accessor :locality_id
     attr_accessor :locality_name
@@ -23,19 +24,9 @@ module Pelias
     attr_accessor :admin3_code
     attr_accessor :admin4_code
 
-    def lat
-      (@location['coordinates'] || @location[:coordinates])[1].to_f
-    end
-
-    def lon
-      (@location['coordinates'] || @location[:coordinates])[0].to_f
-    end
-
     def self.street_level?
       true
     end
-
-    private
 
     def generate_suggestions
       # TODO take into account alternate names

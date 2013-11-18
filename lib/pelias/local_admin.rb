@@ -1,6 +1,6 @@
 module Pelias
 
-  class Locality < Base
+  class LocalAdmin < Base
 
     attr_accessor :id
     attr_accessor :name

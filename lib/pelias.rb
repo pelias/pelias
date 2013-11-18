@@ -14,6 +14,7 @@ module Pelias
 
   autoload :Address, 'pelias/address'
   autoload :Base, 'pelias/base'
+  autoload :Gazette, 'pelias/gazette'
   autoload :Geoname, 'pelias/geoname'
   autoload :Locality, 'pelias/locality'
   autoload :Neighborhood, 'pelias/neighborhood'

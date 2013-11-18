@@ -18,8 +18,27 @@
           "search_analyzer": "simple",
           "payloads": true
         },
-        "location": {
+        "center_shape": {
           "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
+        }
+      }
+    },
+    "gazette": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "simple",
+          "search_analyzer": "simple",
+          "payloads": true
+        },
+        "center_shape": {
+          "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
         }
       }
     },
@@ -31,8 +50,11 @@
           "search_analyzer": "simple",
           "payloads": true
         },
-        "location": {
+        "center_shape": {
           "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
         },
         "boundaries": {
           "type": "geo_shape"
@@ -47,8 +69,30 @@
           "search_analyzer": "simple",
           "payloads": true
         },
-        "location": {
+        "center_shape": {
           "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
+        },
+        "boundaries": {
+          "type": "geo_shape"
+        }
+      }
+    },
+    "local_admin": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "simple",
+          "search_analyzer": "simple",
+          "payloads": true
+        },
+        "center_shape": {
+          "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
         },
         "boundaries": {
           "type": "geo_shape"
@@ -63,8 +107,11 @@
           "search_analyzer": "address",
           "payloads": true
         },
-        "location": {
+        "center_shape": {
           "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
         },
         "boundaries": {
           "type": "geo_shape"
@@ -79,8 +126,11 @@
           "search_analyzer": "address",
           "payloads": true
         },
-        "location": {
+        "center_shape": {
           "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
         }
       }
     }

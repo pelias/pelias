@@ -1,6 +1,6 @@
 module Pelias
 
-  class Geoname < Base
+  class Gazette < Base
 
     attr_accessor :id
     attr_accessor :name

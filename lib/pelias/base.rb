@@ -12,20 +12,37 @@ module Pelias
       attributes = to_hash
       id = attributes.delete('id')
       suggestions = generate_suggestions
-      attributes['suggest'] = suggestions unless suggestions.nil?
-      ES_CLIENT.index(index: INDEX, type: type, id: id, body: attributes)
+      attributes['suggest'] = suggestions if suggestions
+      ES_CLIENT.index(index: INDEX, type: type, id: id, body: attributes,
+        timeout: '5m')
     end
 
     def update(params)
       set_instance_variables(params)
     end
 
-    def self.create(params)
+    def self.build(params)
       obj = self.new(params)
       obj.set_encompassing_shapes if street_level?
       obj.set_admin_names
-      obj.save
       obj
+    end
+
+    def self.create(params)
+      if params.is_a? Array
+        bulk = params.map do |param|
+          obj = self.build(param)
+          hash = obj.to_hash
+          suggestions = obj.generate_suggestions
+          hash['suggest'] = suggestions if suggestions
+          { index: { _id: hash.delete('id'), data: hash } }
+        end
+        ES_CLIENT.bulk(index: INDEX, type: type, body: bulk)
+      else
+        self.build(params)
+        obj.save
+        obj
+      end
     end
 
     def self.find(id)
@@ -44,11 +61,20 @@ module Pelias
       false
     end
 
+    def lat
+      center_point[1]
+    end
+
+    def lon
+      center_point[0]
+    end
+
     def set_encompassing_shapes
       if locality = encompassing_shape('locality')
         self.locality_id = locality['_id']
         source = locality['_source']
-        source.delete('location')
+        source.delete('center_point')
+        source.delete('center_shape')
         source.delete('boundaries')
         source = Hash[source.map { |k,v| ["locality_#{k}", v] } ]
         self.update(source)
@@ -56,7 +82,8 @@ module Pelias
       if neighborhood = encompassing_shape('neighborhood')
         self.neighborhood_id = neighborhood['_id']
         source = neighborhood['_source']
-        source.delete('location')
+        source.delete('center_point')
+        source.delete('center_shape')
         source.delete('boundaries')
         source = Hash[source.map { |k,v| ["neighborhood_#{k}", v] } ]
         self.update(source)
@@ -64,6 +91,7 @@ module Pelias
     end
 
     def set_admin_names
+      return if country_code.empty? || country_code.nil?
       country = ES_CLIENT.get(index: 'geonames', type: 'country',
         id: country_code, ignore: 404)
       self.country_name = country['_source']['name'] if country
@@ -73,6 +101,18 @@ module Pelias
       admin2 = ES_CLIENT.get(index: 'geonames', type: 'admin2',
         id: "#{country_code}.#{admin1_code}.#{admin2_code}", ignore: 404)
       self.admin2_name = admin2['_source']['name'] if admin2
+    end
+
+    def generate_suggestions
+    end
+
+    def to_hash
+      hash ={}
+      self.instance_variables.each do |var|
+        hash[var.to_s.delete("@")] = self.instance_variable_get(var)
+      end
+      hash.delete_if { |k,v| v=='' || v.nil? || v.empty? }
+      hash
     end
 
     private
@@ -85,7 +125,7 @@ module Pelias
             filter: {
               geo_shape: {
                 boundaries: {
-                  shape: location,
+                  shape: center_shape,
                   relation: 'intersects'
                 }
               }
@@ -96,24 +136,12 @@ module Pelias
       results['hits']['hits'].first
     end
 
-    def generate_suggestions
-      # override me
-    end
-
     def set_instance_variables(params)
       params.keys.each do |key|
         m = "#{key.to_s}="
         self.send(m, params[key]) if self.respond_to?(m)
       end
       true
-    end
-
-    def to_hash
-      hash ={}
-      self.instance_variables.each do |var|
-        hash[var.to_s.delete("@")] = self.instance_variable_get(var)
-      end
-      hash
     end
 
     def symbolize_keys(hash)
@@ -133,7 +161,7 @@ module Pelias
             query: { match_all: {} },
             filter: {
               geo_shape: {
-                location: {
+                center_shape: {
                   indexed_shape: {
                     id: @id,
                     type: type,
