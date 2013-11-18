@@ -1,0 +1,11 @@
+development:
+  dbname: 'osm'
+
+production:
+  host: ''
+  port: ''
+  options: ''
+  tty: ''
+  dbname: ''
+  login: ''
+  password: ''

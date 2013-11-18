@@ -1,0 +1,7 @@
+development:
+  log: false
+  host: ':9200'
+
+production:
+  log: true
+  host: ''

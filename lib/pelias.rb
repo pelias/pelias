@@ -24,9 +24,13 @@ module Pelias
   autoload :Osm, 'pelias/osm'
   autoload :Search, 'pelias/search'
 
-  # TODO break out into config
-  ES_CLIENT = Elasticsearch::Client.new log: false
-  PG_CLIENT = PG.connect dbname: 'osm'
+  ENV = 'development'
+
+  es_config = YAML::load(File.open('config/elasticsearch.yml'))[ENV]
+  ES_CLIENT = Elasticsearch::Client.new(es_config)
+
+  pg_config = YAML::load(File.open('config/postgres.yml'))[ENV]
+  PG_CLIENT = PG.connect(pg_config)
 
   def self.root
     File.expand_path '../..', __FILE__
