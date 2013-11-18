@@ -54,7 +54,7 @@ module Pelias
     end
 
     def self.type
-      self.name.split('::').last.downcase
+      self.name.split('::').last.gsub!(/(.)([A-Z])/,'\1_\2').downcase
     end
 
     def self.street_level?
@@ -91,16 +91,24 @@ module Pelias
     end
 
     def set_admin_names
-      return if country_code.empty? || country_code.nil?
-      country = ES_CLIENT.get(index: 'geonames', type: 'country',
-        id: country_code, ignore: 404)
-      self.country_name = country['_source']['name'] if country
-      admin1 = ES_CLIENT.get(index: 'geonames', type: 'admin1',
-        id: "#{country_code}.#{admin1_code}", ignore: 404)
-      self.admin1_name = admin1['_source']['name'] if admin1
-      admin2 = ES_CLIENT.get(index: 'geonames', type: 'admin2',
-        id: "#{country_code}.#{admin1_code}.#{admin2_code}", ignore: 404)
-      self.admin2_name = admin2['_source']['name'] if admin2
+      country = country_codes[country_code]
+      self.country_name = country[:name] if country
+      admin1 = admin1_codes[admin1_code]
+      self.admin1_name = admin1[:name] if admin1
+      admin2 = admin2_codes[admin2_code]
+      self.admin2_name = admin2[:name] if admin2
+    end
+
+    def country_codes
+      @@country_codes ||= YAML::load(File.open('data/geonames/countries.yml'))
+    end
+
+    def admin1_codes
+      @@admin1_codes ||= YAML::load(File.open('data/geonames/admin1.yml'))
+    end
+
+    def admin2_codes
+      @@admin2_codes ||= YAML::load(File.open('data/geonames/admin2.yml'))
     end
 
     def generate_suggestions
@@ -111,7 +119,7 @@ module Pelias
       self.instance_variables.each do |var|
         hash[var.to_s.delete("@")] = self.instance_variable_get(var)
       end
-      hash.delete_if { |k,v| v=='' || v.nil? || v.empty? }
+      hash.delete_if { |k,v| v=='' || v.nil? || (v.is_a?(Array) && v.empty?) }
       hash
     end
 
