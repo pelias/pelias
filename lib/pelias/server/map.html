@@ -132,7 +132,7 @@ $('.demo .typeahead').typeahead([
   {
     name: 'suggestions',
     valueKey: 'text',
-    remote: 'http://localhost:4567/suggest/%QUERY',
+    remote: 'http://' + window.location.host + '/suggest/%QUERY',
     template: [
       '<p class="result-type">{{payload.type}}</p>',
       '<p class="result-text">{{text}}</p>',
