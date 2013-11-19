@@ -124,6 +124,7 @@ namespace :quattroshapes do
 
   def download_shapefiles(file)
     url = "http://static.quattroshapes.com/#{file}"
+    puts "downloading #{url}"
     open("data/quattroshapes/#{file}", 'wb') do |file|
       file << open(url).read
     end
@@ -132,6 +133,7 @@ namespace :quattroshapes do
         name = entry.name.gsub('shp/', '')
         unzipped_file = "data/quattroshapes/#{name}"
         FileUtils.rm(unzipped_file, :force => true)
+        puts "extracting #{unzipped_file}"
         entry.extract(unzipped_file)
       end
     end

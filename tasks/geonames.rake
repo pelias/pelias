@@ -5,6 +5,7 @@ namespace :geonames do
 
   task :download do
     url = 'http://download.geonames.org/export/dump/allCountries.zip'
+    puts "downloading #{url}"
     open('data/geonames/allCountries.zip', 'wb') do |file|
       file << open(url).read
     end
@@ -12,6 +13,7 @@ namespace :geonames do
       zip.each do |entry|
         unzipped_file = "data/geonames/#{entry.name}"
         FileUtils.rm(unzipped_file, :force => true)
+        puts "extracting #{unzipped_file}"
         entry.extract(unzipped_file)
       end
     end
