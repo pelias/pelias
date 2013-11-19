@@ -15,9 +15,15 @@ Quattroshapes and Geonames are also required to build the index, as they provide
 ## Usage
 
     $ rake pelias:setup
-    $ rake geonames:populate_admin
-    $ rake geonames:populate_features
-    $ rake quattroshapes:populate_neighborhoods
+
+    $ rake geonames:download
+    $ rake geonames:populate
+
+    $ rake quattroshapes:download
+    $ rake quattroshapes:populate_local_admin
     $ rake quattroshapes:populate_localities
+    $ rake quattroshapes:populate_neighborhoods
+    $ rake quattroshapes:populate_gazetteer
+
     $ rake openstreetmap:populate_streets
     $ rake openstreetmap:populate_addresses

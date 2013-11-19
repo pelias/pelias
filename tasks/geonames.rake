@@ -1,8 +1,23 @@
 require 'pelias'
+require 'open-uri'
 
 namespace :geonames do
 
-  task :populate_features do
+  task :download do
+    url = 'http://download.geonames.org/export/dump/allCountries.zip'
+    open('data/geonames/allCountries.zip', 'wb') do |file|
+      file << open(url).read
+    end
+    Zip::File::open("data/geonames/allCountries.zip") do |zip|
+      zip.each do |entry|
+        unzipped_file = "data/geonames/#{entry.name}"
+        FileUtils.rm(unzipped_file, :force => true)
+        entry.extract(unzipped_file)
+      end
+    end
+  end
+
+  task :populate do
     File.open('data/geonames/allCountries.txt') do |fp|
       fp.each_slice(1000) do |lines|
         bulk = []
@@ -34,6 +49,7 @@ namespace :geonames do
   end
 
   task :yamlize_admin do
+    # these yml files are in git, keeping around for updates
     yamlize_countries
     yamlize_admin1
     yamlize_admin2

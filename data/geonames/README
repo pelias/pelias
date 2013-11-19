@@ -1,1 +1,1 @@
-Download & unzip relevant GeoNames file from here: http://download.geonames.org/export/dump/
+run `rake geonames:download` to populate this

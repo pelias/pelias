@@ -2,10 +2,17 @@ require 'pelias'
 
 namespace :quattroshapes do
 
+  task :download do
+    download_shapefiles("qs_neighborhoods.zip")
+    download_shapefiles("quattroshapes_gazetteer_gn_then_gp.zip")
+    download_shapefiles("gn-qs_localities.zip")
+    download_shapefiles("qs_localadmin.zip")
+  end
+
   task :populate_gazetteer do
     cnt = 0
     bulk = []
-    shp = "data/quattroshapes/gazetteer/quattroshapes_gazetteer_gn_then_gp.shp"
+    shp = "data/quattroshapes/quattroshapes_gazetteer_gn_then_gp.shp"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
         id = record.attributes['gn_id'].to_i
@@ -32,7 +39,7 @@ namespace :quattroshapes do
   end
 
   task :populate_neighborhoods do
-    shp = "data/quattroshapes/neighborhoods/qs_neighborhoods.shp"
+    shp = "data/quattroshapes/qs_neighborhoods.shp"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
         geometry = RGeo::GeoJSON.encode(record.geometry)
@@ -58,7 +65,7 @@ namespace :quattroshapes do
   end
 
   task :populate_localities do
-    shp = "data/quattroshapes/localities/gn-qs_localities.shp"
+    shp = "data/quattroshapes/gn-qs_localities.shp"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
         geometry = RGeo::GeoJSON.encode(record.geometry)
@@ -85,7 +92,7 @@ namespace :quattroshapes do
   end
 
   task :populate_local_admin do
-    shp = "data/quattroshapes/local_admin/qs_localadmin.shp"
+    shp = "data/quattroshapes/qs_localadmin.shp"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
         next unless boundaries = RGeo::GeoJSON.encode(record.geometry)
@@ -98,7 +105,6 @@ namespace :quattroshapes do
           :boundaries => boundaries
         )
         if geoname = loc.closest_geoname
-          puts "#{record.attributes['qs_iso_cc']} - #{name} - #{geoname['_source']['name']}"
           loc.update(
             :id => geoname['_id'],
             :feature_class => geoname['_source']['feature_class'],
@@ -112,6 +118,21 @@ namespace :quattroshapes do
           )
           loc.save
         end
+      end
+    end
+  end
+
+  def download_shapefiles(file)
+    url = "http://static.quattroshapes.com/#{file}"
+    open("data/quattroshapes/#{file}", 'wb') do |file|
+      file << open(url).read
+    end
+    Zip::File::open("data/quattroshapes/#{file}") do |zip|
+      zip.each do |entry|
+        name = entry.name.gsub('shp/', '')
+        unzipped_file = "data/quattroshapes/#{name}"
+        FileUtils.rm(unzipped_file, :force => true)
+        entry.extract(unzipped_file)
       end
     end
   end

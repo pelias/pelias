@@ -5,6 +5,7 @@ require 'debugger'
 require 'geokit'
 require 'rgeo/geo_json'
 require 'rgeo/shapefile'
+require 'zip'
 
 require 'pelias/server/server'
 
