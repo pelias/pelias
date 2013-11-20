@@ -1,6 +1,9 @@
 development:
   dbname: 'osm'
 
+test:
+  dbname: 'osm'
+
 production:
   host: ''
   port: ''

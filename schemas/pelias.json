@@ -80,7 +80,7 @@
         }
       }
     },
-    "localadmin": {
+    "local_admin": {
       "properties": {
         "suggest": {
           "type": "completion",

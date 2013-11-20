@@ -123,6 +123,57 @@ module Pelias
       hash
     end
 
+    def closest_geoname
+      # try for a geoname with a matching name & type
+      results = ES_CLIENT.search(index: INDEX, type: 'geoname', body: {
+        query: {
+          filtered: {
+            query: {
+              bool: {
+                should: [
+                  match: { name: name, boost: 1.0 },
+                  match: { feature_class: 'P' }
+                ]
+              }
+            },
+            filter: {
+              geo_shape: {
+                center_shape: {
+                  shape: boundaries,
+                  relation: 'intersects'
+                }
+              }
+            }
+          }
+        }
+      })
+      # if not try any in boundaries
+      if results['hits']['total'] == 0
+        results = ES_CLIENT.search(index: INDEX, type: 'geoname', body: {
+          query: {
+            filtered: {
+              query: { match_all: {} },
+              filter: {
+                geo_shape: {
+                  center_shape: {
+                    shape: boundaries,
+                    relation: 'intersects'
+                  }
+                }
+              }
+            }
+          }
+        })
+      end
+      if result = results['hits']['hits'].first
+        geoname = Pelias::Geoname.new(:id=>result['_id'])
+        geoname.update(result['_source'])
+        geoname
+      else
+        nil
+      end
+    end
+
     private
 
     def encompassing_shape(shape_type)

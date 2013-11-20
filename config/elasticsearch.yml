@@ -1,7 +1,14 @@
 development:
-  log: false
-  host: 'localhost:9200'
+  hosts:
+    -
+      :host: 'localhost'
+      :port: 9200
 
-production:
-  log: true
-  host: ''
+test:
+  hosts:
+    -
+      :host: '10.0.2.14'
+      :port: 9200
+    -
+      :host: '10.0.1.239'
+      :port: 9200

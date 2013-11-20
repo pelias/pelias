@@ -26,11 +26,20 @@ module Pelias
   autoload :Search, 'pelias/search'
 
   env = ENV['RACK_ENV'] || 'development'
+
   es_config = YAML::load(File.open('config/elasticsearch.yml'))[env]
-  ES_CLIENT = Elasticsearch::Client.new(
-    host: es_config['host'],
-    log: es_config['log']
+  configuration = lambda do |faraday|
+    faraday.adapter Faraday.default_adapter
+    faraday.response :logger
+    faraday.options[:timeout] = 60
+    faraday.options[:open_timeout] = 60
+  end
+  transport = Elasticsearch::Transport::Transport::HTTP::Faraday.new(
+    hosts: es_config['hosts'],
+    &configuration
   )
+  ES_CLIENT = Elasticsearch::Client.new(transport: transport)
+
   pg_config = YAML::load(File.open('config/postgres.yml'))[env]
   PG_CLIENT = PG.connect(pg_config)
 
