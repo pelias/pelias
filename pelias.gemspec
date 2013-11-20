@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "pelias"
   spec.version       = Pelias::VERSION
   spec.authors       = ["Randy Meech"]
-  spec.email         = ["randy.meech@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.email         = ["randy@mapzen.com"]
+  spec.description   = %q{Pelias is a set of tools to import OpenStreetMap, Quattroshapes, and Geonames data into Elasticsearch, and a simple server to handle queries.}
+  spec.summary       = %q{Search engine and geocoder for OpenStreetMap}
   spec.homepage      = ""
   spec.license       = "MIT"
 
