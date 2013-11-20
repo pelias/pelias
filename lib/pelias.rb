@@ -31,8 +31,7 @@ module Pelias
   configuration = lambda do |faraday|
     faraday.adapter Faraday.default_adapter
     faraday.response :logger
-    faraday.options[:timeout] = 60
-    faraday.options[:open_timeout] = 60
+    faraday.options[:timeout] = 600
   end
   transport = Elasticsearch::Transport::Transport::HTTP::Faraday.new(
     hosts: es_config['hosts'],

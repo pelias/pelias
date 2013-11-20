@@ -14,7 +14,7 @@ module Pelias
       suggestions = generate_suggestions
       attributes['suggest'] = suggestions if suggestions
       ES_CLIENT.index(index: INDEX, type: type, id: id, body: attributes,
-        timeout: '5m')
+        timeout: '10m')
     end
 
     def update(params)
