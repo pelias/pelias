@@ -25,13 +25,15 @@ module Pelias
   autoload :Osm, 'pelias/osm'
   autoload :Search, 'pelias/search'
 
+  ES_TIMEOUT = 600
+
   env = ENV['RACK_ENV'] || 'development'
 
   es_config = YAML::load(File.open('config/elasticsearch.yml'))[env]
   configuration = lambda do |faraday|
     faraday.adapter Faraday.default_adapter
-    faraday.response :logger
-    faraday.options[:timeout] = 600
+    #faraday.response :logger
+    faraday.options[:timeout] = ES_TIMEOUT
   end
   transport = Elasticsearch::Transport::Transport::HTTP::Faraday.new(
     hosts: es_config['hosts'],

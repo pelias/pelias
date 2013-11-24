@@ -46,9 +46,16 @@ module Pelias
 
     def generate_suggestions
       # TODO take into account alternate names
-      {
-        input: @name,
-        output: "#{@name}, #{@admin1_code}",
+      input = "#{@name}"
+      output = "#{@name}"
+      if @country_code == 'US'
+        output << ", #{@admin1_code}" if @admin1_code
+      else
+        output << ", #{@admin1_name}" if @admin1_name
+      end
+      return {
+        input: input,
+        output: output,
         payload: { lat: lat, lon: lon, type: type }
       }
     end

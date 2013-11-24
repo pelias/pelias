@@ -14,7 +14,7 @@ module Pelias
       suggestions = generate_suggestions
       attributes['suggest'] = suggestions if suggestions
       ES_CLIENT.index(index: INDEX, type: type, id: id, body: attributes,
-        timeout: '10m')
+        timeout: "#{ES_TIMEOUT}s")
     end
 
     def update(params)
@@ -93,9 +93,9 @@ module Pelias
     def set_admin_names
       country = country_codes[country_code]
       self.country_name = country[:name] if country
-      admin1 = admin1_codes[admin1_code]
+      admin1 = admin1_codes["#{country_code}.#{admin1_code}"]
       self.admin1_name = admin1[:name] if admin1
-      admin2 = admin2_codes[admin2_code]
+      admin2 = admin2_codes["#{country_code}.#{admin1_code}.#{admin2_code}"]
       self.admin2_name = admin2[:name] if admin2
     end
 
@@ -124,35 +124,21 @@ module Pelias
     end
 
     def closest_geoname
-      # try for a geoname with a matching name & type
-      results = ES_CLIENT.search(index: INDEX, type: 'geoname', body: {
-        query: {
-          filtered: {
-            query: {
-              bool: {
-                should: [
-                  match: { name: name, boost: 1.0 },
-                  match: { feature_class: 'P' }
-                ]
-              }
-            },
-            filter: {
-              geo_shape: {
-                center_shape: {
-                  shape: boundaries,
-                  relation: 'intersects'
-                }
-              }
-            }
-          }
-        }
-      })
-      # if not try any in boundaries
-      if results['hits']['total'] == 0
+      begin
+        # try for a geoname with a matching name & type
         results = ES_CLIENT.search(index: INDEX, type: 'geoname', body: {
           query: {
             filtered: {
-              query: { match_all: {} },
+              query: {
+                bool: {
+                  must: [
+                    match: { name: name.force_encoding('UTF-8') }
+                  ],
+                  should: [
+                    match: { feature_class: 'P' }
+                  ]
+                }
+              },
               filter: {
                 geo_shape: {
                   center_shape: {
@@ -164,12 +150,32 @@ module Pelias
             }
           }
         })
-      end
-      if result = results['hits']['hits'].first
-        geoname = Pelias::Geoname.new(:id=>result['_id'])
-        geoname.update(result['_source'])
-        geoname
-      else
+        # if not try any in boundaries
+        if results['hits']['total'] == 0
+          results = ES_CLIENT.search(index: INDEX, type: 'geoname', body: {
+            query: {
+              filtered: {
+                query: { match_all: {} },
+                filter: {
+                  geo_shape: {
+                    center_shape: {
+                      shape: boundaries,
+                      relation: 'intersects'
+                    }
+                  }
+                }
+              }
+            }
+          })
+        end
+        if result = results['hits']['hits'].first
+          geoname = Pelias::Geoname.new(:id=>result['_id'])
+          geoname.update(result['_source'])
+          geoname
+        else
+          nil
+        end
+      rescue
         nil
       end
     end
