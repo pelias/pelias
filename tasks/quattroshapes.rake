@@ -54,27 +54,51 @@ namespace :quattroshapes do
     shp = "data/quattroshapes/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
+        if record.geometry.nil?
+          puts "NIL GEOMETRY: #{record.attributes.inspect}"
+          next
+        end
         id = (record.attributes['gs_gn_id']||record.attributes['gn_id']).to_i
         boundaries = RGeo::GeoJSON.encode(record.geometry)
-        name = record.attributes['qs_loc']
+        name = record.attributes['qs_loc'] || record.attributes['qs_la']
         name = name.split(' (').first if name
         loc = klass.new(
           :id => id,
           :name => name,
           :boundaries => boundaries
         )
-        geoname = Pelias::Geoname.find(id)
-        if geoname.nil?
+        # if there's a geoname id in the concordance, use it
+        if geoname = Pelias::Geoname.find(id)
+          # and use it for the name too
+          loc.name = geoname.name
+        else
+          # if not, get any geoname in the boundaries
+          # but don't use the name because it won't make sense
           loc.center_shape = RGeo::GeoJSON.encode(record.geometry.centroid)
           loc.center_point = loc.center_shape['coordinates']
           geoname = loc.closest_geoname
+          next if geoname.nil?
         end
-        next if geoname.nil?
         geoname_hash = geoname.to_hash
+        # name already set above, don't use this one
         geoname_hash.delete('name')
         loc.update(geoname_hash)
-        loc.set_admin_names
-        loc.save
+        # save time by not re-writing shapes we've already written
+        unless Pelias::ES_CLIENT.get(index: 'pelias', type: klass.type,
+          id: loc.id, ignore: 404)
+          begin
+            loc.set_admin_names
+            loc.save
+          rescue Faraday::Error::TimeoutError
+            puts "TIMEOUT ERROR: #{record.attributes.inspect}"
+          rescue Elasticsearch::Transport::Transport::Errors::BadRequest
+            puts "INVALID SHAPE: #{record.attributes.inspect}"
+          rescue Exception => e
+            # TODO get rid of this after a few successful runs
+            debugger
+            i=0
+          end
+        end
       end
     end
   end
