@@ -2,19 +2,6 @@ module Pelias
 
   class Osm < Base
 
-    def self.all_streets
-      PG_CLIENT.exec("
-        SELECT
-          osm_id,
-          name,
-          ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
-          ST_AsGeoJSON(ST_Transform(ST_Line_Interpolate_Point(way, 0.5),
-            4326), 6) AS center
-        FROM planet_osm_line
-        WHERE name IS NOT NULL AND highway IS NOT NULL
-      ")
-    end
-
     def self.all_addresses
       addresses = Pelias::Osm.nodes_housenumbers.map { |r| r }
       addresses += Pelias::Osm.ways_housenumbers.map { |r| r }
