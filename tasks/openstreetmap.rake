@@ -4,13 +4,18 @@ namespace :openstreetmap do
 
   desc "populate streets from OSM"
   task :populate_streets do
-    Pelias::Osm.all_streets.each do |street|
-      Pelias::Street.create(
-        :id => street['osm_id'],
-        :name => street['name'],
-        :location => JSON.parse(street['center']),
-        :boundaries => JSON.parse(street['street'])
-      )
+    Pelias::Osm.all_streets.each_slice(50) do |streets|
+      results = streets.map do |street|
+        center = JSON.parse(street['center'])
+        {
+          :id => street['osm_id'],
+          :name => street['name'],
+          :center_point => center['coordinates'],
+          :center_shape => center,
+          :boundaries => JSON.parse(street['street'])
+        }
+      end
+      Pelias::Street.create(results)
     end
   end
 

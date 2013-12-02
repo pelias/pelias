@@ -14,6 +14,14 @@ module Pelias
     attr_accessor :admin3_code
     attr_accessor :admin4_code
     attr_accessor :population
+    attr_accessor :locality_id
+    attr_accessor :locality_name
+    attr_accessor :locality_alternate_names
+    attr_accessor :locality_population
+    attr_accessor :local_admin_id
+    attr_accessor :local_admin_name
+    attr_accessor :local_admin_alternate_names
+    attr_accessor :local_admin_population
     attr_accessor :center_point
     attr_accessor :center_shape
     attr_accessor :boundaries
@@ -46,9 +54,16 @@ module Pelias
 
     def generate_suggestions
       # TODO take into account alternate names
+      input = "#{@name}"
+      output = "#{@name}"
+      if @country_code == 'US'
+        output << ", #{@admin1_code}" if @admin1_code
+      else
+        output << ", #{@admin1_name}" if @admin1_name
+      end
       {
-        input: @name,
-        output: "#{@name}, #{@admin1_code}",
+        input: input,
+        output: output,
         payload: { lat: lat, lon: lon, type: type }
       }
     end

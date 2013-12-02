@@ -4,7 +4,6 @@ namespace :quattroshapes do
 
   task :download do
     download_shapefiles("qs_neighborhoods.zip")
-    download_shapefiles("quattroshapes_gazetteer_gn_then_gp.zip")
     download_shapefiles("gn-qs_localities.zip")
     download_shapefiles("qs_localadmin.zip")
   end
@@ -19,34 +18,6 @@ namespace :quattroshapes do
 
   task :populate_neighborhoods do
     index_shapes(Pelias::Neighborhood, "qs_neighborhoods.shp")
-  end
-
-  task :populate_gazetteer do
-    bulk = []
-    shp = "data/quattroshapes/quattroshapes_gazetteer_gn_then_gp.shp"
-    RGeo::Shapefile::Reader.open(shp) do |file|
-      file.each do |record|
-        id = record.attributes['gn_id'].to_i
-        next if id == 0
-        next unless geoname = Pelias::Geoname.find(id)
-        center_point = RGeo::GeoJSON.encode(record.geometry)['coordinates']
-        attrs = {
-          :id => id,
-          :center_point => center_point
-        }
-        geoname = geoname.to_hash
-        geoname.delete('id')
-        geoname.delete('center_point')
-        bulk << attrs.merge(geoname)
-        if bulk.count >= 500
-          Pelias::Gazette.create(bulk)
-          bulk = []
-        end
-      end
-    end
-    if bulk.count > 0
-      Pelias::Gazette.create(bulk)
-    end
   end
 
   def index_shapes(klass, shp)
@@ -87,6 +58,7 @@ namespace :quattroshapes do
         unless Pelias::ES_CLIENT.get(index: 'pelias', type: klass.type,
           id: loc.id, ignore: 404)
           begin
+            loc.set_encompassing_shapes
             loc.set_admin_names
             loc.save
           rescue Faraday::Error::TimeoutError

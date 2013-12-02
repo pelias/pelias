@@ -7,6 +7,10 @@ module Pelias
     attr_accessor :center_point
     attr_accessor :center_shape
     attr_accessor :boundaries
+    attr_accessor :local_admin_id
+    attr_accessor :local_admin_name
+    attr_accessor :local_admin_alternate_names
+    attr_accessor :local_admin_population
     attr_accessor :locality_id
     attr_accessor :locality_name
     attr_accessor :locality_alternate_names
@@ -21,8 +25,6 @@ module Pelias
     attr_accessor :admin1_name
     attr_accessor :admin2_code
     attr_accessor :admin2_name
-    attr_accessor :admin3_code
-    attr_accessor :admin4_code
 
     def self.street_level?
       true
@@ -30,17 +32,31 @@ module Pelias
 
     def generate_suggestions
       # TODO take into account alternate names
-      input = "#{@name} #{@locality_name} #{@locality_admin1_code}"
-      output = @name
-      output << " - #{@locality_name}" if @locality_name
-      output << ", #{@locality_admin1_code}" if @locality_admin1_code
+      input = []
+      output = "#{name}"
+      if local_admin_name
+        input << "#{name} #{local_admin_name}"
+        output = "#{name} - #{local_admin_name}"
+      end
+      if locality_name
+        input << "#{name} #{locality_name}"
+        output = "#{name} - #{locality_name}"
+      end
+      if neighborhood_name
+        input << "#{name} #{neighborhood_name}"
+      end
+      input = input.uniq
+      if country_code == 'US'
+        output << ", #{admin1_code}" if admin1_code
+      else
+        output << ", #{admin1_name}" if admin1_name
+      end
       return {
-        input: @name,
-        output: "#{@name} - #{@locality_name}, #{@locality_admin1_code}",
+        input: input,
+        output: output,
         payload: { lat: lat, lon: lon, type: type }
       }
     end
-
   end
 
 end

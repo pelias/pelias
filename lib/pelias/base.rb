@@ -24,7 +24,7 @@ module Pelias
     def self.build(params)
       obj = self.new(params)
       obj.set_encompassing_shapes if street_level?
-      obj.set_admin_names
+      obj.set_admin_names unless street_level?
       obj
     end
 
@@ -39,7 +39,7 @@ module Pelias
         end
         ES_CLIENT.bulk(index: INDEX, type: type, body: bulk)
       else
-        self.build(params)
+        obj = self.build(params)
         obj.save
         obj
       end
@@ -70,24 +70,47 @@ module Pelias
     end
 
     def set_encompassing_shapes
-      if locality = encompassing_shape('locality')
-        self.locality_id = locality['_id']
+      params = {}
+      if type!='local_admin' && local_admin=encompassing_shape('local_admin')
+        source = local_admin['_source']
+        params[:local_admin_id] = local_admin['_id']
+        params[:local_admin_name] = source['name']
+        params[:local_admin_alternate_names] = source['alternate_names']
+        params[:local_admin_population] = source['population']
+        params[:country_code] = source['country_code']
+        params[:country_name] = source['country_name']
+        params[:admin1_code] = source['admin1_code']
+        params[:admin1_name] = source['admin1_name']
+        params[:admin2_code] = source['admin2_code']
+        params[:admin2_name] = source['admin2_name']
+      end
+      if type!='locality' && locality=encompassing_shape('locality')
         source = locality['_source']
-        source.delete('center_point')
-        source.delete('center_shape')
-        source.delete('boundaries')
-        source = Hash[source.map { |k,v| ["locality_#{k}", v] } ]
-        self.update(source)
+        params[:locality_id] = locality['_id']
+        params[:locality_name] = source['name']
+        params[:locality_alternate_names] = source['alternate_names']
+        params[:locality_population] = source['population']
+        params[:country_code] = source['country_code']
+        params[:country_name] = source['country_name']
+        params[:admin1_code] = source['admin1_code']
+        params[:admin1_name] = source['admin1_name']
+        params[:admin2_code] = source['admin2_code']
+        params[:admin2_name] = source['admin2_name']
       end
-      if neighborhood = encompassing_shape('neighborhood')
-        self.neighborhood_id = neighborhood['_id']
+      if type!='neighborhood' && neighborhood=encompassing_shape('neighborhood')
         source = neighborhood['_source']
-        source.delete('center_point')
-        source.delete('center_shape')
-        source.delete('boundaries')
-        source = Hash[source.map { |k,v| ["neighborhood_#{k}", v] } ]
-        self.update(source)
+        params[:neighborhood_id] = neighborhood['_id']
+        params[:neighborhood_name] = source['name']
+        params[:neighborhood_alternate_names] = source['alternate_names']
+        params[:neighborhood_population] = source['population']
+        params[:country_code] = source['country_code']
+        params[:country_name] = source['country_name']
+        params[:admin1_code] = source['admin1_code']
+        params[:admin1_name] = source['admin1_name']
+        params[:admin2_code] = source['admin2_code']
+        params[:admin2_name] = source['admin2_name']
       end
+      self.update(params)
     end
 
     def set_admin_names
