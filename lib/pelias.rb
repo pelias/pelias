@@ -14,7 +14,7 @@ require 'pelias/server/server'
 module Pelias
 
   autoload :VERSION, 'pelias/version'
-
+  
   autoload :Address, 'pelias/address'
   autoload :Base, 'pelias/base'
   autoload :Geoname, 'pelias/geoname'
@@ -30,6 +30,7 @@ module Pelias
 
   env = ENV['RACK_ENV'] || 'development'
 
+  # elasticsearch
   es_config = YAML::load(File.open('config/elasticsearch.yml'))[env]
   configuration = lambda do |faraday|
     faraday.adapter Faraday.default_adapter
@@ -42,8 +43,20 @@ module Pelias
   )
   ES_CLIENT = Elasticsearch::Client.new(transport: transport)
 
+  # postgres
   pg_config = YAML::load(File.open('config/postgres.yml'))[env]
   PG_CLIENT = PG.connect(pg_config)
+
+  # sidekiq
+  redis_config = YAML::load(File.open('config/redis.yml'))[env]
+  redis_url = "redis://#{redis_config['host']}:#{redis_config['port']}/12"
+  redis_namespace = redis_config['namespace']
+  Sidekiq.configure_server do |config|
+    config.redis = { :url => redis_url, :namespace => redis_namespace }
+  end
+  Sidekiq.configure_client do |config|
+    config.redis = { :url => redis_url, :namespace => redis_namespace }
+  end
 
   def self.root
     File.expand_path '../..', __FILE__
