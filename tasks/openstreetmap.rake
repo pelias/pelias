@@ -17,7 +17,7 @@ namespace :openstreetmap do
         LIMIT #{limit} OFFSET #{offset}
       ")
       offset += streets.count
-      streets_to_index = streets.map do |street|
+      street_data = streets.map do |street|
         center = JSON.parse(street['center'])
         {
           :id => street['osm_id'],
@@ -27,7 +27,7 @@ namespace :openstreetmap do
           :boundaries => JSON.parse(street['street'])
         }
       end
-      Pelias::Street.create(streets_to_index)
+      Pelias::Street.delay.create(street_data)
     end while streets.count > 0
   end
 

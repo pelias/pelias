@@ -2,6 +2,8 @@ module Pelias
 
   class Base
 
+    include Sidekiq::Worker
+
     INDEX = 'pelias'
 
     def initialize(params)

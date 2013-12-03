@@ -1,11 +1,13 @@
+require "debugger"
 require "elasticsearch"
-require "json"
+require "geokit"
+require "rgeo-geojson"
+require "rgeo-shapefile"
 require "pg"
-require 'debugger'
-require 'geokit'
-require 'rgeo/geo_json'
-require 'rgeo/shapefile'
-require 'zip'
+require "rspec"
+require "zip"
+require "sidekiq"
+require "sinatra"
 
 require 'pelias/server/server'
 
