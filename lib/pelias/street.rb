@@ -46,6 +46,7 @@ module Pelias
         input << "#{name} #{neighborhood_name}"
       end
       input = input.uniq
+      input = "#{name}" if input.empty?
       if country_code == 'US'
         output << ", #{admin1_code}" if admin1_code
       else
