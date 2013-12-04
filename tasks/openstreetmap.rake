@@ -10,7 +10,7 @@ namespace :openstreetmap do
       streets = Pelias::PG_CLIENT.exec("
         SELECT osm_id, name,
           ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
-          ST_AsGeoJSON(ST_Transform(ST_Line_Interpolate_Point(way, 0.5),
+          ST_AsGeoJSON(ST_Transform(ST_LineInterpolatePoint(way, 0.5),
             4326), 6) AS center
         FROM planet_osm_line
         WHERE name IS NOT NULL AND highway IS NOT NULL
@@ -28,6 +28,7 @@ namespace :openstreetmap do
         }
       end
       Pelias::Street.delay.create(street_data)
+      puts offset
     end while streets.count > 0
   end
 
