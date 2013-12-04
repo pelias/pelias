@@ -6,6 +6,7 @@ Sidekiq.configure_client do |config|
   config.redis = { :size => 1 }
 end
 
+env = ENV['RACK_ENV'] || 'development'
 redis_config = YAML::load(File.open('config/redis.yml'))[env]
 Sidekiq.configure_client do |config|
   config.redis = {
