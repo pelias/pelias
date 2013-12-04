@@ -2,6 +2,18 @@ PATH
   remote: .
   specs:
     pelias (0.0.1)
+      bundler (~> 1.3)
+      debugger
+      elasticsearch
+      geokit
+      pg
+      rake
+      rgeo-geojson
+      rgeo-shapefile
+      rspec
+      rubyzip
+      sidekiq
+      sinatra
 
 GEM
   remote: https://rubygems.org/
@@ -75,16 +87,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.3)
-  debugger
-  elasticsearch
-  geokit
   pelias!
-  pg
-  rake
-  rgeo-geojson
-  rgeo-shapefile
-  rspec
-  rubyzip
-  sidekiq
-  sinatra

@@ -18,17 +18,17 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "debugger"
-  spec.add_development_dependency "elasticsearch"
-  spec.add_development_dependency "geokit"
-  spec.add_development_dependency "pg"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rgeo-geojson"
-  spec.add_development_dependency "rgeo-shapefile"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "rubyzip"
-  spec.add_development_dependency "sidekiq"
-  spec.add_development_dependency "sinatra"
+  spec.add_dependency "bundler", "~> 1.3"
+  spec.add_dependency "debugger"
+  spec.add_dependency "elasticsearch"
+  spec.add_dependency "geokit"
+  spec.add_dependency "pg"
+  spec.add_dependency "rake"
+  spec.add_dependency "rgeo-geojson"
+  spec.add_dependency "rgeo-shapefile"
+  spec.add_dependency "rspec"
+  spec.add_dependency "rubyzip"
+  spec.add_dependency "sidekiq"
+  spec.add_dependency "sinatra"
 
 end
