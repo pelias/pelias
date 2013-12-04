@@ -7,4 +7,4 @@ Sidekiq.configure_client do |config|
 end
 
 require 'sidekiq/web'
-run Sidekiq::Web
+run Rack::URLMap.new('/' => Sinatra::Application, '/sidekiq' => Sidekiq::Web)
