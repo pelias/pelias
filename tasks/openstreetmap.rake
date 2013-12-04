@@ -4,19 +4,19 @@ namespace :openstreetmap do
 
   desc "populate streets from OSM"
   task :populate_streets do
-    limit = 50
-    offset = 0
+    Pelias::PG_CLIENT.exec("BEGIN")
+    Pelias::PG_CLIENT.exec("
+      DECLARE streets_cursor CURSOR FOR
+      SELECT osm_id, name,
+        ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
+        ST_AsGeoJSON(
+          ST_Transform(ST_LineInterpolatePoint(way, 0.5), 4326), 6
+        ) AS center
+      FROM planet_osm_line
+      WHERE name IS NOT NULL AND highway IS NOT NULL
+    ")
     begin
-      streets = Pelias::PG_CLIENT.exec("
-        SELECT osm_id, name,
-          ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
-          ST_AsGeoJSON(ST_Transform(ST_LineInterpolatePoint(way, 0.5),
-            4326), 6) AS center
-        FROM planet_osm_line
-        WHERE name IS NOT NULL AND highway IS NOT NULL
-        LIMIT #{limit} OFFSET #{offset}
-      ")
-      offset += streets.count
+      streets = Pelias::PG_CLIENT.exec("FETCH 50 FROM streets_cursor")
       street_data = streets.map do |street|
         center = JSON.parse(street['center'])
         {
@@ -28,8 +28,9 @@ namespace :openstreetmap do
         }
       end
       Pelias::Street.delay.create(street_data)
-      puts offset
     end while streets.count > 0
+    Pelias::PG_CLIENT.exec("CLOSE streets_cursor")
+    Pelias::PG_CLIENT.exec("COMMIT")
   end
 
   desc "populate addresses from OSM"
