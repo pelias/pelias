@@ -48,6 +48,7 @@ module Pelias
   PG_CLIENT = PG.connect(pg_config)
 
   # sidekiq
+  Encoding.default_external = Encoding::UTF_8
   redis_config = YAML::load(File.open('config/redis.yml'))[env]
   redis_url = "redis://#{redis_config['host']}:#{redis_config['port']}/12"
   redis_namespace = redis_config['namespace']
