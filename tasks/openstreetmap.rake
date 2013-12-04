@@ -7,13 +7,7 @@ namespace :openstreetmap do
     Pelias::PG_CLIENT.exec("BEGIN")
     Pelias::PG_CLIENT.exec("
       DECLARE streets_cursor CURSOR FOR
-      SELECT osm_id, name,
-        ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
-        ST_AsGeoJSON(
-          ST_Transform(ST_LineInterpolatePoint(way, 0.5), 4326), 6
-        ) AS center
-      FROM planet_osm_line
-      WHERE name IS NOT NULL AND highway IS NOT NULL
+      #{Pelias::Osm.streets_sql}
     ")
     begin
       streets = Pelias::PG_CLIENT.exec("FETCH 50 FROM streets_cursor")
@@ -35,55 +29,50 @@ namespace :openstreetmap do
 
   desc "populate addresses from OSM"
   task :populate_addresses do
-    Pelias::Osm.all_addresses.each do |address|
-      address_id = address['address_id']
-      location = JSON.parse(address['location'])
-      street_name = address['street_name']
-      number = address['housenumber']
-      street_id = address['street_id'] || Pelias::Osm.get_street_id(
-        street_name,
-        location['coordinates'][1],
-        location['coordinates'][0]
-      )
-      Pelias::Address.create(
-        :id => address_id,
-        :number => number,
-        :location => location,
-        :street_id => street_id,
-        :street_name => street_name
-      )
-    end
+    nodes_housenumbers
+    ways_housenumbers
+    ways_interpolations
+    rels_housenumbers
   end
 
-  desc "add localities to streets & addresses"
-  task :add_localities do
-    completed_results = 0
+  def nodes_housenumbers
+    Pelias::PG_CLIENT.exec("BEGIN")
+    Pelias::PG_CLIENT.exec("
+      DECLARE nh_cursor CURSOR FOR
+      #{Pelias::Osm.addresses_nodes_housenumbers_sql}
+    ")
     begin
-      results = Pelias::ES_CLIENT.search(index: 'pelias', type: 'locality',
-        from: completed_results)
-      results['hits']['hits'].each do |result|
-        locality = Pelias::Locality.find(result['_id'])
-        locality.all_addresses.each do |address|
-          address = Pelias::Address.find(address['_id'])
-          address.update_attributes(
-            :locality_id => locality.id,
-            :locality_name => locality.name,
-            :locality_alternate_names => locality.alternate_names,
-            :locality_country_code => locality.country_code,
-            :locality_admin1_code => locality.admin1_code,
-            :locality_admin2_code => locality.admin2_code,
-            :locality_admin3_code => locality.admin3_code,
-            :locality_admin4_code => locality.admin4_code,
-            :locality_population => locality.population
-          )
-        end
-        locality.all_streets.each do |street|
-          street = Pelias::Street.find(street['_id'])
-        end
-        completed_results += 1
+      addresses = Pelias::PG_CLIENT.exec("FETCH 500 FROM nh_cursor")
+      address_data = addresses.map do |address|
+        center = JSON.parse(street['location'])
+        street_name = address['street_name'],
+        street_id = Pelias::Osm.get_street_id(
+          street_name,
+          center['coordinates'][1],
+          center['coordinates'][0]
+        )
+        {
+          :id => address['address_id'],
+          :number => address['housenumber'],
+          :street_id => street_id,
+          :street_name => street_name,
+          :center_point => center['coordinates'],
+          :center_shape => center
+        }
       end
-      total_results = results['hits']['total']
-    end while completed_results < total_results
+      Pelias::Address.delay.create(address_data)
+    end while addresses.count > 0
+    Pelias::PG_CLIENT.exec("CLOSE nh_cursor")
+    Pelias::PG_CLIENT.exec("COMMIT")
+  end
+
+  def ways_housenumbers
+  end
+
+  def ways_interpolations
+  end
+
+  def rels_housenumbers
   end
 
 end

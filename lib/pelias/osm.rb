@@ -2,69 +2,65 @@ module Pelias
 
   class Osm < Base
 
-    def self.all_addresses
-      addresses = Pelias::Osm.nodes_housenumbers.map { |r| r }
-      addresses += Pelias::Osm.ways_housenumbers.map { |r| r }
-      #addresses += Pelias::Osm.ways_interpolations.map { |r| r }
-      addresses += Pelias::Osm.rels_housenumbers.map { |r| r }
-      addresses
+    def self.streets_sql
+      "SELECT osm_id, name,
+        ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
+        ST_AsGeoJSON(
+          ST_Transform(ST_LineInterpolatePoint(way, 0.5), 4326), 6
+        ) AS center
+      FROM planet_osm_line
+      WHERE name IS NOT NULL AND highway IS NOT NULL"
     end
 
-    def self.nodes_housenumbers
-      PG_CLIENT.exec("
-        SELECT
-          n.id AS address_id,
-          tags[idx(n.tags, 'addr:street') + 1] AS street_name,
-          tags[idx(n.tags, 'addr:housenumber') + 1] AS housenumber,
-          ST_AsGeoJSON(ST_Transform(p.way, 4326), 6) AS location
-        FROM planet_osm_nodes n
-        INNER JOIN planet_osm_point p
-          ON p.osm_id=n.id
-        WHERE n.tags @> ARRAY['addr:housenumber']
-        AND n.tags @> ARRAY['addr:street']
-      ")
+    def self.addresses_nodes_housenumbers_sql
+      "SELECT
+        n.id AS address_id,
+        tags[idx(n.tags, 'addr:street') + 1] AS street_name,
+        tags[idx(n.tags, 'addr:housenumber') + 1] AS housenumber,
+        ST_AsGeoJSON(ST_Transform(p.way, 4326), 6) AS location
+      FROM planet_osm_nodes n
+      INNER JOIN planet_osm_point p
+        ON p.osm_id=n.id
+      WHERE n.tags @> ARRAY['addr:housenumber']
+      AND n.tags @> ARRAY['addr:street']"
     end
 
-    def self.ways_housenumbers
-      PG_CLIENT.exec("
-        SELECT DISTINCT ON (address_id)
-          l1.osm_id AS address_id,
-          l2.osm_id AS street_id,
-          l1.\"addr:housenumber\" AS housenumber,
-          l2.name AS street_name,
-          ST_Distance(l1.way, l2.way) AS distance,
-          ST_AsGeoJSON(ST_Transform(ST_Centroid(l1.way), 4326), 6) AS location
-        FROM planet_osm_ways w
-        INNER JOIN planet_osm_line l1
-          ON l1.osm_id=w.id
-        INNER JOIN planet_osm_line l2
-          ON ST_DWithin(l1.way, l2.way, 100)
-          AND l2.name IS NOT NULL
-          AND l2.highway IS NOT NULL
-        WHERE w.tags @> ARRAY['addr:housenumber']
-          AND ST_Distance(l1.way, l2.way) > 0
-        ORDER BY address_id, distance ASC
-      ")
+    def self.addresses_ways_housenumbers_sql
+      "SELECT DISTINCT ON (address_id)
+        l1.osm_id AS address_id,
+        l2.osm_id AS street_id,
+        l1.\"addr:housenumber\" AS housenumber,
+        l2.name AS street_name,
+        ST_Distance(l1.way, l2.way) AS distance,
+        ST_AsGeoJSON(ST_Transform(ST_Centroid(l1.way), 4326), 6) AS location
+      FROM planet_osm_ways w
+      INNER JOIN planet_osm_line l1
+        ON l1.osm_id=w.id
+      INNER JOIN planet_osm_line l2
+        ON ST_DWithin(l1.way, l2.way, 100)
+        AND l2.name IS NOT NULL
+        AND l2.highway IS NOT NULL
+      WHERE w.tags @> ARRAY['addr:housenumber']
+        AND ST_Distance(l1.way, l2.way) > 0
+      ORDER BY address_id, distance ASC"
     end
 
-    def self.ways_interpolations
+    def self.addresses_ways_interpolations_sql
       # TODO
     end
 
-    def self.rels_housenumbers
-      PG_CLIENT.exec("
-        SELECT r.id AS address_id,
-          tags[idx(r.tags, 'addr:street') + 1] AS street_name,
-          tags[idx(r.tags, 'addr:housenumber') + 1] AS housenumber,
-          ST_AsGeoJSON(ST_Transform(ST_Centroid(
-            ST_Union(l.way)), 4326), 6) AS location
-        FROM planet_osm_rels r
-        INNER JOIN planet_osm_line l
-          ON r.parts @> ARRAY[l.osm_id]
-        WHERE r.tags @> ARRAY['addr:housenumber']
-        AND r.tags @> ARRAY['addr:street']
-        GROUP BY r.id
-      ")
+    def self.addresses_rels_housenumbers_sql
+      "SELECT r.id AS address_id,
+        tags[idx(r.tags, 'addr:street') + 1] AS street_name,
+        tags[idx(r.tags, 'addr:housenumber') + 1] AS housenumber,
+        ST_AsGeoJSON(ST_Transform(ST_Centroid(
+          ST_Union(l.way)), 4326), 6) AS location
+      FROM planet_osm_rels r
+      INNER JOIN planet_osm_line l
+        ON r.parts @> ARRAY[l.osm_id]
+      WHERE r.tags @> ARRAY['addr:housenumber']
+      AND r.tags @> ARRAY['addr:street']
+      GROUP BY r.id"
     end
 
     def self.get_street_id(street_name, lat, lon)
