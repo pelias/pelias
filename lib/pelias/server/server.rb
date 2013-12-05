@@ -8,10 +8,10 @@ class Server < Sinatra::Base
       params[:center])['hits']['hits']
     results = results.map do |result|
       {
-        name: result['name'],
-        lat: result['center_point'][1],
-        lon: result['center_point'][0],
-        type: result['suggest']['payload']['type']
+        name: result['_source']['name'],
+        lat: result['_source']['center_point'][1],
+        lon: result['_source']['center_point'][0],
+        type: result['_source']['suggest']['payload']['type']
       }
     end
     results.to_json
