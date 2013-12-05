@@ -108,13 +108,12 @@ p {
 
 #map {
   margin-top: 10px;
+  width: 100%;
   height: 600px;
 }
 </style>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-<!--[if lte IE 8]>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-<![endif]-->
+<link href='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.css' rel='stylesheet' />
+<script src='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.js'></script>
 </head>
 <body>
 
@@ -123,6 +122,9 @@ p {
 </div>
 
 <div id="map"></div>
+<script>
+var map = L.mapbox.map('map', 'randyme.gajlngfe').setView([40.74417, -73.99047], 13);
+</script>
 
 <script src="http://twitter.github.io/typeahead.js/js/hogan-2.0.0.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -132,7 +134,7 @@ $('.demo .typeahead').typeahead([
   {
     name: 'suggestions',
     valueKey: 'text',
-    remote: 'http://' + window.location.host + '/suggest/%QUERY',
+    remote: 'http://' + window.location.host + '/suggest?query=%QUERY',
     template: [
       '<p class="result-type">{{payload.type}}</p>',
       '<p class="result-text">{{text}}</p>',
@@ -154,15 +156,5 @@ $('.demo .typeahead').typeahead([
       map.setZoom(13);
     }
 });
-</script>
-<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
-<script>
-var map = L.map('map').setView([40.68646, -73.98819], 11);
-var osmAttr = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
-var mqTilesAttr = 'Tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />';
-L.tileLayer('http://otile4.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-  attribution: 'Map data ' + osmAttr + ', ' + mqTilesAttr
-}).addTo(map);
-</script>
 </body>
 </html>
