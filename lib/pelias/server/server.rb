@@ -8,7 +8,7 @@ class Server < Sinatra::Base
       params[:query],
       params[:viewbox],
       params[:center]
-    ).to_json
+    )['hits']['hits'].to_json
   end
 
   get '/suggest/:query' do
