@@ -46,7 +46,8 @@ module Pelias
           suggestions: {
             text: query,
             completion: {
-              field: "suggest"
+              field: "suggest",
+              size: 20
             }
           } 
         }
