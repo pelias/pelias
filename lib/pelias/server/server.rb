@@ -23,7 +23,20 @@ class Server < Sinatra::Base
   get '/suggest' do
     size = params[:size] || 20
     results = Pelias::Search.suggest(params[:query], size)
-    results['suggestions'][0]['options'].to_json
+    results = results['suggestions'][0]['options'].map do |result|
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [result['payload']['lon'], result['payload']['lat']]
+        },
+        properties: {
+          name: result['text'],
+          type: result['payload']['type']
+        }
+      }
+    end
+    { type: 'FeatureCollection', features: results }.to_json
   end
 
   get '/demo' do
