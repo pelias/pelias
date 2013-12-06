@@ -41,13 +41,13 @@ module Pelias
       ES_CLIENT.search(index: INDEX, body: query)
     end
 
-    def self.suggest(query)
+    def self.suggest(query, size)
       ES_CLIENT.suggest(index: INDEX, body: {
           suggestions: {
             text: query,
             completion: {
               field: "suggest",
-              size: 20
+              size: size
             }
           } 
         }

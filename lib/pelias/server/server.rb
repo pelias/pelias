@@ -18,7 +18,8 @@ class Server < Sinatra::Base
   end
 
   get '/suggest' do
-    results = Pelias::Search.suggest(params[:query])
+    size = params[:size] || 20
+    results = Pelias::Search.suggest(params[:query], size)
     results['suggestions'][0]['options'].to_json
   end
 
