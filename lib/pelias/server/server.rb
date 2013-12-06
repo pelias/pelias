@@ -9,13 +9,15 @@ class Server < Sinatra::Base
       params[:center], size)
     results = results['hits']['hits'].map do |result|
       {
-        name: result['_source']['name'],
-        lat: result['_source']['center_point'][1],
-        lon: result['_source']['center_point'][0],
-        type: result['_source']['suggest']['payload']['type']
+        type: 'Feature',
+        geometry: result['_source']['center_shape'],
+        properties: {
+          name: result['_source']['name'],
+          type: result['_source']['suggest']['payload']['type']
+        }
       }
     end
-    results.to_json
+    { type: 'FeatureCollection', features: results }.to_json
   end
 
   get '/suggest' do
