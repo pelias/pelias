@@ -118,7 +118,10 @@ p {
 <body>
 
 <div class="demo">
-  <input class="typeahead" type="text" placeholder="suggest...">
+  <form>
+  <input name="query" class="typeahead" type="text" placeholder="suggest...">
+  <input type="submit" style="visibility:hidden">
+  </form>
 </div>
 
 <div id="map"></div>
@@ -130,26 +133,56 @@ var map = L.mapbox.map('map', 'randyme.gajlngfe').setView([40.74417, -73.99047],
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.js"></script>
 <script>
+$(document).ready(function(){
+  if (location.search != '') {
+    $.ajax({
+      type: 'GET',
+      dataType: "json",
+      url: 'http://' + window.location.host + '/search' + location.search,
+      success: function(geoJson) {
+        var markerLayer = L.mapbox.markerLayer(geoJson)
+        markerLayer.addTo(map);
+        map.fitBounds(markerLayer.getBounds());
+      }
+    });
+  }
+});
+
 $('.demo .typeahead').typeahead([
   {
     name: 'suggestions',
-    valueKey: 'text',
-    remote: 'http://' + window.location.host + '/suggest?query=%QUERY',
+    remote: {
+      url: 'http://' + window.location.host + '/suggest?query=%QUERY',
+      filter: function (geojsonResponse) {
+        var arr = [];
+        var features = geojsonResponse.features;
+        for (key in geojsonResponse.features) {
+          if (geojsonResponse.features.hasOwnProperty(key)) {
+            obj = geojsonResponse.features[key];
+            arr.push({
+              value: obj.properties.name,
+              lonlat: obj.geometry.coordinates,
+              type: obj.properties.type
+            });
+          }
+        }
+        return arr;
+      }
+    },
     template: [
-      '<p class="result-type">{{payload.type}}</p>',
-      '<p class="result-text">{{text}}</p>',
-      '<p class="result-latlng">{{payload.lat}}, {{payload.lon}}</p>'
+      '<p class="result-type">{{type}}</p>',
+      '<p class="result-text">{{value}}</p>',
+      '<p class="result-latlng">{{lonlat}}</p>'
     ].join(''),
     engine: Hogan
   }
 ]).bind('typeahead:selected', function (obj, datum) {
-    console.log(datum.payload);
-    var marker = L.marker([datum.payload.lat, datum.payload.lon]).addTo(map);
-    map.panTo([datum.payload.lat, datum.payload.lon]);
-    if (datum.payload.type=='address') {
+    var marker = L.marker([datum.lonlat[1], datum.lonlat[0]]).addTo(map);
+    map.panTo([datum.lonlat[1], datum.lonlat[0]]);
+    if (datum.type=='address') {
       map.setZoom(17);
     }
-    else if (datum.payload.type=='street') {
+    else if (datum.type=='street') {
       map.setZoom(15);
     }
     else {
