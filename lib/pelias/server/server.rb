@@ -4,9 +4,10 @@ require 'pelias'
 class Server < Sinatra::Base
 
   get '/search' do
+    size = params[:size] || 10
     results = Pelias::Search.search(params[:query], params[:viewbox],
-      params[:center])['hits']['hits']
-    results = results.map do |result|
+      params[:center], size)
+    results = results['hits']['hits'].map do |result|
       {
         name: result['_source']['name'],
         lat: result['_source']['center_point'][1],

@@ -2,7 +2,7 @@ module Pelias
 
   class Search < Base
 
-    def self.search(query, viewbox=nil, center=nil)
+    def self.search(query, viewbox=nil, center=nil, size=10)
       query = { query: { match: { name: query } } }
       if viewbox
         viewbox = viewbox.split(',')
@@ -38,7 +38,7 @@ module Pelias
           }
         ]
       end
-      ES_CLIENT.search(index: INDEX, body: query)
+      ES_CLIENT.search(index: INDEX, body: query, size: size)
     end
 
     def self.suggest(query, size)
