@@ -11,6 +11,9 @@ namespace :openstreetmap do
     ")
     begin
       streets = Pelias::PG_CLIENT.exec("FETCH 50 FROM streets_cursor")
+      exists = Pelias::ES_CLIENT.get(index: 'pelias', type: 'streets',
+        id: streets.first['osm_id'], ignore: 404)
+      next if exists
       street_data = streets.map do |street|
         center = JSON.parse(street['center'])
         {
