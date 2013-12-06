@@ -45,83 +45,8 @@ namespace :geonames do
             :elevation => arr[15]
           }
         end
-        Pelias::Geoname.create(bulk)
+        Pelias::Geoname.delay.create(bulk)
       end
-    end
-  end
-
-  task :yamlize_admin do
-    # these yml files are in git, keeping around for updates
-    yamlize_countries
-    yamlize_admin1
-    yamlize_admin2
-    yamlize_feature_codes
-  end
-
-  def yamlize_countries
-    countries = {}
-    File.open('data/geonames/countryInfo.txt') do |fp|
-      fp.each do |line|
-        arr = line.chomp.split("\t")
-        next unless arr && arr.count > 1 && arr[0] != '#ISO'
-        countries[arr[0]] = {
-          :name => arr[4],
-          :area => arr[6],
-          :population => arr[7],
-          :continent => arr[8]
-        }
-      end
-    end
-    File.open('data/geonames/countries.yml', 'w') do |file|
-      file.write(countries.to_yaml)
-    end
-  end
-
-  def yamlize_admin1
-    admin1 = {}
-    File.open('data/geonames/admin1CodesASCII.txt') do |fp|
-      fp.each do |line|
-        arr = line.chomp.split("\t")
-        admin1[arr[0]] = {
-          :name => arr[1],
-          :geonames_id => arr[3]
-        }
-      end
-    end
-    File.open('data/geonames/admin1.yml', 'w') do |file|
-      file.write(admin1.to_yaml)
-    end
-  end
-
-  def yamlize_admin2
-    admin2 = {}
-    File.open('data/geonames/admin2Codes.txt') do |fp|
-      fp.each do |line|
-        arr = line.chomp.split("\t")
-        admin2[arr[0]] = {
-          :name => arr[1],
-          :geonames_id => arr[3]
-        }
-      end
-    end
-    File.open('data/geonames/admin2.yml', 'w') do |file|
-      file.write(admin2.to_yaml)
-    end
-  end
-
-  def yamlize_feature_codes
-    feature_codes = {}
-    File.open('data/geonames/featureCodes_en.txt') do |fp|
-      fp.each do |line|
-        arr = line.chomp.split("\t")
-        feature_codes[arr[0]] = {
-          :name => arr[1],
-          :description => arr[2]
-        }
-      end
-    end
-    File.open('data/geonames/feature_codes.yml', 'w') do |file|
-      file.write(feature_codes.to_yaml)
     end
   end
 

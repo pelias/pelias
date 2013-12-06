@@ -60,15 +60,11 @@ namespace :quattroshapes do
           begin
             loc.set_encompassing_shapes
             loc.set_admin_names
-            loc.save
+            loc.delay.save
           rescue Faraday::Error::TimeoutError
             puts "TIMEOUT ERROR: #{record.attributes.inspect}"
           rescue Elasticsearch::Transport::Transport::Errors::BadRequest
             puts "INVALID SHAPE: #{record.attributes.inspect}"
-          rescue Exception => e
-            # TODO get rid of this after a few successful runs
-            debugger
-            i=0
           end
         end
       end
