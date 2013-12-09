@@ -7,8 +7,9 @@ class Server < Sinatra::Base
     size = params[:size] || 10
     results = Pelias::Search.search(params[:query], params[:viewbox],
       params[:center], size)
-    i = 1
+    i = 0
     results = results['hits']['hits'].map do |result|
+      i += 1
       {
         type: 'Feature',
         geometry: result['_source']['center_shape'],
@@ -19,7 +20,6 @@ class Server < Sinatra::Base
           :'marker-symbol' => i
         }
       }
-      i += 1
     end
     { type: 'FeatureCollection', features: results }.to_json
   end
