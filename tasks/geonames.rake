@@ -1,6 +1,9 @@
 require 'pelias'
 require 'open-uri'
 
+# going to restrict to US for now
+RESTRICT_COUNTRY = 'US'
+
 namespace :geonames do
 
   task :download do
@@ -21,10 +24,11 @@ namespace :geonames do
 
   task :populate do
     File.open('data/geonames/allCountries.txt') do |fp|
-      fp.each_slice(1000) do |lines|
+      fp.each_slice(500) do |lines|
         bulk = []
         lines.each do |line|
           arr = line.chomp.split("\t")
+          next unless arr[8] == RESTRICT_COUNTRY
           bulk << {
             :id => arr[0],
             :name => arr[1],
