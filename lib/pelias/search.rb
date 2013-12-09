@@ -3,7 +3,17 @@ module Pelias
   class Search < Base
 
     def self.search(query, viewbox=nil, center=nil, size=10)
-      query = { query: { match: { name: query } } }
+      query = { 
+        query: { 
+          multi_match: {
+            query: query,
+            fields: [
+              "name", "alternate_names", "admin1_code", "admin1_name",
+              "admin2_name", "admin3_name", "admin4_name"
+            ]
+          }
+        }
+      }
       if viewbox
         viewbox = viewbox.split(',')
         query[:filter] = {
