@@ -48,7 +48,7 @@ namespace :openstreetmap do
       addresses = Pelias::PG_CLIENT.exec("FETCH 500 FROM nh_cursor")
       address_data = addresses.map do |address|
         center = JSON.parse(street['location'])
-        street_name = address['street_name'],
+        street_name = address['street_name']
         street_id = Pelias::Osm.get_street_id(
           street_name,
           center['coordinates'][1],

@@ -1,6 +1,5 @@
 require "debugger"
 require "elasticsearch"
-require "geokit"
 require "rgeo-geojson"
 require "rgeo-shapefile"
 require "pg"

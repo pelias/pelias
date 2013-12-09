@@ -15,8 +15,8 @@ module Pelias
     def self.addresses_nodes_housenumbers_sql
       "SELECT
         n.id AS address_id,
-        tags[idx(n.tags, 'addr:street') + 1] AS street_name,
-        tags[idx(n.tags, 'addr:housenumber') + 1] AS housenumber,
+        n.tags[idx(n.tags, 'addr:street') + 1] AS street_name,
+        n.tags[idx(n.tags, 'addr:housenumber') + 1] AS housenumber,
         ST_AsGeoJSON(ST_Transform(p.way, 4326), 6) AS location
       FROM planet_osm_nodes n
       INNER JOIN planet_osm_point p
@@ -70,16 +70,15 @@ module Pelias
     end
 
     def self.get_street_ids_from_name(street_name, lat, lon)
-      latlng = Geokit::LatLng.new(lat, lon)
-      bounds = Geokit::Bounds.from_point_and_radius(latlng, 3)
-      ne = [bounds.ne.lng.round(6), bounds.ne.lat.round(6)]
-      sw = [bounds.sw.lng.round(6), bounds.sw.lat.round(6)]
-      es_results = Pelias::ES_CLIENT.search(index: 'pelias',
+      # get matching name streets with a center point 10 km away from address
+      es_results = Pelias::ES_CLIENT.search(index: INDEX,
         type: 'street', size: 50, body: {
           query: { match: { name: street_name } },
           filter: {
-            geo_shape: {
-              center_point:{shape:{type:'envelope',coordinates:[ne, sw]}}
+            geo_distance: {
+              distance: 10,
+              distance_unit: 'km',
+              center_point: [lon, lat]
             }
           }
         }
@@ -88,6 +87,7 @@ module Pelias
     end
 
     def self.get_closest_id(ids, lat, lon)
+      # use PG to sort streets by shape, ES doesn't support this yet
       return if ids.nil? || ids.empty?
       pg_results = Pelias::PG_CLIENT.exec("
         SELECT osm_id, ST_Distance(
