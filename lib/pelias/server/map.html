@@ -140,7 +140,7 @@ $(document).ready(function(){
       dataType: "json",
       url: 'http://' + window.location.host + '/search' + location.search,
       success: function(geoJson) {
-        var markerLayer = L.mapbox.markerLayer(geoJson)
+        var markerLayer = L.mapbox.markerLayer(geoJson);
         markerLayer.addTo(map);
         map.fitBounds(markerLayer.getBounds());
       }

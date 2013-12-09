@@ -13,7 +13,8 @@ class Server < Sinatra::Base
         geometry: result['_source']['center_shape'],
         properties: {
           name: result['_source']['name'],
-          type: result['_source']['suggest']['payload']['type']
+          type: result['_source']['suggest']['payload']['type'],
+          :'marker-color' => '#F00'
         }
       }
     end
