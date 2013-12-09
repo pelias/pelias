@@ -160,9 +160,9 @@ $('.demo .typeahead').typeahead([
           if (geojsonResponse.features.hasOwnProperty(key)) {
             obj = geojsonResponse.features[key];
             arr.push({
-              value: obj.properties.name,
+              value: obj.properties.title,
               lonlat: obj.geometry.coordinates,
-              type: obj.properties.type
+              type: obj.properties.description
             });
           }
         }
