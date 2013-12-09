@@ -32,6 +32,7 @@ namespace :openstreetmap do
 
   desc "populate addresses from OSM"
   task :populate_addresses do
+    Pelias::Osm.create_postgres_index_function
     nodes_housenumbers
     ways_housenumbers
     ways_interpolations

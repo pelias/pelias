@@ -2,6 +2,19 @@ module Pelias
 
   class Osm < Base
 
+    def self.create_postgres_index_function
+      Pelias::PG_CLIENT.exec("
+        CREATE OR REPLACE FUNCTION idx(anyarray, anyelement)
+        RETURNS int AS $$
+        SELECT i FROM (
+          SELECT generate_series(array_lower($1,1),array_upper($1,1))
+        ) g(i)
+        WHERE $1[i] = $2
+        LIMIT 1;
+        $$ LANGUAGE sql IMMUTABLE;
+      ")
+    end
+
     def self.streets_sql
       "SELECT osm_id, name,
         ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
