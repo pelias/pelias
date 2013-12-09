@@ -7,6 +7,7 @@ class Server < Sinatra::Base
     size = params[:size] || 10
     results = Pelias::Search.search(params[:query], params[:viewbox],
       params[:center], size)
+    i = 1
     results = results['hits']['hits'].map do |result|
       {
         type: 'Feature',
@@ -14,9 +15,11 @@ class Server < Sinatra::Base
         properties: {
           title: result['_source']['name'],
           description: result['_source']['suggest']['payload']['type'],
-          :'marker-color' => '#369100'
+          :'marker-color' => '#369100',
+          :'marker-symbol' => i
         }
       }
+      i += 1
     end
     { type: 'FeatureCollection', features: results }.to_json
   end
