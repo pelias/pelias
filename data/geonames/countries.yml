@@ -1,0 +1,1261 @@
+---
+AD:
+  :name: Andorra
+  :area: '468'
+  :population: '84000'
+  :continent: EU
+AE:
+  :name: United Arab Emirates
+  :area: '82880'
+  :population: '4975593'
+  :continent: AS
+AF:
+  :name: Afghanistan
+  :area: '647500'
+  :population: '29121286'
+  :continent: AS
+AG:
+  :name: Antigua and Barbuda
+  :area: '443'
+  :population: '86754'
+  :continent: NA
+AI:
+  :name: Anguilla
+  :area: '102'
+  :population: '13254'
+  :continent: NA
+AL:
+  :name: Albania
+  :area: '28748'
+  :population: '2986952'
+  :continent: EU
+AM:
+  :name: Armenia
+  :area: '29800'
+  :population: '2968000'
+  :continent: AS
+AO:
+  :name: Angola
+  :area: '1246700'
+  :population: '13068161'
+  :continent: AF
+AQ:
+  :name: Antarctica
+  :area: '14000000'
+  :population: '0'
+  :continent: AN
+AR:
+  :name: Argentina
+  :area: '2766890'
+  :population: '41343201'
+  :continent: SA
+AS:
+  :name: American Samoa
+  :area: '199'
+  :population: '57881'
+  :continent: OC
+AT:
+  :name: Austria
+  :area: '83858'
+  :population: '8205000'
+  :continent: EU
+AU:
+  :name: Australia
+  :area: '7686850'
+  :population: '21515754'
+  :continent: OC
+AW:
+  :name: Aruba
+  :area: '193'
+  :population: '71566'
+  :continent: NA
+AX:
+  :name: Aland Islands
+  :area: ''
+  :population: '26711'
+  :continent: EU
+AZ:
+  :name: Azerbaijan
+  :area: '86600'
+  :population: '8303512'
+  :continent: AS
+BA:
+  :name: Bosnia and Herzegovina
+  :area: '51129'
+  :population: '4590000'
+  :continent: EU
+BB:
+  :name: Barbados
+  :area: '431'
+  :population: '285653'
+  :continent: NA
+BD:
+  :name: Bangladesh
+  :area: '144000'
+  :population: '156118464'
+  :continent: AS
+BE:
+  :name: Belgium
+  :area: '30510'
+  :population: '10403000'
+  :continent: EU
+BF:
+  :name: Burkina Faso
+  :area: '274200'
+  :population: '16241811'
+  :continent: AF
+BG:
+  :name: Bulgaria
+  :area: '110910'
+  :population: '7148785'
+  :continent: EU
+BH:
+  :name: Bahrain
+  :area: '665'
+  :population: '738004'
+  :continent: AS
+BI:
+  :name: Burundi
+  :area: '27830'
+  :population: '9863117'
+  :continent: AF
+BJ:
+  :name: Benin
+  :area: '112620'
+  :population: '9056010'
+  :continent: AF
+BL:
+  :name: Saint Barthelemy
+  :area: '21'
+  :population: '8450'
+  :continent: NA
+BM:
+  :name: Bermuda
+  :area: '53'
+  :population: '65365'
+  :continent: NA
+BN:
+  :name: Brunei
+  :area: '5770'
+  :population: '395027'
+  :continent: AS
+BO:
+  :name: Bolivia
+  :area: '1098580'
+  :population: '9947418'
+  :continent: SA
+BQ:
+  :name: 'Bonaire, Saint Eustatius and Saba '
+  :area: ''
+  :population: '18012'
+  :continent: NA
+BR:
+  :name: Brazil
+  :area: '8511965'
+  :population: '201103330'
+  :continent: SA
+BS:
+  :name: Bahamas
+  :area: '13940'
+  :population: '301790'
+  :continent: NA
+BT:
+  :name: Bhutan
+  :area: '47000'
+  :population: '699847'
+  :continent: AS
+BV:
+  :name: Bouvet Island
+  :area: ''
+  :population: '0'
+  :continent: AN
+BW:
+  :name: Botswana
+  :area: '600370'
+  :population: '2029307'
+  :continent: AF
+BY:
+  :name: Belarus
+  :area: '207600'
+  :population: '9685000'
+  :continent: EU
+BZ:
+  :name: Belize
+  :area: '22966'
+  :population: '314522'
+  :continent: NA
+CA:
+  :name: Canada
+  :area: '9984670'
+  :population: '33679000'
+  :continent: NA
+CC:
+  :name: Cocos Islands
+  :area: '14'
+  :population: '628'
+  :continent: AS
+CD:
+  :name: Democratic Republic of the Congo
+  :area: '2345410'
+  :population: '70916439'
+  :continent: AF
+CF:
+  :name: Central African Republic
+  :area: '622984'
+  :population: '4844927'
+  :continent: AF
+CG:
+  :name: Republic of the Congo
+  :area: '342000'
+  :population: '3039126'
+  :continent: AF
+CH:
+  :name: Switzerland
+  :area: '41290'
+  :population: '7581000'
+  :continent: EU
+CI:
+  :name: Ivory Coast
+  :area: '322460'
+  :population: '21058798'
+  :continent: AF
+CK:
+  :name: Cook Islands
+  :area: '240'
+  :population: '21388'
+  :continent: OC
+CL:
+  :name: Chile
+  :area: '756950'
+  :population: '16746491'
+  :continent: SA
+CM:
+  :name: Cameroon
+  :area: '475440'
+  :population: '19294149'
+  :continent: AF
+CN:
+  :name: China
+  :area: '9596960'
+  :population: '1330044000'
+  :continent: AS
+CO:
+  :name: Colombia
+  :area: '1138910'
+  :population: '44205293'
+  :continent: SA
+CR:
+  :name: Costa Rica
+  :area: '51100'
+  :population: '4516220'
+  :continent: NA
+CU:
+  :name: Cuba
+  :area: '110860'
+  :population: '11423000'
+  :continent: NA
+CV:
+  :name: Cape Verde
+  :area: '4033'
+  :population: '508659'
+  :continent: AF
+CW:
+  :name: Curacao
+  :area: ''
+  :population: '141766'
+  :continent: NA
+CX:
+  :name: Christmas Island
+  :area: '135'
+  :population: '1500'
+  :continent: AS
+CY:
+  :name: Cyprus
+  :area: '9250'
+  :population: '1102677'
+  :continent: EU
+CZ:
+  :name: Czech Republic
+  :area: '78866'
+  :population: '10476000'
+  :continent: EU
+DE:
+  :name: Germany
+  :area: '357021'
+  :population: '81802257'
+  :continent: EU
+DJ:
+  :name: Djibouti
+  :area: '23000'
+  :population: '740528'
+  :continent: AF
+DK:
+  :name: Denmark
+  :area: '43094'
+  :population: '5484000'
+  :continent: EU
+DM:
+  :name: Dominica
+  :area: '754'
+  :population: '72813'
+  :continent: NA
+DO:
+  :name: Dominican Republic
+  :area: '48730'
+  :population: '9823821'
+  :continent: NA
+DZ:
+  :name: Algeria
+  :area: '2381740'
+  :population: '34586184'
+  :continent: AF
+EC:
+  :name: Ecuador
+  :area: '283560'
+  :population: '14790608'
+  :continent: SA
+EE:
+  :name: Estonia
+  :area: '45226'
+  :population: '1291170'
+  :continent: EU
+EG:
+  :name: Egypt
+  :area: '1001450'
+  :population: '80471869'
+  :continent: AF
+EH:
+  :name: Western Sahara
+  :area: '266000'
+  :population: '273008'
+  :continent: AF
+ER:
+  :name: Eritrea
+  :area: '121320'
+  :population: '5792984'
+  :continent: AF
+ES:
+  :name: Spain
+  :area: '504782'
+  :population: '46505963'
+  :continent: EU
+ET:
+  :name: Ethiopia
+  :area: '1127127'
+  :population: '88013491'
+  :continent: AF
+FI:
+  :name: Finland
+  :area: '337030'
+  :population: '5244000'
+  :continent: EU
+FJ:
+  :name: Fiji
+  :area: '18270'
+  :population: '875983'
+  :continent: OC
+FK:
+  :name: Falkland Islands
+  :area: '12173'
+  :population: '2638'
+  :continent: SA
+FM:
+  :name: Micronesia
+  :area: '702'
+  :population: '107708'
+  :continent: OC
+FO:
+  :name: Faroe Islands
+  :area: '1399'
+  :population: '48228'
+  :continent: EU
+FR:
+  :name: France
+  :area: '547030'
+  :population: '64768389'
+  :continent: EU
+GA:
+  :name: Gabon
+  :area: '267667'
+  :population: '1545255'
+  :continent: AF
+GB:
+  :name: United Kingdom
+  :area: '244820'
+  :population: '62348447'
+  :continent: EU
+GD:
+  :name: Grenada
+  :area: '344'
+  :population: '107818'
+  :continent: NA
+GE:
+  :name: Georgia
+  :area: '69700'
+  :population: '4630000'
+  :continent: AS
+GF:
+  :name: French Guiana
+  :area: '91000'
+  :population: '195506'
+  :continent: SA
+GG:
+  :name: Guernsey
+  :area: '78'
+  :population: '65228'
+  :continent: EU
+GH:
+  :name: Ghana
+  :area: '239460'
+  :population: '24339838'
+  :continent: AF
+GI:
+  :name: Gibraltar
+  :area: '6.5'
+  :population: '27884'
+  :continent: EU
+GL:
+  :name: Greenland
+  :area: '2166086'
+  :population: '56375'
+  :continent: NA
+GM:
+  :name: Gambia
+  :area: '11300'
+  :population: '1593256'
+  :continent: AF
+GN:
+  :name: Guinea
+  :area: '245857'
+  :population: '10324025'
+  :continent: AF
+GP:
+  :name: Guadeloupe
+  :area: '1780'
+  :population: '443000'
+  :continent: NA
+GQ:
+  :name: Equatorial Guinea
+  :area: '28051'
+  :population: '1014999'
+  :continent: AF
+GR:
+  :name: Greece
+  :area: '131940'
+  :population: '11000000'
+  :continent: EU
+GS:
+  :name: South Georgia and the South Sandwich Islands
+  :area: '3903'
+  :population: '30'
+  :continent: AN
+GT:
+  :name: Guatemala
+  :area: '108890'
+  :population: '13550440'
+  :continent: NA
+GU:
+  :name: Guam
+  :area: '549'
+  :population: '159358'
+  :continent: OC
+GW:
+  :name: Guinea-Bissau
+  :area: '36120'
+  :population: '1565126'
+  :continent: AF
+GY:
+  :name: Guyana
+  :area: '214970'
+  :population: '748486'
+  :continent: SA
+HK:
+  :name: Hong Kong
+  :area: '1092'
+  :population: '6898686'
+  :continent: AS
+HM:
+  :name: Heard Island and McDonald Islands
+  :area: '412'
+  :population: '0'
+  :continent: AN
+HN:
+  :name: Honduras
+  :area: '112090'
+  :population: '7989415'
+  :continent: NA
+HR:
+  :name: Croatia
+  :area: '56542'
+  :population: '4491000'
+  :continent: EU
+HT:
+  :name: Haiti
+  :area: '27750'
+  :population: '9648924'
+  :continent: NA
+HU:
+  :name: Hungary
+  :area: '93030'
+  :population: '9982000'
+  :continent: EU
+ID:
+  :name: Indonesia
+  :area: '1919440'
+  :population: '242968342'
+  :continent: AS
+IE:
+  :name: Ireland
+  :area: '70280'
+  :population: '4622917'
+  :continent: EU
+IL:
+  :name: Israel
+  :area: '20770'
+  :population: '7353985'
+  :continent: AS
+IM:
+  :name: Isle of Man
+  :area: '572'
+  :population: '75049'
+  :continent: EU
+IN:
+  :name: India
+  :area: '3287590'
+  :population: '1173108018'
+  :continent: AS
+IO:
+  :name: British Indian Ocean Territory
+  :area: '60'
+  :population: '4000'
+  :continent: AS
+IQ:
+  :name: Iraq
+  :area: '437072'
+  :population: '29671605'
+  :continent: AS
+IR:
+  :name: Iran
+  :area: '1648000'
+  :population: '76923300'
+  :continent: AS
+IS:
+  :name: Iceland
+  :area: '103000'
+  :population: '308910'
+  :continent: EU
+IT:
+  :name: Italy
+  :area: '301230'
+  :population: '60340328'
+  :continent: EU
+JE:
+  :name: Jersey
+  :area: '116'
+  :population: '90812'
+  :continent: EU
+JM:
+  :name: Jamaica
+  :area: '10991'
+  :population: '2847232'
+  :continent: NA
+JO:
+  :name: Jordan
+  :area: '92300'
+  :population: '6407085'
+  :continent: AS
+JP:
+  :name: Japan
+  :area: '377835'
+  :population: '127288000'
+  :continent: AS
+KE:
+  :name: Kenya
+  :area: '582650'
+  :population: '40046566'
+  :continent: AF
+KG:
+  :name: Kyrgyzstan
+  :area: '198500'
+  :population: '5508626'
+  :continent: AS
+KH:
+  :name: Cambodia
+  :area: '181040'
+  :population: '14453680'
+  :continent: AS
+KI:
+  :name: Kiribati
+  :area: '811'
+  :population: '92533'
+  :continent: OC
+KM:
+  :name: Comoros
+  :area: '2170'
+  :population: '773407'
+  :continent: AF
+KN:
+  :name: Saint Kitts and Nevis
+  :area: '261'
+  :population: '49898'
+  :continent: NA
+KP:
+  :name: North Korea
+  :area: '120540'
+  :population: '22912177'
+  :continent: AS
+KR:
+  :name: South Korea
+  :area: '98480'
+  :population: '48422644'
+  :continent: AS
+XK:
+  :name: Kosovo
+  :area: ''
+  :population: '1800000'
+  :continent: EU
+KW:
+  :name: Kuwait
+  :area: '17820'
+  :population: '2789132'
+  :continent: AS
+KY:
+  :name: Cayman Islands
+  :area: '262'
+  :population: '44270'
+  :continent: NA
+KZ:
+  :name: Kazakhstan
+  :area: '2717300'
+  :population: '15340000'
+  :continent: AS
+LA:
+  :name: Laos
+  :area: '236800'
+  :population: '6368162'
+  :continent: AS
+LB:
+  :name: Lebanon
+  :area: '10400'
+  :population: '4125247'
+  :continent: AS
+LC:
+  :name: Saint Lucia
+  :area: '616'
+  :population: '160922'
+  :continent: NA
+LI:
+  :name: Liechtenstein
+  :area: '160'
+  :population: '35000'
+  :continent: EU
+LK:
+  :name: Sri Lanka
+  :area: '65610'
+  :population: '21513990'
+  :continent: AS
+LR:
+  :name: Liberia
+  :area: '111370'
+  :population: '3685076'
+  :continent: AF
+LS:
+  :name: Lesotho
+  :area: '30355'
+  :population: '1919552'
+  :continent: AF
+LT:
+  :name: Lithuania
+  :area: '65200'
+  :population: '3565000'
+  :continent: EU
+LU:
+  :name: Luxembourg
+  :area: '2586'
+  :population: '497538'
+  :continent: EU
+LV:
+  :name: Latvia
+  :area: '64589'
+  :population: '2217969'
+  :continent: EU
+LY:
+  :name: Libya
+  :area: '1759540'
+  :population: '6461454'
+  :continent: AF
+MA:
+  :name: Morocco
+  :area: '446550'
+  :population: '31627428'
+  :continent: AF
+MC:
+  :name: Monaco
+  :area: '1.95'
+  :population: '32965'
+  :continent: EU
+MD:
+  :name: Moldova
+  :area: '33843'
+  :population: '4324000'
+  :continent: EU
+ME:
+  :name: Montenegro
+  :area: '14026'
+  :population: '666730'
+  :continent: EU
+MF:
+  :name: Saint Martin
+  :area: '53'
+  :population: '35925'
+  :continent: NA
+MG:
+  :name: Madagascar
+  :area: '587040'
+  :population: '21281844'
+  :continent: AF
+MH:
+  :name: Marshall Islands
+  :area: '181.3'
+  :population: '65859'
+  :continent: OC
+MK:
+  :name: Macedonia
+  :area: '25333'
+  :population: '2061000'
+  :continent: EU
+ML:
+  :name: Mali
+  :area: '1240000'
+  :population: '13796354'
+  :continent: AF
+MM:
+  :name: Myanmar
+  :area: '678500'
+  :population: '53414374'
+  :continent: AS
+MN:
+  :name: Mongolia
+  :area: '1565000'
+  :population: '3086918'
+  :continent: AS
+MO:
+  :name: Macao
+  :area: '254'
+  :population: '449198'
+  :continent: AS
+MP:
+  :name: Northern Mariana Islands
+  :area: '477'
+  :population: '53883'
+  :continent: OC
+MQ:
+  :name: Martinique
+  :area: '1100'
+  :population: '432900'
+  :continent: NA
+MR:
+  :name: Mauritania
+  :area: '1030700'
+  :population: '3205060'
+  :continent: AF
+MS:
+  :name: Montserrat
+  :area: '102'
+  :population: '9341'
+  :continent: NA
+MT:
+  :name: Malta
+  :area: '316'
+  :population: '403000'
+  :continent: EU
+MU:
+  :name: Mauritius
+  :area: '2040'
+  :population: '1294104'
+  :continent: AF
+MV:
+  :name: Maldives
+  :area: '300'
+  :population: '395650'
+  :continent: AS
+MW:
+  :name: Malawi
+  :area: '118480'
+  :population: '15447500'
+  :continent: AF
+MX:
+  :name: Mexico
+  :area: '1972550'
+  :population: '112468855'
+  :continent: NA
+MY:
+  :name: Malaysia
+  :area: '329750'
+  :population: '28274729'
+  :continent: AS
+MZ:
+  :name: Mozambique
+  :area: '801590'
+  :population: '22061451'
+  :continent: AF
+NA:
+  :name: Namibia
+  :area: '825418'
+  :population: '2128471'
+  :continent: AF
+NC:
+  :name: New Caledonia
+  :area: '19060'
+  :population: '216494'
+  :continent: OC
+NE:
+  :name: Niger
+  :area: '1267000'
+  :population: '15878271'
+  :continent: AF
+NF:
+  :name: Norfolk Island
+  :area: '34.6'
+  :population: '1828'
+  :continent: OC
+NG:
+  :name: Nigeria
+  :area: '923768'
+  :population: '154000000'
+  :continent: AF
+NI:
+  :name: Nicaragua
+  :area: '129494'
+  :population: '5995928'
+  :continent: NA
+NL:
+  :name: Netherlands
+  :area: '41526'
+  :population: '16645000'
+  :continent: EU
+'NO':
+  :name: Norway
+  :area: '324220'
+  :population: '5009150'
+  :continent: EU
+NP:
+  :name: Nepal
+  :area: '140800'
+  :population: '28951852'
+  :continent: AS
+NR:
+  :name: Nauru
+  :area: '21'
+  :population: '10065'
+  :continent: OC
+NU:
+  :name: Niue
+  :area: '260'
+  :population: '2166'
+  :continent: OC
+NZ:
+  :name: New Zealand
+  :area: '268680'
+  :population: '4252277'
+  :continent: OC
+OM:
+  :name: Oman
+  :area: '212460'
+  :population: '2967717'
+  :continent: AS
+PA:
+  :name: Panama
+  :area: '78200'
+  :population: '3410676'
+  :continent: NA
+PE:
+  :name: Peru
+  :area: '1285220'
+  :population: '29907003'
+  :continent: SA
+PF:
+  :name: French Polynesia
+  :area: '4167'
+  :population: '270485'
+  :continent: OC
+PG:
+  :name: Papua New Guinea
+  :area: '462840'
+  :population: '6064515'
+  :continent: OC
+PH:
+  :name: Philippines
+  :area: '300000'
+  :population: '99900177'
+  :continent: AS
+PK:
+  :name: Pakistan
+  :area: '803940'
+  :population: '184404791'
+  :continent: AS
+PL:
+  :name: Poland
+  :area: '312685'
+  :population: '38500000'
+  :continent: EU
+PM:
+  :name: Saint Pierre and Miquelon
+  :area: '242'
+  :population: '7012'
+  :continent: NA
+PN:
+  :name: Pitcairn
+  :area: '47'
+  :population: '46'
+  :continent: OC
+PR:
+  :name: Puerto Rico
+  :area: '9104'
+  :population: '3916632'
+  :continent: NA
+PS:
+  :name: Palestinian Territory
+  :area: '5970'
+  :population: '3800000'
+  :continent: AS
+PT:
+  :name: Portugal
+  :area: '92391'
+  :population: '10676000'
+  :continent: EU
+PW:
+  :name: Palau
+  :area: '458'
+  :population: '19907'
+  :continent: OC
+PY:
+  :name: Paraguay
+  :area: '406750'
+  :population: '6375830'
+  :continent: SA
+QA:
+  :name: Qatar
+  :area: '11437'
+  :population: '840926'
+  :continent: AS
+RE:
+  :name: Reunion
+  :area: '2517'
+  :population: '776948'
+  :continent: AF
+RO:
+  :name: Romania
+  :area: '237500'
+  :population: '21959278'
+  :continent: EU
+RS:
+  :name: Serbia
+  :area: '88361'
+  :population: '7344847'
+  :continent: EU
+RU:
+  :name: Russia
+  :area: '17100000'
+  :population: '140702000'
+  :continent: EU
+RW:
+  :name: Rwanda
+  :area: '26338'
+  :population: '11055976'
+  :continent: AF
+SA:
+  :name: Saudi Arabia
+  :area: '1960582'
+  :population: '25731776'
+  :continent: AS
+SB:
+  :name: Solomon Islands
+  :area: '28450'
+  :population: '559198'
+  :continent: OC
+SC:
+  :name: Seychelles
+  :area: '455'
+  :population: '88340'
+  :continent: AF
+SD:
+  :name: Sudan
+  :area: '1861484'
+  :population: '35000000'
+  :continent: AF
+SS:
+  :name: South Sudan
+  :area: '644329'
+  :population: '8260490'
+  :continent: AF
+SE:
+  :name: Sweden
+  :area: '449964'
+  :population: '9555893'
+  :continent: EU
+SG:
+  :name: Singapore
+  :area: '692.7'
+  :population: '4701069'
+  :continent: AS
+SH:
+  :name: Saint Helena
+  :area: '410'
+  :population: '7460'
+  :continent: AF
+SI:
+  :name: Slovenia
+  :area: '20273'
+  :population: '2007000'
+  :continent: EU
+SJ:
+  :name: Svalbard and Jan Mayen
+  :area: '62049'
+  :population: '2550'
+  :continent: EU
+SK:
+  :name: Slovakia
+  :area: '48845'
+  :population: '5455000'
+  :continent: EU
+SL:
+  :name: Sierra Leone
+  :area: '71740'
+  :population: '5245695'
+  :continent: AF
+SM:
+  :name: San Marino
+  :area: '61.2'
+  :population: '31477'
+  :continent: EU
+SN:
+  :name: Senegal
+  :area: '196190'
+  :population: '12323252'
+  :continent: AF
+SO:
+  :name: Somalia
+  :area: '637657'
+  :population: '10112453'
+  :continent: AF
+SR:
+  :name: Suriname
+  :area: '163270'
+  :population: '492829'
+  :continent: SA
+ST:
+  :name: Sao Tome and Principe
+  :area: '1001'
+  :population: '175808'
+  :continent: AF
+SV:
+  :name: El Salvador
+  :area: '21040'
+  :population: '6052064'
+  :continent: NA
+SX:
+  :name: Sint Maarten
+  :area: ''
+  :population: '37429'
+  :continent: NA
+SY:
+  :name: Syria
+  :area: '185180'
+  :population: '22198110'
+  :continent: AS
+SZ:
+  :name: Swaziland
+  :area: '17363'
+  :population: '1354051'
+  :continent: AF
+TC:
+  :name: Turks and Caicos Islands
+  :area: '430'
+  :population: '20556'
+  :continent: NA
+TD:
+  :name: Chad
+  :area: '1284000'
+  :population: '10543464'
+  :continent: AF
+TF:
+  :name: French Southern Territories
+  :area: '7829'
+  :population: '140'
+  :continent: AN
+TG:
+  :name: Togo
+  :area: '56785'
+  :population: '6587239'
+  :continent: AF
+TH:
+  :name: Thailand
+  :area: '514000'
+  :population: '67089500'
+  :continent: AS
+TJ:
+  :name: Tajikistan
+  :area: '143100'
+  :population: '7487489'
+  :continent: AS
+TK:
+  :name: Tokelau
+  :area: '10'
+  :population: '1466'
+  :continent: OC
+TL:
+  :name: East Timor
+  :area: '15007'
+  :population: '1154625'
+  :continent: OC
+TM:
+  :name: Turkmenistan
+  :area: '488100'
+  :population: '4940916'
+  :continent: AS
+TN:
+  :name: Tunisia
+  :area: '163610'
+  :population: '10589025'
+  :continent: AF
+TO:
+  :name: Tonga
+  :area: '748'
+  :population: '122580'
+  :continent: OC
+TR:
+  :name: Turkey
+  :area: '780580'
+  :population: '77804122'
+  :continent: AS
+TT:
+  :name: Trinidad and Tobago
+  :area: '5128'
+  :population: '1228691'
+  :continent: NA
+TV:
+  :name: Tuvalu
+  :area: '26'
+  :population: '10472'
+  :continent: OC
+TW:
+  :name: Taiwan
+  :area: '35980'
+  :population: '22894384'
+  :continent: AS
+TZ:
+  :name: Tanzania
+  :area: '945087'
+  :population: '41892895'
+  :continent: AF
+UA:
+  :name: Ukraine
+  :area: '603700'
+  :population: '45415596'
+  :continent: EU
+UG:
+  :name: Uganda
+  :area: '236040'
+  :population: '33398682'
+  :continent: AF
+UM:
+  :name: United States Minor Outlying Islands
+  :area: '0'
+  :population: '0'
+  :continent: OC
+US:
+  :name: United States
+  :area: '9629091'
+  :population: '310232863'
+  :continent: NA
+UY:
+  :name: Uruguay
+  :area: '176220'
+  :population: '3477000'
+  :continent: SA
+UZ:
+  :name: Uzbekistan
+  :area: '447400'
+  :population: '27865738'
+  :continent: AS
+VA:
+  :name: Vatican
+  :area: '0.44'
+  :population: '921'
+  :continent: EU
+VC:
+  :name: Saint Vincent and the Grenadines
+  :area: '389'
+  :population: '104217'
+  :continent: NA
+VE:
+  :name: Venezuela
+  :area: '912050'
+  :population: '27223228'
+  :continent: SA
+VG:
+  :name: British Virgin Islands
+  :area: '153'
+  :population: '21730'
+  :continent: NA
+VI:
+  :name: U.S. Virgin Islands
+  :area: '352'
+  :population: '108708'
+  :continent: NA
+VN:
+  :name: Vietnam
+  :area: '329560'
+  :population: '89571130'
+  :continent: AS
+VU:
+  :name: Vanuatu
+  :area: '12200'
+  :population: '221552'
+  :continent: OC
+WF:
+  :name: Wallis and Futuna
+  :area: '274'
+  :population: '16025'
+  :continent: OC
+WS:
+  :name: Samoa
+  :area: '2944'
+  :population: '192001'
+  :continent: OC
+YE:
+  :name: Yemen
+  :area: '527970'
+  :population: '23495361'
+  :continent: AS
+YT:
+  :name: Mayotte
+  :area: '374'
+  :population: '159042'
+  :continent: AF
+ZA:
+  :name: South Africa
+  :area: '1219912'
+  :population: '49000000'
+  :continent: AF
+ZM:
+  :name: Zambia
+  :area: '752614'
+  :population: '13460305'
+  :continent: AF
+ZW:
+  :name: Zimbabwe
+  :area: '390580'
+  :population: '11651858'
+  :continent: AF
+CS:
+  :name: Serbia and Montenegro
+  :area: '102350'
+  :population: '10829175'
+  :continent: EU
+AN:
+  :name: Netherlands Antilles
+  :area: '960'
+  :population: '136197'
+  :continent: NA

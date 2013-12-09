@@ -1,0 +1,2267 @@
+---
+A.ADM1:
+  :name: first-order administrative division
+  :description: a primary administrative division of a country, such as a state in
+    the United States
+A.ADM1H:
+  :name: historical first-order administrative division
+  :description: a former first-order administrative division
+A.ADM2:
+  :name: second-order administrative division
+  :description: a subdivision of a first-order administrative division
+A.ADM2H:
+  :name: historical second-order administrative division
+  :description: a former second-order administrative division
+A.ADM3:
+  :name: third-order administrative division
+  :description: a subdivision of a second-order administrative division
+A.ADM3H:
+  :name: historical third-order administrative division
+  :description: a former third-order administrative division
+A.ADM4:
+  :name: fourth-order administrative division
+  :description: a subdivision of a third-order administrative division
+A.ADM4H:
+  :name: historical fourth-order administrative division
+  :description: a former fourth-order administrative division
+A.ADM5:
+  :name: fifth-order administrative division
+  :description: a subdivision of a fourth-order administrative division
+A.ADMD:
+  :name: administrative division
+  :description: an administrative division of a country, undifferentiated as to administrative
+    level
+A.ADMDH:
+  :name: 'historical administrative division '
+  :description: a former administrative division of a political entity, undifferentiated
+    as to administrative level
+A.LTER:
+  :name: leased area
+  :description: a tract of land leased to another country, usually for military installations
+A.PCL:
+  :name: political entity
+  :description: 
+A.PCLD:
+  :name: dependent political entity
+  :description: 
+A.PCLF:
+  :name: freely associated state
+  :description: 
+A.PCLH:
+  :name: historical political entity
+  :description: a former political entity
+A.PCLI:
+  :name: independent political entity
+  :description: 
+A.PCLIX:
+  :name: section of independent political entity
+  :description: 
+A.PCLS:
+  :name: semi-independent political entity
+  :description: 
+A.PRSH:
+  :name: parish
+  :description: an ecclesiastical district
+A.TERR:
+  :name: territory
+  :description: 
+A.ZN:
+  :name: zone
+  :description: 
+A.ZNB:
+  :name: buffer zone
+  :description: a zone recognized as a buffer between two nations in which military
+    presence is minimal or absent
+H.AIRS:
+  :name: seaplane landing area
+  :description: a place on a waterbody where floatplanes land and take off
+H.ANCH:
+  :name: anchorage
+  :description: an area where vessels may anchor
+H.BAY:
+  :name: bay
+  :description: a coastal indentation between two capes or headlands, larger than
+    a cove but smaller than a gulf
+H.BAYS:
+  :name: bays
+  :description: coastal indentations between two capes or headlands, larger than a
+    cove but smaller than a gulf
+H.BGHT:
+  :name: bight(s)
+  :description: an open body of water forming a slight recession in a coastline
+H.BNK:
+  :name: bank(s)
+  :description: an elevation, typically located on a shelf, over which the depth of
+    water is relatively shallow but sufficient for most surface navigation
+H.BNKR:
+  :name: stream bank
+  :description: a sloping margin of a stream channel which normally confines the stream
+    to its channel on land
+H.BNKX:
+  :name: section of bank
+  :description: 
+H.BOG:
+  :name: bog(s)
+  :description: a wetland characterized by peat forming sphagnum moss, sedge, and
+    other acid-water plants
+H.CAPG:
+  :name: icecap
+  :description: a dome-shaped mass of glacial ice covering an area of mountain summits
+    or other high lands; smaller than an ice sheet
+H.CHN:
+  :name: channel
+  :description: the deepest part of a stream, bay, lagoon, or strait, through which
+    the main current flows
+H.CHNL:
+  :name: lake channel(s)
+  :description: that part of a lake having water deep enough for navigation between
+    islands, shoals, etc.
+H.CHNM:
+  :name: marine channel
+  :description: that part of a body of water deep enough for navigation through an
+    area otherwise not suitable
+H.CHNN:
+  :name: navigation channel
+  :description: a buoyed channel of sufficient depth for the safe navigation of vessels
+H.CNFL:
+  :name: confluence
+  :description: a place where two or more streams or intermittent streams flow together
+H.CNL:
+  :name: canal
+  :description: an artificial watercourse
+H.CNLA:
+  :name: aqueduct
+  :description: a conduit used to carry water
+H.CNLB:
+  :name: canal bend
+  :description: a conspicuously curved or bent section of a canal
+H.CNLD:
+  :name: drainage canal
+  :description: an artificial waterway carrying water away from a wetland or from
+    drainage ditches
+H.CNLI:
+  :name: irrigation canal
+  :description: a canal which serves as a main conduit for irrigation water
+H.CNLN:
+  :name: navigation canal(s)
+  :description: a watercourse constructed for navigation of vessels
+H.CNLQ:
+  :name: abandoned canal
+  :description: 
+H.CNLSB:
+  :name: underground irrigation canal(s)
+  :description: a gently inclined underground tunnel bringing water for irrigation
+    from aquifers
+H.CNLX:
+  :name: section of canal
+  :description: 
+H.COVE:
+  :name: cove(s)
+  :description: a small coastal indentation, smaller than a bay
+H.CRKT:
+  :name: tidal creek(s)
+  :description: a meandering channel in a coastal wetland subject to bi-directional
+    tidal currents
+H.CRNT:
+  :name: current
+  :description: a horizontal flow of water in a given direction with uniform velocity
+H.CUTF:
+  :name: cutoff
+  :description: a channel formed as a result of a stream cutting through a meander
+    neck
+H.DCK:
+  :name: dock(s)
+  :description: a waterway between two piers, or cut into the land for the berthing
+    of ships
+H.DCKB:
+  :name: docking basin
+  :description: a part of a harbor where ships dock
+H.DOMG:
+  :name: icecap dome
+  :description: a comparatively elevated area on an icecap
+H.DPRG:
+  :name: icecap depression
+  :description: a comparatively depressed area on an icecap
+H.DTCH:
+  :name: ditch
+  :description: a small artificial watercourse dug for draining or irrigating the
+    land
+H.DTCHD:
+  :name: drainage ditch
+  :description: a ditch which serves to drain the land
+H.DTCHI:
+  :name: irrigation ditch
+  :description: a ditch which serves to distribute irrigation water
+H.DTCHM:
+  :name: ditch mouth(s)
+  :description: an area where a drainage ditch enters a lagoon, lake or bay
+H.ESTY:
+  :name: estuary
+  :description: a funnel-shaped stream mouth or embayment where fresh water mixes
+    with sea water under tidal influences
+H.FISH:
+  :name: fishing area
+  :description: a fishing ground, bank or area where fishermen go to catch fish
+H.FJD:
+  :name: fjord
+  :description: a long, narrow, steep-walled, deep-water arm of the sea at high latitudes,
+    usually along mountainous coasts
+H.FJDS:
+  :name: fjords
+  :description: long, narrow, steep-walled, deep-water arms of the sea at high latitudes,
+    usually along mountainous coasts
+H.FLLS:
+  :name: waterfall(s)
+  :description: a perpendicular or very steep descent of the water of a stream
+H.FLLSX:
+  :name: section of waterfall(s)
+  :description: 
+H.FLTM:
+  :name: mud flat(s)
+  :description: a relatively level area of mud either between high and low tide lines,
+    or subject to flooding
+H.FLTT:
+  :name: tidal flat(s)
+  :description: a large flat area of mud or sand attached to the shore and alternately
+    covered and uncovered by the tide
+H.GLCR:
+  :name: glacier(s)
+  :description: a mass of ice, usually at high latitudes or high elevations, with
+    sufficient thickness to flow away from the source area in lobes, tongues, or masses
+H.GULF:
+  :name: gulf
+  :description: a large recess in the coastline, larger than a bay
+H.GYSR:
+  :name: geyser
+  :description: a type of hot spring with intermittent eruptions of jets of hot water
+    and steam
+H.HBR:
+  :name: harbor(s)
+  :description: a haven or space of deep water so sheltered by the adjacent land as
+    to afford a safe anchorage for ships
+H.HBRX:
+  :name: section of harbor
+  :description: 
+H.INLT:
+  :name: inlet
+  :description: a narrow waterway extending into the land, or connecting a bay or
+    lagoon with a larger body of water
+H.INLTQ:
+  :name: former inlet
+  :description: an inlet which has been filled in, or blocked by deposits
+H.LBED:
+  :name: lake bed(s)
+  :description: a dried up or drained area of a former lake
+H.LGN:
+  :name: lagoon
+  :description: a shallow coastal waterbody, completely or partly separated from a
+    larger body of water by a barrier island, coral reef or other depositional feature
+H.LGNS:
+  :name: lagoons
+  :description: shallow coastal waterbodies, completely or partly separated from a
+    larger body of water by a barrier island, coral reef or other depositional feature
+H.LGNX:
+  :name: section of lagoon
+  :description: 
+H.LK:
+  :name: lake
+  :description: a large inland body of standing water
+H.LKC:
+  :name: crater lake
+  :description: a lake in a crater or caldera
+H.LKI:
+  :name: intermittent lake
+  :description: 
+H.LKN:
+  :name: salt lake
+  :description: an inland body of salt water with no outlet
+H.LKNI:
+  :name: intermittent salt lake
+  :description: 
+H.LKO:
+  :name: oxbow lake
+  :description: a crescent-shaped lake commonly found adjacent to meandering streams
+H.LKOI:
+  :name: intermittent oxbow lake
+  :description: 
+H.LKS:
+  :name: lakes
+  :description: large inland bodies of standing water
+H.LKSB:
+  :name: underground lake
+  :description: a standing body of water in a cave
+H.LKSC:
+  :name: crater lakes
+  :description: lakes in a crater or caldera
+H.LKSI:
+  :name: intermittent lakes
+  :description: 
+H.LKSN:
+  :name: salt lakes
+  :description: inland bodies of salt water with no outlet
+H.LKSNI:
+  :name: intermittent salt lakes
+  :description: 
+H.LKX:
+  :name: section of lake
+  :description: 
+H.MFGN:
+  :name: salt evaporation ponds
+  :description: diked salt ponds used in the production of solar evaporated salt
+H.MGV:
+  :name: mangrove swamp
+  :description: a tropical tidal mud flat characterized by mangrove vegetation
+H.MOOR:
+  :name: moor(s)
+  :description: an area of open ground overlaid with wet peaty soils
+H.MRSH:
+  :name: marsh(es)
+  :description: a wetland dominated by grass-like vegetation
+H.MRSHN:
+  :name: salt marsh
+  :description: a flat area, subject to periodic salt water inundation, dominated
+    by grassy salt-tolerant plants
+H.NRWS:
+  :name: narrows
+  :description: a navigable narrow part of a bay, strait, river, etc.
+H.OCN:
+  :name: ocean
+  :description: one of the major divisions of the vast expanse of salt water covering
+    part of the earth
+H.OVF:
+  :name: overfalls
+  :description: an area of breaking waves caused by the meeting of currents or by
+    waves moving against the current
+H.PND:
+  :name: pond
+  :description: a small standing waterbody
+H.PNDI:
+  :name: intermittent pond
+  :description: 
+H.PNDN:
+  :name: salt pond
+  :description: a small standing body of salt water often in a marsh or swamp, usually
+    along a seacoast
+H.PNDNI:
+  :name: intermittent salt pond(s)
+  :description: 
+H.PNDS:
+  :name: ponds
+  :description: small standing waterbodies
+H.PNDSF:
+  :name: fishponds
+  :description: ponds or enclosures in which fish are kept or raised
+H.PNDSI:
+  :name: intermittent ponds
+  :description: 
+H.PNDSN:
+  :name: salt ponds
+  :description: small standing bodies of salt water often in a marsh or swamp, usually
+    along a seacoast
+H.POOL:
+  :name: pool(s)
+  :description: a small and comparatively still, deep part of a larger body of water
+    such as a stream or harbor; or a small body of standing water
+H.POOLI:
+  :name: intermittent pool
+  :description: 
+H.RCH:
+  :name: reach
+  :description: a straight section of a navigable stream or channel between two bends
+H.RDGG:
+  :name: icecap ridge
+  :description: a linear elevation on an icecap
+H.RDST:
+  :name: roadstead
+  :description: an open anchorage affording less protection than a harbor
+H.RF:
+  :name: reef(s)
+  :description: a surface-navigation hazard composed of consolidated material
+H.RFC:
+  :name: coral reef(s)
+  :description: a surface-navigation hazard composed of coral
+H.RFX:
+  :name: section of reef
+  :description: 
+H.RPDS:
+  :name: rapids
+  :description: a turbulent section of a stream associated with a steep, irregular
+    stream bed
+H.RSV:
+  :name: reservoir(s)
+  :description: an artificial pond or lake
+H.RSVI:
+  :name: intermittent reservoir
+  :description: 
+H.RSVT:
+  :name: water tank
+  :description: a contained pool or tank of water at, below, or above ground level
+H.RVN:
+  :name: ravine(s)
+  :description: a small, narrow, deep, steep-sided stream channel, smaller than a
+    gorge
+H.SBKH:
+  :name: sabkha(s)
+  :description: a salt flat or salt encrusted plain subject to periodic inundation
+    from flooding or high tides
+H.SD:
+  :name: sound
+  :description: a long arm of the sea forming a channel between the mainland and an
+    island or islands; or connecting two larger bodies of water
+H.SEA:
+  :name: sea
+  :description: a large body of salt water more or less confined by continuous land
+    or chains of islands forming a subdivision of an ocean
+H.SHOL:
+  :name: shoal(s)
+  :description: a surface-navigation hazard composed of unconsolidated material
+H.SILL:
+  :name: sill
+  :description: the low part of an underwater gap or saddle separating basins, including
+    a similar feature at the mouth of a fjord
+H.SPNG:
+  :name: spring(s)
+  :description: a place where ground water flows naturally out of the ground
+H.SPNS:
+  :name: sulphur spring(s)
+  :description: a place where sulphur ground water flows naturally out of the ground
+H.SPNT:
+  :name: hot spring(s)
+  :description: a place where hot ground water flows naturally out of the ground
+H.STM:
+  :name: stream
+  :description: a body of running water moving to a lower level in a channel on land
+H.STMA:
+  :name: anabranch
+  :description: a diverging branch flowing out of a main stream and rejoining it downstream
+H.STMB:
+  :name: stream bend
+  :description: a conspicuously curved or bent segment of a stream
+H.STMC:
+  :name: canalized stream
+  :description: a stream that has been substantially ditched, diked, or straightened
+H.STMD:
+  :name: distributary(-ies)
+  :description: a branch which flows away from the main stream, as in a delta or irrigation
+    canal
+H.STMH:
+  :name: headwaters
+  :description: the source and upper part of a stream, including the upper drainage
+    basin
+H.STMI:
+  :name: intermittent stream
+  :description: 
+H.STMIX:
+  :name: section of intermittent stream
+  :description: 
+H.STMM:
+  :name: stream mouth(s)
+  :description: a place where a stream discharges into a lagoon, lake, or the sea
+H.STMQ:
+  :name: abandoned watercourse
+  :description: a former stream or distributary no longer carrying flowing water,
+    but still evident due to lakes, wetland, topographic or vegetation patterns
+H.STMS:
+  :name: streams
+  :description: bodies of running water moving to a lower level in a channel on land
+H.STMSB:
+  :name: lost river
+  :description: a surface stream that disappears into an underground channel, or dries
+    up in an arid area
+H.STMX:
+  :name: section of stream
+  :description: 
+H.STRT:
+  :name: strait
+  :description: a relatively narrow waterway, usually narrower and less extensive
+    than a sound, connecting two larger bodies of water
+H.SWMP:
+  :name: swamp
+  :description: a wetland dominated by tree vegetation
+H.SYSI:
+  :name: irrigation system
+  :description: 'a network of ditches and one or more of the following elements: water
+    supply, reservoir, canal, pump, well, drain, etc.'
+H.TNLC:
+  :name: canal tunnel
+  :description: a tunnel through which a canal passes
+H.WAD:
+  :name: wadi
+  :description: a valley or ravine, bounded by relatively steep banks, which in the
+    rainy season becomes a watercourse; found primarily in North Africa and the Middle
+    East
+H.WADB:
+  :name: wadi bend
+  :description: a conspicuously curved or bent segment of a wadi
+H.WADJ:
+  :name: wadi junction
+  :description: a place where two or more wadies join
+H.WADM:
+  :name: wadi mouth
+  :description: the lower terminus of a wadi where it widens into an adjoining floodplain,
+    depression, or waterbody
+H.WADS:
+  :name: wadies
+  :description: valleys or ravines, bounded by relatively steep banks, which in the
+    rainy season become watercourses; found primarily in North Africa and the Middle
+    East
+H.WADX:
+  :name: section of wadi
+  :description: 
+H.WHRL:
+  :name: whirlpool
+  :description: a turbulent, rotating movement of water in a stream
+H.WLL:
+  :name: well
+  :description: a cylindrical hole, pit, or tunnel drilled or dug down to a depth
+    from which water, oil, or gas can be pumped or brought to the surface
+H.WLLQ:
+  :name: abandoned well
+  :description: 
+H.WLLS:
+  :name: wells
+  :description: cylindrical holes, pits, or tunnels drilled or dug down to a depth
+    from which water, oil, or gas can be pumped or brought to the surface
+H.WTLD:
+  :name: wetland
+  :description: an area subject to inundation, usually characterized by bog, marsh,
+    or swamp vegetation
+H.WTLDI:
+  :name: intermittent wetland
+  :description: 
+H.WTRC:
+  :name: watercourse
+  :description: a natural, well-defined channel produced by flowing water, or an artificial
+    channel designed to carry flowing water
+H.WTRH:
+  :name: waterhole(s)
+  :description: a natural hole, hollow, or small depression that contains water, used
+    by man and animals, especially in arid areas
+L.AGRC:
+  :name: agricultural colony
+  :description: a tract of land set aside for agricultural settlement
+L.AMUS:
+  :name: amusement park
+  :description: Amusement Park are theme parks, adventure parks offering entertainment,
+    similar to funfairs but with a fix location
+L.AREA:
+  :name: area
+  :description: a tract of land without homogeneous character or boundaries
+L.BSND:
+  :name: drainage basin
+  :description: an area drained by a stream
+L.BSNP:
+  :name: petroleum basin
+  :description: an area underlain by an oil-rich structural basin
+L.BTL:
+  :name: battlefield
+  :description: a site of a land battle of historical importance
+L.CLG:
+  :name: clearing
+  :description: an area in a forest with trees removed
+L.CMN:
+  :name: common
+  :description: a park or pasture for community use
+L.CNS:
+  :name: concession area
+  :description: a lease of land by a government for economic development, e.g., mining,
+    forestry
+L.COLF:
+  :name: coalfield
+  :description: a region in which coal deposits of possible economic value occur
+L.CONT:
+  :name: continent
+  :description: 'continent: Europe, Africa, Asia, North America, South America, Oceania,
+    Antarctica'
+L.CST:
+  :name: coast
+  :description: a zone of variable width straddling the shoreline
+L.CTRB:
+  :name: business center
+  :description: a place where a number of businesses are located
+L.DEVH:
+  :name: housing development
+  :description: a tract of land on which many houses of similar design are built according
+    to a development plan
+L.FLD:
+  :name: field(s)
+  :description: an open as opposed to wooded area
+L.FLDI:
+  :name: irrigated field(s)
+  :description: a tract of level or terraced land which is irrigated
+L.GASF:
+  :name: gasfield
+  :description: an area containing a subterranean store of natural gas of economic
+    value
+L.GRAZ:
+  :name: grazing area
+  :description: an area of grasses and shrubs used for grazing
+L.GVL:
+  :name: gravel area
+  :description: an area covered with gravel
+L.INDS:
+  :name: industrial area
+  :description: an area characterized by industrial activity
+L.LAND:
+  :name: arctic land
+  :description: a tract of land in the Arctic
+L.LCTY:
+  :name: locality
+  :description: a minor area or place of unspecified or mixed character and indefinite
+    boundaries
+L.MILB:
+  :name: military base
+  :description: a place used by an army or other armed service for storing arms and
+    supplies, and for accommodating and training troops, a base from which operations
+    can be initiated
+L.MNA:
+  :name: mining area
+  :description: an area of mine sites where minerals and ores are extracted
+L.MVA:
+  :name: maneuver area
+  :description: a tract of land where military field exercises are carried out
+L.NVB:
+  :name: naval base
+  :description: an area used to store supplies, provide barracks for troops and naval
+    personnel, a port for naval vessels, and from which operations are initiated
+L.OAS:
+  :name: oasis(-es)
+  :description: an area in a desert made productive by the availability of water
+L.OILF:
+  :name: oilfield
+  :description: an area containing a subterranean store of petroleum of economic value
+L.PEAT:
+  :name: peat cutting area
+  :description: an area where peat is harvested
+L.PRK:
+  :name: park
+  :description: an area, often of forested land, maintained as a place of beauty,
+    or for recreation
+L.PRT:
+  :name: port
+  :description: a place provided with terminal and transfer facilities for loading
+    and discharging waterborne cargo or passengers, usually located in a harbor
+L.QCKS:
+  :name: quicksand
+  :description: an area where loose sand with water moving through it may become unstable
+    when heavy objects are placed at the surface, causing them to sink
+L.RES:
+  :name: reserve
+  :description: a tract of public land reserved for future use or restricted as to
+    use
+L.RESA:
+  :name: agricultural reserve
+  :description: a tract of land reserved for agricultural reclamation and/or development
+L.RESF:
+  :name: forest reserve
+  :description: a forested area set aside for preservation or controlled use
+L.RESH:
+  :name: hunting reserve
+  :description: a tract of land used primarily for hunting
+L.RESN:
+  :name: nature reserve
+  :description: an area reserved for the maintenance of a natural habitat
+L.RESP:
+  :name: palm tree reserve
+  :description: an area of palm trees where use is controlled
+L.RESV:
+  :name: reservation
+  :description: a tract of land set aside for aboriginal, tribal, or native populations
+L.RESW:
+  :name: wildlife reserve
+  :description: a tract of public land reserved for the preservation of wildlife
+L.RGN:
+  :name: region
+  :description: an area distinguished by one or more observable physical or cultural
+    characteristics
+L.RGNE:
+  :name: economic region
+  :description: a region of a country established for economic development or for
+    statistical purposes
+L.RGNH:
+  :name: historical region
+  :description: a former historic area distinguished by one or more observable physical
+    or cultural characteristics
+L.RGNL:
+  :name: lake region
+  :description: a tract of land distinguished by numerous lakes
+L.RNGA:
+  :name: artillery range
+  :description: a tract of land used for artillery firing practice
+L.SALT:
+  :name: salt area
+  :description: a shallow basin or flat where salt accumulates after periodic inundation
+L.SNOW:
+  :name: snowfield
+  :description: an area of permanent snow and ice forming the accumulation area of
+    a glacier
+L.TRB:
+  :name: tribal area
+  :description: a tract of land used by nomadic or other tribes
+P.PPL:
+  :name: populated place
+  :description: a city, town, village, or other agglomeration of buildings where people
+    live and work
+P.PPLA:
+  :name: seat of a first-order administrative division
+  :description: seat of a first-order administrative division (PPLC takes precedence
+    over PPLA)
+P.PPLA2:
+  :name: seat of a second-order administrative division
+  :description: 
+P.PPLA3:
+  :name: seat of a third-order administrative division
+  :description: 
+P.PPLA4:
+  :name: seat of a fourth-order administrative division
+  :description: 
+P.PPLC:
+  :name: capital of a political entity
+  :description: 
+P.PPLCH:
+  :name: historical capital of a political entity
+  :description: a former capital of a political entity
+P.PPLF:
+  :name: farm village
+  :description: a populated place where the population is largely engaged in agricultural
+    activities
+P.PPLG:
+  :name: seat of government of a political entity
+  :description: 
+P.PPLH:
+  :name: historical populated place
+  :description: a populated place that no longer exists
+P.PPLL:
+  :name: populated locality
+  :description: an area similar to a locality but with a small group of dwellings
+    or other buildings
+P.PPLQ:
+  :name: abandoned populated place
+  :description: 
+P.PPLR:
+  :name: religious populated place
+  :description: a populated place whose population is largely engaged in religious
+    occupations
+P.PPLS:
+  :name: populated places
+  :description: cities, towns, villages, or other agglomerations of buildings where
+    people live and work
+P.PPLW:
+  :name: destroyed populated place
+  :description: a village, town or city destroyed by a natural disaster, or by war
+P.PPLX:
+  :name: section of populated place
+  :description: 
+P.STLMT:
+  :name: israeli settlement
+  :description: 
+R.CSWY:
+  :name: causeway
+  :description: a raised roadway across wet ground or shallow water
+R.OILP:
+  :name: oil pipeline
+  :description: a pipeline used for transporting oil
+R.PRMN:
+  :name: promenade
+  :description: a place for public walking, usually along a beach front
+R.PTGE:
+  :name: portage
+  :description: a place where boats, goods, etc., are carried overland between navigable
+    waters
+R.RD:
+  :name: road
+  :description: an open way with improved surface for transportation of animals, people
+    and vehicles
+R.RDA:
+  :name: ancient road
+  :description: the remains of a road used by ancient cultures
+R.RDB:
+  :name: road bend
+  :description: a conspicuously curved or bent section of a road
+R.RDCUT:
+  :name: road cut
+  :description: an excavation cut through a hill or ridge for a road
+R.RDJCT:
+  :name: road junction
+  :description: a place where two or more roads join
+R.RJCT:
+  :name: railroad junction
+  :description: a place where two or more railroad tracks join
+R.RR:
+  :name: railroad
+  :description: a permanent twin steel-rail track on which freight and passenger cars
+    move long distances
+R.RRQ:
+  :name: abandoned railroad
+  :description: 
+R.RTE:
+  :name: caravan route
+  :description: the route taken by caravans
+R.RYD:
+  :name: railroad yard
+  :description: a system of tracks used for the making up of trains, and switching
+    and storing freight cars
+R.ST:
+  :name: street
+  :description: a paved urban thoroughfare
+R.STKR:
+  :name: stock route
+  :description: a route taken by livestock herds
+R.TNL:
+  :name: tunnel
+  :description: a subterranean passageway for transportation
+R.TNLN:
+  :name: natural tunnel
+  :description: a cave that is open at both ends
+R.TNLRD:
+  :name: road tunnel
+  :description: a tunnel through which a road passes
+R.TNLRR:
+  :name: railroad tunnel
+  :description: a tunnel through which a railroad passes
+R.TNLS:
+  :name: tunnels
+  :description: subterranean passageways for transportation
+R.TRL:
+  :name: trail
+  :description: a path, track, or route used by pedestrians, animals, or off-road
+    vehicles
+S.ADMF:
+  :name: administrative facility
+  :description: a government building
+S.AGRF:
+  :name: agricultural facility
+  :description: a building and/or tract of land used for improving agriculture
+S.AIRB:
+  :name: airbase
+  :description: an area used to store supplies, provide barracks for air force personnel,
+    hangars and runways for aircraft, and from which operations are initiated
+S.AIRF:
+  :name: airfield
+  :description: a place on land where aircraft land and take off; no facilities provided
+    for the commercial handling of passengers and cargo
+S.AIRH:
+  :name: heliport
+  :description: a place where helicopters land and take off
+S.AIRP:
+  :name: airport
+  :description: a place where aircraft regularly land and take off, with runways,
+    navigational aids, and major facilities for the commercial handling of passengers
+    and cargo
+S.AIRQ:
+  :name: abandoned airfield
+  :description: 
+S.AMTH:
+  :name: amphitheater
+  :description: an oval or circular structure with rising tiers of seats about a stage
+    or open space
+S.ANS:
+  :name: ancient site
+  :description: a place where archeological remains, old structures, or cultural artifacts
+    are located
+S.AQC:
+  :name: aquaculture facility
+  :description: facility or area for the cultivation of aquatic animals and plants,
+    especially fish, shellfish, and seaweed, in natural or controlled marine or freshwater
+    environments; underwater agriculture
+S.ARCH:
+  :name: arch
+  :description: a natural or man-made structure in the form of an arch
+S.ASTR:
+  :name: astronomical station
+  :description: a point on the earth whose position has been determined by observations
+    of celestial bodies
+S.ASYL:
+  :name: asylum
+  :description: a facility where the insane are cared for and protected
+S.ATHF:
+  :name: athletic field
+  :description: a tract of land used for playing team sports, and athletic track and
+    field events
+S.ATM:
+  :name: automatic teller machine
+  :description: 'An unattended electronic machine in a public place, connected to
+    a data system and related equipment and activated by a bank customer to obtain
+    cash withdrawals and other banking services. '
+S.BANK:
+  :name: bank
+  :description: 'A business establishment in which money is kept for saving or commercial
+    purposes or is invested, supplied for loans, or exchanged. '
+S.BCN:
+  :name: beacon
+  :description: a fixed artificial navigation mark
+S.BDG:
+  :name: bridge
+  :description: a structure erected across an obstacle such as a stream, road, etc.,
+    in order to carry roads, railroads, and pedestrians across
+S.BDGQ:
+  :name: ruined bridge
+  :description: a destroyed or decayed bridge which is no longer functional
+S.BLDG:
+  :name: building(s)
+  :description: a structure built for permanent use, as a house, factory, etc.
+S.BLDO:
+  :name: office building
+  :description: commercial building where business and/or services are conducted
+S.BP:
+  :name: boundary marker
+  :description: a fixture marking a point along a boundary
+S.BRKS:
+  :name: barracks
+  :description: a building for lodging military personnel
+S.BRKW:
+  :name: breakwater
+  :description: a structure erected to break the force of waves at the entrance to
+    a harbor or port
+S.BSTN:
+  :name: baling station
+  :description: a facility for baling agricultural products
+S.BTYD:
+  :name: boatyard
+  :description: a waterside facility for servicing, repairing, and building small
+    vessels
+S.BUR:
+  :name: burial cave(s)
+  :description: a cave used for human burials
+S.BUSTN:
+  :name: bus station
+  :description: 'a facility comprising ticket office, platforms, etc. for loading
+    and unloading passengers '
+S.BUSTP:
+  :name: bus stop
+  :description: a place lacking station facilities
+S.CARN:
+  :name: cairn
+  :description: a heap of stones erected as a landmark or for other purposes
+S.CAVE:
+  :name: cave(s)
+  :description: an underground passageway or chamber, or cavity on the side of a cliff
+S.CH:
+  :name: church
+  :description: a building for public Christian worship
+S.CMP:
+  :name: camp(s)
+  :description: a site occupied by tents, huts, or other shelters for temporary use
+S.CMPL:
+  :name: logging camp
+  :description: a camp used by loggers
+S.CMPLA:
+  :name: labor camp
+  :description: a camp used by migrant or temporary laborers
+S.CMPMN:
+  :name: mining camp
+  :description: a camp used by miners
+S.CMPO:
+  :name: oil camp
+  :description: a camp used by oilfield workers
+S.CMPQ:
+  :name: abandoned camp
+  :description: 
+S.CMPRF:
+  :name: refugee camp
+  :description: a camp used by refugees
+S.CMTY:
+  :name: cemetery
+  :description: a burial place or ground
+S.COMC:
+  :name: communication center
+  :description: a facility, including buildings, antennae, towers and electronic equipment
+    for receiving and transmitting information
+S.CRRL:
+  :name: corral(s)
+  :description: a pen or enclosure for confining or capturing animals
+S.CSNO:
+  :name: casino
+  :description: a building used for entertainment, especially gambling
+S.CSTL:
+  :name: castle
+  :description: a large fortified building or set of buildings
+S.CSTM:
+  :name: customs house
+  :description: a building in a port where customs and duties are paid, and where
+    vessels are entered and cleared
+S.CTHSE:
+  :name: courthouse
+  :description: a building in which courts of law are held
+S.CTRA:
+  :name: atomic center
+  :description: a facility where atomic research is carried out
+S.CTRCM:
+  :name: community center
+  :description: a facility for community recreation and other activities
+S.CTRF:
+  :name: facility center
+  :description: a place where more than one facility is situated
+S.CTRM:
+  :name: medical center
+  :description: 'a complex of health care buildings including two or more of the following:
+    hospital, medical school, clinic, pharmacy, doctor''s offices, etc.'
+S.CTRR:
+  :name: religious center
+  :description: a facility where more than one religious activity is carried out,
+    e.g., retreat, school, monastery, worship
+S.CTRS:
+  :name: space center
+  :description: a facility for launching, tracking, or controlling satellites and
+    space vehicles
+S.CVNT:
+  :name: convent
+  :description: a building where a community of nuns lives in seclusion
+S.DAM:
+  :name: dam
+  :description: a barrier constructed across a stream to impound water
+S.DAMQ:
+  :name: ruined dam
+  :description: a destroyed or decayed dam which is no longer functional
+S.DAMSB:
+  :name: sub-surface dam
+  :description: a dam put down to bedrock in a sand river
+S.DARY:
+  :name: dairy
+  :description: a facility for the processing, sale and distribution of milk or milk
+    products
+S.DCKD:
+  :name: dry dock
+  :description: a dock providing support for a vessel, and means for removing the
+    water so that the bottom of the vessel can be exposed
+S.DCKY:
+  :name: dockyard
+  :description: a facility for servicing, building, or repairing ships
+S.DIKE:
+  :name: dike
+  :description: an earth or stone embankment usually constructed for flood or stream
+    control
+S.DIP:
+  :name: diplomatic facility
+  :description: office, residence, or facility of a foreign government, which may
+    include an embassy, consulate, chancery, office of charge d'affaires, or other
+    diplomatic, economic, military, or cultural mission
+S.DPOF:
+  :name: fuel depot
+  :description: an area where fuel is stored
+S.EST:
+  :name: estate(s)
+  :description: a large commercialized agricultural landholding with associated buildings
+    and other facilities
+S.ESTO:
+  :name: oil palm plantation
+  :description: an estate specializing in the cultivation of oil palm trees
+S.ESTR:
+  :name: rubber plantation
+  :description: an estate which specializes in growing and tapping rubber trees
+S.ESTSG:
+  :name: sugar plantation
+  :description: an estate that specializes in growing sugar cane
+S.ESTT:
+  :name: tea plantation
+  :description: an estate which specializes in growing tea bushes
+S.ESTX:
+  :name: section of estate
+  :description: 
+S.FCL:
+  :name: facility
+  :description: a building or buildings housing a center, institute, foundation, hospital,
+    prison, mission, courthouse, etc.
+S.FNDY:
+  :name: foundry
+  :description: a building or works where metal casting is carried out
+S.FRM:
+  :name: farm
+  :description: a tract of land with associated buildings devoted to agriculture
+S.FRMQ:
+  :name: abandoned farm
+  :description: 
+S.FRMS:
+  :name: farms
+  :description: tracts of land with associated buildings devoted to agriculture
+S.FRMT:
+  :name: farmstead
+  :description: the buildings and adjacent service areas of a farm
+S.FT:
+  :name: fort
+  :description: a defensive structure or earthworks
+S.FY:
+  :name: ferry
+  :description: a boat or other floating conveyance and terminal facilities regularly
+    used to transport people and vehicles across a waterbody
+S.GATE:
+  :name: gate
+  :description: a controlled access entrance or exit
+S.GDN:
+  :name: garden(s)
+  :description: an enclosure for displaying selected plant or animal life
+S.GHAT:
+  :name: ghat
+  :description: a set of steps leading to a river, which are of religious significance,
+    and at their base is usually a platform for bathing
+S.GHSE:
+  :name: guest house
+  :description: a house used to provide lodging for paying guests
+S.GOSP:
+  :name: gas-oil separator plant
+  :description: a facility for separating gas from oil
+S.GOVL:
+  :name: local government office
+  :description: a facility housing local governmental offices, usually a city, town,
+    or village hall
+S.GRVE:
+  :name: grave
+  :description: a burial site
+S.HERM:
+  :name: hermitage
+  :description: a secluded residence, usually for religious sects
+S.HLT:
+  :name: halting place
+  :description: a place where caravans stop for rest
+S.HMSD:
+  :name: homestead
+  :description: 'a residence, owner''s or manager''s, on a sheep or cattle station,
+    woolshed, outcamp, or Aboriginal outstation, specific to Australia and New Zealand '
+S.HSE:
+  :name: house(s)
+  :description: a building used as a human habitation
+S.HSEC:
+  :name: country house
+  :description: a large house, mansion, or chateau, on a large estate
+S.HSP:
+  :name: hospital
+  :description: a building in which sick or injured, especially those confined to
+    bed, are medically treated
+S.HSPC:
+  :name: clinic
+  :description: a medical facility associated with a hospital for outpatients
+S.HSPD:
+  :name: dispensary
+  :description: a building where medical or dental aid is dispensed
+S.HSPL:
+  :name: leprosarium
+  :description: an asylum or hospital for lepers
+S.HSTS:
+  :name: historical site
+  :description: a place of historical importance
+S.HTL:
+  :name: hotel
+  :description: a building providing lodging and/or meals for the public
+S.HUT:
+  :name: hut
+  :description: a small primitive house
+S.HUTS:
+  :name: huts
+  :description: small primitive houses
+S.INSM:
+  :name: military installation
+  :description: a facility for use of and control by armed forces
+S.ITTR:
+  :name: research institute
+  :description: a facility where research is carried out
+S.JTY:
+  :name: jetty
+  :description: a structure built out into the water at a river mouth or harbor entrance
+    to regulate currents and silting
+S.LDNG:
+  :name: landing
+  :description: a place where boats receive or discharge passengers and freight, but
+    lacking most port facilities
+S.LEPC:
+  :name: leper colony
+  :description: a settled area inhabited by lepers in relative isolation
+S.LIBR:
+  :name: library
+  :description: A place in which information resources such as books are kept for
+    reading, reference, or lending.
+S.LNDF:
+  :name: landfill
+  :description: a place for trash and garbage disposal in which the waste is buried
+    between layers of earth to build up low-lying land
+S.LOCK:
+  :name: lock(s)
+  :description: a basin in a waterway with gates at each end by means of which vessels
+    are passed from one water level to another
+S.LTHSE:
+  :name: lighthouse
+  :description: a distinctive structure exhibiting a major navigation light
+S.MALL:
+  :name: mall
+  :description: A large, often enclosed shopping complex containing various stores,
+    businesses, and restaurants usually accessible by common passageways.
+S.MAR:
+  :name: marina
+  :description: a harbor facility for small boats, yachts, etc.
+S.MFG:
+  :name: factory
+  :description: one or more buildings where goods are manufactured, processed or fabricated
+S.MFGB:
+  :name: brewery
+  :description: one or more buildings where beer is brewed
+S.MFGC:
+  :name: cannery
+  :description: a building where food items are canned
+S.MFGCU:
+  :name: copper works
+  :description: a facility for processing copper ore
+S.MFGLM:
+  :name: limekiln
+  :description: a furnace in which limestone is reduced to lime
+S.MFGM:
+  :name: munitions plant
+  :description: a factory where ammunition is made
+S.MFGPH:
+  :name: phosphate works
+  :description: a facility for producing fertilizer
+S.MFGQ:
+  :name: abandoned factory
+  :description: 
+S.MFGSG:
+  :name: sugar refinery
+  :description: a facility for converting raw sugar into refined sugar
+S.MKT:
+  :name: market
+  :description: a place where goods are bought and sold at regular intervals
+S.ML:
+  :name: mill(s)
+  :description: a building housing machines for transforming, shaping, finishing,
+    grinding, or extracting products
+S.MLM:
+  :name: ore treatment plant
+  :description: a facility for improving the metal content of ore by concentration
+S.MLO:
+  :name: olive oil mill
+  :description: a mill where oil is extracted from olives
+S.MLSG:
+  :name: sugar mill
+  :description: a facility where sugar cane is processed into raw sugar
+S.MLSGQ:
+  :name: former sugar mill
+  :description: a sugar mill no longer used as a sugar mill
+S.MLSW:
+  :name: sawmill
+  :description: a mill where logs or lumber are sawn to specified shapes and sizes
+S.MLWND:
+  :name: windmill
+  :description: a mill or water pump powered by wind
+S.MLWTR:
+  :name: water mill
+  :description: a mill powered by running water
+S.MN:
+  :name: mine(s)
+  :description: a site where mineral ores are extracted from the ground by excavating
+    surface pits and subterranean passages
+S.MNAU:
+  :name: gold mine(s)
+  :description: a mine where gold ore, or alluvial gold is extracted
+S.MNC:
+  :name: coal mine(s)
+  :description: a mine where coal is extracted
+S.MNCR:
+  :name: chrome mine(s)
+  :description: a mine where chrome ore is extracted
+S.MNCU:
+  :name: copper mine(s)
+  :description: a mine where copper ore is extracted
+S.MNFE:
+  :name: iron mine(s)
+  :description: a mine where iron ore is extracted
+S.MNMT:
+  :name: monument
+  :description: a commemorative structure or statue
+S.MNN:
+  :name: salt mine(s)
+  :description: a mine from which salt is extracted
+S.MNQ:
+  :name: abandoned mine
+  :description: 
+S.MNQR:
+  :name: quarry(-ies)
+  :description: a surface mine where building stone or gravel and sand, etc. are extracted
+S.MOLE:
+  :name: mole
+  :description: a massive structure of masonry or large stones serving as a pier or
+    breakwater
+S.MSQE:
+  :name: mosque
+  :description: a building for public Islamic worship
+S.MSSN:
+  :name: mission
+  :description: a place characterized by dwellings, school, church, hospital and other
+    facilities operated by a religious group for the purpose of providing charitable
+    services and to propagate religion
+S.MSSNQ:
+  :name: abandoned mission
+  :description: 
+S.MSTY:
+  :name: monastery
+  :description: a building and grounds where a community of monks lives in seclusion
+S.MTRO:
+  :name: metro station
+  :description: 'metro station (Underground, Tube, or Metro) '
+S.MUS:
+  :name: museum
+  :description: a building where objects of permanent interest in one or more of the
+    arts and sciences are preserved and exhibited
+S.NOV:
+  :name: novitiate
+  :description: a religious house or school where novices are trained
+S.NSY:
+  :name: nursery(-ies)
+  :description: a place where plants are propagated for transplanting or grafting
+S.OBPT:
+  :name: observation point
+  :description: a wildlife or scenic observation point
+S.OBS:
+  :name: observatory
+  :description: a facility equipped for observation of atmospheric or space phenomena
+S.OBSR:
+  :name: radio observatory
+  :description: a facility equipped with an array of antennae for receiving radio
+    waves from space
+S.OILJ:
+  :name: oil pipeline junction
+  :description: a section of an oil pipeline where two or more pipes join together
+S.OILQ:
+  :name: abandoned oil well
+  :description: 
+S.OILR:
+  :name: oil refinery
+  :description: a facility for converting crude oil into refined petroleum products
+S.OILT:
+  :name: tank farm
+  :description: a tract of land occupied by large, cylindrical, metal tanks in which
+    oil or liquid petrochemicals are stored
+S.OILW:
+  :name: oil well
+  :description: a well from which oil may be pumped
+S.OPRA:
+  :name: opera house
+  :description: A theater designed chiefly for the performance of operas.
+S.PAL:
+  :name: palace
+  :description: a large stately house, often a royal or presidential residence
+S.PGDA:
+  :name: pagoda
+  :description: a tower-like storied structure, usually a Buddhist shrine
+S.PIER:
+  :name: pier
+  :description: a structure built out into navigable water on piles providing berthing
+    for ships and recreation
+S.PKLT:
+  :name: parking lot
+  :description: an area used for parking vehicles
+S.PMPO:
+  :name: oil pumping station
+  :description: a facility for pumping oil through a pipeline
+S.PMPW:
+  :name: water pumping station
+  :description: a facility for pumping water from a major well or through a pipeline
+S.PO:
+  :name: post office
+  :description: a public building in which mail is received, sorted and distributed
+S.PP:
+  :name: police post
+  :description: a building in which police are stationed
+S.PPQ:
+  :name: abandoned police post
+  :description: 
+S.PRKGT:
+  :name: park gate
+  :description: a controlled access to a park
+S.PRKHQ:
+  :name: park headquarters
+  :description: a park administrative facility
+S.PRN:
+  :name: prison
+  :description: a facility for confining prisoners
+S.PRNJ:
+  :name: reformatory
+  :description: a facility for confining, training, and reforming young law offenders
+S.PRNQ:
+  :name: abandoned prison
+  :description: 
+S.PS:
+  :name: power station
+  :description: a facility for generating electric power
+S.PSH:
+  :name: hydroelectric power station
+  :description: a building where electricity is generated from water power
+S.PSTB:
+  :name: border post
+  :description: a post or station at an international boundary for the regulation
+    of movement of people and goods
+S.PSTC:
+  :name: customs post
+  :description: a building at an international boundary where customs and duties are
+    paid on goods
+S.PSTP:
+  :name: patrol post
+  :description: a post from which patrols are sent out
+S.PYR:
+  :name: pyramid
+  :description: an ancient massive structure of square ground plan with four triangular
+    faces meeting at a point and used for enclosing tombs
+S.PYRS:
+  :name: pyramids
+  :description: ancient massive structures of square ground plan with four triangular
+    faces meeting at a point and used for enclosing tombs
+S.QUAY:
+  :name: quay
+  :description: a structure of solid construction along a shore or bank which provides
+    berthing for ships and which generally provides cargo handling facilities
+S.RDCR:
+  :name: traffic circle
+  :description: a road junction formed around a central circle about which traffic
+    moves in one direction only
+S.RECG:
+  :name: golf course
+  :description: a recreation field where golf is played
+S.RECR:
+  :name: racetrack
+  :description: a track where races are held
+S.REST:
+  :name: restaurant
+  :description: A place where meals are served to the public
+S.RET:
+  :name: store
+  :description: a building where goods and/or services are offered for sale
+S.RHSE:
+  :name: resthouse
+  :description: a structure maintained for the rest and shelter of travelers
+S.RKRY:
+  :name: rookery
+  :description: a breeding place of a colony of birds or seals
+S.RLG:
+  :name: religious site
+  :description: an ancient site of significant religious importance
+S.RLGR:
+  :name: retreat
+  :description: a place of temporary seclusion, especially for religious groups
+S.RNCH:
+  :name: ranch(es)
+  :description: a large farm specializing in extensive grazing of livestock
+S.RSD:
+  :name: railroad siding
+  :description: a short track parallel to and joining the main track
+S.RSGNL:
+  :name: railroad signal
+  :description: a signal at the entrance of a particular section of track governing
+    the movement of trains
+S.RSRT:
+  :name: resort
+  :description: a specialized facility for vacation, health, or participation sports
+    activities
+S.RSTN:
+  :name: railroad station
+  :description: a facility comprising ticket office, platforms, etc. for loading and
+    unloading train passengers and freight
+S.RSTNQ:
+  :name: abandoned railroad station
+  :description: 
+S.RSTP:
+  :name: railroad stop
+  :description: a place lacking station facilities where trains stop to pick up and
+    unload passengers and freight
+S.RSTPQ:
+  :name: abandoned railroad stop
+  :description: 
+S.RUIN:
+  :name: ruin(s)
+  :description: a destroyed or decayed structure which is no longer functional
+S.SCH:
+  :name: school
+  :description: building(s) where instruction in one or more branches of knowledge
+    takes place
+S.SCHA:
+  :name: agricultural school
+  :description: a school with a curriculum focused on agriculture
+S.SCHC:
+  :name: college
+  :description: the grounds and buildings of an institution of higher learning
+S.SCHL:
+  :name: language school
+  :description: Language Schools & Institutions
+S.SCHM:
+  :name: military school
+  :description: a school at which military science forms the core of the curriculum
+S.SCHN:
+  :name: maritime school
+  :description: a school at which maritime sciences form the core of the curriculum
+S.SCHT:
+  :name: technical school
+  :description: post-secondary school with a specifically technical or vocational
+    curriculum
+S.SECP:
+  :name: State Exam Prep Centre
+  :description: state exam preparation centres
+S.SHPF:
+  :name: sheepfold
+  :description: a fence or wall enclosure for sheep and other small herd animals
+S.SHRN:
+  :name: shrine
+  :description: a structure or place memorializing a person or religious concept
+S.SHSE:
+  :name: storehouse
+  :description: a building for storing goods, especially provisions
+S.SLCE:
+  :name: sluice
+  :description: a conduit or passage for carrying off surplus water from a waterbody,
+    usually regulated by means of a sluice gate
+S.SNTR:
+  :name: sanatorium
+  :description: a facility where victims of physical or mental disorders are treated
+S.SPA:
+  :name: spa
+  :description: a resort area usually developed around a medicinal spring
+S.SPLY:
+  :name: spillway
+  :description: a passage or outlet through which surplus water flows over, around
+    or through a dam
+S.SQR:
+  :name: square
+  :description: a broad, open, public area near the center of a town or city
+S.STBL:
+  :name: stable
+  :description: a building for the shelter and feeding of farm animals, especially
+    horses
+S.STDM:
+  :name: stadium
+  :description: a structure with an enclosure for athletic games with tiers of seats
+    for spectators
+S.STNB:
+  :name: scientific research base
+  :description: a scientific facility used as a base from which research is carried
+    out or monitored
+S.STNC:
+  :name: coast guard station
+  :description: a facility from which the coast is guarded by armed vessels
+S.STNE:
+  :name: experiment station
+  :description: a facility for carrying out experiments
+S.STNF:
+  :name: forest station
+  :description: a collection of buildings and facilities for carrying out forest management
+S.STNI:
+  :name: inspection station
+  :description: a station at which vehicles, goods, and people are inspected
+S.STNM:
+  :name: meteorological station
+  :description: a station at which weather elements are recorded
+S.STNR:
+  :name: radio station
+  :description: a facility for producing and transmitting information by radio waves
+S.STNS:
+  :name: satellite station
+  :description: a facility for tracking and communicating with orbiting satellites
+S.STNW:
+  :name: whaling station
+  :description: a facility for butchering whales and processing train oil
+S.STPS:
+  :name: steps
+  :description: stones or slabs placed for ease in ascending or descending a steep
+    slope
+S.SWT:
+  :name: sewage treatment plant
+  :description: facility for the processing of sewage and/or wastewater
+S.THTR:
+  :name: theater
+  :description: A building, room, or outdoor structure for the presentation of plays,
+    films, or other dramatic performances
+S.TMB:
+  :name: tomb(s)
+  :description: a structure for interring bodies
+S.TMPL:
+  :name: temple(s)
+  :description: an edifice dedicated to religious worship
+S.TNKD:
+  :name: cattle dipping tank
+  :description: a small artificial pond used for immersing cattle in chemically treated
+    water for disease control
+S.TOWR:
+  :name: tower
+  :description: a high conspicuous structure, typically much higher than its diameter
+S.TRANT:
+  :name: transit terminal
+  :description: facilities for the handling of vehicular freight and passengers
+S.TRIG:
+  :name: triangulation station
+  :description: a point on the earth whose position has been determined by triangulation
+S.TRMO:
+  :name: oil pipeline terminal
+  :description: a tank farm or loading facility at the end of an oil pipeline
+S.TWO:
+  :name: temp work office
+  :description: Temporary Work Offices
+S.UNIP:
+  :name: university prep school
+  :description: University Preparation Schools & Institutions
+S.UNIV:
+  :name: university
+  :description: An institution for higher learning with teaching and research facilities
+    constituting a graduate school and professional schools that award master's degrees
+    and doctorates and an undergraduate division that awards bachelor's degrees.
+S.USGE:
+  :name: united states government establishment
+  :description: a facility operated by the United States Government in Panama
+S.VETF:
+  :name: veterinary facility
+  :description: a building or camp at which veterinary services are available
+S.WALL:
+  :name: wall
+  :description: a thick masonry structure, usually enclosing a field or building,
+    or forming the side of a structure
+S.WALLA:
+  :name: ancient wall
+  :description: the remains of a linear defensive stone structure
+S.WEIR:
+  :name: weir(s)
+  :description: a small dam in a stream, designed to raise the water level or to divert
+    stream flow through a desired channel
+S.WHRF:
+  :name: wharf(-ves)
+  :description: a structure of open rather than solid construction along a shore or
+    a bank which provides berthing for ships and cargo-handling facilities
+S.WRCK:
+  :name: wreck
+  :description: the site of the remains of a wrecked vessel
+S.WTRW:
+  :name: waterworks
+  :description: a facility for supplying potable water through a water source and
+    a system of pumps and filtration beds
+S.ZNF:
+  :name: free trade zone
+  :description: an area, usually a section of a port, where goods may be received
+    and shipped free of customs duty and of most customs regulations
+S.ZOO:
+  :name: zoo
+  :description: a zoological garden or park where wild animals are kept for exhibition
+T.ASPH:
+  :name: asphalt lake
+  :description: a small basin containing naturally occurring asphalt
+T.ATOL:
+  :name: atoll(s)
+  :description: a ring-shaped coral reef which has closely spaced islands on it encircling
+    a lagoon
+T.BAR:
+  :name: bar
+  :description: a shallow ridge or mound of coarse unconsolidated material in a stream
+    channel, at the mouth of a stream, estuary, or lagoon and in the wave-break zone
+    along coasts
+T.BCH:
+  :name: beach
+  :description: a shore zone of coarse unconsolidated sediment that extends from the
+    low-water line to the highest reach of storm waves
+T.BCHS:
+  :name: beaches
+  :description: a shore zone of coarse unconsolidated sediment that extends from the
+    low-water line to the highest reach of storm waves
+T.BDLD:
+  :name: badlands
+  :description: an area characterized by a maze of very closely spaced, deep, narrow,
+    steep-sided ravines, and sharp crests and pinnacles
+T.BLDR:
+  :name: boulder field
+  :description: a high altitude or high latitude bare, flat area covered with large
+    angular rocks
+T.BLHL:
+  :name: blowhole(s)
+  :description: a hole in coastal rock through which sea water is forced by a rising
+    tide or waves and spurted through an outlet into the air
+T.BLOW:
+  :name: blowout(s)
+  :description: a small depression in sandy terrain, caused by wind erosion
+T.BNCH:
+  :name: bench
+  :description: a long, narrow bedrock platform bounded by steeper slopes above and
+    below, usually overlooking a waterbody
+T.BUTE:
+  :name: butte(s)
+  :description: a small, isolated, usually flat-topped hill with steep sides
+T.CAPE:
+  :name: cape
+  :description: a land area, more prominent than a point, projecting into the sea
+    and marking a notable change in coastal direction
+T.CFT:
+  :name: cleft(s)
+  :description: a deep narrow slot, notch, or groove in a coastal cliff
+T.CLDA:
+  :name: caldera
+  :description: a depression measuring kilometers across formed by the collapse of
+    a volcanic mountain
+T.CLF:
+  :name: cliff(s)
+  :description: a high, steep to perpendicular slope overlooking a waterbody or lower
+    area
+T.CNYN:
+  :name: canyon
+  :description: a deep, narrow valley with steep sides cutting into a plateau or mountainous
+    area
+T.CONE:
+  :name: cone(s)
+  :description: a conical landform composed of mud or volcanic material
+T.CRDR:
+  :name: corridor
+  :description: a strip or area of land having significance as an access way
+T.CRQ:
+  :name: cirque
+  :description: a bowl-like hollow partially surrounded by cliffs or steep slopes
+    at the head of a glaciated valley
+T.CRQS:
+  :name: cirques
+  :description: bowl-like hollows partially surrounded by cliffs or steep slopes at
+    the head of a glaciated valley
+T.CRTR:
+  :name: crater(s)
+  :description: a generally circular saucer or bowl-shaped depression caused by volcanic
+    or meteorite explosive action
+T.CUET:
+  :name: cuesta(s)
+  :description: an asymmetric ridge formed on tilted strata
+T.DLTA:
+  :name: delta
+  :description: a flat plain formed by alluvial deposits at the mouth of a stream
+T.DPR:
+  :name: depression(s)
+  :description: a low area surrounded by higher land and usually characterized by
+    interior drainage
+T.DSRT:
+  :name: desert
+  :description: a large area with little or no vegetation due to extreme environmental
+    conditions
+T.DUNE:
+  :name: dune(s)
+  :description: a wave form, ridge or star shape feature composed of sand
+T.DVD:
+  :name: divide
+  :description: a line separating adjacent drainage basins
+T.ERG:
+  :name: sandy desert
+  :description: an extensive tract of shifting sand and sand dunes
+T.FAN:
+  :name: fan(s)
+  :description: a fan-shaped wedge of coarse alluvium with apex merging with a mountain
+    stream bed and the fan spreading out at a low angle slope onto an adjacent plain
+T.FORD:
+  :name: ford
+  :description: a shallow part of a stream which can be crossed on foot or by land
+    vehicle
+T.FSR:
+  :name: fissure
+  :description: a crack associated with volcanism
+T.GAP:
+  :name: gap
+  :description: a low place in a ridge, not used for transportation
+T.GRGE:
+  :name: gorge(s)
+  :description: a short, narrow, steep-sided section of a stream valley
+T.HDLD:
+  :name: headland
+  :description: a high projection of land extending into a large body of water beyond
+    the line of the coast
+T.HLL:
+  :name: hill
+  :description: a rounded elevation of limited extent rising above the surrounding
+    land with local relief of less than 300m
+T.HLLS:
+  :name: hills
+  :description: rounded elevations of limited extent rising above the surrounding
+    land with local relief of less than 300m
+T.HMCK:
+  :name: hammock(s)
+  :description: a patch of ground, distinct from and slightly above the surrounding
+    plain or wetland. Often occurs in groups
+T.HMDA:
+  :name: rock desert
+  :description: a relatively sand-free, high bedrock plateau in a hot desert, with
+    or without a gravel veneer
+T.INTF:
+  :name: interfluve
+  :description: a relatively undissected upland between adjacent stream valleys
+T.ISL:
+  :name: island
+  :description: a tract of land, smaller than a continent, surrounded by water at
+    high water
+T.ISLET:
+  :name: islet
+  :description: small island, bigger than rock, smaller than island.
+T.ISLF:
+  :name: artificial island
+  :description: an island created by landfill or diking and filling in a wetland,
+    bay, or lagoon
+T.ISLM:
+  :name: mangrove island
+  :description: a mangrove swamp surrounded by a waterbody
+T.ISLS:
+  :name: islands
+  :description: tracts of land, smaller than a continent, surrounded by water at high
+    water
+T.ISLT:
+  :name: land-tied island
+  :description: a coastal island connected to the mainland by barrier beaches, levees
+    or dikes
+T.ISLX:
+  :name: section of island
+  :description: 
+T.ISTH:
+  :name: isthmus
+  :description: a narrow strip of land connecting two larger land masses and bordered
+    by water
+T.KRST:
+  :name: karst area
+  :description: a distinctive landscape developed on soluble rock such as limestone
+    characterized by sinkholes, caves, disappearing streams, and underground drainage
+T.LAVA:
+  :name: lava area
+  :description: an area of solidified lava
+T.LEV:
+  :name: levee
+  :description: a natural low embankment bordering a distributary or meandering stream;
+    often built up artificially to control floods
+T.MESA:
+  :name: mesa(s)
+  :description: a flat-topped, isolated elevation with steep slopes on all sides,
+    less extensive than a plateau
+T.MND:
+  :name: mound(s)
+  :description: a low, isolated, rounded hill
+T.MRN:
+  :name: moraine
+  :description: a mound, ridge, or other accumulation of glacial till
+T.MT:
+  :name: mountain
+  :description: an elevation standing high above the surrounding area with small summit
+    area, steep slopes and local relief of 300m or more
+T.MTS:
+  :name: mountains
+  :description: a mountain range or a group of mountains or high ridges
+T.NKM:
+  :name: meander neck
+  :description: a narrow strip of land between the two limbs of a meander loop at
+    its narrowest point
+T.NTK:
+  :name: nunatak
+  :description: a rock or mountain peak protruding through glacial ice
+T.NTKS:
+  :name: nunataks
+  :description: rocks or mountain peaks protruding through glacial ice
+T.PAN:
+  :name: pan
+  :description: a near-level shallow, natural depression or basin, usually containing
+    an intermittent lake, pond, or pool
+T.PANS:
+  :name: pans
+  :description: a near-level shallow, natural depression or basin, usually containing
+    an intermittent lake, pond, or pool
+T.PASS:
+  :name: pass
+  :description: a break in a mountain range or other high obstruction, used for transportation
+    from one side to the other [See also gap]
+T.PEN:
+  :name: peninsula
+  :description: an elongate area of land projecting into a body of water and nearly
+    surrounded by water
+T.PENX:
+  :name: section of peninsula
+  :description: 
+T.PK:
+  :name: peak
+  :description: a pointed elevation atop a mountain, ridge, or other hypsographic
+    feature
+T.PKS:
+  :name: peaks
+  :description: pointed elevations atop a mountain, ridge, or other hypsographic features
+T.PLAT:
+  :name: plateau
+  :description: an elevated plain with steep slopes on one or more sides, and often
+    with incised streams
+T.PLATX:
+  :name: section of plateau
+  :description: 
+T.PLDR:
+  :name: polder
+  :description: an area reclaimed from the sea by diking and draining
+T.PLN:
+  :name: plain(s)
+  :description: an extensive area of comparatively level to gently undulating land,
+    lacking surface irregularities, and usually adjacent to a higher area
+T.PLNX:
+  :name: section of plain
+  :description: 
+T.PROM:
+  :name: promontory(-ies)
+  :description: a bluff or prominent hill overlooking or projecting into a lowland
+T.PT:
+  :name: point
+  :description: a tapering piece of land projecting into a body of water, less prominent
+    than a cape
+T.PTS:
+  :name: points
+  :description: tapering pieces of land projecting into a body of water, less prominent
+    than a cape
+T.RDGB:
+  :name: beach ridge
+  :description: a ridge of sand just inland and parallel to the beach, usually in
+    series
+T.RDGE:
+  :name: ridge(s)
+  :description: a long narrow elevation with steep sides, and a more or less continuous
+    crest
+T.REG:
+  :name: stony desert
+  :description: a desert plain characterized by a surface veneer of gravel and stones
+T.RK:
+  :name: rock
+  :description: a conspicuous, isolated rocky mass
+T.RKFL:
+  :name: rockfall
+  :description: an irregular mass of fallen rock at the base of a cliff or steep slope
+T.RKS:
+  :name: rocks
+  :description: conspicuous, isolated rocky masses
+T.SAND:
+  :name: sand area
+  :description: a tract of land covered with sand
+T.SBED:
+  :name: dry stream bed
+  :description: a channel formerly containing the water of a stream
+T.SCRP:
+  :name: escarpment
+  :description: a long line of cliffs or steep slopes separating level surfaces above
+    and below
+T.SDL:
+  :name: saddle
+  :description: a broad, open pass crossing a ridge or between hills or mountains
+T.SHOR:
+  :name: shore
+  :description: a narrow zone bordering a waterbody which covers and uncovers at high
+    and low water, respectively
+T.SINK:
+  :name: sinkhole
+  :description: a small crater-shape depression in a karst area
+T.SLID:
+  :name: slide
+  :description: a mound of earth material, at the base of a slope and the associated
+    scoured area
+T.SLP:
+  :name: slope(s)
+  :description: a surface with a relatively uniform slope angle
+T.SPIT:
+  :name: spit
+  :description: a narrow, straight or curved continuation of a beach into a waterbody
+T.SPUR:
+  :name: spur(s)
+  :description: a subordinate ridge projecting outward from a hill, mountain or other
+    elevation
+T.TAL:
+  :name: talus slope
+  :description: a steep concave slope formed by an accumulation of loose rock fragments
+    at the base of a cliff or steep slope
+T.TRGD:
+  :name: interdune trough(s)
+  :description: a long wind-swept trough between parallel longitudinal dunes
+T.TRR:
+  :name: terrace
+  :description: a long, narrow alluvial platform bounded by steeper slopes above and
+    below, usually overlooking a waterbody
+T.UPLD:
+  :name: upland
+  :description: an extensive interior region of high land with low to moderate surface
+    relief
+T.VAL:
+  :name: valley
+  :description: an elongated depression usually traversed by a stream
+T.VALG:
+  :name: hanging valley
+  :description: a valley the floor of which is notably higher than the valley or shore
+    to which it leads; most common in areas that have been glaciated
+T.VALS:
+  :name: valleys
+  :description: elongated depressions usually traversed by a stream
+T.VALX:
+  :name: section of valley
+  :description: 
+T.VLC:
+  :name: volcano
+  :description: a conical elevation composed of volcanic materials with a crater at
+    the top
+U.APNU:
+  :name: apron
+  :description: a gentle slope, with a generally smooth surface, particularly found
+    around groups of islands and seamounts
+U.ARCU:
+  :name: arch
+  :description: a low bulge around the southeastern end of the island of Hawaii
+U.ARRU:
+  :name: arrugado
+  :description: an area of subdued corrugations off Baja California
+U.BDLU:
+  :name: borderland
+  :description: a region adjacent to a continent, normally occupied by or bordering
+    a shelf, that is highly irregular with depths well in excess of those typical
+    of a shelf
+U.BKSU:
+  :name: banks
+  :description: elevations, typically located on a shelf, over which the depth of
+    water is relatively shallow but sufficient for safe surface navigation
+U.BNKU:
+  :name: bank
+  :description: an elevation, typically located on a shelf, over which the depth of
+    water is relatively shallow but sufficient for safe surface navigation
+U.BSNU:
+  :name: basin
+  :description: a depression more or less equidimensional in plan and of variable
+    extent
+U.CDAU:
+  :name: cordillera
+  :description: an entire mountain system including the subordinate ranges, interior
+    plateaus, and basins
+U.CNSU:
+  :name: canyons
+  :description: relatively narrow, deep depressions with steep sides, the bottom of
+    which generally has a continuous slope
+U.CNYU:
+  :name: canyon
+  :description: a relatively narrow, deep depression with steep sides, the bottom
+    of which generally has a continuous slope
+U.CRSU:
+  :name: continental rise
+  :description: a gentle slope rising from oceanic depths towards the foot of a continental
+    slope
+U.DEPU:
+  :name: deep
+  :description: a localized deep area within the confines of a larger feature, such
+    as a trough, basin or trench
+U.EDGU:
+  :name: shelf edge
+  :description: a line along which there is a marked increase of slope at the outer
+    margin of a continental shelf or island shelf
+U.ESCU:
+  :name: escarpment (or scarp)
+  :description: an elongated and comparatively steep slope separating flat or gently
+    sloping areas
+U.FANU:
+  :name: fan
+  :description: a relatively smooth feature normally sloping away from the lower termination
+    of a canyon or canyon system
+U.FLTU:
+  :name: flat
+  :description: a small level or nearly level area
+U.FRZU:
+  :name: fracture zone
+  :description: an extensive linear zone of irregular topography of the sea floor,
+    characterized by steep-sided or asymmetrical ridges, troughs, or escarpments
+U.FURU:
+  :name: furrow
+  :description: a closed, linear, narrow, shallow depression
+U.GAPU:
+  :name: gap
+  :description: a narrow break in a ridge or rise
+U.GLYU:
+  :name: gully
+  :description: a small valley-like feature
+U.HLLU:
+  :name: hill
+  :description: an elevation rising generally less than 500 meters
+U.HLSU:
+  :name: hills
+  :description: elevations rising generally less than 500 meters
+U.HOLU:
+  :name: hole
+  :description: a small depression of the sea floor
+U.KNLU:
+  :name: knoll
+  :description: an elevation rising generally more than 500 meters and less than 1,000
+    meters and of limited extent across the summit
+U.KNSU:
+  :name: knolls
+  :description: elevations rising generally more than 500 meters and less than 1,000
+    meters and of limited extent across the summits
+U.LDGU:
+  :name: ledge
+  :description: a rocky projection or outcrop, commonly linear and near shore
+U.LEVU:
+  :name: levee
+  :description: an embankment bordering a canyon, valley, or seachannel
+U.MESU:
+  :name: mesa
+  :description: an isolated, extensive, flat-topped elevation on the shelf, with relatively
+    steep sides
+U.MNDU:
+  :name: mound
+  :description: a low, isolated, rounded hill
+U.MOTU:
+  :name: moat
+  :description: an annular depression that may not be continuous, located at the base
+    of many seamounts, islands, and other isolated elevations
+U.MTU:
+  :name: mountain
+  :description: a well-delineated subdivision of a large and complex positive feature
+U.PKSU:
+  :name: peaks
+  :description: prominent elevations, part of a larger feature, either pointed or
+    of very limited extent across the summit
+U.PKU:
+  :name: peak
+  :description: a prominent elevation, part of a larger feature, either pointed or
+    of very limited extent across the summit
+U.PLNU:
+  :name: plain
+  :description: a flat, gently sloping or nearly level region
+U.PLTU:
+  :name: plateau
+  :description: a comparatively flat-topped feature of considerable extent, dropping
+    off abruptly on one or more sides
+U.PNLU:
+  :name: pinnacle
+  :description: a high tower or spire-shaped pillar of rock or coral, alone or cresting
+    a summit
+U.PRVU:
+  :name: province
+  :description: a region identifiable by a group of similar physiographic features
+    whose characteristics are markedly in contrast with surrounding areas
+U.RDGU:
+  :name: ridge
+  :description: a long narrow elevation with steep sides
+U.RDSU:
+  :name: ridges
+  :description: long narrow elevations with steep sides
+U.RFSU:
+  :name: reefs
+  :description: surface-navigation hazards composed of consolidated material
+U.RFU:
+  :name: reef
+  :description: a surface-navigation hazard composed of consolidated material
+U.RISU:
+  :name: rise
+  :description: a broad elevation that rises gently, and generally smoothly, from
+    the sea floor
+U.SCNU:
+  :name: seachannel
+  :description: a continuously sloping, elongated depression commonly found in fans
+    or plains and customarily bordered by levees on one or two sides
+U.SCSU:
+  :name: seachannels
+  :description: continuously sloping, elongated depressions commonly found in fans
+    or plains and customarily bordered by levees on one or two sides
+U.SDLU:
+  :name: saddle
+  :description: a low part, resembling in shape a saddle, in a ridge or between contiguous
+    seamounts
+U.SHFU:
+  :name: shelf
+  :description: a zone adjacent to a continent (or around an island) that extends
+    from the low water line to a depth at which there is usually a marked increase
+    of slope towards oceanic depths
+U.SHLU:
+  :name: shoal
+  :description: a surface-navigation hazard composed of unconsolidated material
+U.SHSU:
+  :name: shoals
+  :description: hazards to surface navigation composed of unconsolidated material
+U.SHVU:
+  :name: shelf valley
+  :description: a valley on the shelf, generally the shoreward extension of a canyon
+U.SILU:
+  :name: sill
+  :description: the low part of a gap or saddle separating basins
+U.SLPU:
+  :name: slope
+  :description: the slope seaward from the shelf edge to the beginning of a continental
+    rise or the point where there is a general reduction in slope
+U.SMSU:
+  :name: seamounts
+  :description: elevations rising generally more than 1,000 meters and of limited
+    extent across the summit
+U.SMU:
+  :name: seamount
+  :description: an elevation rising generally more than 1,000 meters and of limited
+    extent across the summit
+U.SPRU:
+  :name: spur
+  :description: a subordinate elevation, ridge, or rise projecting outward from a
+    larger feature
+U.TERU:
+  :name: terrace
+  :description: a relatively flat horizontal or gently inclined surface, sometimes
+    long and narrow, which is bounded by a steeper ascending slope on one side and
+    by a steep descending slope on the opposite side
+U.TMSU:
+  :name: tablemounts (or guyots)
+  :description: seamounts having a comparatively smooth, flat top
+U.TMTU:
+  :name: tablemount (or guyot)
+  :description: a seamount having a comparatively smooth, flat top
+U.TNGU:
+  :name: tongue
+  :description: an elongate (tongue-like) extension of a flat sea floor into an adjacent
+    higher feature
+U.TRGU:
+  :name: trough
+  :description: a long depression of the sea floor characteristically flat bottomed
+    and steep sided, and normally shallower than a trench
+U.TRNU:
+  :name: trench
+  :description: a long, narrow, characteristically very deep and asymmetrical depression
+    of the sea floor, with relatively steep sides
+U.VALU:
+  :name: valley
+  :description: a relatively shallow, wide depression, the bottom of which usually
+    has a continuous gradient
+U.VLSU:
+  :name: valleys
+  :description: a relatively shallow, wide depression, the bottom of which usually
+    has a continuous gradient
+V.BUSH:
+  :name: bush(es)
+  :description: a small clump of conspicuous bushes in an otherwise bare area
+V.CULT:
+  :name: cultivated area
+  :description: an area under cultivation
+V.FRST:
+  :name: forest(s)
+  :description: an area dominated by tree vegetation
+V.FRSTF:
+  :name: fossilized forest
+  :description: a forest fossilized by geologic processes and now exposed at the earth's
+    surface
+V.GRSLD:
+  :name: grassland
+  :description: an area dominated by grass vegetation
+V.GRVC:
+  :name: coconut grove
+  :description: a planting of coconut trees
+V.GRVO:
+  :name: olive grove
+  :description: a planting of olive trees
+V.GRVP:
+  :name: palm grove
+  :description: a planting of palm trees
+V.GRVPN:
+  :name: pine grove
+  :description: a planting of pine trees
+V.HTH:
+  :name: heath
+  :description: an upland moor or sandy area dominated by low shrubby vegetation including
+    heather
+V.MDW:
+  :name: meadow
+  :description: a small, poorly drained area dominated by grassy vegetation
+V.OCH:
+  :name: orchard(s)
+  :description: a planting of fruit or nut trees
+V.SCRB:
+  :name: scrubland
+  :description: an area of low trees, bushes, and shrubs stunted by some environmental
+    limitation
+V.TREE:
+  :name: tree(s)
+  :description: a conspicuous tree used as a landmark
+V.TUND:
+  :name: tundra
+  :description: a marshy, treeless, high latitude plain, dominated by mosses, lichens,
+    and low shrub vegetation under permafrost conditions
+V.VIN:
+  :name: vineyard
+  :description: a planting of grapevines
+V.VINS:
+  :name: vineyards
+  :description: plantings of grapevines
+'null':
+  :name: not available
+  :description: 
