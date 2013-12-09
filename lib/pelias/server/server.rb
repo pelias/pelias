@@ -12,9 +12,9 @@ class Server < Sinatra::Base
         type: 'Feature',
         geometry: result['_source']['center_shape'],
         properties: {
-          name: result['_source']['name'],
-          type: result['_source']['suggest']['payload']['type'],
-          :'marker-color' => '#F00'
+          title: result['_source']['name'],
+          description: result['_source']['suggest']['payload']['type'],
+          :'marker-color' => '#369100'
         }
       }
     end
@@ -32,8 +32,9 @@ class Server < Sinatra::Base
           coordinates: [result['payload']['lon'], result['payload']['lat']]
         },
         properties: {
-          name: result['text'],
-          type: result['payload']['type']
+          title: result['text'],
+          description: result['payload']['type'],
+          :'marker-color' => '#369100'
         }
       }
     end
