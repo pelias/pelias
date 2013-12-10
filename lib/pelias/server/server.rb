@@ -17,7 +17,14 @@ class Server < Sinatra::Base
           title: result['_source']['name'],
           description: result['_source']['suggest']['payload']['type'],
           :'marker-color' => '#369100',
-          :'marker-symbol' => i
+          :'marker-symbol' => i,
+          country_code: result['_source']['country_code'],
+          country_name: result['_source']['country_name'],
+          admin1_abbr: result['_source']['admin1_abbr'],
+          admin1_name: result['_source']['admin1_name'],
+          admin2_name: result['_source']['admin2_name'],
+          locality_name: result['_source']['locality_name'],
+          local_admin_name: result['_source']['local_admin_name']
         }
       }
     end
@@ -37,7 +44,14 @@ class Server < Sinatra::Base
         properties: {
           title: result['text'],
           description: result['payload']['type'],
-          :'marker-color' => '#369100'
+          :'marker-color' => '#369100',
+          country_code: result['payload']['country_code'],
+          country_name: result['payload']['country_name'],
+          admin1_abbr: result['payload']['admin1_abbr'],
+          admin1_name: result['payload']['admin1_name'],
+          admin2_name: result['payload']['admin2_name'],
+          locality_name: result['payload']['locality_name'],
+          local_admin_name: result['payload']['local_admin_name']
         }
       }
     end
