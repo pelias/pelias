@@ -14,49 +14,44 @@ module Pelias
     attr_accessor :admin3_code
     attr_accessor :admin4_code
     attr_accessor :population
+    attr_accessor :locality_id
+    attr_accessor :locality_name
+    attr_accessor :locality_alternate_names
+    attr_accessor :locality_population
     attr_accessor :center_point
     attr_accessor :center_shape
     attr_accessor :boundaries
 
-    def all_streets
-      streets = []
-      from = 0
-      begin
-        results = ES_CLIENT.search(index: INDEX, type: 'street',
-          body: geo_query, from: from)
-        results['hits']['hits'].each { |street| streets << street }
-        total_results = results['hits']['total']
-        from += 10
-      end while streets.count < total_results
-      streets
-    end
-
-    def all_addresses
-      addresses = []
-      from = 0
-      begin
-      results = ES_CLIENT.search(index: INDEX, type: 'address',
-        body: geo_query, from: from)
-      results['hits']['hits'].each { |address| addresses << address }
-        total_results = results['hits']['total']
-        from += 10
-      end while addresses.count < total_results
-      addresses
-    end
-
     def generate_suggestions
-      # TODO take into account alternate names
-      input = "#{@name}"
-      output = "#{@name}"
-      if @country_code == 'US'
-        output << ", #{@admin1_code}" if @admin1_code
-      else
-        output << ", #{@admin1_name}" if @admin1_name
+      input = "#{name}"
+      output = "#{name}"
+      if locality_name
+        input << " #{locality_name}"
+        output << ", #{locality_name}"
+      end
+      if admin1_abbr
+        input << " #{admin1_abbr}"
+        output << ", #{admin1_abbr}"
+      elsif admin1_name
+        input << " #{admin1_name}"
+        output << ", #{admin1_name}"
       end
       return {
         input: input,
         output: output,
-        payload: { lat: lat, lon: lon, type: type }
+        weight: 2,
+        payload: {
+          lat: lat,
+          lon: lon,
+          type: type,
+          country_code: country_code,
+          country_name: country_name,
+          admin1_abbr: admin1_abbr,
+          admin1_name: admin1_name,
+          admin2_name: admin2_name,
+          locality_name: locality_name,
+          local_admin_name: nil
+        }
       }
     end
 

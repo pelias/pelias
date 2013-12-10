@@ -20,11 +20,22 @@ module Pelias
     attr_accessor :population
 
     def generate_suggestions
-      # TODO take into account alternate names, admin heirarchy
       return {
-        input: @name,
-        output: @name,
-        payload: { lat: lat, lon: lon, type: type }
+        input: name,
+        output: name,
+        weight: 1,
+        payload: {
+          lat: lat,
+          lon: lon,
+          type: type,
+          country_code: country_code,
+          country_name: country_name,
+          admin1_abbr: admin1_abbr,
+          admin1_name: admin1_name,
+          admin2_name: admin2_name,
+          locality_name: nil,
+          local_admin_name: nil
+        }
       }
     end
 

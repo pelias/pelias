@@ -12,12 +12,6 @@
   "mappings": {
     "geoname": {
       "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "simple",
-          "search_analyzer": "simple",
-          "payloads": true
-        },
         "center_shape": {
           "type": "geo_shape"
         },

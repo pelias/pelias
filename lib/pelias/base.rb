@@ -63,6 +63,58 @@ module Pelias
       false
     end
 
+    def self.reindex_bulk(results)
+      bulk = results['hits']['hits'].map do |result|
+        obj = self.new(result['_source'])
+        suggest = obj.generate_suggestions
+        # just updating suggestions for now
+        {
+          update: {
+            _id: result['_id'],
+            data: { doc: { suggest: suggest } }
+          }
+        }
+      end
+      Pelias::ES_CLIENT.bulk(index: INDEX, type: type, body: bulk)
+    end
+
+    def self.reindex_all(size=50)
+      i=0
+      results = Pelias::ES_CLIENT.search(index: 'pelias',
+        type: self.type, scroll: '10m', size: size,
+        body: { query: { match_all: {} }, sort: '_id' })
+      puts i
+      i+=50
+      self.delay.reindex_bulk(results)
+      begin
+        results = Pelias::ES_CLIENT.scroll(scroll: '10m',
+          scroll_id: results['_scroll_id'])
+        self.delay.reindex_bulk(results)
+        puts i
+        i+=50
+      end while results['hits']['hits'].count > 0
+    end
+
+    def reindex(update_geometries=false, set_shapes=false)
+      if set_shapes
+        self.set_encompassing_shapes
+      end
+      to_reindex = self.to_hash
+      to_reindex.delete('id')
+      unless update_geometries
+        to_reindex.delete('center_point')
+        to_reindex.delete('center_shape')
+        to_reindex.delete('boundaries')
+      end
+      to_reindex['suggest'] = generate_suggestions
+      Pelias::ES_CLIENT.update(index: INDEX, type: type, id: id,
+        retry_on_conflict: 5, body: { doc: to_reindex })
+    end
+
+    def admin1_abbr
+      admin1_code if country_code=='US'
+    end
+
     def lat
       center_point[1]
     end

@@ -26,23 +26,6 @@ module Pelias
     attr_accessor :center_shape
     attr_accessor :boundaries
 
-    def reindex(update_geometries=false)
-      to_reindex = self.to_hash
-      to_reindex.delete('id')
-      unless update_geometries
-        to_reindex.delete('center_point')
-        to_reindex.delete('center_shape')
-        to_reindex.delete('boundaries')
-      end
-      to_reindex['suggest'] = generate_suggestions
-      Pelias::ES_CLIENT.update(index: INDEX, type: type, id: id, 
-        body: { doc: to_reindex })
-    end
-
-    def admin1_abbr
-      admin1_code if country_code=='US'
-    end
-
     def generate_suggestions
       input = "#{name}"
       output = "#{name}"
@@ -63,6 +46,7 @@ module Pelias
       {
         input: input,
         output: output,
+        weight: 2,
         payload: {
           lat: lat,
           lon: lon,
