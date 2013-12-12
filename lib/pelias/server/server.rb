@@ -20,7 +20,7 @@ class Server < Sinatra::Base
           :'marker-symbol' => i,
           country_code: result['_source']['country_code'],
           country_name: result['_source']['country_name'],
-          admin1_abbr: result['_source']['admin1_abbr'],
+          admin1_abbr: result['_source']['admin1_code'],
           admin1_name: result['_source']['admin1_name'],
           admin2_name: result['_source']['admin2_name'],
           locality_name: result['_source']['locality_name'],
