@@ -8,8 +8,6 @@ require "zip"
 require "sidekiq"
 require "sinatra"
 
-require 'pelias/server/server'
-
 module Pelias
 
   autoload :VERSION, 'pelias/version'
@@ -30,7 +28,7 @@ module Pelias
   env = ENV['RACK_ENV'] || 'development'
 
   # elasticsearch
-  es_config = YAML::load(File.open('config/elasticsearch.yml'))[env]
+  es_config = YAML::load(File.open('lib/pelias/config/elasticsearch.yml'))[env]
   configuration = lambda do |faraday|
     faraday.adapter Faraday.default_adapter
     #faraday.response :logger
@@ -43,12 +41,12 @@ module Pelias
   ES_CLIENT = Elasticsearch::Client.new(transport: transport)
 
   # postgres
-  pg_config = YAML::load(File.open('config/postgres.yml'))[env]
+  pg_config = YAML::load(File.open('lib/pelias/config/postgres.yml'))[env]
   PG_CLIENT = PG.connect(pg_config)
 
   # sidekiq
   Encoding.default_external = Encoding::UTF_8
-  redis_config = YAML::load(File.open('config/redis.yml'))[env]
+  redis_config = YAML::load(File.open('lib/pelias/config/redis.yml'))[env]
   redis_url = "redis://#{redis_config['host']}:#{redis_config['port']}/12"
   redis_namespace = redis_config['namespace']
   Sidekiq.configure_server do |config|
