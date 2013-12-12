@@ -4,8 +4,6 @@ namespace :openstreetmap do
 
   desc "populate streets from OSM"
   task :populate_streets do
-    i = 0
-    size = 50
     Pelias::PG_CLIENT.exec("BEGIN")
     Pelias::PG_CLIENT.exec("
       DECLARE streets_cursor CURSOR FOR
@@ -23,9 +21,7 @@ namespace :openstreetmap do
           :boundaries => JSON.parse(street['street'])
         }
       end
-      puts i
-      i += size
-      #Pelias::Street.delay.create(street_data)
+      Pelias::Street.delay.create(street_data)
     end while streets.count > 0
     Pelias::PG_CLIENT.exec("CLOSE streets_cursor")
     Pelias::PG_CLIENT.exec("COMMIT")
@@ -59,6 +55,7 @@ namespace :openstreetmap do
         if street_id
           {
             :id => address['address_id'],
+            :name => "address['housenumber'] street_name",
             :number => address['housenumber'],
             :street_id => street_id,
             :street_name => street_name,

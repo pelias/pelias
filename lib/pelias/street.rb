@@ -2,29 +2,31 @@ module Pelias
 
   class Street < Base
 
-    attr_accessor :id 
-    attr_accessor :name
-    attr_accessor :center_point
-    attr_accessor :center_shape
-    attr_accessor :boundaries
-    attr_accessor :local_admin_id
-    attr_accessor :local_admin_name
-    attr_accessor :local_admin_alternate_names
-    attr_accessor :local_admin_population
-    attr_accessor :locality_id
-    attr_accessor :locality_name
-    attr_accessor :locality_alternate_names
-    attr_accessor :locality_population
-    attr_accessor :neighborhood_id
-    attr_accessor :neighborhood_name
-    attr_accessor :neighborhood_alternate_names
-    attr_accessor :neighborhood_population
-    attr_accessor :country_code
-    attr_accessor :country_name
-    attr_accessor :admin1_code
-    attr_accessor :admin1_name
-    attr_accessor :admin2_code
-    attr_accessor :admin2_name
+    attr_accessor *%i[
+      id 
+      name
+      center_point
+      center_shape
+      boundaries
+      local_admin_id
+      local_admin_name
+      local_admin_alternate_names
+      local_admin_population
+      locality_id
+      locality_name
+      locality_alternate_names
+      locality_population
+      neighborhood_id
+      neighborhood_name
+      neighborhood_alternate_names
+      neighborhood_population
+      country_code
+      country_name
+      admin1_code
+      admin1_name
+      admin2_code
+      admin2_name
+    ]
 
     def self.street_level?
       true

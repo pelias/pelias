@@ -2,44 +2,71 @@ module Pelias
 
   class Address < Base
 
-    attr_accessor :id
-    attr_accessor :number
-    attr_accessor :center_point
-    attr_accessor :center_shape
-    attr_accessor :street_id
-    attr_accessor :street_name
-    attr_accessor :locality_id
-    attr_accessor :locality_name
-    attr_accessor :locality_alternate_names
-    attr_accessor :locality_population
-    attr_accessor :neighborhood_id
-    attr_accessor :neighborhood_name
-    attr_accessor :neighborhood_alternate_names
-    attr_accessor :neighborhood_population
-    attr_accessor :country_code
-    attr_accessor :country_name
-    attr_accessor :admin1_code
-    attr_accessor :admin1_name
-    attr_accessor :admin2_code
-    attr_accessor :admin2_name
-    attr_accessor :admin3_code
-    attr_accessor :admin4_code
+    attr_accessor *%i[
+      id
+      name
+      number
+      center_point
+      center_shape
+      street_id
+      street_name
+      local_admin_id
+      local_admin_name
+      local_admin_alternate_names
+      local_admin_population
+      locality_id
+      locality_name
+      locality_alternate_names
+      locality_population
+      neighborhood_id
+      neighborhood_name
+      neighborhood_alternate_names
+      neighborhood_population
+      country_code
+      country_name
+      admin1_code
+      admin1_name
+      admin2_code
+      admin2_name
+    ]
 
     def self.street_level?
       true
     end
 
     def generate_suggestions
-      # TODO take into account alternate names
-      input = "#{@number} #{@street_name}"
-      input << "#{@locality_name} #{@locality_admin1_code}"
-      output = "#{@number} #{@street_name}"
-      output << " - #{@locality_name}" if @locality_name
-      output << ", #{@locality_admin1_code}" if @locality_admin1_code
-      return {
+      input = "#{number} #{street_name}"
+      output = "#{number} #{street_name}"
+      if local_admin_name
+        input << " #{local_admin_name}"
+        output << " - #{local_admin_name}"
+      elsif locality_name
+        input << " #{locality_name}"
+        output << " - #{locality_name}"
+      end
+      if admin1_abbr
+        input << " #{admin1_abbr}"
+        output << ", #{admin1_abbr}"
+      elsif admin1_name
+        input << " #{admin1_name}"
+        output << ", #{admin1_name}"
+      end
+      {
         input: input,
         output: output,
-        payload: { lat: lat, lon: lon, type: type }
+        weight: 2,
+        payload: {
+          lat: lat,
+          lon: lon,
+          type: type,
+          country_code: country_code,
+          country_name: country_name,
+          admin1_abbr: admin1_abbr,
+          admin1_name: admin1_name,
+          admin2_name: admin2_name,
+          locality_name: locality_name,
+          local_admin_name: local_admin_name
+        }
       }
     end
 
