@@ -12,19 +12,84 @@ namespace :quattroshapes do
     index_shapes(Pelias::Locality, "gn-qs_localities.shp")
   end
 
+  task :reindex_localities do
+    results = Pelias::ES_CLIENT.search(index: 'pelias',
+      type: 'locality', scroll: '10m', fields: 'id',
+      body: { query: { match_all: {} }, sort: '_id' })
+      i=0
+      results['hits']['hits'].each do |h|
+      i += 1
+      puts "#{i}: #{h['_id']}"
+        Pelias::Locality.find(h['_id']).reindex
+      end
+    begin
+      results = Pelias::ES_CLIENT.scroll(scroll: '10m',
+        scroll_id: results['_scroll_id'])
+      results['hits']['hits'].each do |h|
+      i += 1
+      puts "#{i}: #{h['_id']}"
+        Pelias::Locality.find(h['_id']).reindex
+      end
+    end while results['hits']['hits'].count > 0
+  end
+
   task :populate_local_admin do
     index_shapes(Pelias::LocalAdmin, "qs_localadmin.shp")
+  end
+
+  task :reindex_local_admin do
+    results = Pelias::ES_CLIENT.search(index: 'pelias',
+      type: 'local_admin', scroll: '10m', fields: 'id',
+      body: { query: { match_all: {} }, sort: '_id' })
+      i=0
+      results['hits']['hits'].each do |h|
+        i += 1
+        puts "#{i}: #{h['_id']}"
+        Pelias::LocalAdmin.find(h['_id']).reindex
+      end
+    begin
+      results = Pelias::ES_CLIENT.scroll(scroll: '10m',
+        scroll_id: results['_scroll_id'])
+      results['hits']['hits'].each do |h|
+        i += 1
+        puts "#{i}: #{h['_id']}"
+        Pelias::LocalAdmin.find(h['_id']).reindex
+      end
+    end while results['hits']['hits'].count > 0
   end
 
   task :populate_neighborhoods do
     index_shapes(Pelias::Neighborhood, "qs_neighborhoods.shp")
   end
 
+  task :reindex_neighborhoods do
+    results = Pelias::ES_CLIENT.search(index: 'pelias',
+      type: 'neighborhood', scroll: '10m', fields: 'id',
+      body: { query: { match_all: {} }, sort: '_id' })
+      i=0
+      results['hits']['hits'].each do |h|
+        i += 1
+        puts "#{i}: #{h['_id']}"
+        Pelias::Neighborhood.find(h['_id']).reindex
+      end
+    begin
+      results = Pelias::ES_CLIENT.scroll(scroll: '10m',
+        scroll_id: results['_scroll_id'])
+      results['hits']['hits'].each do |h|
+        i += 1
+        puts "#{i}: #{h['_id']}"
+        Pelias::Neighborhood.find(h['_id']).reindex
+      end
+    end while results['hits']['hits'].count > 0
+  end
+
   def index_shapes(klass, shp)
-    # not using bulk api because some docs are large
     shp = "data/quattroshapes/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
+        next unless record.attributes['qs_iso_cc']=='US' ||
+          record.attributes['qs_adm0_a3']=='US'||
+          record.attributes['gn_adm0_cc']=='US'
         if record.geometry.nil?
           puts "NIL GEOMETRY: #{record.attributes.inspect}"
           next
@@ -50,22 +115,18 @@ namespace :quattroshapes do
           geoname = loc.closest_geoname
           next if geoname.nil?
         end
+        next unless geoname.country_code=='US'
         geoname_hash = geoname.to_hash
         # name already set above, don't use this one
         geoname_hash.delete('name')
         loc.update(geoname_hash)
         # save time by not re-writing shapes we've already written
+puts loc.id
         unless Pelias::ES_CLIENT.get(index: 'pelias', type: klass.type,
           id: loc.id, ignore: 404)
-          begin
-            loc.set_encompassing_shapes
-            loc.set_admin_names
-            loc.delay.save
-          rescue Faraday::Error::TimeoutError
-            puts "TIMEOUT ERROR: #{record.attributes.inspect}"
-          rescue Elasticsearch::Transport::Transport::Errors::BadRequest
-            puts "INVALID SHAPE: #{record.attributes.inspect}"
-          end
+          loc.set_encompassing_shapes
+          loc.set_admin_names
+          klass.delay.create(loc.to_hash)
         end
       end
     end

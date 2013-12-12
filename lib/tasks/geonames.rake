@@ -6,6 +6,22 @@ RESTRICT_COUNTRY = 'US'
 
 namespace :geonames do
 
+  task :reindex do
+    results = Pelias::ES_CLIENT.search(index: 'pelias',
+      type: 'geoname', scroll: '5m', fields: 'id',
+      body: { query: { match_all: {} }, sort: '_id' })
+      results['hits']['hits'].each do |h|
+        Pelias::Geoname.find(h['_id']).reindex
+      end
+    begin
+      results = Pelias::ES_CLIENT.scroll(scroll: '5m',
+        scroll_id: results['_scroll_id'])
+      results['hits']['hits'].each do |h|
+        Pelias::Geoname.find(h['_id']).reindex
+      end
+    end while results['hits']['hits'].count > 0
+  end
+
   task :download do
     url = 'http://download.geonames.org/export/dump/allCountries.zip'
     puts "downloading #{url}"
@@ -24,7 +40,7 @@ namespace :geonames do
 
   task :populate do
     File.open('data/geonames/allCountries.txt') do |fp|
-      fp.each_slice(500) do |lines|
+      fp.each_slice(50) do |lines|
         bulk = []
         lines.each do |line|
           arr = line.chomp.split("\t")
@@ -49,7 +65,7 @@ namespace :geonames do
             :elevation => arr[15]
           }
         end
-        Pelias::Geoname.delay.create(bulk)
+        Pelias::Geoname.delay.create(bulk) unless bulk.empty?
       end
     end
   end
