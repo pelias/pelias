@@ -177,18 +177,25 @@ module Pelias
     end
 
     def country_codes
-      @@country_codes ||= YAML::load(File.open('data/geonames/countries.yml'))
+      @@country_codes ||= YAML::load(
+        File.open('lib/pelias/data/geonames/countries.yml')
+      )
     end
 
     def admin1_codes
-      @@admin1_codes ||= YAML::load(File.open('data/geonames/admin1.yml'))
+      @@admin1_codes ||= YAML::load(
+        File.open('lib/pelias/data/geonames/admin1.yml')
+      )
     end
 
     def admin2_codes
-      @@admin2_codes ||= YAML::load(File.open('data/geonames/admin2.yml'))
+      @@admin2_codes ||= YAML::load(
+        File.open('lib/pelias/data/geonames/admin2.yml')
+      )
     end
 
     def generate_suggestions
+      # to override
     end
 
     def to_hash

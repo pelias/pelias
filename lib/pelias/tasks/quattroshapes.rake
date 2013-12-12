@@ -84,7 +84,7 @@ namespace :quattroshapes do
   end
 
   def index_shapes(klass, shp)
-    shp = "data/quattroshapes/#{shp}"
+    shp = "lib/pelias/data/quattroshapes/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
         next unless record.attributes['qs_iso_cc']=='US' ||
@@ -135,13 +135,13 @@ puts loc.id
   def download_shapefiles(file)
     url = "http://static.quattroshapes.com/#{file}"
     puts "downloading #{url}"
-    open("data/quattroshapes/#{file}", 'wb') do |file|
+    open("lib/pelias/data/quattroshapes/#{file}", 'wb') do |file|
       file << open(url).read
     end
-    Zip::File::open("data/quattroshapes/#{file}") do |zip|
+    Zip::File::open("lib/pelias/data/quattroshapes/#{file}") do |zip|
       zip.each do |entry|
         name = entry.name.gsub('shp/', '')
-        unzipped_file = "data/quattroshapes/#{name}"
+        unzipped_file = "lib/pelias/data/quattroshapes/#{name}"
         FileUtils.rm(unzipped_file, :force => true)
         puts "extracting #{unzipped_file}"
         entry.extract(unzipped_file)
