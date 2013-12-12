@@ -1,2 +1,2 @@
-require './lib/pelias'
+require './lib/pelias/server/server.rb'
 run Server
