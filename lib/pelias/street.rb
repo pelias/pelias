@@ -31,31 +31,38 @@ module Pelias
     end
 
     def generate_suggestions
-      # TODO take into account alternate names
-      input = []
+      input = "#{name}"
       output = "#{name}"
       if local_admin_name
-        input << "#{name} #{local_admin_name}"
-        output = "#{name} - #{local_admin_name}"
+        input << " #{local_admin_name}"
+        output << ", #{local_admin_name}"
+      elsif locality_name
+        input << " #{locality_name}"
+        output << ", #{locality_name}"
       end
-      if locality_name
-        input << "#{name} #{locality_name}"
-        output = "#{name} - #{locality_name}"
+      if admin1_abbr
+        input << " #{admin1_abbr}"
+        output << ", #{admin1_abbr}"
+      elsif admin1_name
+        input << " #{admin1_name}"
+        output << ", #{admin1_name}"
       end
-      if neighborhood_name
-        input << "#{name} #{neighborhood_name}"
-      end
-      input = input.uniq
-      input = "#{name}" if input.empty?
-      if country_code == 'US'
-        output << ", #{admin1_code}" if admin1_code
-      else
-        output << ", #{admin1_name}" if admin1_name
-      end
-      return {
+      {
         input: input,
         output: output,
-        payload: { lat: lat, lon: lon, type: type }
+        weight: 2,
+        payload: {
+          lat: lat,
+          lon: lon,
+          type: type,
+          country_code: country_code,
+          country_name: country_name,
+          admin1_abbr: admin1_abbr,
+          admin1_name: admin1_name,
+          admin2_name: admin2_name,
+          locality_name: locality_name,
+          local_admin_name: local_admin_name
+        }
       }
     end
   end
