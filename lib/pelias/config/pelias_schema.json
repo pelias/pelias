@@ -20,7 +20,7 @@
         }
       }
     },
-    "gazette": {
+    "poi": {
       "properties": {
         "suggest": {
           "type": "completion",

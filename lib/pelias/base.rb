@@ -25,8 +25,8 @@ module Pelias
 
     def self.build(params)
       obj = self.new(params)
-      obj.set_encompassing_shapes if street_level?
-      obj.set_admin_names unless street_level?
+      obj.set_encompassing_shapes
+      obj.set_admin_names
       obj
     end
 
@@ -301,28 +301,6 @@ module Pelias
 
     def type
       self.class.type
-    end
-
-    def geo_query
-      {
-        query: {
-          filtered: {
-            query: { match_all: {} },
-            filter: {
-              geo_shape: {
-                center_shape: {
-                  indexed_shape: {
-                    id: @id,
-                    type: type,
-                    index: INDEX,
-                    shape_field_name: 'boundaries'
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     end
 
   end

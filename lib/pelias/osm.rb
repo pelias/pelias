@@ -54,6 +54,7 @@ module Pelias
         AND l2.name IS NOT NULL
         AND l2.highway IS NOT NULL
       WHERE w.tags @> ARRAY['addr:housenumber']
+        AND w.tags @> ARRAY['addr:street']
         AND ST_Distance(l1.way, l2.way) > 0
       ORDER BY address_id, distance ASC"
     end
@@ -72,14 +73,15 @@ module Pelias
       INNER JOIN planet_osm_line l
         ON r.parts @> ARRAY[l.osm_id]
       WHERE r.tags @> ARRAY['addr:housenumber']
-      AND r.tags @> ARRAY['addr:street']
+        AND r.tags @> ARRAY['addr:street']
       GROUP BY r.id"
     end
 
-    def self.get_street_id(street_name, lat, lon)
+    def self.get_street(street_name, lat, lon)
       return if street_name.nil? || street_name==''
       ids = Pelias::Osm.get_street_ids_from_name(street_name, lat, lon)
-      Pelias::Osm.get_closest_id(ids, lat, lon)
+      id = Pelias::Osm.get_closest_id(ids, lat, lon)
+      id.nil? ? nil : Pelias::Street.find(id)
     end
 
     def self.get_street_ids_from_name(street_name, lat, lon)

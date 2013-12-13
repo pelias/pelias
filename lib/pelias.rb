@@ -8,6 +8,8 @@ require "zip"
 require "sidekiq"
 require "sinatra"
 
+require "pelias/server/server"
+
 module Pelias
 
   autoload :VERSION, 'pelias/version'
@@ -18,6 +20,7 @@ module Pelias
   autoload :LocalAdmin, 'pelias/local_admin'
   autoload :Locality, 'pelias/locality'
   autoload :Neighborhood, 'pelias/neighborhood'
+  autoload :Poi, 'pelias/poi'
   autoload :Street, 'pelias/street'
 
   autoload :Osm, 'pelias/osm'
