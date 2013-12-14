@@ -1,0 +1,155 @@
+# OsmType  Tag          DataType     Flags
+node,way   access       text         linear
+node,way   addr:housename      text  linear
+node,way   addr:housenumber    text  linear
+node,way   addr:street         text  linear
+node,way   addr:postcode       text  linear
+node,way   addr:interpolation  text  linear
+node,way   admin_level  text         linear
+node,way   aerialway    text         linear
+node,way   aeroway      text         polygon
+node,way   amenity      text         polygon
+node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
+node,way   barrier      text         linear
+node,way   bicycle      text
+node,way   brand        text         linear
+node,way   bridge       text         linear
+node,way   boundary     text         linear
+node,way   building     text         polygon
+node       capital      text         linear
+node,way   construction text         linear
+node,way   covered      text         linear
+node,way   culvert      text         linear
+node,way   cutting      text         linear
+node,way   denomination text         linear
+node,way   disused      text         linear
+node       ele          text         linear
+node,way   embankment   text         linear
+node,way   foot         text         linear
+node,way   generator:source    text  linear
+node,way   harbour      text         polygon
+node,way   highway      text         linear
+node,way   historic     text         polygon
+node,way   horse        text         linear
+node,way   intermittent text         linear
+node,way   junction     text         linear
+node,way   landuse      text         polygon
+node,way   layer        text         linear
+node,way   leisure      text         polygon
+node,way   lock         text         linear
+node,way   man_made     text         polygon
+node,way   military     text         polygon
+node,way   motorcar     text         linear
+node,way   name         text         linear
+node,way   natural      text         polygon  # natural=coastline tags are discarded by a hard coded rule in osm2pgsql
+node,way   office       text         polygon
+node,way   oneway       text         linear
+node,way   operator     text         linear
+node,way   phone        text         linear
+node,way   place        text         polygon
+node       poi          text
+node,way   population   text         linear
+node,way   power        text         polygon
+node,way   power_source text         linear
+node,way   public_transport text     polygon
+node,way   railway      text         linear
+node,way   ref          text         linear
+node,way   religion     text         nocache
+node,way   route        text         linear
+node,way   service      text         linear
+node,way   shop         text         polygon
+node,way   sport        text         polygon
+node,way   surface      text         linear
+node,way   toll         text         linear
+node,way   tourism      text         polygon
+node,way   tower:type   text         linear
+way        tracktype    text         linear
+node,way   tunnel       text         linear
+node,way   water        text         polygon
+node,way   waterway     text         polygon
+node,way   website      text         linear
+node,way   wetland      text         polygon
+node,way   width        text         linear
+node,way   wood         text         linear
+node,way   z_order      int4         linear # This is calculated during import
+way        way_area     real                # This is calculated during import
+
+# Area tags
+# We don't make columns for these tags, but objects with them are areas.
+# Mainly for use with hstore
+way         abandoned:aeroway       text    phstore
+way         abandoned:amenity       text    phstore
+way         abandoned:building      text    phstore
+way         abandoned:landuse       text    phstore
+way         abandoned:power         text    phstore
+way         area:highway            text    phstore
+
+# Deleted tags
+# These are tags that are generally regarded as useless for most rendering.
+# Most of them are from imports or intended as internal information for mappers
+# Some of them are automatically deleted by editors.
+# If you want some of them, perhaps for a debugging layer, just delete the lines.
+
+# These tags are used by mappers to keep track of data.
+# They aren't very useful for rendering.
+node,way    note                    text    delete
+node,way    note:*                  text    delete
+node,way    source                  text    delete
+node,way    source_ref              text    delete
+node,way    source:*                text    delete
+node,way    attribution             text    delete
+node,way    comment                 text    delete
+node,way    fixme                   text    delete
+
+# Tags generally dropped by editors, not otherwise covered
+node,way    created_by              text    delete
+node,way    odbl                    text    delete
+node,way    odbl:note               text    delete
+node,way    SK53_bulk:load          text    delete
+
+# Lots of import tags
+# TIGER (US)
+node,way    tiger:*                 text    delete
+
+# NHD (US)
+# NHD has been converted every way imaginable
+node,way    NHD:*                   text    delete
+node,way    nhd:*                   text    delete
+
+# GNIS (US)
+node,way    gnis:*                  text    delete
+
+# Geobase (CA)
+node,way    geobase:*               text    delete
+# NHN (CA)
+node,way    accuracy:meters         text    delete
+node,way    sub_sea:type            text    delete
+node,way    waterway:type           text    delete
+
+# KSJ2 (JA)
+# See also note:ja and source_ref above
+node,way    KSJ2:*                  text    delete
+# Yahoo/ALPS (JA)
+node,way    yh:*                    text    delete
+
+# osak (DK)
+node,way    osak:*                  text    delete
+
+# kms (DK)
+node,way    kms:*                   text    delete
+
+# ngbe (ES)
+# See also note:es and source:file above
+node,way    ngbe:*                  text    delete
+
+# naptan (UK)
+node,way    naptan:*                text    delete
+
+# Corine (CLC) (Europe)
+node,way    CLC:*                   text    delete
+
+# misc
+node,way    3dshapes:ggmodelk       text    delete
+node,way    AND_nosr_r              text    delete
+node,way    import                  text    delete
+node,way    it:fvg:*                text    delete

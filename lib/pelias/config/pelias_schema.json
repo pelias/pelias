@@ -2,7 +2,7 @@
   "settings": {
     "analysis": {
       "analyzer": {
-        "address": {
+        "street_address": {
           "tokenizer": "whitespace",
           "filter": "lowercase"
         }
@@ -97,9 +97,13 @@
       "properties": {
         "suggest": {
           "type": "completion",
-          "index_analyzer": "address",
-          "search_analyzer": "address",
+          "index_analyzer": "street_address",
+          "search_analyzer": "street_address",
           "payloads": true
+        },
+        "name": {
+          "type": "string",
+          "analyzer": "street_address"
         },
         "center_shape": {
           "type": "geo_shape"
@@ -116,9 +120,13 @@
       "properties": {
         "suggest": {
           "type": "completion",
-          "index_analyzer": "address",
-          "search_analyzer": "address",
+          "index_analyzer": "street_address",
+          "search_analyzer": "street_address",
           "payloads": true
+        },
+        "name": {
+          "type": "string",
+          "analyzer": "street_address"
         },
         "center_shape": {
           "type": "geo_shape"
