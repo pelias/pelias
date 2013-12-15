@@ -119,7 +119,7 @@ p {
 
 <div class="demo">
   <form>
-  <input name="query" class="typeahead" type="text" placeholder="suggest...">
+  <input id="query" name="query" class="typeahead" type="text" placeholder="suggest...">
   <input type="submit" style="visibility:hidden">
   </form>
 </div>
@@ -135,10 +135,11 @@ var map = L.mapbox.map('map', 'randyme.gajlngfe').setView([40.74417, -73.99047],
 <script>
 $(document).ready(function(){
   if (location.search != '') {
+    $('.query input').val(location.search);
     $.ajax({
       type: 'GET',
       dataType: "json",
-      url: 'http://' + window.location.host + '/search' + location.search,
+      url: 'http://' + window.location.host + '/search' + location.search + '&size=1',
       success: function(geoJson) {
         var markerLayer = L.mapbox.markerLayer(geoJson);
         markerLayer.addTo(map);
