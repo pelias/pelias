@@ -23,7 +23,6 @@ module Pelias
   autoload :Poi, 'pelias/poi'
   autoload :Street, 'pelias/street'
 
-  autoload :Osm, 'pelias/osm'
   autoload :Search, 'pelias/search'
 
   ES_TIMEOUT = 600

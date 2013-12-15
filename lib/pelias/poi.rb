@@ -8,6 +8,7 @@ module Pelias
       number
       phone
       website
+      category
       center_point
       center_shape
       street_id
@@ -31,10 +32,6 @@ module Pelias
       admin2_code
       admin2_name
     ]
-
-    def self.street_level?
-      true
-    end
 
     def generate_suggestions
       input = "#{name}"
@@ -74,6 +71,10 @@ module Pelias
           local_admin_name: local_admin_name
         }
       }
+    end
+
+    def self.street_level?
+      true
     end
 
   end

@@ -8,10 +8,16 @@ module Pelias
           multi_match: {
             query: query,
             fields: [
-              "name", "alternate_names", "admin1_code^2", "admin1_name",
-              "admin2_name", "admin3_name", "admin4_name"
+              "name^2",
+              "admin1_code",
+              "admin1_name",
+              "locality_name",
+              "local_admin_name",
+              "admin2_name",
+              "neighborhood_name",
+              "category^4"
             ],
-            use_dis_max: false
+            tie_breaker: 0.5
           }
         }
       }
