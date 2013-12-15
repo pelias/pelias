@@ -22,6 +22,12 @@ module Pelias
     attr_accessor :center_shape
     attr_accessor :boundaries
 
+    def population_weight_boost
+      return 0 if population.nil?
+      boost = population.to_i / 100000
+      boost < 1 ? 1 : boost.to_i
+    end
+
     def generate_suggestions
       input = "#{name}"
       output = "#{name}"
@@ -39,7 +45,7 @@ module Pelias
       return {
         input: input,
         output: output,
-        weight: 2,
+        weight: 10 + population_weight_boost,
         payload: {
           lat: lat,
           lon: lon,

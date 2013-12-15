@@ -2,6 +2,31 @@ require 'pelias'
 
 namespace :openstreetmap do
 
+  task :delete_null do
+    results = nil
+    begin
+      results = Pelias::ES_CLIENT.search(index:'pelias', type:'address', 
+        size: 1000, body: { fields: "_id",
+        query: { match_all: {} },
+        filter: {
+          and: {
+            filters: [
+              { missing: { field: "local_admin_name" } },
+              { missing: { field: "locality_name" } },
+              { missing: { field: "neighborhood_name" } }
+            ]
+          }
+        }
+      })
+      bulk = results['hits']['hits'].map do |hit|
+        { delete: { _id: hit['_id'] } }
+      end
+      Pelias::ES_CLIENT.bulk(index: 'pelias', type: 'address', body: bulk)
+      Pelias::ES_CLIENT.indices.refresh(index: 'pelias')
+      puts "deleted 1000 of #{results['hits']['total']}"
+    end while results.nil? || results['hits']['hits'].count > 0
+  end
+
   task :populate_hospitals do
     results = Pelias::PG_CLIENT.exec("
       SELECT osm_id, name, website, phone,

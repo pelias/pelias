@@ -57,7 +57,7 @@ module Pelias
       {
         input: input,
         output: output,
-        weight: 2,
+        weight: 3,
         payload: {
           lat: lat,
           lon: lon,
