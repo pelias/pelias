@@ -135,7 +135,9 @@ var map = L.mapbox.map('map', 'randyme.gajlngfe').setView([40.74417, -73.99047],
 <script>
 $(document).ready(function(){
   if (location.search != '') {
-    $('.query input').val(location.search);
+    var query = location.search.substring(7, location.search.length);
+    query = query.replace('+', ' ');
+    $('#query').val(query);
     $.ajax({
       type: 'GET',
       dataType: "json",
