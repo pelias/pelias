@@ -94,7 +94,7 @@ namespace :openstreetmap do
           center = JSON.parse(result['location'])
           {
             :id => "#{shape}-#{result['address_id']}",
-            :name => "#{result['housenumber']} #{street_name}",
+            :name => "#{result['housenumber']} #{result['street_name']}",
             :number => result['housenumber'],
             :street_name => result['street_name'],
             :center_point => center['coordinates'],

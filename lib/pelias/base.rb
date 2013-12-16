@@ -78,20 +78,20 @@ module Pelias
       Pelias::ES_CLIENT.bulk(index: INDEX, type: type, body: bulk)
     end
 
-    def self.reindex_all(size=50)
+    def self.reindex_all(size=50, start_from=0)
       i=0
       results = Pelias::ES_CLIENT.search(index: 'pelias',
         type: self.type, scroll: '10m', size: size,
         body: { query: { match_all: {} }, sort: '_id' })
       puts i
-      i+=50
-      self.delay.reindex_bulk(results)
+      i+=size
+      self.delay.reindex_bulk(results) if i >= start_from
       begin
         results = Pelias::ES_CLIENT.scroll(scroll: '10m',
           scroll_id: results['_scroll_id'])
-        self.delay.reindex_bulk(results)
+        self.delay.reindex_bulk(results) if i >= start_from
         puts i
-        i+=50
+        i+=size
       end while results['hits']['hits'].count > 0
     end
 
