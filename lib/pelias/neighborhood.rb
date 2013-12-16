@@ -26,6 +26,10 @@ module Pelias
     attr_accessor :center_shape
     attr_accessor :boundaries
 
+    def suggest_weight
+      (locality_name || local_admin_name) ? 7 : 0
+    end
+
     def generate_suggestions
       input = "#{name}"
       output = "#{name}"
@@ -46,7 +50,7 @@ module Pelias
       {
         input: input,
         output: output,
-        weight: 7,
+        weight: suggest_weight,
         payload: {
           lat: lat,
           lon: lon,
