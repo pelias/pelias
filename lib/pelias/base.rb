@@ -4,7 +4,7 @@ module Pelias
 
     include Sidekiq::Worker
 
-    INDEX = 'pelias'
+    INDEX = 'pelias_new'
 
     def initialize(params)
       set_instance_variables(params)
@@ -80,7 +80,7 @@ module Pelias
 
     def self.reindex_all(size=50, start_from=0)
       i=0
-      results = Pelias::ES_CLIENT.search(index: 'pelias',
+      results = Pelias::ES_CLIENT.search(index: INDEX,
         type: self.type, scroll: '10m', size: size,
         body: { query: { match_all: {} }, sort: '_id' })
       puts i
