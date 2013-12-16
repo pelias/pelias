@@ -30,6 +30,10 @@ module Pelias
       admin2_name
     ]
 
+    def suggest_weight
+      (locality_name || local_admin_name) ? 2 : 0
+    end
+
     def generate_suggestions
       input = "#{number} #{street_name}"
       output = "#{number} #{street_name}"
@@ -50,7 +54,7 @@ module Pelias
       {
         input: input,
         output: output,
-        weight: 2,
+        weight: suggest_weight,
         payload: {
           lat: lat,
           lon: lon,

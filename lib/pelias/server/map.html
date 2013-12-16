@@ -120,6 +120,11 @@ p {
 <div class="demo">
   <form>
   <input id="query" name="query" class="typeahead" type="text" placeholder="suggest...">
+  <select name="search_type">
+  <option value="none">-- Select --</option>
+  <option value="bounding">Bounding Box</option>
+  <option value="sort">Sort from Center</option>
+  </select>
   <input type="submit" style="visibility:hidden">
   </form>
 </div>
@@ -135,13 +140,29 @@ var map = L.mapbox.map('map', 'randyme.gajlngfe').setView([40.74417, -73.99047],
 <script>
 $(document).ready(function(){
   if (location.search != '') {
-    var query = location.search.substring(7, location.search.length);
-    query = query.replace('+', ' ');
+    var $_GET = {};
+    document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+      function decode(s) {
+        return decodeURIComponent(s.split("+").join(" "));
+      }
+      $_GET[decode(arguments[1])] = decode(arguments[2]);
+    });
+    var query = $_GET.query;
     $('#query').val(query);
+    var query_string = '/search?query=' + query;
+    if ($_GET.search_type=='bounding') {
+      
+    }
+    else if ($_GET.search_type=='sort') {
+
+    }
+    else {
+      query_string += '&size=1';
+    }
     $.ajax({
       type: 'GET',
       dataType: "json",
-      url: 'http://' + window.location.host + '/search' + location.search + '&size=1',
+      url: 'http://' + window.location.host + query_string,
       success: function(geoJson) {
         var markerLayer = L.mapbox.markerLayer(geoJson);
         markerLayer.addTo(map);
