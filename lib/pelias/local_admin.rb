@@ -31,10 +31,6 @@ module Pelias
     def generate_suggestions
       input = "#{name}"
       output = "#{name}"
-      if locality_name
-        input << " #{locality_name}"
-        output << ", #{locality_name}"
-      end
       if admin1_abbr
         input << " #{admin1_abbr}"
         output << ", #{admin1_abbr}"
