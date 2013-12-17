@@ -4,8 +4,6 @@ module Pelias
 
     include Sidekiq::Worker
 
-    INDEX = 'pelias_new'
-
     def initialize(params)
       set_instance_variables(params)
     end
@@ -15,8 +13,8 @@ module Pelias
       id = attributes.delete('id')
       suggestions = generate_suggestions
       attributes['suggest'] = suggestions if suggestions
-      ES_CLIENT.index(index: INDEX, type: type, id: id, body: attributes,
-        timeout: "#{ES_TIMEOUT}s")
+      ES_CLIENT.index(index: Pelias::INDEX, type: type, id: id,
+        body: attributes, timeout: "#{ES_TIMEOUT}s")
     end
 
     def update(params)
@@ -39,7 +37,7 @@ module Pelias
           hash['suggest'] = suggestions if suggestions
           { index: { _id: hash.delete('id'), data: hash } }
         end
-        ES_CLIENT.bulk(index: INDEX, type: type, body: bulk)
+        ES_CLIENT.bulk(index: Pelias::INDEX, type: type, body: bulk)
       else
         obj = self.build(params)
         obj.save
@@ -48,7 +46,8 @@ module Pelias
     end
 
     def self.find(id)
-      result = ES_CLIENT.get(index: INDEX, type: type, id: id, ignore: 404)
+      result = ES_CLIENT.get(index: Pelias::INDEX, type: type, id: id,
+        ignore: 404)
       return unless result
       obj = self.new(:id=>id)
       obj.update(result['_source'])
@@ -75,12 +74,12 @@ module Pelias
           }
         }
       end
-      Pelias::ES_CLIENT.bulk(index: INDEX, type: type, body: bulk)
+      Pelias::ES_CLIENT.bulk(index: Pelias::INDEX, type: type, body: bulk)
     end
 
     def self.reindex_all(size=50, start_from=0)
       i=0
-      results = Pelias::ES_CLIENT.search(index: INDEX,
+      results = Pelias::ES_CLIENT.search(index: Pelias::INDEX,
         type: self.type, scroll: '10m', size: size,
         body: { query: { match_all: {} }, sort: '_id' })
       puts i
@@ -107,7 +106,7 @@ module Pelias
         to_reindex.delete('boundaries')
       end
       to_reindex['suggest'] = generate_suggestions
-      Pelias::ES_CLIENT.update(index: INDEX, type: type, id: id,
+      Pelias::ES_CLIENT.update(index: Pelias::INDEX, type: type, id: id,
         retry_on_conflict: 5, body: { doc: to_reindex })
     end
 
@@ -210,7 +209,8 @@ module Pelias
     def closest_geoname
       begin
         # try for a geoname with a matching name & type
-        results = ES_CLIENT.search(index: INDEX, type: 'geoname', body: {
+        results = ES_CLIENT.search(index: Pelias::INDEX, type: 'geoname',
+          body: {
           query: {
             filtered: {
               query: {
@@ -236,7 +236,8 @@ module Pelias
         })
         # if not try any in boundaries
         if results['hits']['total'] == 0
-          results = ES_CLIENT.search(index: INDEX, type: 'geoname', body: {
+          results = ES_CLIENT.search(index: Pelias::INDEX, type: 'geoname',
+            body: {
             query: {
               filtered: {
                 query: { match_all: {} },
@@ -267,7 +268,7 @@ module Pelias
     private
 
     def encompassing_shape(shape_type)
-      results = ES_CLIENT.search(index: INDEX, type: shape_type, body: {
+      results = ES_CLIENT.search(index: Pelias::INDEX, type: shape_type, body: {
         query: {
           filtered: {
             query: { match_all: {} },

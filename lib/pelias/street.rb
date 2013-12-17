@@ -90,7 +90,7 @@ module Pelias
 
     def self.get_street_ids_from_name(street_name, lat, lon)
       # get matching name streets with a center point 10 km away from address
-      es_results = Pelias::ES_CLIENT.search(index: INDEX,
+      es_results = Pelias::ES_CLIENT.search(index: Pelias::INDEX,
         type: 'street', size: 50, body: {
           query: { match: { name: street_name } },
           filter: {

@@ -15,6 +15,7 @@ module Pelias
   autoload :VERSION, 'pelias/version'
   
   autoload :Address, 'pelias/address'
+  autoload :Admin2, "pelias/admin2"
   autoload :Base, 'pelias/base'
   autoload :Geoname, 'pelias/geoname'
   autoload :LocalAdmin, 'pelias/local_admin'
@@ -25,22 +26,20 @@ module Pelias
 
   autoload :Search, 'pelias/search'
 
-  ES_TIMEOUT = 600
-
   env = ENV['RACK_ENV'] || 'development'
 
   # elasticsearch
   es_config = YAML::load(File.open('lib/pelias/config/elasticsearch.yml'))[env]
   configuration = lambda do |faraday|
     faraday.adapter Faraday.default_adapter
-    #faraday.response :logger
-    faraday.options[:timeout] = ES_TIMEOUT
+    faraday.options[:timeout] = 600
   end
   transport = Elasticsearch::Transport::Transport::HTTP::Faraday.new(
     hosts: es_config['hosts'],
     &configuration
   )
   ES_CLIENT = Elasticsearch::Client.new(transport: transport)
+  INDEX = 'pelias_new'
 
   # postgres
   pg_config = YAML::load(File.open('lib/pelias/config/postgres.yml'))[env]

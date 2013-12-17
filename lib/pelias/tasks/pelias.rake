@@ -6,7 +6,7 @@ namespace :pelias do
   task :setup do
     schema_file = File.read('lib/pelias/config/pelias_schema.json')
     schema_json = JSON.parse(schema_file)
-    Pelias::ES_CLIENT.indices.create(index: 'pelias', body: schema_json)
+    Pelias::ES_CLIENT.indices.create(index: 'pelias_new', body: schema_json)
   end
 
 end

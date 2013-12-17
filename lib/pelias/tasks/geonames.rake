@@ -1,13 +1,10 @@
 require 'pelias'
 require 'open-uri'
 
-# going to restrict to US for now
-RESTRICT_COUNTRY = 'US'
-
 namespace :geonames do
 
   task :reindex do
-    results = Pelias::ES_CLIENT.search(index: 'pelias',
+    results = Pelias::ES_CLIENT.search(index: Pelias::INDEX,
       type: 'geoname', scroll: '5m', fields: 'id',
       body: { query: { match_all: {} }, sort: '_id' })
       results['hits']['hits'].each do |h|
@@ -25,12 +22,12 @@ namespace :geonames do
   task :download do
     url = 'http://download.geonames.org/export/dump/allCountries.zip'
     puts "downloading #{url}"
-    open('data/geonames/allCountries.zip', 'wb') do |file|
+    open('lib/pelias/data/geonames/allCountries.zip', 'wb') do |file|
       file << open(url).read
     end
-    Zip::File::open("data/geonames/allCountries.zip") do |zip|
+    Zip::File::open("lib/pelias/data/geonames/allCountries.zip") do |zip|
       zip.each do |entry|
-        unzipped_file = "data/geonames/#{entry.name}"
+        unzipped_file = "lib/pelias/data/geonames/#{entry.name}"
         FileUtils.rm(unzipped_file, :force => true)
         puts "extracting #{unzipped_file}"
         entry.extract(unzipped_file)
@@ -39,12 +36,12 @@ namespace :geonames do
   end
 
   task :populate do
-    File.open('data/geonames/allCountries.txt') do |fp|
-      fp.each_slice(50) do |lines|
+    File.open('lib/pelias/data/geonames/allCountries.txt') do |fp|
+      fp.each_slice(500) do |lines|
         bulk = []
         lines.each do |line|
           arr = line.chomp.split("\t")
-          next unless arr[8] == RESTRICT_COUNTRY
+          next unless arr[8] == 'US'
           bulk << {
             :id => arr[0],
             :name => arr[1],
@@ -65,7 +62,10 @@ namespace :geonames do
             :elevation => arr[15]
           }
         end
-        Pelias::Geoname.delay.create(bulk) unless bulk.empty?
+        unless bulk.empty?
+          next if Pelias::Geoname.find(bulk.first[:id])
+          Pelias::Geoname.delay.create(bulk)
+        end
       end
     end
   end

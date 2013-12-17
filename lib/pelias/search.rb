@@ -55,11 +55,11 @@ module Pelias
           }
         ]
       end
-      ES_CLIENT.search(index: INDEX, body: query, size: size)
+      ES_CLIENT.search(index: Pelias::INDEX, body: query, size: size)
     end
 
     def self.suggest(query, size)
-      ES_CLIENT.suggest(index: INDEX, body: {
+      ES_CLIENT.suggest(index: Pelias::INDEX, body: {
           suggestions: {
             text: query,
             completion: {
