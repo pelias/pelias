@@ -7,23 +7,24 @@ module Pelias
     attr_accessor :alternate_names
     attr_accessor :country_code
     attr_accessor :country_name
+    attr_accessor :population
     attr_accessor :admin1_code
     attr_accessor :admin1_name
-    attr_accessor :admin2_code
+    attr_accessor :center_point
+    attr_accessor :center_shape
+    attr_accessor :boundaries
+    # encompassing shape attributes
+    attr_accessor :admin2_id
     attr_accessor :admin2_name
-    attr_accessor :admin3_code
-    attr_accessor :admin4_code
-    attr_accessor :population
+    attr_accessor :admin2_alternate_names
+    attr_accessor :admin2_population
     attr_accessor :local_admin_id
     attr_accessor :local_admin_name
     attr_accessor :local_admin_alternate_names
     attr_accessor :local_admin_population
-    attr_accessor :center_point
-    attr_accessor :center_shape
-    attr_accessor :boundaries
 
     def encompassing_shapes
-      %w(local_admin)
+      %w(admin2 local_admin)
     end
 
     def population_weight_boost

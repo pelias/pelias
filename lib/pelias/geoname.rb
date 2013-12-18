@@ -23,7 +23,7 @@ module Pelias
       return {
         input: name,
         output: name,
-        weight: 1,
+        weight: 0,
         payload: {
           lat: lat,
           lon: lon,

@@ -29,17 +29,18 @@ module Pelias
   env = ENV['RACK_ENV'] || 'development'
 
   # elasticsearch
+  ES_TIMEOUT = 600
   es_config = YAML::load(File.open('lib/pelias/config/elasticsearch.yml'))[env]
   configuration = lambda do |faraday|
     faraday.adapter Faraday.default_adapter
-    faraday.options[:timeout] = 600
+    faraday.options[:timeout] = ES_TIMEOUT
   end
   transport = Elasticsearch::Transport::Transport::HTTP::Faraday.new(
     hosts: es_config['hosts'],
     &configuration
   )
   ES_CLIENT = Elasticsearch::Client.new(transport: transport)
-  INDEX = 'pelias_new'
+  INDEX = 'pelias'
 
   # postgres
   pg_config = YAML::load(File.open('lib/pelias/config/postgres.yml'))[env]

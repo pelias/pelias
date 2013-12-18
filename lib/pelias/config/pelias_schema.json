@@ -1,18 +1,13 @@
 {
-  "settings": {
-    "analysis": {
-      "analyzer": {
-        "address_analyzer": {
-          "type": "custom",
-          "tokenizer": "whitespace",
-          "filter": ["lowercase"]
-        }
-      }
-    }
-  },
   "mappings": {
     "geoname": {
       "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
+          "payloads": true
+        },
         "center_shape": {
           "type": "geo_shape"
         },
@@ -25,8 +20,8 @@
       "properties": {
         "suggest": {
           "type": "completion",
-          "index_analyzer": "simple",
-          "search_analyzer": "simple",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
           "payloads": true
         },
         "center_shape": {
@@ -37,12 +32,47 @@
         }
       }
     },
+    "address": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
+          "payloads": true
+        },
+        "center_shape": {
+          "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
+        }
+      }
+    },
+    "street": {
+      "properties": {
+        "suggest": {
+          "type": "completion",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
+          "payloads": true
+        },
+        "center_shape": {
+          "type": "geo_shape"
+        },
+        "center_point": {
+          "type": "geo_point"
+        },
+        "boundaries": {
+          "type": "geo_shape"
+        }
+      }
+    },
     "neighborhood": {
       "properties": {
         "suggest": {
           "type": "completion",
-          "index_analyzer": "simple",
-          "search_analyzer": "simple",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
           "payloads": true
         },
         "center_shape": {
@@ -60,8 +90,8 @@
       "properties": {
         "suggest": {
           "type": "completion",
-          "index_analyzer": "simple",
-          "search_analyzer": "simple",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
           "payloads": true
         },
         "center_shape": {
@@ -79,8 +109,8 @@
       "properties": {
         "suggest": {
           "type": "completion",
-          "index_analyzer": "simple",
-          "search_analyzer": "simple",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
           "payloads": true
         },
         "center_shape": {
@@ -94,17 +124,13 @@
         }
       }
     },
-    "street": {
+    "admin2": {
       "properties": {
         "suggest": {
           "type": "completion",
-          "index_analyzer": "address_analyzer",
-          "search_analyzer": "address_analyzer",
+          "index_analyzer": "standard",
+          "search_analyzer": "standard",
           "payloads": true
-        },
-        "name": {
-          "type": "string",
-          "analyzer": "address_analyzer"
         },
         "center_shape": {
           "type": "geo_shape"
@@ -114,26 +140,6 @@
         },
         "boundaries": {
           "type": "geo_shape"
-        }
-      }
-    },
-    "address": {
-      "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "address_analyzer",
-          "search_analyzer": "address_analyzer",
-          "payloads": true
-        },
-        "name": {
-          "type": "string",
-          "analyzer": "address_analyzer"
-        },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
         }
       }
     }

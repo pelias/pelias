@@ -9,21 +9,22 @@ module Pelias
     attr_accessor :country_name
     attr_accessor :admin1_code
     attr_accessor :admin1_name
-    attr_accessor :admin2_code
-    attr_accessor :admin2_name
-    attr_accessor :admin3_code
-    attr_accessor :admin4_code
     attr_accessor :population
+    attr_accessor :center_point
+    attr_accessor :center_shape
+    attr_accessor :boundaries
+    # encompassing shape attributes
+    attr_accessor :admin2_id
+    attr_accessor :admin2_name
+    attr_accessor :admin2_alternate_names
+    attr_accessor :admin2_population
     attr_accessor :locality_id
     attr_accessor :locality_name
     attr_accessor :locality_alternate_names
     attr_accessor :locality_population
-    attr_accessor :center_point
-    attr_accessor :center_shape
-    attr_accessor :boundaries
 
     def encompassing_shapes
-      %w(locality)
+      %w(admin2 locality)
     end
 
     def population_weight_boost
