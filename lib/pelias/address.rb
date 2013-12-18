@@ -30,6 +30,10 @@ module Pelias
       admin2_name
     ]
 
+    def encompassing_shapes
+      %w(local_admin locality neighborhood)
+    end
+
     def suggest_weight
       (locality_name || local_admin_name) ? 2 : 0
     end

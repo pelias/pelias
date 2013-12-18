@@ -122,57 +122,43 @@ module Pelias
       center_point[0]
     end
 
+    def encompassing_shapes
+      []
+    end
+
     def set_encompassing_shapes
-      params = {}
-      if type!='local_admin' && local_admin=encompassing_shape('local_admin')
-        source = local_admin['_source']
-        params[:local_admin_id] = local_admin['_id']
-        params[:local_admin_name] = source['name']
-        params[:local_admin_alternate_names] = source['alternate_names']
-        params[:local_admin_population] = source['population']
-        params[:country_code] = source['country_code']
-        params[:country_name] = source['country_name']
-        params[:admin1_code] = source['admin1_code']
-        params[:admin1_name] = source['admin1_name']
-        params[:admin2_code] = source['admin2_code']
-        params[:admin2_name] = source['admin2_name']
+      encompassing_shapes.each do |shape_type|
+        if shape = encompassing_shape(shape_type)
+          source = shape['_source']
+          self.update(
+            "#{shape_type}_id".to_sym => shape['_id'],
+            "#{shape_type}_name".to_sym => source['name'],
+            "#{shape_type}_alternate_names".to_sym => source['alternate_names'],
+            "#{shape_type}_population".to_sym => source['population'],
+            :country_code => source['country_code'],
+            :country_name => source['country_name'],
+            :admin1_code => source['admin1_code'],
+            :admin1_name => source['admin1_name'],
+            :admin2_code => source['admin2_code'],
+            :admin2_name => source['admin2_name']
+          )
+        end
       end
-      if type!='locality' && locality=encompassing_shape('locality')
-        source = locality['_source']
-        params[:locality_id] = locality['_id']
-        params[:locality_name] = source['name']
-        params[:locality_alternate_names] = source['alternate_names']
-        params[:locality_population] = source['population']
-        params[:country_code] = source['country_code']
-        params[:country_name] = source['country_name']
-        params[:admin1_code] = source['admin1_code']
-        params[:admin1_name] = source['admin1_name']
-        params[:admin2_code] = source['admin2_code']
-        params[:admin2_name] = source['admin2_name']
-      end
-      if type!='neighborhood' && neighborhood=encompassing_shape('neighborhood')
-        source = neighborhood['_source']
-        params[:neighborhood_id] = neighborhood['_id']
-        params[:neighborhood_name] = source['name']
-        params[:neighborhood_alternate_names] = source['alternate_names']
-        params[:neighborhood_population] = source['population']
-        params[:country_code] = source['country_code']
-        params[:country_name] = source['country_name']
-        params[:admin1_code] = source['admin1_code']
-        params[:admin1_name] = source['admin1_name']
-        params[:admin2_code] = source['admin2_code']
-        params[:admin2_name] = source['admin2_name']
-      end
-      self.update(params)
     end
 
     def set_admin_names
-      country = country_codes[country_code]
-      self.country_name = country[:name] if country
-      admin1 = admin1_codes["#{country_code}.#{admin1_code}"]
-      self.admin1_name = admin1[:name] if admin1
-      admin2 = admin2_codes["#{country_code}.#{admin1_code}.#{admin2_code}"]
-      self.admin2_name = admin2[:name] if admin2
+      if respond_to?(:country_name)
+        country = country_codes[country_code]
+        self.country_name = country[:name] if country
+      end
+      if respond_to?(:admin1_name)
+        admin1 = admin1_codes["#{country_code}.#{admin1_code}"]
+        self.admin1_name = admin1[:name] if admin1
+      end
+      if respond_to?(:admin2_name)
+        admin2 = admin2_codes["#{country_code}.#{admin1_code}.#{admin2_code}"]
+        self.admin2_name = admin2[:name] if admin2
+      end
     end
 
     def country_codes

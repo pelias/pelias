@@ -22,6 +22,10 @@ module Pelias
     attr_accessor :center_shape
     attr_accessor :boundaries
 
+    def encompassing_shapes
+      %w(local_admin)
+    end
+
     def population_weight_boost
       return 0 if population.nil?
       boost = population.to_i / 100000

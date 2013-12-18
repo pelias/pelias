@@ -26,6 +26,10 @@ module Pelias
     attr_accessor :center_shape
     attr_accessor :boundaries
 
+    def encompassing_shapes
+      %w(local_admin locality)
+    end
+
     def suggest_weight
       (locality_name || local_admin_name) ? 7 : 0
     end

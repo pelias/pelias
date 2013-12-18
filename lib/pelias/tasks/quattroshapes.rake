@@ -46,20 +46,21 @@ namespace :quattroshapes do
         )
         # if there's a geoname id in the concordance, use it
         if id != 0 && geoname = Pelias::Geoname.find(id)
-          # and use it for the name too
+          # and use it for the names too
           loc.name = geoname.name
+          loc.alternate_names = geoname.alternate_names
         else
           # if not, get any geoname in the boundaries
-          # but don't use the name because it won't make sense
+          # but don't use the names because it won't make sense
           loc.center_shape = RGeo::GeoJSON.encode(record.geometry.centroid)
           loc.center_point = loc.center_shape['coordinates']
-          geoname = loc.closest_geoname
-          next if geoname.nil?
+          next unless geoname = loc.closest_geoname
         end
         next unless geoname.country_code=='US'
         geoname_hash = geoname.to_hash
-        # name already set above, don't use this one
+        # names already set above, don't use this one
         geoname_hash.delete('name')
+        geoname_hash.delete('alternate_names')
         loc.update(geoname_hash)
         # save time by not re-writing shapes we've already written
         unless Pelias::ES_CLIENT.get(index: Pelias::INDEX, type: klass.type,
