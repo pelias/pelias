@@ -138,9 +138,7 @@ module Pelias
             :country_code => source['country_code'],
             :country_name => source['country_name'],
             :admin1_code => source['admin1_code'],
-            :admin1_name => source['admin1_name'],
-            :admin2_code => source['admin2_code'],
-            :admin2_name => source['admin2_name']
+            :admin1_name => source['admin1_name']
           )
         end
       end
@@ -154,10 +152,6 @@ module Pelias
       if respond_to?(:admin1_name)
         admin1 = admin1_codes["#{country_code}.#{admin1_code}"]
         self.admin1_name = admin1[:name] if admin1
-      end
-      if respond_to?(:admin2_name)
-        admin2 = admin2_codes["#{country_code}.#{admin1_code}.#{admin2_code}"]
-        self.admin2_name = admin2[:name] if admin2
       end
     end
 

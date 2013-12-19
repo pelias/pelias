@@ -57,7 +57,7 @@ module Pelias
           admin1_name: admin1_name,
           admin2_name: admin2_name,
           locality_name: locality_name,
-          local_admin_name: nil
+          local_admin_name: name
         }
       }
     end
