@@ -13,18 +13,26 @@ Quattroshapes and Geonames are also required to build the index, as they provide
 
 ## Usage
 
-To get set up, run the following. Order is important in most cases.
+To get set up, run the following. Order is important!
+
+Set up the index & mappings:
 
     $ rake pelias:setup
 
+Download geonames, and add them to the index. This provides part of the admin heirarchy. They're also used for populations (which factor into autocomplete weights) and alternate names.
+
     $ rake geonames:download
     $ rake geonames:populate
+
+Download & unzip Quattroshapes shapefiles. We only index these if we can find a relevant Geoname above!
 
     $ rake quattroshapes:download
     $ rake quattroshapes:populate_admin2
     $ rake quattroshapes:populate_local_admin
     $ rake quattroshapes:populate_localities
     $ rake quattroshapes:populate_neighborhoods
+
+Assuming you've set up a postGIS-enabled database with OSM data, the following will add all streets and addresses to the index, reverse geocoding them into the above shapes. This should capture most of the streets and addresses in OSM, but is probably missing some. It's not as exhaustive as Nominatim at this point.
 
     $ rake openstreetmap:populate_streets
     $ rake openstreetmap:populate_addresses
@@ -35,3 +43,20 @@ To run the test server:
     > Server.run!
 
 You should be able to access the server at http://localhost:4567/demo
+
+## API
+
+Right now there are two endpoints: /suggest (which is awesome) and /search (which needs work). All results are in GeoJSON.
+
+Examples:
+
+* [http://api-pelias-test.mapzen.com/suggest?query=bro](http://api-pelias-test.mapzen.com/suggest?query=bro)
+* [http://api-pelias-test.mapzen.com/suggest?query=bro&size=5](http://api-pelias-test.mapzen.com/suggest?query=bro&size=5)
+* [http://api-pelias-test.mapzen.com/search?query=brooklyn](http://api-pelias-test.mapzen.com/search?query=brooklyn)
+* [http://api-pelias-test.mapzen.com/search?query=brooklyn&center=-74.08,40.77](http://api-pelias-test.mapzen.com/search?query=brooklyn&center=-74.08,40.77)
+* [http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67](http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67)
+* [http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67&center=-74.08,40.77](http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67&center=-74.08,40.77)
+
+## Demo
+
+Check out our demo here: [http://api-pelias-test.mapzen.com/demo](http://api-pelias-test.mapzen.com/demo)
