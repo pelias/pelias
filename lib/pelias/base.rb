@@ -67,7 +67,7 @@ module Pelias
       # params[:update_geometries] because those are time-consuming
       bulk = results['hits']['hits'].map do |result|
         obj = self.new(result['_source'])
-        if params['update_encompassing_shapes']
+        if params[:update_encompassing_shapes]
           obj.set_encompassing_shapes
         end
         to_reindex = obj.to_hash
@@ -87,7 +87,7 @@ module Pelias
       Pelias::ES_CLIENT.bulk(index: Pelias::INDEX, type: type, body: bulk)
     end
 
-    def self.reindex_all(params)
+    def self.reindex_all(params={})
       size = params[:size] || 50
       start_from = params[:start_from] || 0
       i=0
@@ -96,11 +96,11 @@ module Pelias
         body: { query: { match_all: {} }, sort: '_id' })
       puts i
       i+=size
-      self.delay.reindex_bulk(results) if i >= start_from
+      self.delay.reindex_bulk(results, params) if i >= start_from
       begin
         results = Pelias::ES_CLIENT.scroll(scroll: '10m',
           scroll_id: results['_scroll_id'])
-        self.delay.reindex_bulk(results) if i >= start_from
+        self.delay.reindex_bulk(results, params) if i >= start_from
         puts i
         i+=size
       end while results['hits']['hits'].count > 0
