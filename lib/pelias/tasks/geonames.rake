@@ -3,22 +3,6 @@ require 'open-uri'
 
 namespace :geonames do
 
-  task :reindex do
-    results = Pelias::ES_CLIENT.search(index: Pelias::INDEX,
-      type: 'geoname', scroll: '5m', fields: 'id',
-      body: { query: { match_all: {} }, sort: '_id' })
-      results['hits']['hits'].each do |h|
-        Pelias::Geoname.find(h['_id']).reindex
-      end
-    begin
-      results = Pelias::ES_CLIENT.scroll(scroll: '5m',
-        scroll_id: results['_scroll_id'])
-      results['hits']['hits'].each do |h|
-        Pelias::Geoname.find(h['_id']).reindex
-      end
-    end while results['hits']['hits'].count > 0
-  end
-
   task :download do
     url = 'http://download.geonames.org/export/dump/allCountries.zip'
     puts "downloading #{url}"
@@ -63,8 +47,12 @@ namespace :geonames do
           }
         end
         unless bulk.empty?
-          next if Pelias::Geoname.find(bulk.first[:id])
-          Pelias::Geoname.delay.create(bulk)
+          begin
+            Pelias::Geoname.delay.create(bulk)
+          rescue
+            sleep 20
+            Pelias::Geoname.delay.create(bulk)
+          end
         end
       end
     end

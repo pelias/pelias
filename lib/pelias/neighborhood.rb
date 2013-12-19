@@ -2,6 +2,8 @@ module Pelias
 
   class Neighborhood < Base
 
+    SUGGEST_WEIGHT = 10
+
     attr_accessor :id
     attr_accessor :name
     attr_accessor :alternate_names
@@ -28,11 +30,11 @@ module Pelias
     attr_accessor :local_admin_population
 
     def encompassing_shapes
-      %w(local_admin locality)
+      %w(admin2 local_admin locality)
     end
 
     def suggest_weight
-      (locality_name || local_admin_name) ? 7 : 0
+      (locality_name || local_admin_name) ? SUGGEST_WEIGHT : 0
     end
 
     def generate_suggestions

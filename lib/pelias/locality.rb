@@ -2,6 +2,8 @@ module Pelias
 
   class Locality < Base
 
+    SUGGEST_WEIGHT = 12
+
     attr_accessor :id
     attr_accessor :name
     attr_accessor :alternate_names
@@ -27,6 +29,10 @@ module Pelias
       %w(admin2 local_admin)
     end
 
+    def suggest_weight
+      SUGGEST_WEIGHT + population_weight_boost
+    end
+
     def population_weight_boost
       return 0 if population.nil?
       boost = population.to_i / 100000
@@ -46,7 +52,7 @@ module Pelias
       return { 
         input: input,
         output: output,
-        weight: 10 + population_weight_boost,
+        weight: suggest_weight,
         payload: {
           lat: lat,
           lon: lon,

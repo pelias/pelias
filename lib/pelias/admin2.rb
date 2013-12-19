@@ -2,6 +2,8 @@ module Pelias
 
   class Admin2 < Base
 
+    SUGGEST_WEIGHT = 2
+
     attr_accessor :id
     attr_accessor :name
     attr_accessor :alternate_names
@@ -13,6 +15,10 @@ module Pelias
     attr_accessor :center_point
     attr_accessor :center_shape
     attr_accessor :boundaries
+
+    def suggest_weight
+      SUGGEST_WEIGHT + population_weight_boost
+    end
 
     def population_weight_boost
       return 0 if population.nil?
@@ -33,7 +39,7 @@ module Pelias
       return {
         input: input,
         output: output,
-        weight: 10 + population_weight_boost,
+        weight: suggest_weight,
         payload: {
           lat: lat,
           lon: lon,

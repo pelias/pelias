@@ -62,22 +62,34 @@ module Pelias
       false
     end
 
-    def self.reindex_bulk(results)
+    def self.reindex_bulk(results, params)
+      # accepts options of params[:update_encompassing_shapes] and
+      # params[:update_geometries] because those are time-consuming
       bulk = results['hits']['hits'].map do |result|
         obj = self.new(result['_source'])
-        suggest = obj.generate_suggestions
-        # just updating suggestions for now
+        if params['update_encompassing_shapes']
+          obj.set_encompassing_shapes
+        end
+        to_reindex = obj.to_hash
+        unless params[:update_geometries]
+          to_reindex.delete('center_point')
+          to_reindex.delete('center_shape')
+          to_reindex.delete('boundaries')
+        end
+        to_reindex['suggest'] = obj.generate_suggestions
         {
           update: {
             _id: result['_id'],
-            data: { doc: { suggest: suggest } }
+            data: { doc: to_reindex }
           }
         }
       end
       Pelias::ES_CLIENT.bulk(index: Pelias::INDEX, type: type, body: bulk)
     end
 
-    def self.reindex_all(size=50, start_from=0)
+    def self.reindex_all(params)
+      size = params[:size] || 50
+      start_from = params[:start_from] || 0
       i=0
       results = Pelias::ES_CLIENT.search(index: Pelias::INDEX,
         type: self.type, scroll: '10m', size: size,
@@ -94,22 +106,6 @@ module Pelias
       end while results['hits']['hits'].count > 0
     end
 
-    def reindex(update_geometries=false, set_shapes=false)
-      if set_shapes
-        self.set_encompassing_shapes
-      end
-      to_reindex = self.to_hash
-      to_reindex.delete('id')
-      unless update_geometries
-        to_reindex.delete('center_point')
-        to_reindex.delete('center_shape')
-        to_reindex.delete('boundaries')
-      end
-      to_reindex['suggest'] = generate_suggestions
-      Pelias::ES_CLIENT.update(index: Pelias::INDEX, type: type, id: id,
-        retry_on_conflict: 5, body: { doc: to_reindex })
-    end
-
     def admin1_abbr
       admin1_code if country_code=='US'
     end
@@ -123,6 +119,7 @@ module Pelias
     end
 
     def encompassing_shapes
+      # to override on objects with encompassing shapes
       []
     end
 
@@ -164,12 +161,6 @@ module Pelias
     def admin1_codes
       @@admin1_codes ||= YAML::load(
         File.open('lib/pelias/data/geonames/admin1.yml')
-      )
-    end
-
-    def admin2_codes
-      @@admin2_codes ||= YAML::load(
-        File.open('lib/pelias/data/geonames/admin2.yml')
       )
     end
 
