@@ -9,7 +9,7 @@ Pelias is a set of tools for importing [OpenStreetMap](http://www.openstreetmap.
 * Redis: Install Redis in order to process background jobs during the indexing process.
 * Sidekiq: Used for background processing, you'll need to set up the background workers and optional web monitoring interface. Info [here](http://sidekiq.org/).
 
-Quattroshapes and Geonames are also required to build the index, as they provide the admin heirarchy. You can download those via the rake tasks below. OpenStreetMap streets and address points are reverse geocoded into the admin heirarchy, and we ignore OpenStreetMap boundaries at the moment.
+[Quattroshapes](http://quattroshapes.com/) and [Geonames](http://www.geonames.org/) are also required to build the index, as they provide the admin heirarchy. You can download those via the rake tasks below. OpenStreetMap streets and address points are reverse geocoded into the admin heirarchy, and we ignore OpenStreetMap boundaries at the moment.
 
 ## Usage
 
