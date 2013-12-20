@@ -36,18 +36,19 @@ module Pelias
     end
 
     def suggest_weight
-      (locality_name || local_admin_name) ? SUGGEST_WEIGHT : 0
+      admin_display_name ? SUGGEST_WEIGHT : 0
+    end
+
+    def admin_display_name
+      locality_name || local_admin_name || admin2_name
     end
 
     def generate_suggestions
       input = "#{name}"
       output = "#{name}"
-      if local_admin_name
-        input << " #{local_admin_name}"
-        output << ", #{local_admin_name}"
-      elsif locality_name
-        input << " #{locality_name}"
-        output << ", #{locality_name}"
+      if admin_display_name
+        input << " #{admin_display_name}"
+        output << ", #{admin_display_name}"
       end
       if admin1_abbr
         input << " #{admin1_abbr}"

@@ -29,7 +29,7 @@ module Pelias
   env = ENV['RACK_ENV'] || 'development'
 
   # elasticsearch
-  ES_TIMEOUT = 600
+  ES_TIMEOUT = 1200
   es_config = YAML::load(File.open('lib/pelias/config/elasticsearch.yml'))[env]
   configuration = lambda do |faraday|
     faraday.adapter Faraday.default_adapter
