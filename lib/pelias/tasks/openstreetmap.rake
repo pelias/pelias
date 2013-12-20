@@ -2,35 +2,8 @@ require 'pelias'
 
 namespace :openstreetmap do
 
-  task :populate_hospitals do
-    results = Pelias::PG_CLIENT.exec("
-      SELECT osm_id, name, website, phone,
-        \"addr:street\" AS street_name,
-        \"addr:housenumber\" AS housenumber,
-        ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS location
-      FROM planet_osm_point
-      WHERE amenity='hospital'
-    ")
-    results.each_slice(50) do |pois|
-      bulk = pois.map do |poi|
-        center = JSON.parse(poi['location'])
-        {
-          :id => poi['osm_id'],
-          :name => poi['name'],
-          :website => poi['website'],
-          :phone => poi['phone'],
-          :street_name => poi['street_name'],
-          :number => poi['housenumber'],
-          :center_point => center['coordinates'],
-          :center_shape => center,
-          :category => ["hospital", "healthcare", "doctor", "emergency room"]
-        }
-      end
-      Pelias::Poi.create(bulk)
-    end
-  end
-
   task :populate_streets do
+    i = 0
     size = 50
     Pelias::PG_CLIENT.exec("BEGIN")
     Pelias::PG_CLIENT.exec("
@@ -38,6 +11,8 @@ namespace :openstreetmap do
       #{Pelias::Street.all_streets_sql}
     ")
     begin
+      puts i
+      i += size
       streets = Pelias::PG_CLIENT.exec("FETCH #{size} FROM streets_cursor")
       street_data = streets.map do |street|
         center = JSON.parse(street['center'])
@@ -49,13 +24,21 @@ namespace :openstreetmap do
           :boundaries => JSON.parse(street['street'])
         }
       end
-      Pelias::Street.delay.create(street_data)
+      if i >= 0
+        begin
+          Pelias::Street.delay.create(street_data)
+        rescue
+          sleep 20
+          Pelias::Street.delay.create(street_data)
+        end
+      end
     end while streets.count > 0
     Pelias::PG_CLIENT.exec("CLOSE streets_cursor")
     Pelias::PG_CLIENT.exec("COMMIT")
   end
 
   task :populate_addresses do
+    i = 0
     size = 100
     %w(point polygon line).each do |shape|
       Pelias::PG_CLIENT.exec("BEGIN")
@@ -64,6 +47,8 @@ namespace :openstreetmap do
         #{Pelias::Address.get_sql(shape)}
       ")
       begin
+        puts "#{shape} #{i}"
+        i+=size
         results = Pelias::PG_CLIENT.exec("FETCH #{size} FROM #{shape}_cursor")
         addresses = results.map do |result|
           center = JSON.parse(result['location'])
@@ -76,7 +61,14 @@ namespace :openstreetmap do
             :center_shape => center
           }
         end
-        Pelias::Address.delay.create(addresses.compact)
+        if i >= 0
+          begin
+            Pelias::Address.delay.create(addresses.compact)
+          rescue
+            sleep 20
+            Pelias::Address.delay.create(addresses.compact)
+          end
+        end
       end while results.count > 0
       Pelias::PG_CLIENT.exec("CLOSE #{shape}_cursor")
       Pelias::PG_CLIENT.exec("COMMIT")

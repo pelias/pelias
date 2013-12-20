@@ -40,7 +40,7 @@ module Pelias
     end
 
     def admin_display_name
-      locality_name || local_admin_name || admin2_name
+      locality_name || local_admin_name || neighborhood_name || admin2_name
     end
 
     def generate_suggestions
@@ -82,7 +82,8 @@ module Pelias
         ST_AsGeoJSON(ST_Transform(ST_LineInterpolatePoint(way, 0.5), 4326), 6)
           AS center
       FROM planet_osm_line
-      WHERE name IS NOT NULL AND highway IS NOT NULL"
+      WHERE name IS NOT NULL AND highway IS NOT NULL
+      ORDER BY osm_id"
     end
 
     def self.street_level?
