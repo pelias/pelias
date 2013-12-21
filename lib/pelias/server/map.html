@@ -120,11 +120,6 @@ p {
 <div class="demo">
   <form>
   <input id="query" name="query" class="typeahead" type="text" placeholder="suggest...">
-  <select name="search_type">
-  <option value="none">-- Select --</option>
-  <option value="bounding">Bounding Box</option>
-  <option value="sort">Sort from Center</option>
-  </select>
   <input type="submit" style="visibility:hidden">
   </form>
 </div>
@@ -150,15 +145,6 @@ $(document).ready(function(){
     var query = $_GET.query;
     $('#query').val(query);
     var query_string = '/search?query=' + query;
-    if ($_GET.search_type=='bounding') {
-      
-    }
-    else if ($_GET.search_type=='sort') {
-
-    }
-    else {
-      query_string += '&size=1';
-    }
     $.ajax({
       type: 'GET',
       dataType: "json",
