@@ -40,11 +40,21 @@ module Pelias
     end
 
     def admin_display_name
-      locality_name || local_admin_name || neighborhood_name || admin2_name
+      local_admin_name || locality_name || neighborhood_name || admin2_name
+    end
+
+    def suggest_input
+      base = "#{number} #{street_name}"
+      input = [base]
+      input << "#{base} #{local_admin_name}" if local_admin_name
+      input << "#{base} #{locality_name}" if locality_name
+      input << "#{base} #{neighborhood_name}" if neighborhood_name
+      input << "#{base} #{admin2_name}" if admin2_name
+      input
     end
 
     def generate_suggestions
-      input = "#{name}"
+      input = suggest_input
       output = "#{name}"
       if admin_display_name
         input << " #{admin_display_name}"
@@ -71,7 +81,8 @@ module Pelias
           admin1_name: admin1_name,
           admin2_name: admin2_name,
           locality_name: locality_name,
-          local_admin_name: local_admin_name
+          local_admin_name: local_admin_name,
+          neighborhood_name: neighborhood_name
         }
       }
     end

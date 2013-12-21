@@ -39,8 +39,15 @@ module Pelias
       boost < 1 ? 1 : boost.to_i
     end
 
+    def suggest_input
+      input = []
+      input << "#{name} #{local_admin_name}" if local_admin_name
+      input << "#{name} #{admin2_name}" if admin2_name
+      input
+    end
+
     def generate_suggestions
-      input = "#{name}"
+      input = suggest_input
       output = "#{name}"
       if admin1_abbr
         input << " #{admin1_abbr}"

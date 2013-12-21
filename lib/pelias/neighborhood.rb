@@ -41,8 +41,16 @@ module Pelias
       locality_name || local_admin_name || admin2_name
     end
 
+    def suggest_input
+      input = []
+      input << "#{name} #{local_admin_name}" if local_admin_name
+      input << "#{name} #{locality_name}" if locality_name
+      input << "#{name} #{admin2_name}" if admin2_name
+      input
+    end
+
     def generate_suggestions
-      input = "#{name}"
+      input = suggest_input
       output = "#{name}"
       if admin_display_name
         input << " #{admin_display_name}"
