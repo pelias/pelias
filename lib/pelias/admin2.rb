@@ -26,19 +26,27 @@ module Pelias
       boost < 1 ? 1 : boost.to_i
     end
 
-    def generate_suggestions
-      input = "#{name}"
+    def suggest_input
+      input = []
+      input << "#{name} #{admin1_abbr}" if admin1_abbr
+      input << "#{name} #{admin1_name}" if admin1_name
+      input
+    end
+
+    def suggest_output
       output = "#{name}"
       if admin1_abbr
-        input << " #{admin1_abbr}"
         output << ", #{admin1_abbr}"
       elsif admin1_name
-        input << " #{admin1_name}"
         output << ", #{admin1_name}"
       end
-      return {
-        input: input,
-        output: output,
+      output
+    end
+
+    def generate_suggestions
+      {
+        input: suggest_input,
+        output: suggest_output,
         weight: suggest_weight,
         payload: {
           lat: lat,

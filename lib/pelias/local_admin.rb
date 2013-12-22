@@ -41,24 +41,35 @@ module Pelias
 
     def suggest_input
       input = []
-      input << "#{name} #{locality_name}" if locality_name
-      input << "#{name} #{admin2_name}" if admin2_name
+      input << "#{name} #{admin1_abbr}" if admin1_abbr
+      input << "#{name} #{admin1_name}" if admin1_name
+      [locality_name, admin2_name].each do |admin_name|
+        next unless admin_name
+        input_name = "#{name} #{admin_name}"
+        if admin1_abbr
+          input_name << " #{admin1_abbr}"
+        elsif admin1_name
+          input_name << " #{admin1_name}"
+        end
+        input << input_name
+      end
       input
     end
 
-    def generate_suggestions
-      input = suggest_input
+    def suggest_output
       output = "#{name}"
       if admin1_abbr
-        input << " #{admin1_abbr}"
         output << ", #{admin1_abbr}"
       elsif admin1_name
-        input << " #{admin1_name}"
         output << ", #{admin1_name}"
       end
-      return {
-        input: input,
-        output: output,
+      output
+    end
+
+    def generate_suggestions
+      {
+        input: suggest_input,
+        output: suggest_output,
         weight: suggest_weight,
         payload: {
           lat: lat,
