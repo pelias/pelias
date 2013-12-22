@@ -54,23 +54,23 @@ module Pelias
       input
     end
 
-    def generate_suggestions
-      input = suggest_input
+    def suggest_output
       output = "#{number} #{street_name}"
       if admin_display_name
-        input << " #{admin_display_name}"
         output << ", #{admin_display_name}"
       end
       if admin1_abbr
-        input << " #{admin1_abbr}"
         output << ", #{admin1_abbr}"
       elsif admin1_name
-        input << " #{admin1_name}"
         output << ", #{admin1_name}"
       end
+      output
+    end
+
+    def generate_suggestions
       {
-        input: input,
-        output: output,
+        input: suggest_input,
+        output: suggest_output,
         weight: suggest_weight,
         payload: {
           lat: lat,
