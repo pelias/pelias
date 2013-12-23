@@ -80,7 +80,12 @@ module Pelias
       begin
         results = Pelias::ES_CLIENT.scroll(scroll: '10m',
           scroll_id: results['_scroll_id'])
-        self.delay.reindex_bulk(results, params) if i >= start_from
+        begin
+          self.delay.reindex_bulk(results, params) if i >= start_from
+        rescue
+          sleep 20
+          self.delay.reindex_bulk(results, params) if i >= start_from
+        end
         puts i
         i+=size
       end while results['hits']['hits'].count > 0
