@@ -9,7 +9,7 @@ module Pelias
     attr_accessor :number
     attr_accessor :phone
     attr_accessor :website
-    attr_accessor :category
+    attr_accessor :feature
     attr_accessor :center_point
     attr_accessor :center_shape
     attr_accessor :street_name
@@ -85,6 +85,23 @@ module Pelias
 
     def self.street_level?
       true
+    end
+
+    def self.osm_features
+      %w(aerialway aeroway amenity building craft cuisine diet historic
+         landuse leisure man_made military natural office public_transport
+         railway shop sport tourism waterway)
+    end
+
+    def self.get_sql(shape)
+      "SELECT osm_id, name, \"addr:street\" AS street_name,
+        \"addr:housenumber\" AS housenumber, phone, website,
+        \"#{osm_features * '", "'}\",
+        ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location
+      FROM planet_osm_#{shape}
+      WHERE (\"#{osm_features * '" IS NOT NULL OR "'}\" IS NOT NULL)
+        AND name IS NOT NULL
+      ORDER BY osm_id"
     end
 
   end
