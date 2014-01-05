@@ -31,10 +31,6 @@ module Pelias
       ORDER BY osm_id"
     end
 
-    def feature_synonyms
-      @@feature_synonyms ||= YAML::load(File.open('lib/pelias/config/features.yml'))
-    end
-
   end
 
 end
