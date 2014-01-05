@@ -22,6 +22,7 @@ module Pelias
   autoload :Locality, 'pelias/locality'
   autoload :Neighborhood, 'pelias/neighborhood'
   autoload :Poi, 'pelias/poi'
+  autoload :Restaurant, 'pelias/restaurant'
   autoload :Street, 'pelias/street'
 
   autoload :Search, 'pelias/search'

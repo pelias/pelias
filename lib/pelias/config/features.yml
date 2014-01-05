@@ -1,0 +1,41 @@
+chinese:
+  - asian
+thai:
+  - asian
+sushi:
+  - asian
+korean:
+  - asian
+noodle:
+  - asian
+vietnamese:
+  - asian
+cantonese:
+  - chinese
+  - asian
+szechuan:
+  - chinese
+  - asian
+hunan:
+  - chinese
+  - asian
+japanese:
+  - asian
+pizza:
+  - italian
+pancake:
+  - breakfast
+bagel:
+  - breakfast
+cafe:
+  - coffee
+coffee shop:
+  - cafe
+coffee:
+  - cafe
+donut:
+  - breakfast
+  - doughnut
+doughnut:
+  - breakfast
+  - donut

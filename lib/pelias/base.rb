@@ -23,6 +23,7 @@ module Pelias
 
     def self.build(params)
       obj = self.new(params)
+      obj.pre_process # TODO should call the below?
       obj.set_encompassing_shapes
       obj.set_admin_names
       obj
@@ -55,7 +56,8 @@ module Pelias
     end
 
     def self.type
-      self.name.split('::').last.gsub(/(.)([A-Z])/,'\1_\2').downcase
+      klass = self.superclass == Pelias::Poi ? self.superclass : self
+      klass.name.split('::').last.gsub(/(.)([A-Z])/,'\1_\2').downcase
     end
 
     def self.street_level?
@@ -96,6 +98,7 @@ module Pelias
         obj = self.new(result['_source'])
         if params[:update_encompassing_shapes]
           obj.set_encompassing_shapes
+          obj.pre_process
         end
         to_reindex = obj.to_hash
         unless params[:update_geometries]
@@ -158,6 +161,10 @@ module Pelias
         admin1 = admin1_codes["#{country_code}.#{admin1_code}"]
         self.admin1_name = admin1[:name] if admin1
       end
+    end
+
+    def pre_process
+      # to override
     end
 
     def country_codes

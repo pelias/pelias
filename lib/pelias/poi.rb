@@ -104,6 +104,38 @@ module Pelias
       ORDER BY osm_id"
     end
 
+    def self.create_hash(result, shape)
+      result = result.delete_if { |k,v| v.nil? }
+      center = JSON.parse(result.delete('location'))
+      return_hash = {
+        :id => "#{shape}-#{result.delete('osm_id')}",
+        :name => result.delete('name'),
+        :number => result.delete('housenumber'),
+        :street_name => result.delete('street_name'),
+        :website => result.delete('website'),
+        :phone => result.delete('phone'),
+        :center_point => center['coordinates'],
+        :center_shape => center
+      }
+      feature = result.map { |k,v|
+        features = [k]
+        if v[',']
+          features << v.split(',')
+        elsif v[';']
+          features << v.split(';')
+        elsif v[':']
+          features << v.split(':')
+        else
+          features << v
+        end
+        features.flatten.compact.uniq.map { |f|
+          f.gsub('_', ' ').downcase.strip.gsub(' ', '_').gsub('"', '')
+        }
+      }
+      return_hash[:feature] = feature.flatten.compact.uniq
+      return_hash
+    end
+
   end
 
 end
