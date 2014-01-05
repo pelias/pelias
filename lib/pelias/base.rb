@@ -56,7 +56,7 @@ module Pelias
     end
 
     def self.type
-      class.name.split('::').last.gsub(/(.)([A-Z])/,'\1_\2').downcase
+      self.class.name.split('::').last.gsub(/(.)([A-Z])/,'\1_\2').downcase
     end
 
     def self.street_level?
