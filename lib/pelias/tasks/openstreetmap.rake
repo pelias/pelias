@@ -4,7 +4,7 @@ namespace :openstreetmap do
 
   task :populate_restaurants do
     i = 0
-    size = 1000
+    size = 10
     %w(point polygon line).each do |shape|
       Pelias::PG_CLIENT.exec("BEGIN")
       Pelias::PG_CLIENT.exec("
@@ -20,10 +20,10 @@ namespace :openstreetmap do
         end
         if i >= 0
           begin
-            Pelias::Restaurant.create(restaurants.compact)
+            Pelias::Restaurant.delay.create(restaurants.compact)
           rescue
             sleep 20
-            Pelias::Restaurant.create(restaurants.compact)
+            Pelias::Restaurant.delay.create(restaurants.compact)
           end
         end
       end while results.count > 0

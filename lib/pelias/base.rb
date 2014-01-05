@@ -56,8 +56,7 @@ module Pelias
     end
 
     def self.type
-      klass = self.superclass == Pelias::Poi ? self.superclass : self
-      klass.name.split('::').last.gsub(/(.)([A-Z])/,'\1_\2').downcase
+      class.name.split('::').last.gsub(/(.)([A-Z])/,'\1_\2').downcase
     end
 
     def self.street_level?

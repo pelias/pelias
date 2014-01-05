@@ -16,7 +16,7 @@
         }
       }
     },
-    "poi": {
+    "restaurant": {
       "properties": {
         "suggest": {
           "type": "completion",
