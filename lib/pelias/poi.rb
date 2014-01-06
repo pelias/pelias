@@ -115,24 +115,39 @@ module Pelias
       true
     end
 
+    def pre_process
+      self.feature = self.feature.map { |f| f.strip.downcase.gsub('_', ' ') }
+      to_add = []
+      feature.map { |f| to_add << feature_synonyms[f] }
+      self.feature << to_add
+      self.feature = feature.flatten.compact.uniq
+      feature_deletions.each { |d| self.feature.delete(d) }
+    end
+
+    def feature_deletions
+      @@feature_deletions ||= YAML::load(File.open('lib/pelias/config/feature_deletions.yml'))
+    end
+
     def feature_synonyms
-      @@feature_synonyms ||= YAML::load(File.open('lib/pelias/config/features.yml'))
+      @@feature_synonyms ||= YAML::load(File.open('lib/pelias/config/feature_synonyms.yml'))
     end
 
     def self.osm_features
-      %w(aerialway aeroway amenity building craft cuisine diet historic
+      %w(aerialway aeroway amenity building craft cuisine historic
          landuse leisure man_made military natural office public_transport
          railway shop sport tourism waterway)
     end
 
     def self.get_sql(shape)
-      "SELECT osm_id, name, \"addr:street\" AS street_name,
-        \"addr:housenumber\" AS housenumber, phone, website,
-        \"#{osm_features * '", "'}\",
-        ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location
+      "SELECT
+         osm_id, name, phone, website,
+         \"addr:street\" AS street_name,
+         \"addr:housenumber\" AS housenumber,
+         ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location,
+         \"#{osm_features * '","'}\"
       FROM planet_osm_#{shape}
-      WHERE (\"#{osm_features * '" IS NOT NULL OR "'}\" IS NOT NULL)
-        AND name IS NOT NULL
+      WHERE name IS NOT NULL
+        AND (\"#{osm_features * '" IS NOT NULL OR "'}\" IS NOT NULL)
       ORDER BY osm_id"
     end
 

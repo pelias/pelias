@@ -2,32 +2,32 @@ require 'pelias'
 
 namespace :openstreetmap do
 
-  task :populate_restaurants do
+  task :populate_pois do
     i = 0
     size = 10
     %w(point polygon line).each do |shape|
       Pelias::PG_CLIENT.exec("BEGIN")
       Pelias::PG_CLIENT.exec("
-        DECLARE restaurant_#{shape}_cursor CURSOR FOR
-        #{Pelias::Restaurant.get_sql(shape)}
+        DECLARE poi_#{shape}_cursor CURSOR FOR
+        #{Pelias::Poi.get_sql(shape)}
       ")
       begin
         puts "#{shape} #{i}"
         i+=size
-        results = Pelias::PG_CLIENT.exec("FETCH #{size} FROM restaurant_#{shape}_cursor")
-        restaurants = results.map do |result|
+        results = Pelias::PG_CLIENT.exec("FETCH #{size} FROM poi_#{shape}_cursor")
+        pois = results.map do |result|
           Pelias::Poi.create_hash(result, shape)
         end
         if i >= 0
           begin
-            Pelias::Restaurant.delay.create(restaurants.compact)
+            Pelias::Poi.create(pois.compact)
           rescue
             sleep 20
-            Pelias::Restaurant.delay.create(restaurants.compact)
+            Pelias::Poi.delay.create(pois.compact)
           end
         end
       end while results.count > 0
-      Pelias::PG_CLIENT.exec("CLOSE restaurant_#{shape}_cursor")
+      Pelias::PG_CLIENT.exec("CLOSE poi_#{shape}_cursor")
       Pelias::PG_CLIENT.exec("COMMIT")
     end
   end

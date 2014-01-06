@@ -23,7 +23,7 @@ module Pelias
 
     def self.build(params)
       obj = self.new(params)
-      obj.pre_process # TODO should call the below?
+      obj.pre_process
       obj.set_encompassing_shapes
       obj.set_admin_names
       obj

@@ -39,3 +39,35 @@ donut:
 doughnut:
   - breakfast
   - donut
+grave yard:
+  - cemetery
+peak:
+  - mountain
+townhall:
+  - town hall
+cuisine:
+  - food
+  - restaurant
+  - dining
+restaurant:
+  - food
+  - dining
+aerodrome:
+  - airport
+fuel:
+  - gas
+  - gas station
+pharmacy:
+  - drug store
+  - druggist
+  - chemist
+shop:
+  - store
+alcohol:
+  - liquor
+theater:
+  - theatre
+theatre:
+  - theater
+toilets:
+  - bathroom
