@@ -28,7 +28,12 @@ module Pelias
   autoload :Search, 'pelias/search'
 
   env = ENV['RAILS_ENV'] || 'development'
+
+  # temp debug
   puts "ENV == #{ENV['RAILS_ENV']}"
+  dump_es_config = YAML::load(File.open('lib/pelias/config/elasticsearch.yml'))
+  puts dump_es_config
+  # end temp debug
 
   # elasticsearch
   ES_TIMEOUT = 1200
