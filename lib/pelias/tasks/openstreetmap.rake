@@ -20,7 +20,7 @@ namespace :openstreetmap do
         end
         if i >= 0
           begin
-            Pelias::Poi.create(pois.compact)
+            Pelias::Poi.delay.create(pois.compact)
           rescue
             sleep 20
             Pelias::Poi.delay.create(pois.compact)

@@ -71,6 +71,27 @@ module Pelias
       )
     end
 
+    def self.reverse_geocode(lng, lat)
+      ES_CLIENT.search(index: Pelias::INDEX, body:{
+        query: {
+          filtered: {
+            query: { match_all: {} },
+            filter: {
+              geo_shape: {
+                boundaries: {
+                  shape: {
+                    type: "Point",
+                    coordinates: [lng, lat]
+                  },
+                  relation: "intersects"
+                }
+              }
+            }
+          }
+        }
+      })
+    end
+
   end
 
 end

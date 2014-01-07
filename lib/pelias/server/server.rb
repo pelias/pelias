@@ -58,6 +58,27 @@ class Server < Sinatra::Base
     { type: 'FeatureCollection', features: results }.to_json
   end
 
+  get '/reverse' do
+    results = Pelias::Search.reverse_geocode(params[:lng], params[:lat])
+    results = results['hits']['hits'].map do |result|
+      source = result['_source']
+      {
+        type: result['_type'],
+        name: source['name'],
+        center: source['center_shape'],
+        country_code: source['country_code'],
+        country_name: source['country_name'],
+        admin1_abbr: source['country_code']=='US' ? source['admin1_code'] : nil,
+        admin1_name: source['admin1_name'],
+        admin2_name: source['admin2_name'],
+        locality_name: source['locality_name'],
+        local_admin_name: source['local_admin_name'],
+        neighborhood_name: source['neighborhood_name']
+      }
+    end
+    results.to_json
+  end
+
   get '/demo' do
     File.read('lib/pelias/server/map.html')
   end
