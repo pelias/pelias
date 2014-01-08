@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rubyzip"
   spec.add_dependency "sidekiq"
   spec.add_dependency "sinatra"
+  spec.add_dependency "sinatra-cross_origin"
   spec.add_dependency "unicorn"
 
 end

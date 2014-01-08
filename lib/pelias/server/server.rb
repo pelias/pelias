@@ -1,9 +1,12 @@
 require 'sinatra'
+require 'sinatra/cross_origin'
 require 'pelias'
 
 class Server < Sinatra::Base
 
   set :show_exceptions, false
+
+  enable :cross_origin
 
   get '/search' do
     size = params[:size] || 10
