@@ -69,4 +69,12 @@ class Server < Sinatra::Base
     File.read('lib/pelias/server/map.html')
   end
 
+  # override the default 'Sinatra
+  #   doesn't know this ditty' error page
+  #
+  error Sinatra::NotFound do
+    content_type 'text/plain'
+    [404, 'Not Found']
+  end
+
 end
