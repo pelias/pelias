@@ -1,14 +1,12 @@
 require 'sinatra'
-require 'sinatra/cross_origin'
 require 'pelias'
 
 class Server < Sinatra::Base
 
   set :show_exceptions, false
 
-  enable :cross_origin
-
   get '/search' do
+    response['Access-Control-Allow-Origin'] = '*'
     size = params[:size] || 10
     results = Pelias::Search.search(params[:query], params[:viewbox],
       params[:center], size)
@@ -37,6 +35,7 @@ class Server < Sinatra::Base
   end
 
   get '/suggest' do
+    response['Access-Control-Allow-Origin'] = '*'
     size = params[:size] || 20
     results = Pelias::Search.suggest(params[:query], size)
     results = results['suggestions'][0]['options'].map do |result|
@@ -64,6 +63,7 @@ class Server < Sinatra::Base
   end
 
   get '/reverse' do
+    response['Access-Control-Allow-Origin'] = '*'
     results = Pelias::Search.reverse_geocode(params[:lng], params[:lat])
     results.to_json
   end
