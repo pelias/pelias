@@ -13,7 +13,6 @@ PATH
       rubyzip
       sidekiq
       sinatra
-      sinatra-cross_origin
       unicorn
 
 GEM
@@ -81,7 +80,6 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
-    sinatra-cross_origin (0.3.2)
     tilt (1.4.1)
     timers (1.1.0)
     unicorn (4.7.0)

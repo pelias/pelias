@@ -8,19 +8,14 @@ class Server < Sinatra::Base
   get '/search' do
     response['Access-Control-Allow-Origin'] = '*'
     size = params[:size] || 10
-    results = Pelias::Search.search(params[:query], params[:viewbox],
-      params[:center], size)
-    i = 0
+    results = Pelias::Search.search(params[:query], params[:viewbox], params[:center], size)
     results = results['hits']['hits'].map do |result|
-      i += 1
       {
         type: 'Feature',
         geometry: result['_source']['center_shape'],
         properties: {
           title: result['_source']['name'],
           description: result['_source']['suggest']['payload']['type'],
-          :'marker-color' => '#369100',
-          :'marker-symbol' => i,
           country_code: result['_source']['country_code'],
           country_name: result['_source']['country_name'],
           admin1_abbr: result['_source']['admin1_code'],
@@ -48,7 +43,6 @@ class Server < Sinatra::Base
         properties: {
           title: result['text'],
           description: result['payload']['type'],
-          :'marker-color' => '#369100',
           country_code: result['payload']['country_code'],
           country_name: result['payload']['country_name'],
           admin1_abbr: result['payload']['admin1_abbr'],
@@ -66,10 +60,6 @@ class Server < Sinatra::Base
     response['Access-Control-Allow-Origin'] = '*'
     results = Pelias::Search.reverse_geocode(params[:lng], params[:lat])
     results.to_json
-  end
-
-  get '/demo' do
-    File.read('lib/pelias/server/map.html')
   end
 
   # override the default 'Sinatra
