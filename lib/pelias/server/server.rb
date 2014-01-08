@@ -3,6 +3,8 @@ require 'pelias'
 
 class Server < Sinatra::Base
 
+  set :show_exceptions, false
+
   get '/search' do
     size = params[:size] || 10
     results = Pelias::Search.search(params[:query], params[:viewbox],
