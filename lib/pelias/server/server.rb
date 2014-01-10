@@ -51,7 +51,7 @@ class Server < Sinatra::Base
           admin2_name: result['payload']['admin2_name'],
           locality_name: result['payload']['locality_name'],
           local_admin_name: result['payload']['local_admin_name'],
-          neighborhood_name: result['_source']['neighborhood_name']
+          neighborhood_name: result['payload']['neighborhood_name']
         }
       }
     end
