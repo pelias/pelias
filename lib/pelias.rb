@@ -40,7 +40,7 @@ module Pelias
     hosts: es_config['hosts'],
     &configuration
   )
-  ES_CLIENT = Elasticsearch::Client.new(transport: transport, retry_on_failure: 3, randomize_hosts: true)
+  ES_CLIENT = Elasticsearch::Client.new(transport: transport, retry_on_failure: true, randomize_hosts: true)
   INDEX = 'pelias'
 
   # postgres
