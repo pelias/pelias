@@ -66,7 +66,7 @@ class Server < Sinatra::Base
 
   get '/closest' do
     response['Access-Control-Allow-Origin'] = '*'
-    results = Pelias::Search.closest(params[:lng], params[:lat], params[:type])
+    results = Pelias::Search.closest(params[:lng], params[:lat], params[:type], 1500)
     results = results['hits']['hits'].map do |result|
       {
         type: 'Feature',
