@@ -72,6 +72,7 @@ class Server < Sinatra::Base
         type: 'Feature',
         geometry: result['_source']['center_shape'],
         properties: {
+          osm_id: result['_id'],
           name: result['_source']['name'],
           street_number: result['_source']['number'],
           street_name: result['_source']['street_name'],
