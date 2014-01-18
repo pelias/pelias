@@ -67,7 +67,25 @@ class Server < Sinatra::Base
   get '/closest' do
     response['Access-Control-Allow-Origin'] = '*'
     results = Pelias::Search.closest(params[:lng], params[:lat], params[:type])
-    results.to_json
+    results = results['hits']['hits'].map do |result|
+      {
+        type: 'Feature',
+        geometry: result['_source']['center_shape'],
+        properties: {
+          name: result['_source']['name'],
+          type: result['_source']['suggest']['payload']['type'],
+          country_code: result['_source']['country_code'],
+          country_name: result['_source']['country_name'],
+          admin1_abbr: result['_source']['admin1_code'],
+          admin1_name: result['_source']['admin1_name'],
+          admin2_name: result['_source']['admin2_name'],
+          locality_name: result['_source']['locality_name'],
+          local_admin_name: result['_source']['local_admin_name'],
+          neighborhood_name: result['_source']['neighborhood_name']
+        }
+      }
+    end
+    { type: 'FeatureCollection', features: results }.to_json
   end
 
   # override the default 'Sinatra
