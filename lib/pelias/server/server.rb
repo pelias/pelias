@@ -64,6 +64,12 @@ class Server < Sinatra::Base
     results.to_json
   end
 
+  get '/closest' do
+    response['Access-Control-Allow-Origin'] = '*'
+    results = Pelias::Search.closest(params[:lng], params[:lat], params[:type])
+    results.to_json
+  end
+
   # override the default 'Sinatra
   #   doesn't know this ditty' error page
   #
