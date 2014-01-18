@@ -73,7 +73,11 @@ class Server < Sinatra::Base
         geometry: result['_source']['center_shape'],
         properties: {
           name: result['_source']['name'],
-          type: result['_source']['suggest']['payload']['type'],
+          street_number: result['_source']['number'],
+          street_name: result['_source']['street_name'],
+          feature: result['_source']['feature'],
+          phone: result['_source']['phone'],
+          website: result['_source']['website'],
           country_code: result['_source']['country_code'],
           country_name: result['_source']['country_name'],
           admin1_abbr: result['_source']['admin1_code'],
