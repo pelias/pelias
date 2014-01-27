@@ -54,4 +54,9 @@ module Pelias
     config.redis = { :url => redis_url, :namespace => redis_namespace }
   end
 
+  if ENV['RAILS_ENV'] == 'development'
+    require 'sidekiq/testing'
+    Sidekiq::Testing.inline!
+  end
+
 end

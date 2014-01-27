@@ -21,7 +21,6 @@ Set up the index & mappings:
 
 Download geonames, and add them to the index. This provides part of the admin heirarchy. They're also used for populations (which factor into autocomplete weights) and alternate names.
 
-    $ rake geonames:download
     $ rake geonames:populate
 
 Download & unzip Quattroshapes shapefiles. We only index these if we can find a relevant Geoname above!
