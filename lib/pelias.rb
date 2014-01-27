@@ -13,7 +13,7 @@ require "pelias/server/server"
 module Pelias
 
   autoload :VERSION, 'pelias/version'
-  
+
   autoload :Address, 'pelias/address'
   autoload :Admin2, "pelias/admin2"
   autoload :Base, 'pelias/base'
@@ -22,7 +22,6 @@ module Pelias
   autoload :Locality, 'pelias/locality'
   autoload :Neighborhood, 'pelias/neighborhood'
   autoload :Poi, 'pelias/poi'
-  autoload :Restaurant, 'pelias/restaurant'
   autoload :Street, 'pelias/street'
 
   autoload :Search, 'pelias/search'
