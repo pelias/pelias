@@ -17,7 +17,7 @@ To get set up, run the following. Order is important!
 
 Set up the index & mappings:
 
-    $ rake pelias:setup
+    $ rake index:create
 
 Download geonames, and add them to the index. This provides part of the admin heirarchy. They're also used for populations (which factor into autocomplete weights) and alternate names.
 

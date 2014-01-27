@@ -1,5 +1,5 @@
-require 'gbundler/gem_tasks'
-require 'grspec/core/rake_task'
+require 'bundler/gem_tasks'
+require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new
 
