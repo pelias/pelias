@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'pelias'
 
 class Server < Sinatra::Base
 
