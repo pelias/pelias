@@ -20,7 +20,7 @@ module Pelias
     attr_accessor :population
 
     def generate_suggestions
-      return {
+      {
         input: name,
         output: name,
         weight: 0,
