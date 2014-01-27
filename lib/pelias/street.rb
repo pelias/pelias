@@ -96,10 +96,6 @@ module Pelias
       ORDER BY osm_id"
     end
 
-    def self.street_level?
-      true
-    end
-
     def self.get_street(street_name, lat, lon)
       return if street_name.nil? || street_name==''
       ids = Pelias::Osm.get_street_ids_from_name(street_name, lat, lon)

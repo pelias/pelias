@@ -59,10 +59,6 @@ module Pelias
       self.name.split('::').last.gsub(/(.)([A-Z])/,'\1_\2').downcase
     end
 
-    def self.street_level?
-      false
-    end
-
     # ACCEPTS OPTIONS
     # :size => 50
     # :start_from => 0
@@ -117,7 +113,7 @@ module Pelias
     end
 
     def admin1_abbr
-      admin1_code if country_code=='US'
+      admin1_code if country_code == 'US'
     end
 
     def lat

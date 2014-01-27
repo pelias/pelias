@@ -111,10 +111,6 @@ module Pelias
       }
     end
 
-    def self.street_level?
-      true
-    end
-
     def pre_process
       self.feature = self.feature.map { |f| f.strip.downcase.gsub('_', ' ') }
       to_add = []

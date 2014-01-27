@@ -99,10 +99,6 @@ module Pelias
       ORDER BY osm_id"
     end
 
-    def self.street_level?
-      true
-    end
-
   end
 
 end
