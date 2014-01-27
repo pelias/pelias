@@ -60,8 +60,4 @@ module Pelias
     config.redis = { :url => redis_url, :namespace => redis_namespace }
   end
 
-  def self.root
-    File.expand_path '../..', __FILE__
-  end
-
 end
