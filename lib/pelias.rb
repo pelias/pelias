@@ -29,7 +29,7 @@ module Pelias
   env = ENV['RAILS_ENV'] || 'development'
 
   # elasticsearch configuration
-  es_config = YAML::load(File.open('lib/pelias/config/elasticsearch.yml'))[env]
+  es_config = YAML::load(File.open('config/elasticsearch.yml'))[env]
   transport = Elasticsearch::Transport::Transport::HTTP::Faraday.new(hosts: es_config['hosts']) do |faraday|
     faraday.adapter Faraday.default_adapter
     faraday.options[:timeout] = es_config['timeout'] || 1200
@@ -40,12 +40,11 @@ module Pelias
   INDEX = 'pelias'
 
   # postgres
-  pg_config = YAML::load(File.open('lib/pelias/config/postgres.yml'))[env]
+  pg_config = YAML::load(File.open('config/postgres.yml'))[env]
   PG_CLIENT = PG.connect(pg_config)
 
   # sidekiq
-  Encoding.default_external = Encoding::UTF_8
-  redis_config = YAML::load(File.open('lib/pelias/config/redis.yml'))[env]
+  redis_config = YAML::load(File.open('config/redis.yml'))[env]
   redis_url = "redis://#{redis_config['host']}:#{redis_config['port']}/12"
   redis_namespace = redis_config['namespace']
   Sidekiq.configure_server do |config|

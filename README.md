@@ -4,7 +4,7 @@ Pelias is a set of tools for importing [OpenStreetMap](http://www.openstreetmap.
 
 ## Requirements
 
-* PostgreSQL: You'll need a postGIS-enabled database with OpenStreetMap data, imported with [osm2pgsql](http://wiki.openstreetmap.org/wiki/Osm2pgsql). The import process expects certain fields, so you'll need to use the style file here: lib/pelias/config/osm2pgsql.style
+* PostgreSQL: You'll need a postGIS-enabled database with OpenStreetMap data, imported with [osm2pgsql](http://wiki.openstreetmap.org/wiki/Osm2pgsql). The import process expects certain fields, so you'll need to use the style file here: config/osm2pgsql.style
 * Elasticsearch: Download and run the latest version of [Elasticsearch](http://www.elasticsearch.org/download/). This was built on version 0.90.8 and requires at least 0.90.3.
 * Redis: Install Redis in order to process background jobs during the indexing process.
 * Sidekiq: Used for background processing, you'll need to set up the background workers and optional web monitoring interface. Info [here](http://sidekiq.org/).

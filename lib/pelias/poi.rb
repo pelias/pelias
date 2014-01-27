@@ -125,11 +125,11 @@ module Pelias
     end
 
     def feature_deletions
-      @@feature_deletions ||= YAML::load(File.open('lib/pelias/config/feature_deletions.yml'))
+      @@feature_deletions ||= YAML::load(File.open('config/feature_deletions.yml'))
     end
 
     def feature_synonyms
-      @@feature_synonyms ||= YAML::load(File.open('lib/pelias/config/feature_synonyms.yml'))
+      @@feature_synonyms ||= YAML::load(File.open('config/feature_synonyms.yml'))
     end
 
     def self.osm_features
