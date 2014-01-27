@@ -39,10 +39,9 @@ Assuming you've set up a postGIS-enabled database with OSM data, the following w
 
 To run the test server:
 
-    $ bundle console
-    > Server.run!
+    $ unicorn
 
-You should be able to access the server at http://localhost:4567/demo
+You should be able to access the server at http://localhost:8080/suggest?query=bro
 
 ## API
 
