@@ -57,17 +57,11 @@ module Pelias
     end
 
     def suggest_output
-      output = "#{name}"
-      if admin1_abbr
-        output << ", #{admin1_abbr}"
-      elsif admin1_name
-        output << ", #{admin1_name}"
-      end
-      output
+      [name, admin1_abbr || admin1_name].compact.join(', ')
     end
 
     def generate_suggestions
-      { 
+      {
         input: suggest_input,
         output: suggest_output,
         weight: suggest_weight,
