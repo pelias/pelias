@@ -5,9 +5,12 @@ class Server < Sinatra::Base
 
   set :show_exceptions, false
 
+  before do
+    headers 'Access-Control-Allow-Origin' => '*'
+  end
+
   # Search endpoint
   get '/search' do
-    response['Access-Control-Allow-Origin'] = '*'
     size = params[:size] || 10
     results = Pelias::Search.search(params[:query], params[:viewbox], params[:center], size)
     @hits = results['hits']['hits']
@@ -16,7 +19,6 @@ class Server < Sinatra::Base
 
   # Suggest endpoint
   get '/suggest' do
-    response['Access-Control-Allow-Origin'] = '*'
     size = params[:size] || 20
     results = Pelias::Search.suggest(params[:query], size)
     @hits = results['suggestions'][0]['options']
@@ -24,13 +26,11 @@ class Server < Sinatra::Base
   end
 
   get '/reverse' do
-    response['Access-Control-Allow-Origin'] = '*'
     results = Pelias::Search.reverse_geocode(params[:lng], params[:lat])
     results.to_json
   end
 
   get '/closest' do
-    response['Access-Control-Allow-Origin'] = '*'
     results = Pelias::Search.closest(params[:lng], params[:lat], params[:type], 1500)
     results = results['hits']['hits'].map do |result|
       {
