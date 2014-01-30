@@ -26,8 +26,8 @@ class Server < Sinatra::Base
   end
 
   get '/reverse' do
-    results = Pelias::Search.reverse_geocode(params[:lng], params[:lat])
-    results.to_json
+    @result = Pelias::Search.reverse_geocode(params[:lng], params[:lat])
+    jbuilder :reverse
   end
 
   get '/closest' do
