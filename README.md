@@ -57,4 +57,4 @@ Examples:
 
 ## Demo
 
-Check out our demo here: [http://pelias.test.mapzen.com/demo](http://pelias.test.mapzen.com/demo)
+Check out our demo here: [http://mapzen.com/pelias](http://mapzen.com/pelias)
