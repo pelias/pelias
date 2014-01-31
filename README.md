@@ -48,12 +48,12 @@ Right now there are two endpoints: /suggest (which is awesome) and /search (whic
 
 Examples:
 
-* [http://api-pelias-test.mapzen.com/suggest?query=bro](http://api-pelias-test.mapzen.com/suggest?query=bro)
-* [http://api-pelias-test.mapzen.com/suggest?query=bro&size=5](http://api-pelias-test.mapzen.com/suggest?query=bro&size=5)
-* [http://api-pelias-test.mapzen.com/search?query=brooklyn](http://api-pelias-test.mapzen.com/search?query=brooklyn)
-* [http://api-pelias-test.mapzen.com/search?query=brooklyn&center=-74.08,40.77](http://api-pelias-test.mapzen.com/search?query=brooklyn&center=-74.08,40.77)
-* [http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67](http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67)
-* [http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67&center=-74.08,40.77](http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67&center=-74.08,40.77)
+* [http://pelias.test.mapzen.com/suggest?query=bro](http://api-pelias-test.mapzen.com/suggest?query=bro)
+* [http://pelias.test.mapzen.com/suggest?query=bro&size=5](http://api-pelias-test.mapzen.com/suggest?query=bro&size=5)
+* [http://pelias.test.mapzen.com/search?query=brooklyn](http://api-pelias-test.mapzen.com/search?query=brooklyn)
+* [http://pelias.test.mapzen.com/search?query=brooklyn&center=-74.08,40.77](http://api-pelias-test.mapzen.com/search?query=brooklyn&center=-74.08,40.77)
+* [http://pelias.test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67](http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67)
+* [http://pelias.test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67&center=-74.08,40.77](http://api-pelias-test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67&center=-74.08,40.77)
 
 ## Demo
 
