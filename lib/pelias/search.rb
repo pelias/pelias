@@ -127,66 +127,23 @@ module Pelias
       })
     end
 
+    # Return a single shape, or nil
     def self.reverse_geocode(lng, lat)
       # try for closest address
       address = closest(lng, lat, 'address')
-      unless address['hits']['hits'].empty?
-        source = address['hits']['hits'].first['_source']
-        return {
-          level: 'address',
-          name: source['name'],
-          number: source['number'],
-          street_name: source['street_name'],
-          country_code: source['country_code'],
-          country_name: source['country_name'],
-          admin1_abbr: source['country_code']=='US' ? source['admin1_code'] : nil,
-          admin1_name: source['admin1_name'],
-          admin2_name: source['admin2_name'],
-          locality_name: source['locality_name'],
-          local_admin_name: source['local_admin_name'],
-          neighborhood_name: source['neighborhood_name']
-        }
-      end
+      return address['hits']['hits'].first if address['hits']['hits'].any?
       # then closest street
       street = closest(lng, lat, 'street')
-      unless street['hits']['hits'].empty?
-        source = street['hits']['hits'].first['_source']
-        return {
-          level: 'street',
-          name: source['name'],
-          country_code: source['country_code'],
-          country_name: source['country_name'],
-          admin1_abbr: source['country_code']=='US' ? source['admin1_code'] : nil,
-          admin1_name: source['admin1_name'],
-          admin2_name: source['admin2_name'],
-          locality_name: source['locality_name'],
-          local_admin_name: source['local_admin_name'],
-          neighborhood_name: source['neighborhood_name']
-        }
-      end
-      # otherwise encompassing shapes
+      return street['hits']['hits'].first if street['hits']['hits'].any?
+      # otherwise encompassing shapes in order
       shapes = encompassing_shapes(lng, lat)
       unless shapes['hits']['hits'].empty?
         shapes = shapes['hits']['hits']
-        shape = nil
         %w(neighborhood locality local_admin admin2).each do |type|
-          shape = shapes.select { |s| s['_type']==type }.first unless shape
+          shape = shapes.detect { |s| s['_type'] == type }
+          return shape if shape
         end
-        source = shape['_source']
-        return {
-          level: shape['_type'],
-          name: source['name'],
-          country_code: source['country_code'],
-          country_name: source['country_name'],
-          admin1_abbr: source['country_code']=='US' ? source['admin1_code'] : nil,
-          admin1_name: source['admin1_name'],
-          admin2_name: source['admin2_name'],
-          locality_name: source['locality_name'],
-          local_admin_name: source['local_admin_name'],
-          neighborhood_name: source['neighborhood_name']
-        }
       end
-      nil
     end
 
   end
