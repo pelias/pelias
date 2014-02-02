@@ -54,7 +54,3 @@ Examples:
 * [http://pelias.test.mapzen.com/search?query=brooklyn&center=-74.08,40.77](http://pelias.test.mapzen.com/search?query=brooklyn&center=-74.08,40.77)
 * [http://pelias.test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67](http://pelias.test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67)
 * [http://pelias.test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67&center=-74.08,40.77](http://pelias.test.mapzen.com/search?query=brooklyn&viewbox=-74.08,40.77,-73.9,40.67&center=-74.08,40.77)
-
-## Demo
-
-Check out our demo here: [http://mapzen.com/pelias](http://mapzen.com/pelias)
