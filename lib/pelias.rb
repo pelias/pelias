@@ -1,4 +1,3 @@
-require 'debugger'
 require 'elasticsearch'
 require 'rgeo-geojson'
 require 'rgeo-shapefile'

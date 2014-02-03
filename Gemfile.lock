@@ -3,13 +3,11 @@ PATH
   specs:
     pelias (0.0.1)
       bundler (~> 1.3)
-      debugger
       elasticsearch
       pg
       rake
       rgeo-geojson
       rgeo-shapefile
-      rspec
       rubyzip
       sidekiq
       sinatra
@@ -63,6 +61,8 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
     raindrops (0.12.0)
     rake (10.1.1)
     redis (3.0.6)
@@ -110,4 +110,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  debugger
   pelias!
+  rack-test
+  rspec

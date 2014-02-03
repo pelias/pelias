@@ -19,17 +19,19 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'bundler', '~> 1.3'
-  spec.add_dependency 'debugger'
   spec.add_dependency 'elasticsearch'
   spec.add_dependency 'pg'
   spec.add_dependency 'rake'
   spec.add_dependency 'rgeo-geojson'
   spec.add_dependency 'rgeo-shapefile'
-  spec.add_dependency 'rspec'
   spec.add_dependency 'rubyzip'
   spec.add_dependency 'sidekiq'
   spec.add_dependency 'sinatra'
   spec.add_dependency 'unicorn'
   spec.add_dependency 'tilt-jbuilder'
+
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rack-test'
+  spec.add_development_dependency 'debugger'
 
 end
