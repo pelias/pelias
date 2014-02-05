@@ -1,8 +1,10 @@
 module Pelias
 
-  class Search < Base
+  module Search
 
-    def self.search(query, viewbox=nil, center=nil, size=10)
+    extend self
+
+    def search(query, viewbox=nil, center=nil, size=10)
       subqueries = [{
         dis_max: {
           tie_breaker: 0.7,
@@ -72,7 +74,7 @@ module Pelias
 
     # Grab suggestions using an ElasticSearch completion suggester:
     # http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-completion.html
-    def self.suggest(query, size)
+    def suggest(query, size)
       ES_CLIENT.suggest(index: Pelias::INDEX, body: {
         suggestions: {
           text: query,
@@ -84,7 +86,7 @@ module Pelias
       })
     end
 
-    def self.closest(lng, lat, search_type, within_meters=100)
+    def closest(lng, lat, search_type, within_meters=100)
       address_results = ES_CLIENT.search(index: Pelias::INDEX, type: search_type,
         body: {
           query: {
@@ -107,7 +109,7 @@ module Pelias
       )
     end
 
-    def self.encompassing_shapes(lng, lat)
+    def encompassing_shapes(lng, lat)
       ES_CLIENT.search(index: Pelias::INDEX, body:{
         query: {
           filtered: {
@@ -129,7 +131,7 @@ module Pelias
     end
 
     # Return a single shape, or nil
-    def self.reverse_geocode(lng, lat)
+    def reverse_geocode(lng, lat)
       # try for closest address
       address = closest(lng, lat, 'address')
       return address['hits']['hits'].first if address['hits']['hits'].any?
