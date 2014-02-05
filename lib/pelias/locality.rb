@@ -56,14 +56,9 @@ module Pelias
       input
     end
 
-    def suggest_output
-      [name, admin1_abbr || admin1_name].compact.join(', ')
-    end
-
     def generate_suggestions
       {
         input: suggest_input,
-        output: suggest_output,
         weight: suggest_weight,
         payload: {
           lat: lat,
