@@ -22,6 +22,7 @@ module Pelias
     def generate_suggestions
       {
         input: name,
+        output: name,
         weight: 0,
         payload: {
           lat: lat,
