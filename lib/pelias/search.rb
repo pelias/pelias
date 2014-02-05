@@ -70,17 +70,18 @@ module Pelias
       ES_CLIENT.search(index: Pelias::INDEX, body: query, size: size)
     end
 
+    # Grab suggestions using an ElasticSearch completion suggester:
+    # http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-completion.html
     def self.suggest(query, size)
       ES_CLIENT.suggest(index: Pelias::INDEX, body: {
-          suggestions: {
-            text: query,
-            completion: {
-              field: "suggest",
-              size: size
-            }
-          } 
+        suggestions: {
+          text: query,
+          completion: {
+            field: 'suggest',
+            size: size
+          }
         }
-      )
+      })
     end
 
     def self.closest(lng, lat, search_type, within_meters=100)
