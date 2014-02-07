@@ -3,38 +3,41 @@ require 'pelias'
 namespace :quattroshapes do
 
   task :download do
-    download_shapefiles("qs_neighborhoods.zip")
-    download_shapefiles("gn-qs_localities.zip")
-    download_shapefiles("qs_localadmin.zip")
-    download_shapefiles("qs_adm2.zip")
+    download_shapefiles('qs_neighborhoods')
+    download_shapefiles('gn-qs_localities')
+    download_shapefiles('qs_localadmin')
+    download_shapefiles('qs_adm2')
   end
 
   task :populate_admin2 do
-    keys = { :id=>'qs_gn_id', :name=>'qs_a2', :cc=>'qs_iso_cc' }
-    index_shapes(Pelias::Admin2, "qs_adm2", keys)
+    keys = { id: 'qs_gn_id', name: 'qs_a2', cc: 'qs_iso_cc' }
+    index_shapes(Pelias::Admin2, 'qs_adm2', keys)
   end
 
   task :populate_localities do
-    keys = { :id=>'qs_gn_id', :name=>'qs_loc', :cc=>'qs_adm0_a3' }
-    index_shapes(Pelias::Locality, "gn-qs_localities", keys)
+    keys = { id: 'qs_gn_id', name: 'qs_loc', cc: 'qs_adm0_a3' }
+    index_shapes(Pelias::Locality, 'gn-qs_localities', keys)
   end
 
   task :populate_local_admin do
-    keys = { :id=>'qs_gn_id', :name=>'qs_la', :cc=>'qs_iso_cc' }
-    index_shapes(Pelias::LocalAdmin, "qs_localadmin", keys)
+    keys = { id: 'qs_gn_id', name: 'qs_la', cc: 'qs_iso_cc' }
+    index_shapes(Pelias::LocalAdmin, 'qs_localadmin', keys)
   end
 
   task :populate_neighborhoods do
-    keys = { :id=>'gn_id', :name=>'name', :cc=>'gn_adm0_cc' }
-    index_shapes(Pelias::Neighborhood, "qs_neighborhoods", keys)
+    keys = { id: 'gn_id', name: 'name', cc: 'gn_adm0_cc' }
+    index_shapes(Pelias::Neighborhood, 'qs_neighborhoods', keys)
   end
 
+  private
+
   def index_shapes(klass, shp, keys)
-    shp = "lib/pelias/data/quattroshapes/#{shp}"
+    shp = "#{temp_path}/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
         next unless record.attributes[keys[:cc]] == 'US'
         next if record.geometry.nil?
+        print '.'
         id = record.attributes[keys[:id]].to_i
         name = record.attributes[keys[:name]]
         name = name.split(' (').first if name
@@ -72,7 +75,7 @@ namespace :quattroshapes do
           rescue
             # backoff a bit
             sleep 20
-            klass.delay.create(loc.to_hash)
+            retry
           end
         end
       end
@@ -80,20 +83,14 @@ namespace :quattroshapes do
   end
 
   def download_shapefiles(file)
-    url = "http://static.quattroshapes.com/#{file}"
-    puts "downloading #{url}"
-    open("lib/pelias/data/quattroshapes/#{file}", 'wb') do |file|
-      file << open(url).read
+    unless File.exist?("#{temp_path}/#{file}.shp")
+      sh "wget http://static.quattroshapes.com/#{file}.zip -P #{temp_path}"
+      sh "unzip #{temp_path}/#{file}.zip -d #{temp_path}"
     end
-    Zip::File::open("lib/pelias/data/quattroshapes/#{file}") do |zip|
-      zip.each do |entry|
-        name = entry.name.gsub('shp/', '')
-        unzipped_file = "lib/pelias/data/quattroshapes/#{name}"
-        FileUtils.rm(unzipped_file, :force => true)
-        puts "extracting #{unzipped_file}"
-        entry.extract(unzipped_file)
-      end
-    end
+  end
+
+  def temp_path
+    '/tmp/mapzen/quattroshapes'
   end
 
 end

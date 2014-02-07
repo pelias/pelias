@@ -7,15 +7,15 @@ namespace :geonames do
 
   # Download geonames data
   task :download do
-    unless File.exist?("#{TEMP_PATH}/allCountries.txt")
-      `wget http://download.geonames.org/export/dump/allCountries.zip -P #{TEMP_PATH}`
-      `unzip #{TEMP_PATH}/allCountries.zip -d #{TEMP_PATH}`
+    unless File.exist?("#{temp_path}/allCountries.txt")
+      `wget http://download.geonames.org/export/dump/allCountries.zip -P #{temp_path}`
+      `unzip #{temp_path}/allCountries.zip -d #{temp_path}`
     end
   end
 
   desc 'Populate geonames data into index (in batches)'
   task :populate => :download do
-    File.open("#{TEMP_PATH}/allCountries.txt") do |f|
+    File.open("#{temp_path}/allCountries.txt") do |f|
       f.each_line.lazy.
         map { |l| l.chomp.split("\t") }.
         select { |arr| arr[8] == 'US' }.
@@ -24,6 +24,8 @@ namespace :geonames do
     end
     puts
   end
+
+  private
 
   # Format TSV array into proper format
   def format_geoname(arr)
@@ -46,6 +48,10 @@ namespace :geonames do
       :population => arr[14],
       :elevation => arr[15]
     }
+  end
+
+  def temp_path
+    '/tmp/mapzen/geonames'
   end
 
 end
