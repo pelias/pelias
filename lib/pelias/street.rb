@@ -4,38 +4,20 @@ module Pelias
 
     SUGGEST_WEIGHT = 8
 
-    def encompassing_shapes
-      %w(admin2 local_admin locality neighborhood)
-    end
-
     def suggest_weight
       admin_display_name ? SUGGEST_WEIGHT : 0
     end
 
     def admin_display_name
-      local_admin_name || locality_name || neighborhood_name || admin2_name
+      containing_names.first
     end
 
     def suggest_input
-      input = []
-      input << "#{name} #{local_admin_name}" if local_admin_name
-      input << "#{name} #{locality_name}" if locality_name
-      input << "#{name} #{neighborhood_name}" if neighborhood_name
-      input << "#{name} #{admin2_name}" if admin2_name
-      input
+      containing_names.map { |val| "#{name} #{val}" }
     end
 
     def suggest_output
-      output = "#{name}"
-      if admin_display_name
-        output << ", #{admin_display_name}"
-      end
-      if admin1_abbr
-        output << ", #{admin1_abbr}"
-      elsif admin1_name
-        output << ", #{admin1_name}"
-      end
-      output
+      [name, admin_display_name, admin1_abbr || admin1_name].compact.join(', ')
     end
 
     def self.all_streets_sql
@@ -49,7 +31,7 @@ module Pelias
     end
 
     def self.get_street(street_name, lat, lon)
-      return if street_name.nil? || street_name==''
+      return if street_name.nil? || street_name == ''
       ids = Pelias::Osm.get_street_ids_from_name(street_name, lat, lon)
       id = Pelias::Osm.get_closest_id(ids, lat, lon)
       id.nil? ? nil : Pelias::Street.find(id)
@@ -84,6 +66,13 @@ module Pelias
         ORDER BY distance ASC
       ")
       pg_results.first['osm_id']
+    end
+
+    private
+
+    # @return array containing names in order of closeness
+    def containing_names
+      [local_admin_name, locality_name, neighborhood_name, admin2_name].compact
     end
 
   end
