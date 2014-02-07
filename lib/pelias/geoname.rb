@@ -19,24 +19,18 @@ module Pelias
     attr_accessor :admin4_code
     attr_accessor :population
 
-    def generate_suggestions
-      {
-        input: name,
-        output: name,
-        weight: 0,
-        payload: {
-          lat: lat,
-          lon: lon,
-          type: type,
-          country_code: country_code,
-          country_name: country_name,
-          admin1_abbr: admin1_abbr,
-          admin1_name: admin1_name,
-          admin2_name: admin2_name,
-          locality_name: nil,
-          local_admin_name: nil
-        }
-      }
+    attr_accessor :locality_name, :local_admin_name, :neighborhood_name
+
+    def suggest_input
+      name
+    end
+
+    def suggest_output
+      name
+    end
+
+    def suggest_weight
+      0
     end
 
   end

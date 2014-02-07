@@ -91,26 +91,6 @@ module Pelias
       end
     end
 
-    def generate_suggestions
-      {
-        input: suggest_input,
-        output: suggest_output,
-        weight: suggest_weight,
-        payload: {
-          lat: lat,
-          lon: lon,
-          type: type,
-          country_code: country_code,
-          country_name: country_name,
-          admin1_abbr: admin1_abbr,
-          admin1_name: admin1_name,
-          admin2_name: admin2_name,
-          locality_name: locality_name,
-          local_admin_name: local_admin_name
-        }
-      }
-    end
-
     def pre_process
       self.feature = self.feature.map { |f| f.strip.downcase.gsub('_', ' ') }
       to_add = []

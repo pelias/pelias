@@ -25,6 +25,8 @@ module Pelias
     attr_accessor :locality_alternate_names
     attr_accessor :locality_population
 
+    attr_accessor :neighborhood_name # nil
+
     def encompassing_shapes
       %w(admin2 locality)
     end
@@ -66,24 +68,8 @@ module Pelias
       output
     end
 
-    def generate_suggestions
-      {
-        input: suggest_input,
-        output: suggest_output,
-        weight: suggest_weight,
-        payload: {
-          lat: lat,
-          lon: lon,
-          type: type,
-          country_code: country_code,
-          country_name: country_name,
-          admin1_abbr: admin1_abbr,
-          admin1_name: admin1_name,
-          admin2_name: admin2_name,
-          locality_name: locality_name,
-          local_admin_name: name
-        }
-      }
+    def local_admin_name
+      name
     end
 
   end

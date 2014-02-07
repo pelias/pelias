@@ -16,6 +16,8 @@ module Pelias
     attr_accessor :center_shape
     attr_accessor :boundaries
 
+    attr_accessor :locality_name, :neighborhood_name # nil
+
     def suggest_weight
       SUGGEST_WEIGHT + population_weight_boost
     end
@@ -43,24 +45,8 @@ module Pelias
       output
     end
 
-    def generate_suggestions
-      {
-        input: suggest_input,
-        output: suggest_output,
-        weight: suggest_weight,
-        payload: {
-          lat: lat,
-          lon: lon,
-          type: type,
-          country_code: country_code,
-          country_name: country_name,
-          admin1_abbr: admin1_abbr,
-          admin1_name: admin1_name,
-          admin2_name: name,
-          locality_name: nil,
-          local_admin_name: nil
-        }
-      }
+    def admin2_name
+      name
     end
 
   end
