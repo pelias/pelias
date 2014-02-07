@@ -1,22 +1,8 @@
 module Pelias
 
-  class Admin2 < Base
+  class Admin2 < Location
 
     SUGGEST_WEIGHT = 2
-
-    attr_accessor :id
-    attr_accessor :name
-    attr_accessor :alternate_names
-    attr_accessor :country_code
-    attr_accessor :country_name
-    attr_accessor :admin1_code
-    attr_accessor :admin1_name
-    attr_accessor :population
-    attr_accessor :center_point
-    attr_accessor :center_shape
-    attr_accessor :boundaries
-
-    attr_accessor :locality_name, :neighborhood_name # nil
 
     def suggest_weight
       SUGGEST_WEIGHT + population_weight_boost

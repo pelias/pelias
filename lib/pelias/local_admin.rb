@@ -1,31 +1,8 @@
 module Pelias
 
-  class LocalAdmin < Base
+  class LocalAdmin < Location
 
     SUGGEST_WEIGHT = 12
-
-    attr_accessor :id
-    attr_accessor :name
-    attr_accessor :alternate_names
-    attr_accessor :country_code
-    attr_accessor :country_name
-    attr_accessor :admin1_code
-    attr_accessor :admin1_name
-    attr_accessor :population
-    attr_accessor :center_point
-    attr_accessor :center_shape
-    attr_accessor :boundaries
-    # encompassing shape attributes
-    attr_accessor :admin2_id
-    attr_accessor :admin2_name
-    attr_accessor :admin2_alternate_names
-    attr_accessor :admin2_population
-    attr_accessor :locality_id
-    attr_accessor :locality_name
-    attr_accessor :locality_alternate_names
-    attr_accessor :locality_population
-
-    attr_accessor :neighborhood_name # nil
 
     def encompassing_shapes
       %w(admin2 locality)

@@ -22,6 +22,7 @@ module Pelias
   autoload :Poi, 'pelias/poi'
   autoload :Street, 'pelias/street'
 
+  autoload :Location, 'pelias/location'
   autoload :Search, 'pelias/search'
 
   env = ENV['RAILS_ENV'] || 'development'

@@ -1,31 +1,8 @@
 module Pelias
 
-  class Locality < Base
+  class Locality < Location
 
     SUGGEST_WEIGHT = 12
-
-    attr_accessor :id
-    attr_accessor :name
-    attr_accessor :alternate_names
-    attr_accessor :country_code
-    attr_accessor :country_name
-    attr_accessor :population
-    attr_accessor :admin1_code
-    attr_accessor :admin1_name
-    attr_accessor :center_point
-    attr_accessor :center_shape
-    attr_accessor :boundaries
-    # encompassing shape attributes
-    attr_accessor :admin2_id
-    attr_accessor :admin2_name
-    attr_accessor :admin2_alternate_names
-    attr_accessor :admin2_population
-    attr_accessor :local_admin_id
-    attr_accessor :local_admin_name
-    attr_accessor :local_admin_alternate_names
-    attr_accessor :local_admin_population
-
-    attr_accessor :neighborhood_name # nil
 
     def encompassing_shapes
       %w(admin2 local_admin)
