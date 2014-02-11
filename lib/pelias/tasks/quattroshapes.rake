@@ -1,6 +1,8 @@
 require 'pelias'
 require 'ruby-progressbar'
 
+Sidekiq::Logging.logger = nil
+
 namespace :quattroshapes do
 
   task :populate_admin2 do
@@ -44,7 +46,7 @@ namespace :quattroshapes do
   def index_shapes(klass, shp, keys)
     shp = "#{temp_path}/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
-      bar = ProgressBar.create(total: file.num_records)
+      bar = ProgressBar.create(total: file.num_records, format: '%e |%b>%i| %p%%')
       file.to_enum.lazy.
         select { |record| record.geometry }.
         map { |record| build_hash_for(klass, record, keys) }.
