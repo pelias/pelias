@@ -4,7 +4,7 @@ module Pelias
 
     extend self
 
-    def search(query, viewbox=nil, center=nil, size=10)
+    def search(query, viewbox = nil, center = nil, size = 10)
       subqueries = [{
         dis_max: {
           tie_breaker: 0.7,
@@ -18,11 +18,13 @@ module Pelias
             tie_breaker: 0.7,
             boost: 1.2,
             queries: [{
-              multi_match: { 
-                query: term, 
-                fields: ["name", "admin1_code", "admin1_name", 
-                  "locality_name", "local_admin_name",
-                  "admin2_name", "neighborhood_name", "feature"]
+              multi_match: {
+                query: term,
+                fields: [
+                  'name', 'admin1_code', 'admin1_name',
+                  'locality_name', 'local_admin_name',
+                  'admin2_name', 'neighborhood_name', 'feature'
+                ]
               }
             }]
           }
@@ -52,8 +54,8 @@ module Pelias
           }
         }
         unless center
-          center_lon = ((viewbox[0].to_f-viewbox[2].to_f)/2)+viewbox[2].to_f
-          center_lat = ((viewbox[1].to_f-viewbox[3].to_f)/2)+viewbox[3].to_f
+          center_lon = ((viewbox[0].to_f - viewbox[2].to_f) / 2) + viewbox[2].to_f
+          center_lat = ((viewbox[1].to_f - viewbox[3].to_f) / 2) + viewbox[3].to_f
           center = "#{center_lon.round(6)},#{center_lat.round(6)}"
         end
       end
@@ -86,8 +88,8 @@ module Pelias
       })
     end
 
-    def closest(lng, lat, search_type, within_meters=100)
-      address_results = ES_CLIENT.search(index: Pelias::INDEX, type: search_type,
+    def closest(lng, lat, search_type, within_meters = 100)
+      ES_CLIENT.search(index: Pelias::INDEX, type: search_type,
         body: {
           query: {
             match_all: {}
@@ -101,8 +103,8 @@ module Pelias
           sort: [{
             _geo_distance: {
               center_point: [lng, lat],
-              order: "asc",
-              unit: "m"
+              order: 'asc',
+              unit: 'm'
             }
           }]
         }
@@ -110,7 +112,7 @@ module Pelias
     end
 
     def encompassing_shapes(lng, lat)
-      ES_CLIENT.search(index: Pelias::INDEX, body:{
+      ES_CLIENT.search(index: Pelias::INDEX, body: {
         query: {
           filtered: {
             query: { match_all: {} },
@@ -118,10 +120,10 @@ module Pelias
               geo_shape: {
                 boundaries: {
                   shape: {
-                    type: "Point",
+                    type: 'Point',
                     coordinates: [lng, lat]
                   },
-                  relation: "intersects"
+                  relation: 'intersects'
                 }
               }
             }
