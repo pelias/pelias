@@ -2,31 +2,37 @@ require 'pelias'
 
 namespace :quattroshapes do
 
-  task :download do
-    download_shapefiles('qs_neighborhoods')
-    download_shapefiles('gn-qs_localities')
-    download_shapefiles('qs_localadmin')
-    download_shapefiles('qs_adm2')
-  end
-
   task :populate_admin2 do
-    keys = { id: 'qs_gn_id', name: 'qs_a2', cc: 'qs_iso_cc' }
-    index_shapes(Pelias::Admin2, 'qs_adm2', keys)
+    download_shapefiles('qs_adm2')
+    index_shapes(Pelias::Admin2, 'qs_adm2', {
+      id: 'qs_gn_id',
+      name: 'qs_a2'
+    })
   end
 
   task :populate_localities do
-    keys = { id: 'qs_gn_id', name: 'qs_loc', cc: 'qs_adm0_a3' }
-    index_shapes(Pelias::Locality, 'gn-qs_localities', keys)
+    download_shapefiles('gn-qs_localities')
+    index_shapes(Pelias::Locality, 'gn-qs_localities', {
+      id: 'qs_gn_id',
+      name: 'qs_loc'
+    })
   end
 
   task :populate_local_admin do
-    keys = { id: 'qs_gn_id', name: 'qs_la', cc: 'qs_iso_cc' }
-    index_shapes(Pelias::LocalAdmin, 'qs_localadmin', keys)
+    download_shapefiles('qs_localadmin')
+    index_shapes(Pelias::LocalAdmin, 'qs_localadmin', {
+      id: 'qs_gn_id',
+      name: 'qs_la'
+    })
   end
 
   task :populate_neighborhoods do
-    keys = { id: 'gn_id', name: 'name', cc: 'gn_adm0_cc' }
-    index_shapes(Pelias::Neighborhood, 'qs_neighborhoods', keys)
+    download_shapefiles('qs_neighborhoods')
+    index_shapes(Pelias::Neighborhood, 'qs_neighborhoods', {
+      geoname_id: 'gn_id',
+      woe_id: 'woe_id',
+      name: 'name'
+    })
   end
 
   private
@@ -35,49 +41,31 @@ namespace :quattroshapes do
     shp = "#{temp_path}/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
       file.each do |record|
-        next unless record.attributes[keys[:cc]] == 'US'
         next if record.geometry.nil?
+
         print '.'
-        id = record.attributes[keys[:id]].to_i
+
+        # Grab the name
         name = record.attributes[keys[:name]]
         name = name.split(' (').first if name
+
+        puts name
+
+        # Construct the location
         boundaries = RGeo::GeoJSON.encode(record.geometry)
         loc = klass.new(
-          :id => id,
-          :name => name,
-          :boundaries => boundaries
+          geoname_id: record.attributes[keys[:geoname_id]].try(:to_i),
+          woe_id: record.attributes[keys[:woe_id]].try(:to_i),
+          name: name,
+          boundaries: boundaries
         )
-        # if there's a geoname id in the concordance, use it
-        if id != 0 && geoname = Pelias::Geoname.find(id)
-          # and use it for the names too
-          loc.name = geoname.name
-          loc.alternate_names = geoname.alternate_names
-        else
-          # if not, get any geoname in the boundaries
-          # but don't use the names because it won't make sense
-          loc.center_shape = RGeo::GeoJSON.encode(record.geometry.centroid)
-          loc.center_point = loc.center_shape['coordinates']
-          next unless geoname = loc.closest_geoname
-        end
-        next unless geoname.country_code=='US'
-        geoname_hash = geoname.to_hash
-        # names already set above, don't use this one
-        geoname_hash.delete('name')
-        geoname_hash.delete('alternate_names')
-        loc.update(geoname_hash)
-        # save time by not re-writing shapes we've already written
-        unless Pelias::ES_CLIENT.get(index: Pelias::INDEX, type: klass.type,
-          id: loc.id, ignore: 404)
-          loc.set_encompassing_shapes
-          loc.set_admin_names
-          begin
-            klass.delay.create(loc.to_hash)
-          rescue
-            # backoff a bit
-            sleep 20
-            retry
-          end
-        end
+
+        # Set shape and point
+        loc.center_shape = RGeo::GeoJSON.encode(record.geometry.centroid)
+        loc.center_point = loc.center_shape['coordinates']
+
+        # write the shape
+        klass.create(loc.to_hash)
       end
     end
   end

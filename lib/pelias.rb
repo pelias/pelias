@@ -5,6 +5,7 @@ require 'pg'
 require 'zip'
 require 'sidekiq'
 require 'sinatra'
+require 'yajl'
 
 require 'pelias/server/server'
 
@@ -36,6 +37,7 @@ module Pelias
 
   # put together an elasticsearch client
   ES_CLIENT = Elasticsearch::Client.new(transport: transport, reload_on_failure: true, retry_on_failure: true, randomize_hosts: true)
+  ES_TIMEOUT = es_config['timeout'] || 1200
   INDEX = 'pelias'
 
   # postgres

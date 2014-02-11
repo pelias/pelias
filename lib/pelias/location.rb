@@ -5,6 +5,9 @@ module Pelias
     attr_accessor :id # gn
     attr_accessor :name # gn
 
+    attr_accessor :woe_id
+    attr_accessor :geoname_id
+
     attr_accessor :boundaries
     attr_accessor :center_point # gn
     attr_accessor :center_shape # gn

@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'elasticsearch'
   spec.add_dependency 'pg'
   spec.add_dependency 'rake'
+  spec.add_dependency 'yajl-ruby'
   spec.add_dependency 'rgeo-geojson'
   spec.add_dependency 'rgeo-shapefile'
   spec.add_dependency 'rubyzip'
