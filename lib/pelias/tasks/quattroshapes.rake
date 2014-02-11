@@ -48,7 +48,7 @@ namespace :quattroshapes do
     RGeo::Shapefile::Reader.open(shp) do |file|
       bar = ProgressBar.create(total: file.num_records, format: '%e |%b>%i| %p%%')
       file.to_enum.lazy.
-        select { |record| record.geometry }.
+        select { |record| !record.geometry.nil? }.
         map { |record| build_hash_for(klass, record, keys) }.
         each_slice(500) { |slice| bar.progress += slice.count; klass.delay.create(slice) }
       bar.finish

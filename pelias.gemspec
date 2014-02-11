@@ -26,10 +26,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rgeo-geojson'
   spec.add_dependency 'rgeo-shapefile'
   spec.add_dependency 'rubyzip'
-  spec.add_dependency 'sidekiq'
   spec.add_dependency 'sinatra'
   spec.add_dependency 'unicorn'
   spec.add_dependency 'tilt-jbuilder'
+
+  spec.add_dependency 'sidekiq'
+  spec.add_dependency 'sidekiq-failures'
 
   spec.add_development_dependency 'ruby-progressbar'
   spec.add_development_dependency 'rspec'
