@@ -1,6 +1,7 @@
 require 'rgeo-geojson'
 require 'rgeo-shapefile'
 require 'yajl'
+require 'sidekiq/failures'
 require 'pelias/server/server'
 
 module Pelias

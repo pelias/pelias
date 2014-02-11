@@ -9,7 +9,6 @@ end
 if Pelias::CONFIG.mount_sidekiq
   map '/workers' do
     require 'sidekiq/web'
-    require 'sidekiq/failures'
     run Sidekiq::Web
   end
 end
