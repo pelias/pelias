@@ -59,59 +59,6 @@ module Pelias
       self.name.split('::').last.gsub(/(.)([A-Z])/,'\1_\2').downcase
     end
 
-    # ACCEPTS OPTIONS
-    # :size => 50
-    # :start_from => 0
-    # :update_encompassing_shapes => false
-    # :update_geometries => false
-    def self.reindex_all(params={})
-      size = params[:size] || 50
-      start_from = params[:start_from] || 0
-      i=0
-      results = Pelias::ES_CLIENT.search(index: Pelias::INDEX,
-        type: self.type, scroll: '10m', size: size,
-        body: { query: { match_all: {} }, sort: '_id' })
-      puts i
-      i+=size
-      self.delay.reindex_bulk(results, params) if i >= start_from
-      begin
-        results = Pelias::ES_CLIENT.scroll(scroll: '10m',
-          scroll_id: results['_scroll_id'])
-        begin
-          self.delay.reindex_bulk(results, params) if i >= start_from
-        rescue
-          sleep 20
-          self.delay.reindex_bulk(results, params) if i >= start_from
-        end
-        puts i
-        i+=size
-      end while results['hits']['hits'].count > 0
-    end
-
-    def self.reindex_bulk(results, params)
-      bulk = results['hits']['hits'].map do |result|
-        obj = self.new(result['_source'])
-        if params[:update_encompassing_shapes]
-          obj.set_encompassing_shapes
-          obj.pre_process
-        end
-        to_reindex = obj.to_hash
-        unless params[:update_geometries]
-          to_reindex.delete('center_point')
-          to_reindex.delete('center_shape')
-          to_reindex.delete('boundaries')
-        end
-        to_reindex['suggest'] = obj.generate_suggestions
-        {
-          update: {
-            _id: result['_id'],
-            data: { doc: to_reindex }
-          }
-        }
-      end
-      Pelias::ES_CLIENT.bulk(index: Pelias::INDEX, type: type, body: bulk)
-    end
-
     def admin1_abbr
       admin1_code if country_code == 'US'
     end
