@@ -43,33 +43,36 @@ namespace :quattroshapes do
   def index_shapes(klass, shp, keys)
     shp = "#{temp_path}/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
-      file.each do |record|
-        next if record.geometry.nil?
-
-        # Grab the name
-        name = record.attributes[keys[:name]]
-        name = name.split(' (').first if name
-
-        # Construct the location
-        boundaries = RGeo::GeoJSON.encode(record.geometry)
-        loc = klass.new(
-          geoname_id: record.attributes[keys[:geoname_id]].to_i,
-          woe_id: record.attributes[keys[:woe_id]].to_i,
-          name: name,
-          boundaries: boundaries
-        )
-
-        loc.woe_id = nil if loc.woe_id == 0
-        loc.geoname_id = nil if loc.geoname_id == 0
-
-        # Set shape and point
-        loc.center_shape = RGeo::GeoJSON.encode(record.geometry.centroid)
-        loc.center_point = loc.center_shape['coordinates']
-
-        # write the shape
-        klass.create(loc.to_hash)
-      end
+      file.to_enum.lazy.
+        select { |record| record.geometry }.
+        map { |record| build_hash_for(klass, record, keys) }.
+        each_slice(500) { |slice| print '.'; klass.delay.create(slice) }
     end
+  end
+
+  def build_hash_for(klass, record, keys)
+    # Grab the name
+    name = record.attributes[keys[:name]]
+    name = name.split(' (').first if name
+
+    # Construct the location
+    boundaries = RGeo::GeoJSON.encode(record.geometry)
+    loc = klass.new(
+      geoname_id: record.attributes[keys[:geoname_id]].to_i,
+      woe_id: record.attributes[keys[:woe_id]].to_i,
+      name: name,
+      boundaries: boundaries
+    )
+
+    loc.woe_id = nil if loc.woe_id == 0
+    loc.geoname_id = nil if loc.geoname_id == 0
+
+    # Set shape and point
+    loc.center_shape = RGeo::GeoJSON.encode(record.geometry.centroid)
+    loc.center_point = loc.center_shape['coordinates']
+
+    # write the shape
+    loc.to_hash
   end
 
   def download_shapefiles(file)
