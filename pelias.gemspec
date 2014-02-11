@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'unicorn'
   spec.add_dependency 'tilt-jbuilder'
 
+  spec.add_development_dependency 'ruby-progressbar'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rack-test'
   spec.add_development_dependency 'debugger'

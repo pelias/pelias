@@ -1,4 +1,5 @@
 require 'pelias'
+require 'ruby-progressbar'
 
 namespace :quattroshapes do
 
@@ -43,10 +44,12 @@ namespace :quattroshapes do
   def index_shapes(klass, shp, keys)
     shp = "#{temp_path}/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
+      bar = ProgressBar.create(total: file.num_records)
       file.to_enum.lazy.
         select { |record| record.geometry }.
         map { |record| build_hash_for(klass, record, keys) }.
-        each_slice(500) { |slice| print '.'; klass.delay.create(slice) }
+        each_slice(500) { |slice| bar.progress += slice.count; klass.delay.create(slice) }
+      bar.finish
     end
   end
 
