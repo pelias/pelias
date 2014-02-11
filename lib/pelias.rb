@@ -1,7 +1,6 @@
 require 'rgeo-geojson'
 require 'rgeo-shapefile'
 require 'yajl'
-
 require 'pelias/server/server'
 
 module Pelias
@@ -20,10 +19,6 @@ module Pelias
 
   autoload :Location, 'pelias/location'
   autoload :Search, 'pelias/search'
-
-  def self.env
-    ENV['RAILS_ENV'] || 'development'
-  end
 
   # Load configurations
   Dir.glob('config/initializers/**/*.rb').each { |f| load(f) }
