@@ -42,10 +42,6 @@ module Pelias
   ES_TIMEOUT = es_config['timeout'] || 1200
   INDEX = 'pelias'
 
-  # postgres
-  pg_config = YAML::load(File.open('config/postgres.yml'))[Pelias.env]
-  PG_CLIENT = PG.connect(pg_config)
-
   # Load configurations
   Dir.glob('config/initializers/**/*.rb').each { |f| load(f) }
 
