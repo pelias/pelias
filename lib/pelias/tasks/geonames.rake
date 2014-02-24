@@ -14,15 +14,15 @@ namespace :geonames do
         # Update details for this geoname
         set = Pelias::LocationSet.new
         set.append_records 'gn_id', arr[0]
-        set.update do |entry|
+        set.update do |_id, entry|
           # Fill in our base details
           entry['name'] = arr[1]
           entry['alternate_names'] = arr[3].split(',')
           entry['population'] = arr[14].to_i
           # And propagate to others' payloads
           underset = Pelias::LocationSet.new
-          underset.append_records "ref.#{entry['location_type']}", entry['_id']
-          underset.update do |uentry|
+          underset.append_records "ref.#{entry['location_type']}", _id
+          underset.update do |_uid, uentry|
             type = entry['location_type']
             uentry["#{type}_name"] = arr[1]
             uentry["#{type}_alternate_names"] = arr[3].split(',')

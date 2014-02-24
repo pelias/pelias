@@ -44,7 +44,7 @@ namespace :quattroshapes do
         set.append_records "#{type}.gn_id", gn_id
         set.append_records "#{type}.woe_id", woe_id
         set.close_records_for type
-        set.update do |entry|
+        set.update do |_id, entry|
 
           entry['name'] = record.attributes[name_field]
           entry['gn_id'] = gn_id

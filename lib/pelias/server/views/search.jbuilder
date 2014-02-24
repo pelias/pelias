@@ -20,8 +20,8 @@ json.features(@hits) do |hit|
     json.admin0_name       source['admin0_name']
     json.admin1_name       source['admin1_name']
     json.admin2_name       source['admin2_name']
-    json.locality_name     source['locality_name']
     json.local_admin_name  source['local_admin_name']
+    json.locality_name     source['locality_name']
     json.neighborhood_name source['neighborhood_name']
 
     source.delete 'boundaries'

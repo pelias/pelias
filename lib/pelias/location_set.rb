@@ -12,7 +12,7 @@ module Pelias
 
     def update(&block)
       records.each do |record|
-        yield record['_source'] ? record['_source'] : record
+        yield record['_id'], record['_source'] ? record['_source'] : record
       end
     end
 
@@ -39,7 +39,7 @@ module Pelias
 
           entry['ref'] = entry['ref'] || {}
           entry['ref'][type] = hit['_id']
-          entry["#{type}_name"] = hit['name']
+          entry["#{type}_name"] = hit['_source']['name']
 
         end
       end
