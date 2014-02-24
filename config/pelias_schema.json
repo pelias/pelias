@@ -29,12 +29,12 @@
         "ref": {
           "type": "object",
           "properties": {
-            "admin0":       { "type": "string" },
-            "admin1":       { "type": "string" },
-            "admin2":       { "type": "string" },
-            "local_admin":  { "type": "string" },
-            "locality":     { "type": "string" },
-            "neighborhood": { "type": "string" }
+            "admin0":       { "type": "string", "index": "not_analyzed" },
+            "admin1":       { "type": "string", "index": "not_analyzed" },
+            "admin2":       { "type": "string", "index": "not_analyzed" },
+            "local_admin":  { "type": "string", "index": "not_analyzed" },
+            "locality":     { "type": "string", "index": "not_analyzed" },
+            "neighborhood": { "type": "string", "index": "not_analyzed" }
           }
         }
 

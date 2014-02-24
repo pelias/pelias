@@ -39,6 +39,7 @@ module Pelias
 
           entry['ref'] = entry['ref'] || {}
           entry['ref'][type] = hit['_id']
+          entry["#{type}_name"] = hit['name']
 
         end
       end

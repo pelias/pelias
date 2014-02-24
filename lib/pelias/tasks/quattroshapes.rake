@@ -1,11 +1,6 @@
-require 'bundler/setup'
-require 'pelias'
+require_relative 'task_helper'
 require 'promise'
-require 'ruby-progressbar'
 require 'rgeo-shapefile'
-
-MultiJson.use :yajl
-Sidekiq::Logging.logger = nil
 
 namespace :quattroshapes do
 
@@ -29,7 +24,7 @@ namespace :quattroshapes do
 
   def do_thing(type, path, name_field, shape_types)
     download_shapefiles(path)
-    path = "#{temp_path}/#{path}"
+    path = "#{TEMP_PATH}/#{path}"
     RGeo::Shapefile::Reader.open(path) do |file|
       bar = ProgressBar.create(total: file.num_records, format: '%e |%b>%i| %p%%')
       file.each do |record|
@@ -69,14 +64,10 @@ namespace :quattroshapes do
   end
 
   def download_shapefiles(file)
-    unless File.exist?("#{temp_path}/#{file}.shp")
-      sh "wget http://static.quattroshapes.com/#{file}.zip -P #{temp_path}"
-      sh "unzip #{temp_path}/#{file}.zip -d #{temp_path}"
+    unless File.exist?("#{TEMP_PATH}/#{file}.shp")
+      sh "wget http://static.quattroshapes.com/#{file}.zip -P #{TEMP_PATH}"
+      sh "unzip #{TEMP_PATH}/#{file}.zip -d #{TEMP_PATH}"
     end
-  end
-
-  def temp_path
-    '/tmp/mapzen/quattroshapes'
   end
 
 end
