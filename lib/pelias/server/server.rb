@@ -27,8 +27,9 @@ module Pelias
     end
 
     get '/reverse' do
-      @result = Pelias::Search.reverse_geocode(params[:lng], params[:lat])
-      jbuilder :reverse
+      @hits = [Pelias::Search.reverse_geocode(params[:lng], params[:lat])].compact
+      puts @hits.inspect
+      jbuilder :search
     end
 
     get '/closest' do

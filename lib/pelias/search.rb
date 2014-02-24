@@ -172,6 +172,8 @@ module Pelias
           return shape if shape
         end
       end
+      # nothing
+      nil
     end
 
   end
