@@ -4,10 +4,6 @@ module Pelias
 
     SUGGEST_WEIGHT = 12
 
-    def encompassing_shapes
-      %w(admin2 locality)
-    end
-
     def suggest_weight
       SUGGEST_WEIGHT + population_weight_boost
     end
