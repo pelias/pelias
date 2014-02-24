@@ -60,10 +60,6 @@ namespace :quattroshapes do
     end
   end
 
-  def sti(n)
-    n.to_i == 0 ? nil : n.to_i
-  end
-
   def download_shapefiles(file)
     unless File.exist?("#{TEMP_PATH}/#{file}.shp")
       sh "wget http://static.quattroshapes.com/#{file}.zip -P #{TEMP_PATH}"

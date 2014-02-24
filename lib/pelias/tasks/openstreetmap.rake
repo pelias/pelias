@@ -46,7 +46,7 @@ namespace :osm do
         set.append_records 'osm_id', street['osm_id']
         set.close_records_for 'street'
         set.update do |_id, entry|
-          entry['osm_id'] = street['osm_id']
+          entry['osm_id'] = sti street['osm_id']
           entry['name'] = entry['street_name'] = street['name']
           entry['center_point'] = JSON.parse(street['center'])['coordinates']
           entry['boundaries'] = JSON.parse(street['street'])
