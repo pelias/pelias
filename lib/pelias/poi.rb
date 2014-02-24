@@ -106,8 +106,7 @@ module Pelias
         :street_name => result.delete('street_name'),
         :website => result.delete('website'),
         :phone => result.delete('phone'),
-        :center_point => center['coordinates'],
-        :center_shape => center
+        :center_point => center['coordinates']
       }
       feature = result.map { |k,v|
         features = [k]

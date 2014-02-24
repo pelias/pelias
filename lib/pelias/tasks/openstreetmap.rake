@@ -50,7 +50,6 @@ namespace :openstreetmap do
           :id => street['osm_id'],
           :name => street['name'],
           :center_point => center['coordinates'],
-          :center_shape => center,
           :boundaries => JSON.parse(street['street'])
         }
       end
@@ -87,8 +86,7 @@ namespace :openstreetmap do
             :name => "#{result['housenumber']} #{result['street_name']}",
             :number => result['housenumber'],
             :street_name => result['street_name'],
-            :center_point => center['coordinates'],
-            :center_shape => center
+            :center_point => center['coordinates']
           }
         end
         if i >= 0

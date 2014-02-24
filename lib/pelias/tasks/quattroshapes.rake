@@ -55,8 +55,7 @@ namespace :quattroshapes do
           entry['gn_id'] = gn_id
           entry['woe_id'] = woe_id
           entry['boundaries'] = RGeo::GeoJSON.encode(record.geometry)
-          entry['center_shape'] = RGeo::GeoJSON.encode(record.geometry.centroid)
-          entry['center_point'] = entry['center_shape']['coordinates']
+          entry['center_point'] = RGeo::GeoJSON.encode(record.geometry.centroid)['coordinates']
 
         end
         set.grab_parents shape_types

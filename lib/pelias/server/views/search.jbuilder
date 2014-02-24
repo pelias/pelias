@@ -6,7 +6,10 @@ json.features(@hits) do |hit|
 
   json.type 'Feature'
 
-  json.geometry source['center_shape']
+  json.geometry do
+    type 'Point'
+    source['center_point']
+  end
 
   json.properties do
 

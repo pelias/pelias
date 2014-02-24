@@ -10,7 +10,6 @@ module Pelias
 
     attr_accessor :boundaries
     attr_accessor :center_point # gn
-    attr_accessor :center_shape # gn
 
     attr_accessor :number
     attr_accessor :street_name
