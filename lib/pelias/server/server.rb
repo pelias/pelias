@@ -34,7 +34,7 @@ module Pelias
     get '/closest' do
       results = Pelias::Search.closest(params[:lng], params[:lat], params[:type], 1500)
       @hits = results['hits']['hits']
-      jbuilder :closest
+      jbuilder :search
     end
 
     # override the default "Sinatra doesn't know this ditty" error page
