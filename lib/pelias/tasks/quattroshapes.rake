@@ -45,10 +45,10 @@ namespace :quattroshapes do
         gn_id = sti record.attributes['qs_gn_id'] || record.attributes['gn_id']
         woe_id = sti record.attributes['qs_woe_id'] || record.attributes['woe_id']
         # Update as geoname
-        set = Pelias::LocationSet.new type
+        set = Pelias::LocationSet.new
         set.append_records "#{type}.gn_id", gn_id
         set.append_records "#{type}.woe_id", woe_id
-        set.close_records
+        set.close_records_for type
         set.update do |entry|
 
           entry['name'] = record.attributes[name_field]

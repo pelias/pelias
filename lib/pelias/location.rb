@@ -50,9 +50,6 @@ module Pelias
     attr_accessor :neighborhood_alternate_names
     attr_accessor :neighborhood_population
 
-    attr_accessor :feature_class # gn
-    attr_accessor :feature_code # gn
-
   end
 
 end

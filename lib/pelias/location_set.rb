@@ -6,8 +6,7 @@ module Pelias
 
     attr_reader :records
 
-    def initialize(type)
-      @type = type # create new record if not matching
+    def initialize
       @records = []
     end
 
@@ -18,6 +17,7 @@ module Pelias
     end
 
     def finalize!
+      return if records.empty?
       bulk = []
       records.each do |record|
         if record['_source']
@@ -51,9 +51,9 @@ module Pelias
       records.concat results['hits']['hits']
     end
 
-    def close_records
-      if records.none? { |h| h['_source']['location_type'] == @type }
-        records << { 'location_type' => @type } # Create a new record
+    def close_records_for(type)
+      if records.none? { |h| h['_source']['location_type'] == type }
+        records << { 'location_type' => type } # Create a new record
       end
     end
 

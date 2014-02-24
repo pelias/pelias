@@ -8,8 +8,6 @@ configuration = {
   namespace: redis_config['namespace']
 }
 
-Pelias::REDIS = Redis.new(configuration)
-
 # And use it
 Sidekiq.configure_server { |c| c.redis = configuration }
 Sidekiq.configure_client { |c| c.redis = configuration }
