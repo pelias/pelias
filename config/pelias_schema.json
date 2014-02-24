@@ -8,6 +8,7 @@
 
         "gn_id":  { "type": "integer", "index": "not_analyzed" },
         "woe_id": { "type": "integer", "index": "not_analyzed" },
+        "osm_id": { "type": "integer", "index": "not_analyzed" },
 
         "location_type": { "type": "string" },
 
