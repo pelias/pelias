@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sinatra'
   spec.add_dependency 'unicorn'
   spec.add_dependency 'tilt-jbuilder'
+  spec.add_dependency 'rake'
 
   spec.add_dependency 'sidekiq'
   spec.add_dependency 'sidekiq-failures'

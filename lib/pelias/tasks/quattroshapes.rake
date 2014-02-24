@@ -1,6 +1,9 @@
 require 'pelias'
 require 'ruby-progressbar'
+require 'rgeo-shapefile'
+require_relative '../../../neighborhood_transform'
 
+MultiJson.use :yajl
 Sidekiq::Logging.logger = nil
 
 namespace :quattroshapes do
@@ -34,50 +37,23 @@ namespace :quattroshapes do
 
   task :populate_neighborhoods do
     download_shapefiles('qs_neighborhoods')
-    index_shapes(Pelias::Neighborhood, 'qs_neighborhoods', {
-      geoname_id: 'gn_id',
-      woe_id: 'woe_id',
-      name: 'name'
-    })
+    index_shapes('qs_neighborhoods') do |record|
+      qs_neighborhood_transform(record).tap { |h| puts h.inspect }
+    end
   end
 
   private
 
-  def index_shapes(klass, shp, keys)
+  def index_shapes(shp)
     shp = "#{temp_path}/#{shp}"
     RGeo::Shapefile::Reader.open(shp) do |file|
       bar = ProgressBar.create(total: file.num_records, format: '%e |%b>%i| %p%%')
       file.to_enum.lazy.
         select { |record| !record.geometry.nil? }.
-        map { |record| build_hash_for(klass, record, keys) }.
-        each_slice(500) { |slice| bar.progress += slice.count; klass.delay.create(slice) }
+        map { |record| yield(record) }.compact.
+        each_slice(50) { |slice| bar.progress += slice.count; Pelias::Location.create(slice) }
       bar.finish
     end
-  end
-
-  def build_hash_for(klass, record, keys)
-    # Grab the name
-    name = record.attributes[keys[:name]]
-    name = name.split(' (').first if name
-
-    # Construct the location
-    boundaries = RGeo::GeoJSON.encode(record.geometry)
-    loc = klass.new(
-      geoname_id: record.attributes[keys[:geoname_id]].to_i,
-      woe_id: record.attributes[keys[:woe_id]].to_i,
-      name: name,
-      boundaries: boundaries
-    )
-
-    loc.woe_id = nil if loc.woe_id == 0
-    loc.geoname_id = nil if loc.geoname_id == 0
-
-    # Set shape and point
-    loc.center_shape = RGeo::GeoJSON.encode(record.geometry.centroid)
-    loc.center_point = loc.center_shape['coordinates']
-
-    # write the shape
-    loc.to_hash
   end
 
   def download_shapefiles(file)
