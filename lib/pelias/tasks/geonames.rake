@@ -18,7 +18,7 @@ namespace :geonames do
           # Fill in our base details
           entry['name'] = arr[1]
           entry['alternate_names'] = arr[3].split(',')
-          entry['population'] = arr[14]
+          entry['population'] = arr[14].to_i
           # And propagate to others' payloads
           underset = Pelias::LocationSet.new
           underset.append_records "ref.#{entry['location_type']}", entry['_id']
