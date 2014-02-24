@@ -9,7 +9,6 @@ module Pelias
   autoload :LocationSet, 'pelias/location_set'
   autoload :Search, 'pelias/search'
 
-  autoload :Address, 'pelias/address'
   autoload :Poi, 'pelias/poi'
 
   # Load configurations
