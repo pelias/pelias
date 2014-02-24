@@ -89,10 +89,10 @@ module Pelias
     end
 
     def closest(lng, lat, search_type, within_meters = 100)
-      ES_CLIENT.search(index: Pelias::INDEX, type: search_type,
+      ES_CLIENT.search(index: Pelias::INDEX, type: 'location',
         body: {
           query: {
-            match_all: {}
+            term: { location_type: search_type }
           },
           filter: {
             geo_distance: {
