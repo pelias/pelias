@@ -1,9 +1,7 @@
 require 'bundler/setup'
 require 'pelias'
 require 'ruby-progressbar'
-
-# Use YAJL
-MultiJson.use :yajl
+require 'rgeo-geojson'
 
 # Hide the sidekiq log
 Sidekiq::Logging.logger = nil

@@ -1,4 +1,3 @@
-require 'rgeo-geojson'
 require 'yajl'
 require 'sidekiq/failures'
 require 'pelias/server/server'
@@ -15,5 +14,8 @@ module Pelias
 
   # Load configurations
   Dir.glob('config/initializers/**/*.rb').each { |f| load(f) }
+
+  # Use YAJL
+  MultiJson.use :yajl
 
 end
