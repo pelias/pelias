@@ -5,9 +5,10 @@ PATH
       bundler
       elasticsearch
       pg
+      promise
       rake
       rgeo-geojson
-      rgeo-shapefile
+      rgeo-shapefile (= 0.2.5.nonrelease)
       sidekiq
       sidekiq-failures
       sinatra
@@ -59,6 +60,7 @@ GEM
     multi_json (1.8.4)
     multipart-post (2.0.0)
     pg (0.17.1)
+    promise (0.3.0)
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
@@ -72,9 +74,10 @@ GEM
     rgeo (0.3.20)
     rgeo-geojson (0.2.3)
       rgeo (>= 0.3.7)
-    rgeo-shapefile (0.2.3)
+    rgeo-shapefile (0.2.5.nonrelease)
       dbf (>= 1.7.0)
-      rgeo (>= 0.3.3)
+      promise
+      rgeo (>= 0.3.13)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)

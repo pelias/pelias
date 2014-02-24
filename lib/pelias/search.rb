@@ -133,15 +133,18 @@ module Pelias
     end
 
     # Get encompassing shapes for a shape
-    def encompassing_shape(center_shape, shape_type)
-      results = ES_CLIENT.search(index: Pelias::INDEX, type: shape_types.join(','), body: {
+    def encompassing_shape(coordinates, shape_types)
+      results = ES_CLIENT.search(index: Pelias::INDEX, type: 'location', body: {
         query: {
           filtered: {
-            query: { match_all: {} },
+            query: { terms: { location_type: shape_types } },
             filter: {
               geo_shape: {
                 boundaries: {
-                  shape: center_shape,
+                  shape: {
+                    type: 'Point',
+                    coordinates: coordinates
+                  },
                   relation: 'intersects'
                 }
               }

@@ -2,10 +2,13 @@ module Pelias
 
   class LocationSet
 
-    def initialize(field, id, type = nil)
-      @field = field
-      @id = id
+    TYPE = 'location'
+
+    attr_reader :records
+
+    def initialize(type)
       @type = type # create new record if not matching
+      @records = []
     end
 
     def update(&block)
@@ -15,7 +18,6 @@ module Pelias
     end
 
     def finalize!
-      return if records.empty? # lookup not found
       bulk = []
       records.each do |record|
         if record['_source']
@@ -24,40 +26,34 @@ module Pelias
           bulk << { index: { data: record } }
         end
       end
-      ES_CLIENT.bulk(index: Pelias::INDEX, type: @type, body: bulk)
+      ES_CLIENT.bulk(index: Pelias::INDEX, type: 'location', body: bulk)
     end
 
     def grab_parents(shape_types)
       return if shape_types.empty?
       update do |entry|
-        puts entry['center_shape']
-        hits = Pelias::Search.encompassing_shapes(entry['center_shape'], shape_types)
+        hits = Pelias::Search.encompassing_shape(entry['center_point'], shape_types)
         hits.each do |hit|
-          type = hit['type']
-          entry[type] = entry[type] || {}
-          entry[type]['name'] = hit[type]['name']
-          entry[type]['gn_id'] = hit[type]['gn_id']
-          entry[type]['woe_id'] = hit[type]['woe_id']
+
+          type = hit['_source']['location_type']
+
+          entry['ref'] = entry['ref'] || {}
+          entry['ref'][type] = hit['_id']
+
         end
       end
     end
 
-    private
-
-    def records
-      @records ||= load_records
+    def append_records(field, id)
+      return unless id
+      t = { field => id }
+      results = ES_CLIENT.search(index: Pelias::INDEX, type: TYPE, body: { query: { term: t } })
+      records.concat results['hits']['hits']
     end
 
-    def load_records
-      t = {}
-      t[@field] = @id
-      results = ES_CLIENT.search(index: Pelias::INDEX, type: @type, body: {
-        query: { term: t }
-      })
-      results['hits']['hits'].tap do |arr|
-        if arr.none? { |h| h['type'] == @type }
-          arr << { '_type' => @type } # Create a new record
-        end
+    def close_records
+      if records.none? { |h| h['_source']['location_type'] == @type }
+        records << { 'location_type' => @type } # Create a new record
       end
     end
 

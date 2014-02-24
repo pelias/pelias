@@ -9,6 +9,7 @@ json.features(@hits) do |hit|
   json.geometry source['center_shape']
 
   json.properties do
+
     json.name              source['name']
     json.type              source['location_type']
     json.country_code      source['country'].try(:[], 'code')
@@ -20,7 +21,9 @@ json.features(@hits) do |hit|
     json.local_admin_name  source['local_admin'].try(:[], 'name')
     json.neighborhood_name source['neighborhood'].try(:[], 'name')
 
-    json.source source
+    json.gn_id source['gn_id']
+    json.woe_id source['woe_id']
+    json.ref source['ref']
 
   end
 
