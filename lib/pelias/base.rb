@@ -24,7 +24,6 @@ module Pelias
     def self.build(params)
       obj = self.new(params)
       obj.pre_process
-      obj.set_encompassing_shapes
       obj.set_admin_names
       obj
     end
@@ -69,29 +68,6 @@ module Pelias
 
     def lon
       center_point[0]
-    end
-
-    def encompassing_shapes
-      # to override on objects with encompassing shapes
-      []
-    end
-
-    def set_encompassing_shapes
-      encompassing_shapes.each do |shape_type|
-        if shape = encompassing_shape(shape_type)
-          source = shape['_source']
-          self.update(
-            "#{shape_type}_id".to_sym => shape['_id'],
-            "#{shape_type}_name".to_sym => source['name'],
-            "#{shape_type}_alternate_names".to_sym => source['alternate_names'],
-            "#{shape_type}_population".to_sym => source['population'],
-            :country_code => source['country_code'],
-            :country_name => source['country_name'],
-            :admin1_code => source['admin1_code'],
-            :admin1_name => source['admin1_name']
-          )
-        end
-      end
     end
 
     def set_admin_names
@@ -151,85 +127,7 @@ module Pelias
       hash
     end
 
-    def closest_geoname
-      begin
-        # try for a geoname with a matching name & type
-        results = ES_CLIENT.search(index: Pelias::INDEX, type: 'geoname',
-          body: {
-          query: {
-            filtered: {
-              query: {
-                bool: {
-                  must: [
-                    match: { name: name.force_encoding('UTF-8') }
-                  ],
-                  should: [
-                    match: { feature_class: 'P' }
-                  ]
-                }
-              },
-              filter: {
-                geo_shape: {
-                  center_shape: {
-                    shape: boundaries,
-                    relation: 'intersects'
-                  }
-                }
-              }
-            }
-          }
-        })
-        # if not try any in boundaries
-        if results['hits']['total'] == 0
-          results = ES_CLIENT.search(index: Pelias::INDEX, type: 'geoname',
-            body: {
-            query: {
-              filtered: {
-                query: { match_all: {} },
-                filter: {
-                  geo_shape: {
-                    center_shape: {
-                      shape: boundaries,
-                      relation: 'intersects'
-                    }
-                  }
-                }
-              }
-            }
-          })
-        end
-        if result = results['hits']['hits'].first
-          geoname = Pelias::Geoname.new(:id=>result['_id'])
-          geoname.update(result['_source'])
-          geoname
-        else
-          nil
-        end
-      rescue
-        nil
-      end
-    end
-
     private
-
-    def encompassing_shape(shape_type)
-      results = ES_CLIENT.search(index: Pelias::INDEX, type: shape_type, body: {
-        query: {
-          filtered: {
-            query: { match_all: {} },
-            filter: {
-              geo_shape: {
-                boundaries: {
-                  shape: center_shape,
-                  relation: 'intersects'
-                }
-              }
-            }
-          }
-        }
-      })
-      results['hits']['hits'].first
-    end
 
     def set_instance_variables(params)
       params.keys.each do |key|

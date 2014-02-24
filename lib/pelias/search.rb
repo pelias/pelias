@@ -132,6 +132,26 @@ module Pelias
       })
     end
 
+    # Get encompassing shapes for a shape
+    def encompassing_shape(center_shape, shape_type)
+      results = ES_CLIENT.search(index: Pelias::INDEX, type: shape_types.join(','), body: {
+        query: {
+          filtered: {
+            query: { match_all: {} },
+            filter: {
+              geo_shape: {
+                boundaries: {
+                  shape: center_shape,
+                  relation: 'intersects'
+                }
+              }
+            }
+          }
+        }
+      })
+      results['hits']['hits']
+    end
+
     # Return a single shape, or nil
     def reverse_geocode(lng, lat)
       # try for closest address

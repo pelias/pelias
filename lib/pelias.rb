@@ -7,6 +7,7 @@ module Pelias
 
   autoload :VERSION, 'pelias/version'
 
+  autoload :LocationSet, 'pelias/location_set'
   autoload :Address, 'pelias/address'
   autoload :Admin2, 'pelias/admin2'
   autoload :Base, 'pelias/base'
