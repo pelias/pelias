@@ -36,7 +36,7 @@ module Pelias
           bulk << { index: { data: record } }
         end
       end
-      ES_CLIENT.bulk(index: Pelias::INDEX, type: 'location', body: bulk)
+      LocationIndexer.perform_async bulk
     end
 
     def grab_parents(shape_types)
