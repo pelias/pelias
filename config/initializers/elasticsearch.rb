@@ -10,5 +10,4 @@ end
 
 # put together an elasticsearch client
 Pelias::ES_CLIENT = Elasticsearch::Client.new(transport: transport, reload_on_failure: true, retry_on_failure: true, randomize_hosts: true)
-Pelias::ES_TIMEOUT = es_config['timeout'] || 1200
 Pelias::INDEX = es_config['index']
