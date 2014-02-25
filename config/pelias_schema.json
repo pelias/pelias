@@ -13,7 +13,8 @@
         "location_type": { "type": "string" },
 
         "boundaries": {
-          "type": "geo_shape"
+          "type": "geo_shape",
+          "index": "not_analyzed"
         },
 
         "center_point": {
