@@ -8,6 +8,7 @@ module Pelias
 
   autoload :LocationSet, 'pelias/location_set'
   autoload :Search, 'pelias/search'
+  autoload :Suggestion, 'pelias/suggestion'
 
   autoload :Poi, 'pelias/poi'
 

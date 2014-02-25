@@ -16,8 +16,18 @@ module Pelias
       end
     end
 
+    def rebuild_suggestions!
+      update do |_id, entry|
+        suggest = Suggestion.send :"rebuild_suggestions_for_#{entry['location_type']}", entry
+        entry['suggest'] = suggest
+        denied = ['boundaries', 'suggest']
+        entry['suggest']['payload'] = entry.reject { |k, v| denied.include?(k) }
+      end
+    end
+
     def finalize!
       return if records.empty?
+      rebuild_suggestions!
       bulk = []
       records.each do |record|
         if record['_source']
@@ -40,6 +50,10 @@ module Pelias
           entry['ref'] = entry['ref'] || {}
           entry['ref'][type] = hit['_id']
           entry["#{type}_name"] = hit['_source']['name']
+
+          # copy data we don't source
+          entry['admin0_abbr'] = hit['_source']['admin0_abbr']
+          entry['admin0_name'] = hit['_source']['admin0_name']
 
         end
       end

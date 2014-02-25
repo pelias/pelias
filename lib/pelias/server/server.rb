@@ -23,7 +23,7 @@ module Pelias
       size = params[:size] || 20
       results = Pelias::Search.suggest(params[:query], size)
       @hits = results['suggestions'][0]['options']
-      jbuilder :suggest
+      jbuilder :search
     end
 
     get '/reverse' do

@@ -2,7 +2,7 @@ json.type 'FeatureCollection'
 
 json.features(@hits) do |hit|
 
-  source = hit['_source']
+  source = hit['_source'] || hit['payload']
 
   json.type 'Feature'
 
