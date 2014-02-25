@@ -53,7 +53,7 @@ namespace :osm do
           entry['boundaries'] = JSON.parse(street['street'])
         end
         # and save
-        set.grab_parents ['neighborhood', 'locality', 'admin2', 'local_admin']
+        set.grab_parents ['neighborhood', 'locality', 'admin1', 'admin2', 'local_admin']
         set.finalize!
       end
     end while streets.count > 0
@@ -83,7 +83,7 @@ namespace :osm do
           end
           # and save (we purposely skip the street here because we are not able
           # to line them up perfectly and instead rely on the name we already # have
-          set.grab_parents ['neighborhood', 'local_admin', 'locality', 'admin2']
+          set.grab_parents ['neighborhood', 'local_admin', 'locality', 'admin1', 'admin2']
           set.finalize!
         end
       end while addresses.count > 0
