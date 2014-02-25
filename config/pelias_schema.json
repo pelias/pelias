@@ -1,147 +1,48 @@
 {
+
   "mappings": {
-    "geoname": {
+
+    "location": {
+
       "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "standard",
-          "search_analyzer": "standard",
-          "payloads": true
-        },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
-        }
-      }
-    },
-    "poi": {
-      "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "standard",
-          "search_analyzer": "standard",
-          "payloads": true
-        },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
-        }
-      }
-    },
-    "address": {
-      "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "standard",
-          "search_analyzer": "standard",
-          "payloads": true
-        },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
-        }
-      }
-    },
-    "street": {
-      "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "standard",
-          "search_analyzer": "standard",
-          "payloads": true
-        },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
-        },
+
+        "gn_id":  { "type": "integer", "index": "not_analyzed" },
+        "woe_id": { "type": "integer", "index": "not_analyzed" },
+        "osm_id": { "type": "integer", "index": "not_analyzed" },
+
+        "location_type": { "type": "string" },
+
         "boundaries": {
           "type": "geo_shape"
-        }
-      }
-    },
-    "neighborhood": {
-      "properties": {
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
         "suggest": {
           "type": "completion",
           "index_analyzer": "standard",
           "search_analyzer": "standard",
           "payloads": true
         },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
-        },
-        "boundaries": {
-          "type": "geo_shape"
+
+        "ref": {
+          "type": "object",
+          "properties": {
+            "admin0":       { "type": "string", "index": "not_analyzed" },
+            "admin1":       { "type": "string", "index": "not_analyzed" },
+            "admin2":       { "type": "string", "index": "not_analyzed" },
+            "local_admin":  { "type": "string", "index": "not_analyzed" },
+            "locality":     { "type": "string", "index": "not_analyzed" },
+            "neighborhood": { "type": "string", "index": "not_analyzed" }
+          }
         }
+
       }
-    },
-    "locality": {
-      "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "standard",
-          "search_analyzer": "standard",
-          "payloads": true
-        },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
-        },
-        "boundaries": {
-          "type": "geo_shape"
-        }
-      }
-    },
-    "local_admin": {
-      "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "standard",
-          "search_analyzer": "standard",
-          "payloads": true
-        },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
-        },
-        "boundaries": {
-          "type": "geo_shape"
-        }
-      }
-    },
-    "admin2": {
-      "properties": {
-        "suggest": {
-          "type": "completion",
-          "index_analyzer": "standard",
-          "search_analyzer": "standard",
-          "payloads": true
-        },
-        "center_shape": {
-          "type": "geo_shape"
-        },
-        "center_point": {
-          "type": "geo_point"
-        },
-        "boundaries": {
-          "type": "geo_shape"
-        }
-      }
+
     }
+
   }
+
 }

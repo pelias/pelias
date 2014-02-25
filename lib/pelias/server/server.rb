@@ -27,14 +27,15 @@ module Pelias
     end
 
     get '/reverse' do
-      @result = Pelias::Search.reverse_geocode(params[:lng], params[:lat])
-      jbuilder :reverse
+      @hits = [Pelias::Search.reverse_geocode(params[:lng], params[:lat])].compact
+      puts @hits.inspect
+      jbuilder :search
     end
 
     get '/closest' do
       results = Pelias::Search.closest(params[:lng], params[:lat], params[:type], 1500)
       @hits = results['hits']['hits']
-      jbuilder :closest
+      jbuilder :search
     end
 
     # override the default "Sinatra doesn't know this ditty" error page

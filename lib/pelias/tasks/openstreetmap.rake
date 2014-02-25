@@ -1,6 +1,6 @@
-require 'pelias'
+require_relative 'task_helper'
 
-namespace :openstreetmap do
+namespace :osm do
 
   task :populate_pois do
     i = 0
@@ -33,76 +33,93 @@ namespace :openstreetmap do
   end
 
   task :populate_streets do
-    i = 0
-    size = 50
-    Pelias::PG_CLIENT.exec("BEGIN")
-    Pelias::PG_CLIENT.exec("
-      DECLARE streets_cursor CURSOR FOR
-      #{Pelias::Street.all_streets_sql}
-    ")
+    r = Pelias::PG_CLIENT.exec(all_streets_count_sql)
+    bar = ProgressBar.create(total: r.first['count'].to_i, format: '%e |%b>%i| %p%%')
+    Pelias::PG_CLIENT.exec('BEGIN')
+    Pelias::PG_CLIENT.exec("DECLARE streets_cursor CURSOR FOR #{all_streets_sql}")
     begin
-      puts i
-      i += size
-      streets = Pelias::PG_CLIENT.exec("FETCH #{size} FROM streets_cursor")
-      street_data = streets.map do |street|
-        center = JSON.parse(street['center'])
-        {
-          :id => street['osm_id'],
-          :name => street['name'],
-          :center_point => center['coordinates'],
-          :center_shape => center,
-          :boundaries => JSON.parse(street['street'])
-        }
-      end
-      if i >= 0
-        begin
-          Pelias::Street.delay.create(street_data)
-        rescue
-          sleep 20
-          Pelias::Street.delay.create(street_data)
+      streets = Pelias::PG_CLIENT.exec('FETCH 50 FROM streets_cursor')
+      streets.each do |street|
+        # load it up
+        bar.progress += 1
+        next unless osm_id = sti(street['osm_id'])
+        set = Pelias::LocationSet.new
+        set.append_records 'osm_id', osm_id
+        set.close_records_for 'street'
+        set.update do |_id, entry|
+          entry['osm_id'] = osm_id
+          entry['name'] = entry['street_name'] = street['name']
+          entry['center_point'] = JSON.parse(street['center'])['coordinates']
+          entry['boundaries'] = JSON.parse(street['street'])
         end
+        # and save
+        set.grab_parents ['neighborhood', 'locality', 'admin2', 'local_admin']
+        set.finalize!
       end
     end while streets.count > 0
-    Pelias::PG_CLIENT.exec("CLOSE streets_cursor")
-    Pelias::PG_CLIENT.exec("COMMIT")
+    Pelias::PG_CLIENT.exec('CLOSE streets_cursor')
+    Pelias::PG_CLIENT.exec('COMMIT')
   end
 
   task :populate_addresses do
-    i = 0
-    size = 100
     %w(point polygon line).each do |shape|
-      Pelias::PG_CLIENT.exec("BEGIN")
-      Pelias::PG_CLIENT.exec("
-        DECLARE address_#{shape}_cursor CURSOR FOR
-        #{Pelias::Address.get_sql(shape)}
-      ")
+      r = Pelias::PG_CLIENT.exec(all_addresses_count_sql_for(shape))
+      bar = ProgressBar.create(total: r.first['count'].to_i, format: '%e |%b>%i| %p%%')
+      Pelias::PG_CLIENT.exec('BEGIN')
+      Pelias::PG_CLIENT.exec("DECLARE address_#{shape}_cursor CURSOR FOR #{all_addresses_sql_for(shape)}")
       begin
-        puts "#{shape} #{i}"
-        i+=size
-        results = Pelias::PG_CLIENT.exec("FETCH #{size} FROM address_#{shape}_cursor")
-        addresses = results.map do |result|
-          center = JSON.parse(result['location'])
-          {
-            :id => "#{shape}-#{result['address_id']}",
-            :name => "#{result['housenumber']} #{result['street_name']}",
-            :number => result['housenumber'],
-            :street_name => result['street_name'],
-            :center_point => center['coordinates'],
-            :center_shape => center
-          }
-        end
-        if i >= 0
-          begin
-            Pelias::Address.delay.create(addresses.compact)
-          rescue
-            sleep 20
-            Pelias::Address.delay.create(addresses.compact)
+        addresses = Pelias::PG_CLIENT.exec("FETCH 100 FROM address_#{shape}_cursor")
+        addresses.each do |address|
+          bar.progress += 1
+          next unless osm_id = sti(address['osm_id'])
+          set = Pelias::LocationSet.new
+          set.append_records 'osm_id', osm_id
+          set.close_records_for 'address'
+          set.update do |_id, entry|
+            entry['osm_id'] = osm_id
+            entry['name'] = entry['address_name'] = "#{address['housenumber']} #{address['street_name']}"
+            entry['street_name'] = address['street_name']
+            entry['center_point'] = JSON.parse(address['location'])['coordinates']
           end
+          # and save (we purposely skip the street here because we are not able
+          # to line them up perfectly and instead rely on the name we already # have
+          set.grab_parents ['neighborhood', 'local_admin', 'locality', 'admin2']
+          set.finalize!
         end
-      end while results.count > 0
+      end while addresses.count > 0
       Pelias::PG_CLIENT.exec("CLOSE address_#{shape}_cursor")
-      Pelias::PG_CLIENT.exec("COMMIT")
+      Pelias::PG_CLIENT.exec('COMMIT')
     end
+  end
+
+  private
+
+  def all_streets_count_sql
+    'SELECT count(1) FROM planet_osm_line WHERE name IS NOT NULL AND highway IS NOT NULL'
+  end
+
+  def all_streets_sql
+    "SELECT osm_id, name,
+      ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
+      ST_AsGeoJSON(ST_Transform(ST_LineInterpolatePoint(way, 0.5), 4326), 6) AS center
+    FROM planet_osm_line
+    WHERE name IS NOT NULL AND highway IS NOT NULL
+    ORDER BY osm_id"
+  end
+
+  def all_addresses_count_sql_for(shape)
+    "SELECT count(1) FROM planet_osm_#{shape} WHERE \"addr:housenumber\" IS NOT NULL AND \"addr:street\" IS NOT NULL"
+  end
+
+  def all_addresses_sql_for(shape)
+    "SELECT osm_id,
+      \"addr:street\" AS street_name,
+      \"addr:housenumber\" AS housenumber,
+      ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location
+    FROM planet_osm_#{shape}
+    WHERE \"addr:housenumber\" IS NOT NULL
+      AND \"addr:street\" IS NOT NULL
+    ORDER BY osm_id"
   end
 
 end

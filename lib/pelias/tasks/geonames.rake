@@ -1,11 +1,39 @@
 require 'pelias'
-require 'open-uri'
+require 'ruby-progressbar'
 
 namespace :geonames do
 
-  TEMP_PATH = '/tmp/mapzen/geonames'
+  task :populate => :download do
+    File.open("#{temp_path}/allCountries.txt") do |file|
+      bar = ProgressBar.create(total: 10_000_000, format: '%e |%b>%i| %p%%')
+      file.each_line.with_index do |line, i|
+        arr = line.chomp.split("\t")
+        bar.progress += 1
+        next unless arr[8] == 'US'
+        next unless arr[10] == 'NJ'
+        # Update details for this geoname
+        set = Pelias::LocationSet.new
+        set.append_records 'gn_id', arr[0]
+        set.update do |_id, entry|
+          # Fill in our base details
+          entry['name'] = arr[1]
+          entry['alternate_names'] = arr[3].split(',')
+          entry['population'] = arr[14].to_i
+          # And propagate to others' payloads
+          underset = Pelias::LocationSet.new
+          underset.append_records "ref.#{entry['location_type']}", _id
+          underset.update do |_uid, uentry|
+            type = entry['location_type']
+            uentry["#{type}_name"] = arr[1]
+            uentry["#{type}_alternate_names"] = arr[3].split(',')
+          end
+          underset.finalize!
+        end
+        set.finalize!
+      end
+    end
+  end
 
-  # Download geonames data
   task :download do
     unless File.exist?("#{temp_path}/allCountries.txt")
       `wget http://download.geonames.org/export/dump/allCountries.zip -P #{temp_path}`
@@ -13,45 +41,10 @@ namespace :geonames do
     end
   end
 
-  desc 'Populate geonames data into index (in batches)'
-  task :populate => :download do
-    File.open("#{temp_path}/allCountries.txt") do |f|
-      f.each_line.lazy.
-        map { |l| l.chomp.split("\t") }.
-        select { |arr| arr[8] == 'US' }.
-        map { |arr| format_geoname(arr) }.
-        each_slice(500) { |sl| print '.'; Pelias::Geoname.delay.create(sl) }
-    end
-    puts
-  end
-
   private
 
-  # Format TSV array into proper format
-  def format_geoname(arr)
-    {
-      :id => arr[0],
-      :name => arr[1],
-      :alternate_names => arr[3].split(','),
-      :center_point => [arr[5].to_f, arr[4].to_f],
-      :center_shape => {
-        type: 'Point',
-        coordinates: [arr[5].to_f, arr[4].to_f]
-      },
-      :feature_class => arr[6],
-      :feature_code => arr[7],
-      :country_code => arr[8],
-      :admin1_code => arr[10],
-      :admin2_code => arr[11],
-      :admin3_code => arr[12],
-      :admin4_code => arr[13],
-      :population => arr[14],
-      :elevation => arr[15]
-    }
-  end
-
   def temp_path
-    '/tmp/mapzen/geonames'
+    '/tmp/mapzen/quattroshapes'
   end
 
 end

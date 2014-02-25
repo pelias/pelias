@@ -25,7 +25,6 @@ Download geonames, and add them to the index. This provides part of the admin he
 
 Download & unzip Quattroshapes shapefiles. We only index these if we can find a relevant Geoname above!
 
-    $ rake quattroshapes:download
     $ rake quattroshapes:populate_admin2
     $ rake quattroshapes:populate_local_admin
     $ rake quattroshapes:populate_localities

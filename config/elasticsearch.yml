@@ -1,5 +1,5 @@
-development:
-  hosts:
-    -
-      :host: 'localhost'
-      :port: 9200
+index: pelias
+hosts:
+  -
+    :host: 'localhost'
+    :port: 9200

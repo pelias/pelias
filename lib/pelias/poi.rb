@@ -1,39 +1,8 @@
 module Pelias
 
-  class Poi < Base
+  class Poi < Location
 
     SUGGEST_WEIGHT = 6
-
-    attr_accessor :id
-    attr_accessor :name
-    attr_accessor :number
-    attr_accessor :phone
-    attr_accessor :website
-    attr_accessor :feature
-    attr_accessor :center_point
-    attr_accessor :center_shape
-    attr_accessor :street_name
-    attr_accessor :country_code
-    attr_accessor :country_name
-    attr_accessor :admin1_code
-    attr_accessor :admin1_name
-    # encompassing shape attributes
-    attr_accessor :admin2_id
-    attr_accessor :admin2_name
-    attr_accessor :admin2_alternate_names
-    attr_accessor :admin2_population
-    attr_accessor :locality_id
-    attr_accessor :locality_name
-    attr_accessor :locality_alternate_names
-    attr_accessor :locality_population
-    attr_accessor :local_admin_id
-    attr_accessor :local_admin_name
-    attr_accessor :local_admin_alternate_names
-    attr_accessor :local_admin_population
-    attr_accessor :neighborhood_id
-    attr_accessor :neighborhood_name
-    attr_accessor :neighborhood_alternate_names
-    attr_accessor :neighborhood_population
 
     def encompassing_shapes
       %w(admin2 local_admin locality neighborhood)
@@ -91,26 +60,6 @@ module Pelias
       end
     end
 
-    def generate_suggestions
-      {
-        input: suggest_input,
-        output: suggest_output,
-        weight: suggest_weight,
-        payload: {
-          lat: lat,
-          lon: lon,
-          type: type,
-          country_code: country_code,
-          country_name: country_name,
-          admin1_abbr: admin1_abbr,
-          admin1_name: admin1_name,
-          admin2_name: admin2_name,
-          locality_name: locality_name,
-          local_admin_name: local_admin_name
-        }
-      }
-    end
-
     def pre_process
       self.feature = self.feature.map { |f| f.strip.downcase.gsub('_', ' ') }
       to_add = []
@@ -157,8 +106,7 @@ module Pelias
         :street_name => result.delete('street_name'),
         :website => result.delete('website'),
         :phone => result.delete('phone'),
-        :center_point => center['coordinates'],
-        :center_shape => center
+        :center_point => center['coordinates']
       }
       feature = result.map { |k,v|
         features = [k]
