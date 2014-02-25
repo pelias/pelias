@@ -3,25 +3,11 @@ require 'rgeo-shapefile'
 
 namespace :quattroshapes do
 
-  task :populate_admin1 do
-    do_thing 'admin1', 'qs_adm1', 'qs_a1', []
-  end
-
-  task :populate_admin2 do
-    do_thing 'admin2'
-  end
-
-  task :populate_local_admin do
-    do_thing 'local_admin', 'qs_localadmin', 'qs_la', ['admin1', 'admin2']
-  end
-
-  task :populate_locality do
-    do_thing 'locality', 'qs_localities', 'qs_loc', ['admin1', 'admin2', 'local_admin']
-  end
-
-  task :populate_neighborhood do
-    do_thing 'neighborhood'
-  end
+  task(:populate_admin1)       { perform_index 'admin1' }
+  task(:populate_admin2)       { perform_index 'admin2' }
+  task(:populate_local_admin)  { perform_index 'local_admin' }
+  task(:populate_locality)     { perform_index 'locality' }
+  task(:populate_neighborhood) { perform_index 'neighborhood' }
 
   # Download the things we need
   task :download do
@@ -35,7 +21,7 @@ namespace :quattroshapes do
 
   private
 
-  def do_thing(type)
+  def perform_index(type)
     reader = RGeo::Shapefile::Reader.open("#{TEMP_PATH}/#{Pelias::LocationIndexer::PATHS[type.to_sym]}")
     bar = ProgressBar.create(total: reader.num_records, format: '%e |%b>%i| %p%%')
     reader.num_records.times do |idx|
