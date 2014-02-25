@@ -55,7 +55,8 @@ namespace :quattroshapes do
 
           # other data
           entry['admin0_abbr'] = record.attributes['qs_iso_cc']
-          entry['admin0_name'] = country_data[entry['admin0_abbr']][:name]
+          entry['admin0_name'] = country_data[entry['admin0_abbr']].try(:[], :name)
+          raise "admin name not found for #{entry['admin0_abbr']}" unless entry['admin0_name']
 
         end
         set.grab_parents shape_types
