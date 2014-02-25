@@ -8,7 +8,7 @@ PATH
       promise
       rake
       rgeo-geojson
-      rgeo-shapefile (= 0.2.5.nonrelease)
+      rgeo-shapefile
       sidekiq
       sidekiq-failures
       sinatra
