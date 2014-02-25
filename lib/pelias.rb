@@ -1,7 +1,7 @@
-require 'yajl'
-require 'yajl/json_gem'
 require 'sidekiq/failures'
 require 'pelias/server/server'
+require 'yajl'
+require 'yajl/json_gem'
 
 module Pelias
 
