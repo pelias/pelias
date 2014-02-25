@@ -29,13 +29,7 @@ module Pelias
       neighborhood: 'gn_adm0_cc'
     }
 
-    SHAPE_TYPES = { # TODO use array
-      admin1: [],
-      admin2: ['admin1'],
-      local_admin: ['admin1', 'admin2'],
-      locality: ['admin1', 'admin2', 'local_admin'],
-      locality: ['admin1', 'admin2', 'local_admin', 'locality']
-    }
+    SHAPE_ORDER = [:admin1, :admin2, :local_admin, :locality, :neighborhood]
 
     COUNTRY_DATA = YAML.load_file 'lib/pelias/data/geonames/countries.yml'
 
@@ -84,7 +78,8 @@ module Pelias
       end
 
       # And save
-      set.grab_parents SHAPE_TYPES[type_sym]
+      parent_types = SHAPE_ORDER[0..SHAPE_ORDER.index(type_sym)]
+      set.grab_parents parent_types
       set.finalize!
 
     ensure
