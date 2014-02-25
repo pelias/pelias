@@ -48,8 +48,9 @@ module Pelias
       record = reader.next
 
       # Make sure we care a valid record
-      cc = record.attributes[CC_FIELDS[type_sym]]
+      cc = record.attributes[CC_FIELDS[type_sym]].strip
       return if record.geometry.nil?
+      return unless cc.present? # TODO maybe keep these
       raise "bad cc: #{cc} (#{cc.class.name})" unless COUNTRY_DATA[cc]
 
       # grab our ids
