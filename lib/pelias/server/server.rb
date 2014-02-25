@@ -28,7 +28,6 @@ module Pelias
 
     get '/reverse' do
       @hits = [Pelias::Search.reverse_geocode(params[:lng], params[:lat])].compact
-      puts @hits.inspect
       jbuilder :search
     end
 
