@@ -33,13 +33,11 @@ namespace :quattroshapes do
       bar = ProgressBar.create(total: file.num_records, format: '%e |%b>%i| %p%%')
       file.each do |record|
         bar.progress += 1
-        next unless record.attributes['qs_iso_cc'] == 'US' ||
-                    record.attributes['qs_adm0_a3'] == 'US' ||
-                    record.attributes['gn_adm0_cc'] == 'US'
-        next unless record.attributes['qs_a1'] == 'New Jersey' ||
-                    record.attributes['qs_a1'] == '*New Jersey' ||
-                    record.attributes['name_adm1'] == 'New Jersey'
+        # next unless record.attributes['qs_iso_cc'] == 'US' || record.attributes['qs_adm0_a3'] == 'US' || record.attributes['gn_adm0_cc'] == 'US'
+        # next unless record.attributes['qs_a1'] == 'New Jersey' || record.attributes['qs_a1'] == '*New Jersey' || record.attributes['name_adm1'] == 'New Jersey'
+        cc = record.attributes['gn_adm0_cc'] || record.attributes['qs_adm0_a3'] || record.attributes['qs_iso_cc']
         next if record.geometry.nil?
+        next unless country_data[cc] # TODO tighten
         # make sure we have a geoname id
         gn_id = sti record.attributes['qs_gn_id'] || record.attributes['gn_id']
         woe_id = sti record.attributes['qs_woe_id'] || record.attributes['woe_id']
@@ -58,9 +56,8 @@ namespace :quattroshapes do
           entry["#{type}_name"] = entry['name']
 
           # other data
-          entry['admin0_abbr'] = record.attributes['gn_adm0_cc'] || record.attributes['qs_adm0_a3'] || record.attributes['qs_iso_cc']
-          entry['admin0_name'] = country_data[entry['admin0_abbr']].try(:[], :name)
-          raise "admin name not found for #{entry['admin0_abbr']}" unless entry['admin0_name']
+          entry['admin0_abbr'] = cc
+          entry['admin0_name'] = country_data[cc][:name]
 
         end
         set.grab_parents shape_types
