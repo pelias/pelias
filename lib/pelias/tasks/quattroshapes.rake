@@ -35,9 +35,9 @@ namespace :quattroshapes do
         bar.progress += 1
         # next unless record.attributes['qs_iso_cc'] == 'US' || record.attributes['qs_adm0_a3'] == 'US' || record.attributes['gn_adm0_cc'] == 'US'
         # next unless record.attributes['qs_a1'] == 'New Jersey' || record.attributes['qs_a1'] == '*New Jersey' || record.attributes['name_adm1'] == 'New Jersey'
-        cc = record.attributes['gn_adm0_cc'] || record.attributes['qs_adm0_a3'] || record.attributes['qs_iso_cc']
+        cc = record.attribtues['qs_iso_cc'] || ecord.attributes['gn_adm0_cc'] || record.attributes['qs_adm0_a3']
         next if record.geometry.nil?
-        next unless country_data[cc] # TODO tighten
+        raise "bad cc: #{cc} (#{cc.class.name})" unless country_data[cc]
         # make sure we have a geoname id
         gn_id = sti record.attributes['qs_gn_id'] || record.attributes['gn_id']
         woe_id = sti record.attributes['qs_woe_id'] || record.attributes['woe_id']
