@@ -6,7 +6,6 @@ PATH
       elasticsearch
       hashie
       pg
-      promise
       rake
       rgeo-geojson
       rgeo-shapefile (= 0.2.3)
@@ -62,7 +61,6 @@ GEM
     multi_json (1.8.4)
     multipart-post (2.0.0)
     pg (0.17.1)
-    promise (0.3.0)
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
