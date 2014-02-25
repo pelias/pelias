@@ -72,10 +72,6 @@ namespace :quattroshapes do
     @country_data ||= YAML.load_file 'lib/pelias/data/geonames/countries.yml'
   end
 
-  def admin1_data
-    @admin1_data ||= YAML.load_file 'lib/pelias/data/geonames/admin1.yml'
-  end
-
   def download_shapefiles(file)
     unless File.exist?("#{TEMP_PATH}/#{file}.shp")
       sh "wget http://static.quattroshapes.com/#{file}.zip -P #{TEMP_PATH}"
