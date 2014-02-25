@@ -33,12 +33,8 @@ namespace :quattroshapes do
       bar = ProgressBar.create(total: file.num_records, format: '%e |%b>%i| %p%%')
       file.each do |record|
         bar.progress += 1
-        next unless record.attributes['qs_iso_cc'] == 'US' ||
-                    record.attributes['qs_adm0_a3'] == 'US' ||
-                    record.attributes['gn_adm0_cc'] == 'US'
-        next unless record.attributes['qs_a1'] == 'New Jersey' ||
-                    record.attributes['qs_a1'] == '*New Jersey' ||
-                    record.attributes['name_adm1'] == 'New Jersey'
+        #next unless record.attributes['qs_iso_cc'] == 'US' || record.attributes['qs_adm0_a3'] == 'US' || record.attributes['gn_adm0_cc'] == 'US'
+        #next unless record.attributes['qs_a1'] == 'New Jersey' || record.attributes['qs_a1'] == '*New Jersey' || record.attributes['name_adm1'] == 'New Jersey'
         next if record.geometry.nil?
         # make sure we have a geoname id
         gn_id = sti record.attributes['qs_gn_id'] || record.attributes['gn_id']
