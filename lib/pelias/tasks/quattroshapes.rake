@@ -54,7 +54,7 @@ namespace :quattroshapes do
           entry["#{type}_name"] = entry['name']
 
           # other data
-          entry['admin0_abbr'] = record.attributes['qs_iso_cc']
+          entry['admin0_abbr'] = record.attributes['gn_adm0_cc'] || record.attributes['qs_adm0_a3'] || record.attributes['qs_iso_cc']
           entry['admin0_name'] = country_data[entry['admin0_abbr']].try(:[], :name)
           raise "admin name not found for #{entry['admin0_abbr']}" unless entry['admin0_name']
 
