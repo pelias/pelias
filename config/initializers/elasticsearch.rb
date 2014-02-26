@@ -5,7 +5,7 @@ require 'elasticsearch'
 es_config = YAML::load(File.open('config/elasticsearch.yml'))
 transport = Elasticsearch::Transport::Transport::HTTP::Faraday.new(hosts: es_config['hosts']) do |faraday|
   faraday.adapter Faraday.default_adapter
-  faraday.options[:timeout] = es_config['timeout'] || 1200
+  faraday.timeout = faraday.open_timeout = es_config['timeout'] || 1200
 end
 
 # put together an elasticsearch client
