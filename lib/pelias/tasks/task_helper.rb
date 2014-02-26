@@ -13,3 +13,8 @@ TEMP_PATH = '/tmp/mapzen'
 def sti(n)
   n.to_i == 0 ? nil : n.to_i
 end
+
+if ENV['ES_INLINE'] == '1'
+  require 'sidekiq/testing'
+  Sidekiq::Testing.inline!
+end

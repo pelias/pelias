@@ -152,7 +152,7 @@ module Pelias
           }
         }
       })
-      results['hits'] ? results['hits']['hits'] : []
+      results['hits']['hits']
     end
 
     # Return a single shape, or nil
