@@ -1,4 +1,6 @@
 index: pelias
+timeout: 5
+open_timeout: 2
 hosts:
   -
     :host: 'localhost'
