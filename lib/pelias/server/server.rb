@@ -14,7 +14,7 @@ module Pelias
     get '/search' do
       size = params[:size] || 10
       results = Pelias::Search.search(params[:query], params[:viewbox], params[:center], size)
-      @hits = results['hits'] ? results['hits'] : []
+      @hits = results['hits'] ? results['hits']['hits'] : []
       jbuilder :search
     end
 

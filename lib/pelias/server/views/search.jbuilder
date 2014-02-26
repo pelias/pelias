@@ -30,11 +30,6 @@ json.features(@hits) do |hit|
     json.neighborhood_name source['neighborhood_name']
     json.street_name       source['street_name']
 
-    # And some extra info for now
-    source.delete 'boundaries'
-    source.delete 'center_shape'
-    json.source source
-
   end
 
 end

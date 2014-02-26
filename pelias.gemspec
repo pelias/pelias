@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'bundler'
   spec.add_dependency 'elasticsearch'
+  spec.add_dependency 'typhoeus'
   spec.add_dependency 'pg'
   spec.add_dependency 'yajl-ruby'
   spec.add_dependency 'rgeo-geojson'
