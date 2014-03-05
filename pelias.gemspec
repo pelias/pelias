@@ -18,25 +18,4 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'bundler'
-  spec.add_dependency 'elasticsearch'
-  spec.add_dependency 'typhoeus'
-  spec.add_dependency 'pg'
-  spec.add_dependency 'yajl-ruby'
-  spec.add_dependency 'rgeo-geojson'
-  spec.add_dependency 'rgeo-shapefile', '0.2.3'
-  spec.add_dependency 'sinatra'
-  spec.add_dependency 'unicorn'
-  spec.add_dependency 'tilt-jbuilder'
-  spec.add_dependency 'rake'
-  spec.add_dependency 'hashie'
-
-  spec.add_dependency 'sidekiq'
-  spec.add_dependency 'sidekiq-failures'
-
-  spec.add_development_dependency 'ruby-progressbar'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rack-test'
-  spec.add_development_dependency 'debugger'
-
 end

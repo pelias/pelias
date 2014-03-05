@@ -17,9 +17,9 @@ json.features(@hits) do |hit|
     json.type              source['location_type']
     json.name              source['name']
 
-    # Out of place, coming soon
-    json.country_code      source['country_code']
-    json.country_name      source['country_name']
+    # Special fields
+    json.country_code      source['admin0_abbr']
+    json.country_name      source['admin0_name']
 
     # Names
     json.admin0_name       source['admin0_name']
