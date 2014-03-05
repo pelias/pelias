@@ -49,9 +49,14 @@ module Pelias
 
       # Make sure we care a valid record
       cc = record.attributes[CC_FIELDS[type_sym]].strip
+
+      return unless cc == 'US'
+      return unless record.attributes['qs_a1'] == 'New Jersey'
+
       return if record.geometry.nil?
       return unless cc.present? # TODO maybe keep these
       raise "bad cc: #{cc} (#{cc.class.name})" unless COUNTRY_DATA[cc]
+
 
       # grab our ids
       gn_id = sti record.attributes['qs_gn_id'] || record.attributes['gn_id']
