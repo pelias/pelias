@@ -6,8 +6,7 @@ module Pelias
 
     extend self
 
-    def rebuild_suggestions_for_admin1(entry)
-      e = Hashie::Mash.new(entry)
+    def rebuild_suggestions_for_admin1(e)
       {
         input: e.name,
         output: e.name,
@@ -15,8 +14,7 @@ module Pelias
       }
     end
 
-    def rebuild_suggestions_for_admin2(entry)
-      e = Hashie::Mash.new(entry)
+    def rebuild_suggestions_for_admin2(e)
       {
         input:  [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" },
         output: [e.name, e.admin1_abbr || e.admin1_name].compact.join(', '),
@@ -24,8 +22,7 @@ module Pelias
       }
     end
 
-    def rebuild_suggestions_for_local_admin(entry)
-      e = Hashie::Mash.new(entry)
+    def rebuild_suggestions_for_local_admin(e)
       inputs = []
       inputs.concat [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" }
       inputs.concat [e.locality_name, e.admin2_name].compact.map { |v| [e.name, v, e.admin1_abbr || e.admin1_name].join(' ') }
@@ -36,8 +33,7 @@ module Pelias
       }
     end
 
-    def rebuild_suggestions_for_locality(entry)
-      e = Hashie::Mash.new(entry)
+    def rebuild_suggestions_for_locality(e)
       inputs = []
       inputs.concat [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" }
       inputs.concat [e.local_admin_name, e.admin2_name].compact.map { |v| [e.name, v, e.admin1_abbr || e.admin1_name].join(' ') }
@@ -48,8 +44,7 @@ module Pelias
       }
     end
 
-    def rebuild_suggestions_for_neighborhood(entry)
-      e = Hashie::Mash.new(entry)
+    def rebuild_suggestions_for_neighborhood(e)
       adn = e.locality_name || e.local_admin_name || e.admin2_name
       inputs = []
       inputs.concat [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" }
@@ -61,16 +56,16 @@ module Pelias
       }
     end
 
-    def rebuild_suggestions_for_address(entry)
+    def rebuild_suggestions_for_address(e)
       # TODO
     end
 
-    def rebuild_suggestions_for_street(entry)
+    def rebuild_suggestions_for_street(e)
       # TODO
       {}
     end
 
-    def rebuild_suggestions_for_poi(entry)
+    def rebuild_suggestions_for_poi(e)
       # TODO
     end
 

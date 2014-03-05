@@ -18,7 +18,7 @@ module Pelias
 
     def rebuild_suggestions!
       update do |_id, entry|
-        suggest = Suggestion.send :"rebuild_suggestions_for_#{entry['location_type']}", entry
+        suggest = Suggestion.send :"rebuild_suggestions_for_#{entry['location_type']}", Hashie::Mash.new(entry)
         entry['suggest'] = suggest
         denied = ['boundaries', 'suggest']
         entry['suggest']['payload'] = entry.reject { |k, v| denied.include?(k) }
