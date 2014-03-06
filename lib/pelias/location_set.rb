@@ -41,8 +41,8 @@ module Pelias
 
     def grab_parents(shape_types)
       return if shape_types.empty?
-      hits = Pelias::Search.encompassing_shape(entry['center_point'], shape_types)
       update do |_id, entry|
+        hits = Pelias::Search.encompassing_shape(entry['center_point'], shape_types)
         hits.each do |hit|
           type = hit['_source']['location_type']
           entry['ref'] = entry['ref'] || {}
