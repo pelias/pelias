@@ -1,7 +1,8 @@
 require 'sidekiq/failures'
 require 'yajl'
 require 'yajl/json_gem'
-require_relative 'pelias/server/server'
+
+$LOAD_PATH << File.dirname(__FILE__)
 
 module Pelias
 
@@ -10,6 +11,7 @@ module Pelias
   autoload :LocationSet, 'pelias/location_set'
   autoload :LocationIndexer, 'pelias/location_indexer'
   autoload :Search, 'pelias/search'
+  autoload :Server, 'pelias/server/server'
   autoload :Suggestion, 'pelias/suggestion'
 
   autoload :Poi, 'pelias/poi'
