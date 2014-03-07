@@ -3,6 +3,8 @@ require 'rgeo-shapefile'
 
 namespace :quattroshapes do
 
+  task :prepare_all => Pelias::LocationIndexer::PATHS.map { |t, _| "prepare_#{t}" }
+
   Pelias::LocationIndexer::PATHS.each do |type, file|
     task(:"prepare_#{type}") { perform_prepare(type, file) }
     task(:"populate_#{type}") { perform_index(type) }
