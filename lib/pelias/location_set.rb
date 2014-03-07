@@ -43,24 +43,18 @@ module Pelias
       return if shape_types.empty?
       update do |_id, entry|
 
-        # hits = Pelias::Search.encompassing_shape(entry['center_point'], shape_types)
-        hits = []
-        hits.each do |hit|
-          type = hit['_source']['location_type']
-          entry['ref'] = entry['ref'] || {}
-          entry['ref'][type] = hit['_id']
-          entry["#{type}_name"] = hit['_source']['name']
-          # copy data we don't source
-          entry['admin0_abbr'] = hit['_source']['admin0_abbr']
-          entry['admin0_name'] = hit['_source']['admin0_name']
-        end
-
         if shape_types.include?(:admin0)
           query = "SELECT qs_iso_cc,qs_adm0 FROM qs.qs_admin0 WHERE ST_Contains(geom, ST_GeometryFromText('#{entry['center_point']}'))";
-          results = Pelias::PG_CLIENT.exec(query)
-          if results.first
-            entry['admin0_abbr'] = results.first['qs_iso_cc']
-            entry['admin0_name'] = results.first['qs_adm0']
+          if result = Pelias::PG_CLIENT.exec(query).first
+            entry['admin0_abbr'] = result['qs_iso_cc']
+            entry['admin0_name'] = result['qs_adm0']
+          end
+        end
+
+        if shape_types.include?(:admin1)
+          query = "SELECT qs_iso_cc,qs_a1 FROM qs.qs_admin1 WHERE ST_Contains(geom, ST_GeometryFromText('#{entry['center_point']}'))";
+          if result = Pelias::PG_CLIENT.exec(query).first
+            entry['admin1_name'] = result['qs_a1']
           end
         end
 
