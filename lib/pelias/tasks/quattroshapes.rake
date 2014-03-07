@@ -9,6 +9,10 @@ namespace :quattroshapes do
   task(:populate_locality)     { perform_index 'locality' }
   task(:populate_neighborhood) { perform_index 'neighborhood' }
 
+  task :populate_single do
+    Pelias::LocationIndexer.perform_async ENV['LOCATION_TYPE'], ENV['LOCATION_IDX'].to_i
+  end
+
   # Download the things we need
   task :download do
     Pelias::LocationIndexer::PATHS.each do |type, file|

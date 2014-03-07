@@ -57,6 +57,10 @@ module Pelias
       gn_id = sti record.attributes['qs_gn_id'] || record.attributes['gn_id']
       woe_id = sti record.attributes['qs_woe_id'] || record.attributes['woe_id']
 
+      record.attributes.each do |key, value|
+        value.force_encoding 'UTF-8' if value.is_a?(String)
+      end
+
       # Build a set
       set = Pelias::LocationSet.new
       set.append_records "#{type}.gn_id", gn_id
