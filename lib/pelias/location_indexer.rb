@@ -54,20 +54,23 @@ module Pelias
       set.close_records_for type
 
       # Update it
+      parent_types = SHAPE_ORDER[0...SHAPE_ORDER.index(type_sym)]
       set.update do |_id, entry|
 
         entry['name'] = record[NAME_FIELDS[type_sym]]
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
         entry['boundaries'] = record['st_astext'] if include_boundaries
-        entry['center_point'] = parse_point record['st_centroid']
+        entry['center_point'] = record['st_centroid']
         entry["#{type}_name"] = entry['name']
+
+        set.grab_parents(parent_types, entry)
+
+        entry['center_point'] = parse_point record['st_centroid']
 
       end
 
       # And save
-      parent_types = SHAPE_ORDER[0...SHAPE_ORDER.index(type_sym)]
-      set.grab_parents parent_types
       set.finalize!
 
     end
