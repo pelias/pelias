@@ -5,7 +5,7 @@ namespace :quattroshapes do
 
   Pelias::LocationIndexer::PATHS.each do |type, file|
     task(:"prepare_#{type}") { perform_prepare(type, file) }
-    task(:"populate_#{type}") { perform_index(type, file) }
+    task(:"populate_#{type}") { perform_index(type) }
   end
 
   task :populate_single do
@@ -23,10 +23,11 @@ namespace :quattroshapes do
   end
 
   # Perform an index
-  def perform_index(type, file)
-    reader = RGeo::Shapefile::Reader.open("#{TEMP_PATH}/#{file}")
-    bar = ProgressBar.create(total: reader.num_records, format: '%e |%b>%i| %p%%')
-    reader.num_records.times do |idx|
+  def perform_index(type)
+    results = Pelias::PG_CLIENT.exec "SELECT COUNT(1) as count from qs.qs_#{type}"
+    count = results.first['count'].to_i
+    bar = ProgressBar.create(total: count, format: '%e |%b>%i| %p%%')
+    count.times do |idx|
       bar.progress += 1
       Pelias::LocationIndexer.perform_async type, idx
     end
