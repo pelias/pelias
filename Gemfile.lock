@@ -80,6 +80,7 @@ GEM
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.5)
     ruby-progressbar (1.4.1)
+    sequel (4.8.0)
     sidekiq (2.17.7)
       celluloid (>= 0.15.2)
       connection_pool (>= 1.0.0)
@@ -122,6 +123,7 @@ DEPENDENCIES
   rgeo-shapefile!
   rspec
   ruby-progressbar
+  sequel
   sidekiq
   sidekiq-failures
   sinatra
