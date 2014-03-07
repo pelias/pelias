@@ -14,4 +14,9 @@ namespace :index do
     Pelias::ES_CLIENT.indices.delete(index: Pelias::INDEX)
   end
 
+  desc 'refresh index'
+  task :refresh do
+    Pelias::ES_CLIENT.indices.refresh(index: Pelias::INDEX)
+  end
+
 end

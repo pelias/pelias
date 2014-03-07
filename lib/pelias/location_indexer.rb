@@ -38,7 +38,6 @@ module Pelias
     READERS = Hash.new { |h, k| h[k] = [] }
 
     def perform(type, idx)
-
       type_sym = type.to_sym
       path = "/tmp/mapzen/#{PATHS[type_sym]}"
       reader = get_locked_reader(path)
@@ -49,8 +48,9 @@ module Pelias
 
       # Make sure we care a valid record
       cc = record.attributes[CC_FIELDS[type_sym]].strip
+
+      return if cc == '-1'
       return if record.geometry.nil?
-      return unless cc.present? # TODO maybe keep these
       raise "bad cc: #{cc} (#{cc.class.name})" unless COUNTRY_DATA[cc]
 
       # grab our ids
