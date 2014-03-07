@@ -39,25 +39,13 @@ module Pelias
       ES_CLIENT.bulk(index: Pelias::INDEX, type: 'location', body: bulk)
     end
 
-    def grab_parents(shape_types)
-      return if shape_types.empty?
-      update do |_id, entry|
-
-        if shape_types.include?(:admin0)
-          query = "SELECT qs_iso_cc,qs_adm0 FROM qs.qs_admin0 WHERE ST_Contains(geom, ST_GeometryFromText('#{entry['center_point']}'))";
-          if result = Pelias::PG_CLIENT.exec(query).first
-            entry['admin0_abbr'] = result['qs_iso_cc']
-            entry['admin0_name'] = result['qs_adm0']
-          end
+    def grab_parents(shape_types, entry)
+      shape_types.each do |type|
+        name_field = LocationIndexer::NAME_FIELDS[type]
+        query = "SELECT #{name_field} FROM qs.qs_#{type} WHERE ST_Contains(geom, ST_GeometryFromText('#{entry['center_point']}'))";
+        if result = Pelias::PG_CLIENT.exec(query).first
+          entry["#{type}_name"] = result[name_field]
         end
-
-        if shape_types.include?(:admin1)
-          query = "SELECT qs_iso_cc,qs_a1 FROM qs.qs_admin1 WHERE ST_Contains(geom, ST_GeometryFromText('#{entry['center_point']}'))";
-          if result = Pelias::PG_CLIENT.exec(query).first
-            entry['admin1_name'] = result['qs_a1']
-          end
-        end
-
       end
     end
 
