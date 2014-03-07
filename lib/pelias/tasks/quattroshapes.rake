@@ -16,9 +16,20 @@ namespace :quattroshapes do
   # Download the things we need
   task :download do
     Pelias::LocationIndexer::PATHS.each do |type, file|
-      unless File.exist?("#{TEMP_PATH}/#{file}.shp")
+      unless File.exist?("#{TEMP_PATH}/#{file}.sql")
+
+        # Download
         sh "wget http://static.quattroshapes.com/#{file}.zip -P #{TEMP_PATH}"
+
+        # Unzip
         sh "unzip #{TEMP_PATH}/#{file}.zip -d #{TEMP_PATH}"
+
+        # Convert for postgis
+        sh "shp2pgsql -d #{TEMP_PATH}/#{file}.shp qs.qs_#{type} > #{TEMP_PATH}/#{file}.sql"
+
+        # Import into postgis
+        sh "psql gis < #{TEMP_PATH}/#{file}.sql"
+
       end
     end
   end

@@ -7,6 +7,7 @@ module Pelias
     include Sidekiq::Worker
 
     PATHS = {
+      admin0: 'qs_adm0',
       admin1: 'qs_adm1',
       admin2: 'qs_adm2',
       local_admin: 'qs_localadmin',
@@ -15,6 +16,7 @@ module Pelias
     }
 
     NAME_FIELDS = {
+      admin0: 'qs_a0',
       admin1: 'qs_a1',
       admin2: 'qs_a2',
       local_admin: 'qs_la',
@@ -23,6 +25,7 @@ module Pelias
     }
 
     CC_FIELDS = {
+      admin0: 'qs_iso_cc',
       admin1: 'qs_iso_cc',
       admin2: 'qs_iso_cc',
       local_admin: 'qs_iso_cc',
@@ -30,7 +33,7 @@ module Pelias
       neighborhood: 'gn_adm0_cc'
     }
 
-    SHAPE_ORDER = [:admin1, :admin2, :local_admin, :locality, :neighborhood]
+    SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood]
 
     COUNTRY_DATA = YAML.load_file 'lib/pelias/data/geonames/countries.yml'
 

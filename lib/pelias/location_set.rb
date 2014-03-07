@@ -42,7 +42,9 @@ module Pelias
     def grab_parents(shape_types)
       return if shape_types.empty?
       update do |_id, entry|
-        hits = Pelias::Search.encompassing_shape(entry['center_point'], shape_types)
+
+        # hits = Pelias::Search.encompassing_shape(entry['center_point'], shape_types)
+        hits = []
         hits.each do |hit|
           type = hit['_source']['location_type']
           entry['ref'] = entry['ref'] || {}
@@ -52,6 +54,15 @@ module Pelias
           entry['admin0_abbr'] = hit['_source']['admin0_abbr']
           entry['admin0_name'] = hit['_source']['admin0_name']
         end
+
+        pair = entry['center_point']
+        query = "SELECT qs_iso_cc,qs_adm0 FROM qs.qs_adm0 WHERE ST_Contains(geom, ST_GeometryFromText('POINT(#{pair.join(' ')})'))";
+        results = Pelias::PG_QS_CLIENT.exec(query)
+        if results.first
+          entry['admin0_abbr'] = results.first['qs_iso_cc']
+          entry['admin0_name'] = results.first['qs_adm0']
+        end
+
       end
     end
 
