@@ -11,7 +11,7 @@ module Pelias
       admin1: 'qs_adm1',
       admin2: 'qs_adm2',
       local_admin: 'qs_localadmin',
-      locality: 'qs_localities',
+      locality: 'gn-qs_localities',
       neighborhood: 'qs_neighborhoods'
     }
 
