@@ -12,7 +12,7 @@ module Pelias
 
     def rebuild_suggestions_for_admin1(e)
       {
-        input: e.name,
+        input: [e.name],
         output: e.name,
         weight: 1
       }

@@ -21,7 +21,7 @@ module Pelias
               multi_match: {
                 query: term,
                 fields: [
-                  'name', 'admin1_code', 'admin1_name',
+                  'name', 'admin1_code', 'admin1_name', 'admin0_name',
                   'locality_name', 'local_admin_name',
                   'admin2_name', 'neighborhood_name', 'feature'
                 ]
