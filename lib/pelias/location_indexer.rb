@@ -34,6 +34,7 @@ module Pelias
       # Load up our record
       fields = 'qs_gn_id,qs_woe_id,ST_AsText(ST_Centroid(geom)) as st_centroid'
       fields << ',ST_AsText(geom) as st_geom' if include_boundaries
+      fields << ",#{NAME_FIELDS[type_sym]}"
       results = Pelias::PG_CLIENT.exec "SELECT #{fields} from qs.qs_#{type} LIMIT 1 OFFSET #{idx}"
       record = results.first
 
@@ -60,7 +61,7 @@ module Pelias
       end
 
       # And save
-      parent_types = SHAPE_ORDER[0..SHAPE_ORDER.index(type_sym)]
+      parent_types = SHAPE_ORDER[0...SHAPE_ORDER.index(type_sym)]
       set.grab_parents parent_types
       set.finalize!
 
