@@ -60,7 +60,7 @@ module Pelias
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
         entry['boundaries'] = record['st_astext'] if include_boundaries
-        entry['center_point'] = record['st_centroid']
+        entry['center_point'] = parse_point record['st_centroid']
         entry["#{type}_name"] = entry['name']
 
       end
@@ -73,6 +73,11 @@ module Pelias
     end
 
     private
+
+    # convert a point to es format
+    def parse_point(point_data)
+      point_data.gsub(/[^\d\. ]/, '').gsub(' ', ',')
+    end
 
     def sti(n)
       n.to_i == 0 ? nil : n.to_i
