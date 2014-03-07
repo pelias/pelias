@@ -27,15 +27,19 @@ module Pelias
     SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood]
 
     def perform(type, idx)
+
       type_sym = type.to_sym
+      include_boundaries = type_sym != :admin0 && type_sym != :admin1
 
       # Load up our record
-      results = Pelias::PG_CLIENT.exec "SELECT *, ST_AsText(geom), ST_AsText(ST_Centroid(geom)) as st_centroid from qs.qs_#{type} LIMIT 1 OFFSET #{idx}"
+      fields = 'qs_gn_id,qs_woe_id,ST_AsText(ST_Centroid(geom)) as st_centroid'
+      fields << ',ST_AsText(geom) as st_geom' if include_boundaries
+      results = Pelias::PG_CLIENT.exec "SELECT #{fields} from qs.qs_#{type} LIMIT 1 OFFSET #{idx}"
       record = results.first
 
       # grab our ids
-      gn_id = sti record['qs_gn_id'] || record['gn_id']
-      woe_id = sti record['qs_woe_id'] || record['woe_id']
+      gn_id = sti record['qs_gn_id'] || record['gn_id'] # TODO allow gn_id
+      woe_id = sti record['qs_woe_id'] || record['woe_id'] # TODO allow woe_id
 
       # Build a set
       set = Pelias::LocationSet.new
@@ -49,7 +53,7 @@ module Pelias
         entry['name'] = record[NAME_FIELDS[type_sym]]
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
-        entry['boundaries'] = record['st_astext'] unless type_sym == :admin0 || type_sym == :admin1
+        entry['boundaries'] = record['st_astext'] if include_boundaries
         entry['center_point'] = record['st_centroid']
         entry["#{type}_name"] = entry['name']
 
