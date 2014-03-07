@@ -21,7 +21,8 @@ namespace :quattroshapes do
     sh "wget http://static.quattroshapes.com/#{file}.zip -P #{TEMP_PATH}" # download
     sh "unzip #{TEMP_PATH}/#{file}.zip -d #{TEMP_PATH}" # expand
     sh "shp2pgsql -d -Nskip #{TEMP_PATH}/#{file}.shp qs.qs_#{type} > #{TEMP_PATH}/#{file}.sql" # convert
-    sh "psql #{Pelias::PG_DBNAME} < #{TEMP_PATH}/#{file}.sql" #import
+    sh "psql #{Pelias::PG_DBNAME} < #{TEMP_PATH}/#{file}.sql" # import
+    sh "rm #{TEMP_PATH}/#{file}*" # clean up
   end
 
   # Perform an index
