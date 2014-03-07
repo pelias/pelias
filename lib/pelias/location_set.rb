@@ -55,12 +55,13 @@ module Pelias
           entry['admin0_name'] = hit['_source']['admin0_name']
         end
 
-        pair = entry['center_point']
-        query = "SELECT qs_iso_cc,qs_adm0 FROM qs.qs_adm0 WHERE ST_Contains(geom, ST_GeometryFromText('POINT(#{pair.join(' ')})'))";
-        results = Pelias::PG_QS_CLIENT.exec(query)
-        if results.first
-          entry['admin0_abbr'] = results.first['qs_iso_cc']
-          entry['admin0_name'] = results.first['qs_adm0']
+        if shape_types.include?(:admin0)
+          query = "SELECT qs_iso_cc,qs_adm0 FROM qs.qs_admin0 WHERE ST_Contains(geom, ST_GeometryFromText('#{entry['center_point']}'))";
+          results = Pelias::PG_CLIENT.exec(query)
+          if results.first
+            entry['admin0_abbr'] = results.first['qs_iso_cc']
+            entry['admin0_name'] = results.first['qs_adm0']
+          end
         end
 
       end

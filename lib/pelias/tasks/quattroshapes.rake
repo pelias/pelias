@@ -3,6 +3,7 @@ require 'rgeo-shapefile'
 
 namespace :quattroshapes do
 
+  task(:populate_admin0)       { perform_index 'admin0' }
   task(:populate_admin1)       { perform_index 'admin1' }
   task(:populate_admin2)       { perform_index 'admin2' }
   task(:populate_local_admin)  { perform_index 'local_admin' }

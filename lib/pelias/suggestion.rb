@@ -6,6 +6,10 @@ module Pelias
 
     extend self
 
+    def rebuild_suggestions_for_admin0(e)
+      rebuild_suggestions_for_admin1(e)
+    end
+
     def rebuild_suggestions_for_admin1(e)
       {
         input: e.name,

@@ -24,45 +24,18 @@ module Pelias
       neighborhood: 'name'
     }
 
-    CC_FIELDS = {
-      admin0: 'qs_iso_cc',
-      admin1: 'qs_iso_cc',
-      admin2: 'qs_iso_cc',
-      local_admin: 'qs_iso_cc',
-      locality: 'qs_adm0_a3',
-      neighborhood: 'gn_adm0_cc'
-    }
-
     SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood]
-
-    COUNTRY_DATA = YAML.load_file 'lib/pelias/data/geonames/countries.yml'
-
-    READER_SEMAPHORE = Mutex.new
-    READERS = Hash.new { |h, k| h[k] = [] }
 
     def perform(type, idx)
       type_sym = type.to_sym
-      path = "/tmp/mapzen/#{PATHS[type_sym]}"
-      reader = get_locked_reader(path)
 
       # Load up our record
-      reader.seek_index(idx)
-      record = reader.next
-
-      # Make sure we care a valid record
-      cc = record.attributes[CC_FIELDS[type_sym]].strip
-
-      return if cc == '-1'
-      return if record.geometry.nil?
-      raise "bad cc: #{cc} (#{cc.class.name})" unless COUNTRY_DATA[cc]
+      results = Pelias::PG_CLIENT.exec "SELECT *, ST_AsText(geom), ST_AsText(ST_Centroid(geom)) as st_centroid from qs.qs_#{type} LIMIT 1 OFFSET #{idx}"
+      record = results.first
 
       # grab our ids
-      gn_id = sti record.attributes['qs_gn_id'] || record.attributes['gn_id']
-      woe_id = sti record.attributes['qs_woe_id'] || record.attributes['woe_id']
-
-      record.attributes.each do |key, value|
-        value.force_encoding 'UTF-8' if value.is_a?(String)
-      end
+      gn_id = sti record['qs_gn_id'] || record['gn_id']
+      woe_id = sti record['qs_woe_id'] || record['woe_id']
 
       # Build a set
       set = Pelias::LocationSet.new
@@ -73,16 +46,12 @@ module Pelias
       # Update it
       set.update do |_id, entry|
 
-        entry['name'] = record.attributes[NAME_FIELDS[type_sym]]
+        entry['name'] = record[NAME_FIELDS[type_sym]]
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
-        entry['boundaries'] = RGeo::GeoJSON.encode(record.geometry)
-        entry['center_point'] = RGeo::GeoJSON.encode(record.geometry.centroid)['coordinates']
+        entry['boundaries'] = record['st_astext'] unless type_sym == :admin0 || type_sym == :admin1
+        entry['center_point'] = record['st_centroid']
         entry["#{type}_name"] = entry['name']
-
-        # other data
-        entry['admin0_abbr'] = cc
-        entry['admin0_name'] = COUNTRY_DATA[cc][:name]
 
       end
 
@@ -91,23 +60,9 @@ module Pelias
       set.grab_parents parent_types
       set.finalize!
 
-    ensure
-
-      return_locked_reader path, reader
-
     end
 
     private
-
-    def get_locked_reader(path)
-      reader = nil
-      READER_SEMAPHORE.synchronize { reader = READERS[path].shift }
-      reader || RGeo::Shapefile::Reader.open(path)
-    end
-
-    def return_locked_reader(path, reader)
-      READER_SEMAPHORE.synchronize { READERS[path] << reader }
-    end
 
     def sti(n)
       n.to_i == 0 ? nil : n.to_i
