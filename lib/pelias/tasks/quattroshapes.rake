@@ -28,7 +28,7 @@ namespace :quattroshapes do
         sh "shp2pgsql -d #{TEMP_PATH}/#{file}.shp qs.qs_#{type} > #{TEMP_PATH}/#{file}.sql"
 
         # Import into postgis
-        sh "psql gis < #{TEMP_PATH}/#{file}.sql"
+        sh "psql #{Pelias::PG_DBNAME} < #{TEMP_PATH}/#{file}.sql"
 
       end
     end
