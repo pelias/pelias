@@ -27,8 +27,8 @@ namespace :quattroshapes do
 
   # Perform an index
   def perform_index(type)
-    results = Pelias::PG_CLIENT.exec "SELECT COUNT(1) as count from qs.qs_#{type}"
-    count = results.first['count'].to_i
+    results = Pelias::DB["SELECT COUNT(1) as count from qs.qs_#{type}"]
+    count = results.first[:count].to_i
     bar = ProgressBar.create(total: count, format: '%e |%b>%i| %p%%')
     count.times do |idx|
       bar.progress += 1

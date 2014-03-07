@@ -16,12 +16,12 @@ module Pelias
     }
 
     NAME_FIELDS = {
-      admin0: 'qs_a0',
-      admin1: 'qs_a1',
-      admin2: 'qs_a2',
-      local_admin: 'qs_la',
-      locality: 'qs_loc',
-      neighborhood: 'name'
+      admin0: :qs_a0,
+      admin1: :qs_a1,
+      admin2: :qs_a2,
+      local_admin: :qs_la,
+      locality: :qs_loc,
+      neighborhood: :name
     }
 
     SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood]
@@ -40,12 +40,12 @@ module Pelias
       end
       fields << ',ST_AsText(geom) as st_geom' if include_boundaries
       fields << ",#{NAME_FIELDS[type_sym]}"
-      results = Pelias::PG_CLIENT.exec "SELECT #{fields} from qs.qs_#{type} LIMIT 1 OFFSET #{idx}"
+      results = Pelias::DB["SELECT #{fields} from qs.qs_#{type} LIMIT 1 OFFSET #{idx}"]
       record = results.first
 
       # grab our ids
-      gn_id = sti record['qs_gn_id'] || record['gn_id'] # TODO allow gn_id
-      woe_id = sti record['qs_woe_id'] || record['woe_id'] # TODO allow woe_id
+      gn_id = sti record[:qs_gn_id] || record[:gn_id] # TODO allow gn_id
+      woe_id = sti record[:qs_woe_id] || record[:woe_id] # TODO allow woe_id
 
       # Build a set
       set = Pelias::LocationSet.new
@@ -60,13 +60,13 @@ module Pelias
         entry['name'] = record[NAME_FIELDS[type_sym]]
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
-        entry['boundaries'] = record['st_astext'] if include_boundaries
-        entry['center_point'] = record['st_centroid']
+        entry['boundaries'] = record[:st_astext] if include_boundaries
+        entry['center_point'] = record[:st_centroid]
         entry["#{type}_name"] = entry['name']
 
         set.grab_parents(parent_types, entry)
 
-        entry['center_point'] = parse_point record['st_centroid']
+        entry['center_point'] = parse_point record[:st_centroid]
 
       end
 
