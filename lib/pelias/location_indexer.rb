@@ -83,7 +83,10 @@ module Pelias
     end
 
     def sti(n)
-      n.to_i == 0 ? nil : n.to_i
+      if n
+        n_i = n.to_i
+        n_i if n_i > 0
+      end
     end
 
   end
