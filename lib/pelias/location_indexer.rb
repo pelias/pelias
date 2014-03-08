@@ -26,7 +26,7 @@ module Pelias
 
     SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood]
 
-    def perform(type, idx)
+    def perform(type, gid)
 
       type_sym = type.to_sym
       include_boundaries = type_sym != :admin0 && type_sym != :admin1
@@ -40,12 +40,12 @@ module Pelias
       end
       fields << ',ST_AsText(geom) as st_geom' if include_boundaries
       fields << ",#{NAME_FIELDS[type_sym]}"
-      results = Pelias::DB["SELECT #{fields} from qs.qs_#{type} LIMIT 1 OFFSET #{idx}"]
+      results = Pelias::DB["SELECT #{fields} from qs.qs_#{type} WHERE gid=#{gid}"]
       record = results.first
 
       # grab our ids
-      gn_id = sti record[:qs_gn_id] || record[:gn_id] # TODO allow gn_id
-      woe_id = sti record[:qs_woe_id] || record[:woe_id] # TODO allow woe_id
+      gn_id = sti record[:qs_gn_id] || record[:gn_id]
+      woe_id = sti record[:qs_woe_id] || record[:woe_id]
 
       # Build a set
       set = Pelias::LocationSet.new

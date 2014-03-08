@@ -27,12 +27,14 @@ namespace :quattroshapes do
 
   # Perform an index
   def perform_index(type)
+    # Get count
     results = Pelias::DB["SELECT COUNT(1) as count from qs.qs_#{type}"]
     count = results.first[:count].to_i
     bar = ProgressBar.create(total: count, format: '%e |%b>%i| %p%%')
-    count.times do |idx|
+    # And execute each
+    Pelias::DB["select gid from qs.qs_#{type}"].use_cursor.each do |row|
       bar.progress += 1
-      Pelias::LocationIndexer.perform_async type, idx
+      Pelias::LocationIndexer.perform_async type, row[:gid]
     end
   end
 
