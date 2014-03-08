@@ -38,7 +38,7 @@ module Pelias
       else
         fields << ',qs_gn_id,qs_woe_id'
       end
-      fields << ',ST_AsText(geom) as st_geom' if include_boundaries
+      fields << ',ST_AsGeoJson(geom) as st_geom' if include_boundaries
       fields << ",#{NAME_FIELDS[type_sym]}"
       results = Pelias::DB["SELECT #{fields} from qs.qs_#{type} WHERE gid=#{gid}"]
       record = results.first
@@ -60,7 +60,7 @@ module Pelias
         entry['name'] = record[NAME_FIELDS[type_sym]]
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
-        entry['boundaries'] = record[:st_astext] if include_boundaries
+        entry['boundaries'] = JSON.parse(record[:st_geom]) if include_boundaries
         entry['center_point'] = record[:st_centroid]
         entry["#{type}_name"] = entry['name']
 
