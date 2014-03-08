@@ -12,7 +12,6 @@ namespace :osm do
         #{Pelias::Poi.get_sql(shape)}
       ")
       begin
-        puts "#{shape} #{i}"
         i+=size
         results = Pelias::PG_CLIENT.exec("FETCH #{size} FROM poi_#{shape}_cursor")
         pois = results.map do |result|
@@ -38,7 +37,6 @@ namespace :osm do
     Pelias::DB[all_streets_sql].use_cursor.each do |street|
       # load it up
       bar.progress += 1
-      puts street.inspect
       next unless osm_id = sti(street[:osm_id])
       set = Pelias::LocationSet.new
       set.append_records 'osm_id', osm_id

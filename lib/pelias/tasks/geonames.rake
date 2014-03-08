@@ -27,10 +27,6 @@ namespace :geonames do
           end
           underset.finalize!
         end
-        if set.records.count > 0
-          puts set.records.count
-          exit
-        end
         set.finalize!
       end
     end
