@@ -1,7 +1,6 @@
 require 'bundler/setup'
 require 'pelias'
 require 'ruby-progressbar'
-require 'rgeo-geojson'
 
 # Hide the sidekiq log
 Sidekiq::Logging.logger = nil

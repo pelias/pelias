@@ -1,5 +1,4 @@
 require_relative 'task_helper'
-require 'rgeo-shapefile'
 
 namespace :quattroshapes do
 

@@ -1,6 +1,3 @@
-require 'rgeo-shapefile'
-require 'rgeo-geojson'
-
 module Pelias
   class LocationIndexer
 
