@@ -9,10 +9,12 @@ module Pelias
   autoload :VERSION, 'pelias/version'
 
   autoload :LocationSet, 'pelias/location_set'
-  autoload :LocationIndexer, 'pelias/location_indexer'
   autoload :Search, 'pelias/search'
   autoload :Server, 'pelias/server/server'
   autoload :Suggestion, 'pelias/suggestion'
+
+  autoload :GeonameIndexer,  'pelias/geoname_indexer'
+  autoload :LocationIndexer, 'pelias/location_indexer'
 
   autoload :Poi, 'pelias/poi'
 
