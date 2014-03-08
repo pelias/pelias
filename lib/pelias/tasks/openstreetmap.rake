@@ -61,34 +61,26 @@ namespace :osm do
     Pelias::PG_CLIENT.exec('COMMIT')
   end
 
-  task :populate_addresses do
+  task :populate_address do
     %w(point polygon line).each do |shape|
-      r = Pelias::PG_CLIENT.exec(all_addresses_count_sql_for(shape))
-      bar = ProgressBar.create(total: r.first['count'].to_i, format: '%e |%b>%i| %p%%')
-      Pelias::PG_CLIENT.exec('BEGIN')
-      Pelias::PG_CLIENT.exec("DECLARE address_#{shape}_cursor CURSOR FOR #{all_addresses_sql_for(shape)}")
-      begin
-        addresses = Pelias::PG_CLIENT.exec("FETCH 100 FROM address_#{shape}_cursor")
-        addresses.each do |address|
-          bar.progress += 1
-          next unless osm_id = sti(address['osm_id'])
-          set = Pelias::LocationSet.new
-          set.append_records 'osm_id', osm_id
-          set.close_records_for 'address'
-          set.update do |_id, entry|
-            entry['osm_id'] = osm_id
-            entry['name'] = entry['address_name'] = "#{address['housenumber']} #{address['street_name']}"
-            entry['street_name'] = address['street_name']
-            entry['center_point'] = JSON.parse(address['location'])['coordinates']
-          end
-          # and save (we purposely skip the street here because we are not able
-          # to line them up perfectly and instead rely on the name we already # have
-          set.grab_parents ['neighborhood', 'local_admin', 'locality', 'admin1', 'admin2']
-          set.finalize!
+      r = Pelias::DB[all_addresses_count_sql_for(shape)]
+      bar = ProgressBar.create(total: r.first[:count].to_i, format: '%e |%b>%i| %p%%')
+      Pelias::DB[all_addresses_sql_for(shape)].use_cursor.each do |address|
+        bar.progress += 1
+        next unless osm_id = sti(address[:osm_id])
+        set = Pelias::LocationSet.new
+        set.append_records 'osm_id', osm_id
+        set.close_records_for 'address'
+        set.update do |_id, entry|
+          entry['osm_id'] = osm_id
+          entry['name'] = entry['address_name'] = "#{address[:housenumber]} #{address[:street_name]}"
+          entry['street_name'] = address[:street_name]
+          entry['center_point'] = JSON.parse(address[:location])['coordinates']
+          set.grab_parents [:neighborhood, :locality, :local_admin, :admin2, :admin1, :admin0], entry # TODO use central location
         end
-      end while addresses.count > 0
-      Pelias::PG_CLIENT.exec("CLOSE address_#{shape}_cursor")
-      Pelias::PG_CLIENT.exec('COMMIT')
+        # and save
+        set.finalize!
+      end
     end
   end
 

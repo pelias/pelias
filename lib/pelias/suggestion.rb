@@ -62,6 +62,7 @@ module Pelias
 
     def rebuild_suggestions_for_address(e)
       # TODO
+      {}
     end
 
     def rebuild_suggestions_for_street(e)
