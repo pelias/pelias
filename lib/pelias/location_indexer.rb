@@ -76,7 +76,7 @@ module Pelias
 
     # convert a point to es format
     def parse_point(point_data)
-      point_data.gsub(/[^\d\. ]/, '').split(' ').map(&:to_f)
+      point_data.gsub(/[^-\d\. ]/, '').split(' ').map(&:to_f)
     end
 
     def sti(n)
