@@ -33,7 +33,7 @@ module Pelias
 
       # Load up our record
       fields = 'ST_AsText(ST_Centroid(geom)) as st_centroid'
-      if type_sym == :locality
+      if type_sym == :neighborhood
         fields << ',gn_id,woe_id'
       else
         fields << ',qs_gn_id,qs_woe_id'
