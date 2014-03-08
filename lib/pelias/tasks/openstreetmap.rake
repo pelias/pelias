@@ -46,7 +46,7 @@ namespace :osm do
         entry['name'] = entry['street_name'] = street[:name]
         entry['center_point'] = JSON.parse(street[:center])['coordinates']
         entry['boundaries'] = JSON.parse(street[:street])
-        set.grab_parents [:neighborhood, :locality, :local_admin, :admin2, :admin1, :admin0], entry # TODO use central location
+        set.grab_parents Pelias::LocationIndexer.parent_types_for(:street), entry
       end
       # and save
       set.finalize!
@@ -68,7 +68,7 @@ namespace :osm do
           entry['name'] = entry['address_name'] = "#{address[:housenumber]} #{address[:street_name]}"
           entry['street_name'] = address[:street_name]
           entry['center_point'] = JSON.parse(address[:location])['coordinates']
-          set.grab_parents [:neighborhood, :locality, :local_admin, :admin2, :admin1, :admin0], entry # TODO use central location
+          set.grab_parents Pelias::LocationIndexer.parent_types_for(:street), entry # don't look up streets
         end
         # and save
         set.finalize!

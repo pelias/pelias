@@ -24,7 +24,7 @@ module Pelias
       neighborhood: :name
     }
 
-    SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood]
+    SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood, :street, :address]
 
     def perform(type, gid)
 
@@ -54,7 +54,7 @@ module Pelias
       set.close_records_for type
 
       # Update it
-      parent_types = SHAPE_ORDER[0...SHAPE_ORDER.index(type_sym)]
+      parent_types = LocationIndexer.parent_types_for(type_sym)
       set.update do |_id, entry|
 
         entry['name'] = record[NAME_FIELDS[type_sym]]
@@ -87,6 +87,10 @@ module Pelias
         n_i = n.to_i
         n_i if n_i > 0
       end
+    end
+
+    def self.parent_types_for(type)
+      SHAPE_ORDER[0...SHAPE_ORDER.index(type)]
     end
 
   end
