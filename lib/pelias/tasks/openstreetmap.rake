@@ -32,33 +32,27 @@ namespace :osm do
     end
   end
 
-  task :populate_streets do
-    r = Pelias::PG_CLIENT.exec(all_streets_count_sql)
-    bar = ProgressBar.create(total: r.first['count'].to_i, format: '%e |%b>%i| %p%%')
-    Pelias::PG_CLIENT.exec('BEGIN')
-    Pelias::PG_CLIENT.exec("DECLARE streets_cursor CURSOR FOR #{all_streets_sql}")
-    begin
-      streets = Pelias::PG_CLIENT.exec('FETCH 50 FROM streets_cursor')
-      streets.each do |street|
-        # load it up
-        bar.progress += 1
-        next unless osm_id = sti(street['osm_id'])
-        set = Pelias::LocationSet.new
-        set.append_records 'osm_id', osm_id
-        set.close_records_for 'street'
-        set.update do |_id, entry|
-          entry['osm_id'] = osm_id
-          entry['name'] = entry['street_name'] = street['name']
-          entry['center_point'] = JSON.parse(street['center'])['coordinates']
-          entry['boundaries'] = JSON.parse(street['street'])
-        end
-        # and save
-        set.grab_parents ['neighborhood', 'locality', 'admin1', 'admin2', 'local_admin']
-        set.finalize!
+  task :populate_street do
+    r = Pelias::DB[all_streets_count_sql]
+    bar = ProgressBar.create(total: r.first[:count].to_i, format: '%e |%b>%i| %p%%')
+    Pelias::DB[all_streets_sql].use_cursor.each do |street|
+      # load it up
+      bar.progress += 1
+      puts street.inspect
+      next unless osm_id = sti(street[:osm_id])
+      set = Pelias::LocationSet.new
+      set.append_records 'osm_id', osm_id
+      set.close_records_for 'street'
+      set.update do |_id, entry|
+        entry['osm_id'] = osm_id
+        entry['name'] = entry['street_name'] = street[:name]
+        entry['center_point'] = JSON.parse(street[:center])['coordinates']
+        entry['boundaries'] = JSON.parse(street[:street])
+        set.grab_parents [:neighborhood, :locality, :local_admin, :admin2, :admin1, :admin0], entry # TODO use central location
       end
-    end while streets.count > 0
-    Pelias::PG_CLIENT.exec('CLOSE streets_cursor')
-    Pelias::PG_CLIENT.exec('COMMIT')
+      # and save
+      set.finalize!
+    end
   end
 
   task :populate_address do
