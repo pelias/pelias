@@ -13,33 +13,35 @@ Pelias is a set of tools for importing [OpenStreetMap](http://www.openstreetmap.
 
 ## Usage
 
-To get set up, run the following. Order is important!
+To get set up, run the following.
 
-Set up the index & mappings:
+### Set up the index & mappings:
 
     $ rake index:create
 
-Download geonames, and add them to the index. This provides part of the admin heirarchy. They're also used for populations (which factor into autocomplete weights) and alternate names.
+### Prepare Quattroshapes shapefiles and load them into ElasticSearch:
+
+    $ rake quattroshapes:prepare_all
+    $ rake quattroshapes:populate_all
+
+### Download geonames, and add them to the index.
+
+This provides nicer names, alternate names, and populations (which factor into autocomplete weights).
 
     $ rake geonames:populate
 
-Download & unzip Quattroshapes shapefiles. We only index these if we can find a relevant Geoname above!
-
-    $ rake quattroshapes:populate_admin2
-    $ rake quattroshapes:populate_local_admin
-    $ rake quattroshapes:populate_localities
-    $ rake quattroshapes:populate_neighborhoods
+### Add OSM data
 
 Assuming you've set up a postGIS-enabled database with OSM data, the following will add all streets and addresses to the index, reverse geocoding them into the above shapes. This should capture most of the streets and addresses in OSM, but is probably missing some. It's not as exhaustive as Nominatim at this point.
 
     $ rake openstreetmap:populate_streets
     $ rake openstreetmap:populate_addresses
 
-To run the test server:
+## Start the server
 
     $ unicorn
 
-You should be able to access the server at http://localhost:8080/suggest?query=bro
+You should now be able to access the server at http://localhost:8080/suggest?query=bro
 
 ## API
 
