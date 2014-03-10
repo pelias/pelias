@@ -25,6 +25,7 @@ json.features(@hits) do |hit|
     json.locality_name     source['locality_name']
     json.neighborhood_name source['neighborhood_name']
     json.street_name       source['street_name']
+    json.address_name      source['address_name']
 
   end
 

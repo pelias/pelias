@@ -58,12 +58,10 @@ module Pelias
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
         entry['boundaries'] = JSON.parse(record[:st_geom]) if include_boundaries
-        entry['center_point'] = record[:st_centroid]
+        entry['center_point'] = parse_point record[:st_centroid]
         entry["#{type}_name"] = entry['name']
 
         set.grab_parents(parent_types, entry)
-
-        entry['center_point'] = parse_point record[:st_centroid]
 
       end
 
