@@ -32,11 +32,7 @@ namespace :osm do
   end
 
   task :populate_street do
-    r = Pelias::DB[all_streets_count_sql]
-    bar = ProgressBar.create(total: r.first[:count].to_i, format: '%e |%b>%i| %p%%')
-    Pelias::DB[all_streets_sql].use_cursor.each do |street|
-      # load it up
-      bar.progress += 1
+    Pelias::DB[all_streets_sql].use_cursor.each.with_index do |street, idx|
       next unless osm_id = sti(street[:osm_id])
       Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :street, :street, {
         osm_id: osm_id,
