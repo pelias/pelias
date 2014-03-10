@@ -4,36 +4,12 @@ module Pelias
 
     extend self
 
-    def search(query, viewbox = nil, center = nil, size = 10)
-      subqueries = [{
-        dis_max: {
-          tie_breaker: 0.7,
-          boost: 1.2,
-          queries: [{ match: { name: query } }]
-        }
-      }]
-      query.split.each do |term|
-        subqueries << {
-          dis_max: {
-            tie_breaker: 0.7,
-            boost: 1.2,
-            queries: [{
-              multi_match: {
-                query: term,
-                fields: [
-                  'name', 'admin1_code', 'admin1_name', 'admin0_name',
-                  'locality_name', 'local_admin_name',
-                  'admin2_name', 'neighborhood_name', 'feature'
-                ]
-              }
-            }]
-          }
-        }
-      end
+    def search(term, viewbox = nil, center = nil, size = 10)
       query = {
         query: {
-          bool: {
-            should: subqueries
+          multi_match: {
+            query: term,
+            fields: ['name^3'].concat(QuattroIndexer::SHAPE_ORDER.map { |f| "#{f}_name" })
           }
         }
       }
