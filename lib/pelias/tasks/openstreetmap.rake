@@ -13,7 +13,7 @@ namespace :osm do
   end
 
   task :populate_street do
-    Pelias::DB[all_streets_sql].use_cursor.each.with_index do |street, idx|
+    Pelias::DB[all_streets_sql].use_cursor.each do |street|
       next unless osm_id = sti(street[:osm_id])
       next unless street[:highway] && street[:name]
       Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :street, :street, {
