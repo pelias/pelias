@@ -21,7 +21,7 @@ namespace :quattroshapes do
     sh "wget http://static.quattroshapes.com/#{file}.zip -P #{TEMP_PATH}" # download
     sh "unzip #{TEMP_PATH}/#{file}.zip -d #{TEMP_PATH}" # expand
     sh "shp2pgsql -D -d -Nskip -I -WLATIN1 #{TEMP_PATH}/#{file}.shp qs.qs_#{type} > #{TEMP_PATH}/#{file}.sql" # convert
-    sh "psql #{Pelias::PG_DBNAME} < #{TEMP_PATH}/#{file}.sql" # import
+    sh "#{psql_command} < #{TEMP_PATH}/#{file}.sql" # import
     sh "rm #{TEMP_PATH}/#{file}*" # clean up
   end
 
@@ -36,6 +36,16 @@ namespace :quattroshapes do
       bar.progress += 1
       Pelias::QuattroIndexer.perform_async type, row[:gid]
     end
+  end
+
+  def psql_command
+    c = Pelias::PG_CONFIG
+    [ 'psql',
+      ("-U #{c[:user]}" if c[:user]),
+      ("-h #{c[:host]}" if c[:host]),
+      ("-p #{c[:port]}" if c[:post]),
+      c[:database]
+    ].compact.join(' ')
   end
 
 end

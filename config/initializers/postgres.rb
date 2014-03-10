@@ -7,5 +7,5 @@ pg_config.symbolize_keys!
 pg_config[:database] ||= pg_config[:dbname] # legacy setting
 
 # And connect
-Pelias::PG_DBNAME = pg_config[:database]
+Pelias::PG_CONFIG = pg_config
 Pelias::DB = Sequel.postgres(pg_config)
