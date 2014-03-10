@@ -41,7 +41,7 @@ module Pelias
 
     def grab_parents(shape_types, entry)
       shape_types.each do |type|
-        name_field = LocationIndexer::NAME_FIELDS[type]
+        name_field = QuattroIndexer::NAME_FIELDS[type]
         query = "SELECT #{name_field} FROM qs.qs_#{type} WHERE ST_Contains(geom, ST_GeometryFromText('#{entry['center_point']}'))";
         if result = Pelias::DB[query].first
           entry["#{type}_name"] = result[name_field]

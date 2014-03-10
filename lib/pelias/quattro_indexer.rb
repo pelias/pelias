@@ -1,5 +1,5 @@
 module Pelias
-  class LocationIndexer
+  class QuattroIndexer
 
     include Sidekiq::Worker
 
@@ -51,7 +51,7 @@ module Pelias
       set.close_records_for type
 
       # Update it
-      parent_types = LocationIndexer.parent_types_for(type_sym)
+      parent_types = self.class.parent_types_for(type_sym)
       set.update do |_id, entry|
 
         entry['name'] = record[NAME_FIELDS[type_sym]]
