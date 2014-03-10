@@ -37,6 +37,7 @@ namespace :osm do
     Pelias::DB[all_streets_sql].use_cursor.each do |street|
       # load it up
       bar.progress += 1
+      next unless street[:name] && street[:highway]
       next unless osm_id = sti(street[:osm_id])
       Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :street, :street, {
         osm_id: osm_id,
@@ -70,16 +71,11 @@ namespace :osm do
   private
 
   def all_streets_count_sql
-    'SELECT count(1) FROM planet_osm_line WHERE name IS NOT NULL AND highway IS NOT NULL'
+    'SELECT count(1) FROM planet_osm_line'
   end
 
   def all_streets_sql
-    "SELECT osm_id, name,
-      ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
-      ST_AsGeoJSON(ST_Transform(ST_LineInterpolatePoint(way, 0.5), 4326), 6) AS center
-    FROM planet_osm_line
-    WHERE name IS NOT NULL AND highway IS NOT NULL
-    ORDER BY osm_id"
+    'SELECT osm_id, name, ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street, ST_AsGeoJSON(ST_Transform(ST_LineInterpolatePoint(way, 0.5), 4326), 6) AS center FROM planet_osm_line'
   end
 
   def all_addresses_count_sql_for(shape)
