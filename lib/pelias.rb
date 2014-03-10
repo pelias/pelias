@@ -15,6 +15,7 @@ module Pelias
 
   autoload :GeonameIndexer, 'pelias/geoname_indexer'
   autoload :QuattroIndexer, 'pelias/quattro_indexer'
+  autoload :LocationIndexer, 'pelias/location_indexer'
 
   autoload :Poi, 'pelias/poi'
 

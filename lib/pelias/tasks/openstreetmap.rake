@@ -38,18 +38,13 @@ namespace :osm do
       # load it up
       bar.progress += 1
       next unless osm_id = sti(street[:osm_id])
-      set = Pelias::LocationSet.new
-      set.append_records 'osm_id', osm_id
-      set.close_records_for 'street'
-      set.update do |_id, entry|
-        entry['osm_id'] = osm_id
-        entry['name'] = entry['street_name'] = street[:name]
-        entry['center_point'] = JSON.parse(street[:center])['coordinates']
-        entry['boundaries'] = JSON.parse(street[:street])
-        set.grab_parents Pelias::QuattroIndexer.parent_types_for(:street), entry
-      end
-      # and save
-      set.finalize!
+      Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :street, :street, {
+        osm_id: osm_id,
+        name: street[:name],
+        street_name: street[:name],
+        center_point: JSON.parse(street[:center])['coordinates'],
+        boundaries: JSON.parse(street[:street])
+      })
     end
   end
 
@@ -60,18 +55,14 @@ namespace :osm do
       Pelias::DB[all_addresses_sql_for(shape)].use_cursor.each do |address|
         bar.progress += 1
         next unless osm_id = sti(address[:osm_id])
-        set = Pelias::LocationSet.new
-        set.append_records 'osm_id', osm_id
-        set.close_records_for 'address'
-        set.update do |_id, entry|
-          entry['osm_id'] = osm_id
-          entry['name'] = entry['address_name'] = "#{address[:housenumber]} #{address[:street_name]}"
-          entry['street_name'] = address[:street_name]
-          entry['center_point'] = JSON.parse(address[:location])['coordinates']
-          set.grab_parents Pelias::QuattroIndexer.parent_types_for(:street), entry # don't look up streets
-        end
-        # and save
-        set.finalize!
+        name = "#{address[:housenumber]} #{address[:street_name]}"
+        Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :address, :street, {
+          osm_id: osm_id,
+          name: name,
+          address_name: name,
+          street_name: address[:street_name],
+          center_point: JSON.parse(address[:location])['coordinates']
+        })
       end
     end
   end
