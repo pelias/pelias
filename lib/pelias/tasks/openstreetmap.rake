@@ -34,6 +34,7 @@ namespace :osm do
   task :populate_street do
     Pelias::DB[all_streets_sql].use_cursor.each.with_index do |street, idx|
       next unless osm_id = sti(street[:osm_id])
+      next unless street[:highway] && street[:name]
       Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :street, :street, {
         osm_id: osm_id,
         name: street[:name],
@@ -70,11 +71,10 @@ namespace :osm do
   end
 
   def all_streets_sql
-    "SELECT osm_id, name,
+    "SELECT osm_id, name, highway,
       ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
       ST_AsGeoJSON(ST_Transform(ST_LineInterpolatePoint(way, 0.5), 4326), 6) AS center
     FROM planet_osm_line
-    WHERE name IS NOT NULL AND highway IS NOT NULL
     ORDER BY osm_id"
   end
 
