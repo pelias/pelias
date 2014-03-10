@@ -13,15 +13,12 @@ module Pelias
         entry['name'] = arr[1]
         entry['alternate_names'] = arr[3].split(',')
         entry['population'] = arr[14].to_i
-        # And propagate to others' payloads
+        # And propagate to others' payloads via location indexer
         type = entry['location_type']
-        underset = Pelias::LocationSet.new
-        underset.append_records "ref.#{type}", _id
-        underset.update do |_uid, uentry|
-          uentry["#{type}_name"] = arr[1]
-          uentry["#{type}_alternate_names"] = arr[3].split(',')
-        end
-        underset.finalize!
+        Pelias::LocationIndexer.perform_async({ "ref.#{type}" => _id }, nil, nil, {
+          "#{type}_name" => arr[1],
+          "#{type}_alternate_names" => arr[3].split(',')
+        })
       end
       set.finalize!
     end
