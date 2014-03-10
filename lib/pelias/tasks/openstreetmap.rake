@@ -3,31 +3,12 @@ require_relative 'task_helper'
 namespace :osm do
 
   task :populate_pois do
-    i = 0
-    size = 10
     %w(point polygon line).each do |shape|
-      Pelias::PG_CLIENT.exec("BEGIN")
-      Pelias::PG_CLIENT.exec("
-        DECLARE poi_#{shape}_cursor CURSOR FOR
-        #{Pelias::Poi.get_sql(shape)}
-      ")
-      begin
-        i+=size
-        results = Pelias::PG_CLIENT.exec("FETCH #{size} FROM poi_#{shape}_cursor")
-        pois = results.map do |result|
-          Pelias::Poi.create_hash(result, shape)
-        end
-        if i >= 0
-          begin
-            Pelias::Poi.delay.create(pois.compact)
-          rescue
-            sleep 20
-            Pelias::Poi.delay.create(pois.compact)
-          end
-        end
-      end while results.count > 0
-      Pelias::PG_CLIENT.exec("CLOSE poi_#{shape}_cursor")
-      Pelias::PG_CLIENT.exec("COMMIT")
+      Pelias::DB[Pelias::Poi.get_sql(shape)].use_cursor.each do |poi|
+        next unless osm_id = str(street[:osm_id])
+        hash = Pelias::Poi.create_hash(poi.stringify_keys, shape)
+        Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :poi, :street, hash)
+      end
     end
   end
 
@@ -65,10 +46,6 @@ namespace :osm do
   end
 
   private
-
-  def all_streets_count_sql
-    'SELECT count(1) FROM planet_osm_line WHERE name IS NOT NULL AND highway IS NOT NULL'
-  end
 
   def all_streets_sql
     "SELECT osm_id, name, highway,

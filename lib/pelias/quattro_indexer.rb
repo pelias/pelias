@@ -21,7 +21,7 @@ module Pelias
       neighborhood: :name
     }
 
-    SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood, :street, :address]
+    SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood, :street, :address, :poi]
 
     def perform(type, gid)
 

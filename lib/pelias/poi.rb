@@ -4,10 +4,6 @@ module Pelias
 
     SUGGEST_WEIGHT = 6
 
-    def encompassing_shapes
-      %w(admin2 local_admin locality neighborhood)
-    end
-
     def suggest_weight
       (locality_name || local_admin_name) ? SUGGEST_WEIGHT : 0
     end
