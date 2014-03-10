@@ -6,7 +6,7 @@ namespace :geonames do
   task :populate => :download do
     File.open("#{TEMP_PATH}/allCountries.txt") do |file|
       bar = ProgressBar.create(total: 10_000_000, format: '%e |%b>%i| %p%%')
-      file.each_line.with_index do |line, i|
+      file.each_line do |line|
         bar.progress += 1
         Pelias::GeonameIndexer.perform_async line
       end
