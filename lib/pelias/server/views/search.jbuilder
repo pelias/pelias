@@ -17,6 +17,9 @@ json.features(@hits) do |hit|
     json.type              source['location_type']
     json.name              source['name']
 
+    # Suggest output
+    json.hint hit['output'] if hit['output']
+
     # Names
     json.admin0_name       source['admin0_name']
     json.admin1_name       source['admin1_name']
