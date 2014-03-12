@@ -20,7 +20,7 @@ module Pelias
       update do |_id, entry|
         suggest = Suggestion.send :"rebuild_suggestions_for_#{entry['location_type']}", Hashie::Mash.new(entry)
         entry['suggest'] = suggest
-        denied = ['boundaries', 'suggest']
+        denied = ['boundaries', 'suggest', 'refs']
         entry['suggest']['payload'] = entry.reject { |k, v| denied.include?(k) }
       end
     end
@@ -33,7 +33,7 @@ module Pelias
         if record['_source']
           bulk << { index: { _id: record.delete('_id'), data: record['_source'] } }
         else
-          bulk << { index: { data: record } }
+          bulk << { index: { _id: record.delete('_id'), data: record } }
         end
       end
       ES_CLIENT.bulk(index: Pelias::INDEX, type: 'location', body: bulk)
@@ -41,12 +41,25 @@ module Pelias
 
     def grab_parents(shape_types, entry)
       shape_types.each do |type|
-        name_field = QuattroIndexer::NAME_FIELDS[type]
+
         loc = "POINT(#{entry['center_point'][0]} #{entry['center_point'][1]})"
-        query = "SELECT #{name_field} FROM qs.qs_#{type} WHERE ST_Contains(geom, ST_GeometryFromText('#{loc}'))";
-        if result = Pelias::DB[query].first
-          entry["#{type}_name"] = result[name_field]
+        query = "SELECT gid FROM qs.qs_#{type} WHERE ST_Contains(geom, ST_GeometryFromText('#{loc}'))";
+        result = Pelias::DB[query].first
+
+        # Copy down data from the found record
+        if result
+
+          record = Pelias::ES_CLIENT.get(id: "qs:#{type}:#{result[:gid]}", type: 'location', index: Pelias::INDEX)
+          source = record['_source']
+
+          entry['refs'] ||= {}
+          entry['refs'][type] = record['_id']
+          entry["#{type}_name"] = source['name']
+          entry["#{type}_abbr"] = source['abbr']
+          entry["#{type}_alternate_names"] = source['alternate_names']
+
         end
+
       end
     end
 

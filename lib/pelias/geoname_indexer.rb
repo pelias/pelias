@@ -15,7 +15,7 @@ module Pelias
         entry['population'] = arr[14].to_i
         # And propagate to others' payloads via location indexer
         type = entry['location_type']
-        Pelias::LocationIndexer.perform_async({ "ref.#{type}" => _id }, nil, nil, {
+        Pelias::LocationIndexer.perform_async({ "refs.#{type}" => _id }, nil, nil, {
           "#{type}_name" => arr[1],
           "#{type}_alternate_names" => arr[3].split(',')
         })

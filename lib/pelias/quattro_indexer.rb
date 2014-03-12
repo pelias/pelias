@@ -12,6 +12,10 @@ module Pelias
       neighborhood: 'qs_neighborhoods'
     }
 
+    ABBR_FIELDS = {
+      admin0: :qs_iso_cc
+    }
+
     NAME_FIELDS = {
       admin0: :qs_a0,
       admin1: :qs_a1,
@@ -37,8 +41,11 @@ module Pelias
       end
       fields << ',ST_AsGeoJson(geom) as st_geom' if include_boundaries
       fields << ",#{NAME_FIELDS[type_sym]}"
-      results = Pelias::DB["SELECT #{fields} from qs.qs_#{type} WHERE gid=#{gid}"]
+      fields << ",#{ABBR_FIELDS[type_sym]}" if ABBR_FIELDS.key?(type_sym)
+      results = Pelias::DB["SELECT qs_iso_cc,#{fields} from qs.qs_#{type} WHERE gid=#{gid}"]
       record = results.first
+
+      return unless record[:qs_iso_cc] == 'US'
 
       # grab our ids
       gn_id = sti record[:qs_gn_id] || record[:gn_id]
@@ -54,12 +61,20 @@ module Pelias
       parent_types = self.class.parent_types_for(type_sym)
       set.update do |_id, entry|
 
+        _id ||= "qs:#{type}:#{gid}"
+        entry['_id'] = _id
+
         entry['name'] = record[NAME_FIELDS[type_sym]]
+        entry['abbr'] = record[ABBR_FIELDS[type_sym]] if ABBR_FIELDS.key?(type_sym)
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
         entry['boundaries'] = JSON.parse(record[:st_geom]) if include_boundaries
         entry['center_point'] = parse_point record[:st_centroid]
+
+        entry['refs'] ||= {}
+        entry['refs'][type] = _id
         entry["#{type}_name"] = entry['name']
+        entry["#{type}_abbr"] = entry['abbr']
 
         set.grab_parents(parent_types, entry)
 

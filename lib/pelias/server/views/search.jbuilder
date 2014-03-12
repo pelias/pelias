@@ -30,6 +30,8 @@ json.features(@hits) do |hit|
     json.street_name       source['street_name']
     json.address_name      source['address_name']
 
+    json.refs source['refs']
+
   end
 
 end
