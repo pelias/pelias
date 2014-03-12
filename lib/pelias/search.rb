@@ -7,9 +7,10 @@ module Pelias
     def search(term, viewbox = nil, center = nil, size = 10)
       query = {
         query: {
-          multi_match: {
+          query_string: {
             query: term,
-            fields: ['name^3'].concat(QuattroIndexer::SHAPE_ORDER.map { |f| "#{f}_name" })
+            fields: ['name^3'].concat(QuattroIndexer::SHAPE_ORDER.map { |f| "#{f}_name" }),
+            default_operator: 'AND'
           }
         }
       }
