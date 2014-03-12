@@ -62,7 +62,7 @@ Using this hardware allocation, we also recommend the following during the initi
 
 Using the above architecture, we've observed the following load times:
 * `rake quattroshapes:populate_all`
-* `rake quattroshapes:prepare_all` ~ 2 hours. Load on Elasticsearch is generally near 100% CPU with a 5 minute load average of 14 (the c3.4xlarge instances provide 16 cores)
+* `rake quattroshapes:prepare_all` ~ 1.5 hours. Load on Elasticsearch is generally near 100% CPU with a 5 minute load average of 14 (the c3.4xlarge instances provide 16 cores)
 * `rake geonames:populate`
 * `rake osm:populate_streets`
 * `rake osm:populate_addresses`
