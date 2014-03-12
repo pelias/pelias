@@ -19,10 +19,11 @@ module Pelias
     end
 
     def rebuild_suggestions_for_admin2(e)
+      boost = e.population.to_i / 100_000
       {
         input:  [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" },
         output: [e.name, e.admin1_abbr || e.admin1_name].compact.join(', '),
-        weight: e.population.to_i / 100_000
+        weight: boost < 1 ? 1 : boost
       }
     end
 
@@ -33,7 +34,7 @@ module Pelias
       {
         input: inputs,
         output: [e.name, e.admin1_abr || e.admin1_name].compact.join(', '),
-        weight: (e.population.to_i / 100_000) * 12
+        weight: (e.population.to_i / 100_000) + 12
       }
     end
 
@@ -44,7 +45,7 @@ module Pelias
       {
         input: inputs,
         output: [e.name, e.admin1_abbr || e.admin1_name].compact.join(', '),
-        weight: (e.population.to_i / 100_000) * 12
+        weight: (e.population.to_i / 100_000) + 12
       }
     end
 
@@ -55,19 +56,29 @@ module Pelias
       inputs.concat [e.local_admin_name, e.locality_name, e.admin2_name].compact.map { |v| [e.name, v, e.admin1_abbr || e.admin1_name].join(' ') }
       {
         input: inputs,
-        output: [e.name, adn, e.admin1_abbr, e.admin1_name].compact.join(', '),
+        output: [e.name, adn, e.admin1_abbr || e.admin1_name].compact.join(', '),
         weight: adn ? 10 : 0
       }
     end
 
     def rebuild_suggestions_for_address(e)
-      # TODO
-      {}
+      adn = e.local_admin_name || e.locality_name || e.neighborhood_name || e.admin2_name
+      inputs = [e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name].compact.map { |v| "#{e.name} #{v}" }
+      {
+        input: inputs,
+        output: [e.name, adn, e.admin1_abbr || e.admin1_name].compact.join(', '),
+        weight: adn ? 10 : 0
+      }
     end
 
     def rebuild_suggestions_for_street(e)
-      # TODO
-      {}
+      adn = e.local_admin_name || e.locality_name || e.neighborhood_name || e.admin2_name
+      inputs = [e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name].compact.map { |v| "#{e.name} #{v}" }
+      {
+        input: inputs,
+        output: [e.name, adn, e.admin1_abbr || e.admin1_name].join(', '),
+        weight: adn ? 8 : 0
+      }
     end
 
     def rebuild_suggestions_for_poi(e)
