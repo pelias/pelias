@@ -4,10 +4,11 @@ require 'ruby-progressbar'
 namespace :geonames do
 
   task :populate => :download do
+    i = 0
     File.open("#{TEMP_PATH}/allCountries.txt") do |file|
-      bar = ProgressBar.create(total: 10_000_000, format: '%e |%b>%i| %p%%')
       file.each_line do |line|
-        bar.progress += 1
+        i += 1
+        puts "Prepared #{i}" if i % 10000 == 0
         Pelias::GeonameIndexer.perform_async line
       end
     end
