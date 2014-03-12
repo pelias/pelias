@@ -50,16 +50,13 @@ To give you an idea of what you're getting into, we provide the following synops
 ### Architecture/Tuning
 
 * PostgreSQL/PostGIS: 1 c3.8xlarge
-* Elasticsearch: 4 c3.4xlarge systems
+* Elasticsearch: 4 c3.4xlarge
 * Sidekiq: 4 c1.medium
 
 Using this hardware allocation, we also recommend the following during the initial data load:
-* disable replication in elasticsearch:
-    $ curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"number_of_replicas\" : \"0\"}}"
-* set the index refresh to something north of 60 seconds:
-    $ curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"refresh_interval\" : \"3600s\"}}"
-* in PostgreSQL, add the following index (this will take some time if you're working with a full planet installation):
-    $ CREATE INDEX limit_street_line ON planet_osm_line (name, highway);
+* disable replication in elasticsearch: `curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"number_of_replicas\" : \"0\"}}"`
+* set the index refresh to something north of 60 seconds: `curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"refresh_interval\" : \"3600s\"}}"`
+* in PostgreSQL, add the following index (this will take some time if you're working with a full planet installation): `CREATE INDEX limit_street_line ON planet_osm_line (name, highway);`
 
 ### Load Times
 
