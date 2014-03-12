@@ -120,7 +120,7 @@ module Pelias
       shapes = encompassing_shapes(lng, lat)
       unless shapes['hits']['hits'].empty?
         shapes = shapes['hits']['hits']
-        %w(neighborhood locality local_admin admin2).each do |type|
+        %w(neighborhood locality local_admin admin2 admin1 admin0).each do |type|
           shape = shapes.detect { |s| s['_type'] == type }
           return shape if shape
         end
