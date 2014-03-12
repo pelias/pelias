@@ -18,7 +18,7 @@ json.features(@hits) do |hit|
     json.name              source['name']
 
     # Suggest output
-    json.hint hit['output'] if hit['output']
+    json.hint hit['text'] if hit['text']
 
     # Names
     json.admin0_name       source['admin0_name']
