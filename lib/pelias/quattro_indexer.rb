@@ -42,10 +42,8 @@ module Pelias
       fields << ',ST_AsGeoJson(geom) as st_geom' if include_boundaries
       fields << ",#{NAME_FIELDS[type_sym]}"
       fields << ",#{ABBR_FIELDS[type_sym]}" if ABBR_FIELDS.key?(type_sym)
-      results = Pelias::DB["SELECT qs_iso_cc,#{fields} from qs.qs_#{type} WHERE gid=#{gid}"]
+      results = Pelias::DB["SELECT #{fields} from qs.qs_#{type} WHERE gid=#{gid}"]
       record = results.first
-
-      return unless record[:qs_iso_cc] == 'US'
 
       # grab our ids
       gn_id = sti record[:qs_gn_id] || record[:gn_id]
