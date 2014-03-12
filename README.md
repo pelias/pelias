@@ -43,6 +43,30 @@ Assuming you've set up a postGIS-enabled database with OSM data, the following w
 
 You should now be able to access the server at http://localhost:8080/suggest?query=bro
 
+## Production-like Setup Performance Information
+
+To give you an idea of what you're getting into, we provide the following synopsis of an environment purpose built for the loading of this data. In addition, rough times to complete each step, along with what the end product will look like in terms of amount of data, number of documents, etc.
+
+### Architecture/Tuning
+
+* PostgreSQL/PostGIS: 1 c3.8xlarge
+* Elasticsearch: 4 c3.4xlarge systems
+* Sidekiq: 4 c1.medium
+
+Using this hardware allocation, we also recommend the following during the initial data load:
+* disable replication in elasticsearch:
+    $ curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"number_of_replicas\" : \"0\"}}"
+* set the index refresh to something north of 60 seconds:
+    $ curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"refresh_interval\" : \"3600s\"}}"
+* in PostgreSQL, add the following index (this will take some time if you're working with a full planet installation):
+    $ CREATE INDEX limit_street_line ON planet_osm_line (name, highway);
+
+### Load Times
+
+Using the above architecture, we've observed the following load times:
+* `rake quattroshapes:populate_all`
+* `rake quattroshapes:prepare_all` ~ 2 hours. Load on Elasticsearch is generally near 100% CPU with a 5 minute load average of 14 (the c3.4xlarge instances provide 16 cores)
+
 ## API
 
 Right now there are two endpoints: /suggest (which is awesome) and /search (which needs work). All results are in GeoJSON.
