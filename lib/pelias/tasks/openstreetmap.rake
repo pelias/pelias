@@ -2,12 +2,43 @@ require_relative 'task_helper'
 
 namespace :osm do
 
-  task :populate_pois do
+  task :populate_poi do
     %w(point polygon line).each do |shape|
+      i = 0
       Pelias::DB[all_poi_sql_for(shape)].use_cursor.each do |poi|
-        next unless osm_id = str(street[:osm_id])
-        hash = Pelias::Poi.create_hash(poi.stringify_keys, shape)
-        Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :poi, :street, hash)
+        i += 1
+        puts "Prepared #{i}" if i % 10000 == 0
+        next unless osm_id = sti(poi[:osm_id])
+        # Grab the feature list
+        puts poi.inspect
+        features = osm_features.flat_map do |feature_type|
+          val = poi[feature_type.to_sym]
+          next if val.nil?
+          next if val == 'no' || val == 'false'
+          if val == 'yes' || val == 'true'
+            feature_type
+          else
+            val.split(/[:;,]/) << feature_type
+          end
+        end
+        # Add in any synonyms
+        features.compact!
+        features.concat features.flat_map { |f| feature_synonyms[f] }.compact
+        # And clean up the names
+        features.map! { |f| f.gsub('_', '').gsub('"', '').downcase.strip }
+        features.uniq!
+        # And then insert
+        Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :poi, :street, {
+          osm_id: poi[:osm_id],
+          name: poi[:name],
+          poi_name: poi[:name],
+          address_name: ("#{poi[:housenumber]} #{poi[:street_name]}" if poi[:housenumber]),
+          street_name: poi[:street_name],
+          center_point: JSON.parse(poi[:location])['coordinates'],
+          website: poi[:website],
+          phone: poi[:phone],
+          features: features
+        })
       end
     end
   end
@@ -16,9 +47,9 @@ namespace :osm do
     i = 0
     Pelias::DB[all_streets_sql].use_cursor.each do |street|
       i += 1
+      puts "Prepared #{i}" if i % 10000 == 0
       next unless osm_id = sti(street[:osm_id])
       next unless street[:highway] && street[:name]
-      puts "Prepared #{i}" if i % 10000 == 0
       Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :street, :street, {
         osm_id: osm_id,
         name: street[:name],
@@ -34,8 +65,8 @@ namespace :osm do
       i = 0
       Pelias::DB[all_addresses_sql_for(shape)].use_cursor.each do |address|
         i += 1
-        next unless osm_id = sti(address[:osm_id])
         puts "Prepared #{i}" if i % 10000 == 0
+        next unless osm_id = sti(address[:osm_id])
         name = "#{address[:housenumber]} #{address[:street_name]}"
         Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :address, :street, {
           osm_id: osm_id,
@@ -49,6 +80,11 @@ namespace :osm do
   end
 
   private
+
+  # A map (key -> array) of feature synonyms
+  def feature_synonyms
+    @feature_synonyms ||= YAML::load(File.open('config/feature_synonyms.yml'))
+  end
 
   def all_streets_sql
     "SELECT osm_id, name, highway,
