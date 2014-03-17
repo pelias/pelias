@@ -17,8 +17,6 @@ module Pelias
   autoload :QuattroIndexer, 'pelias/quattro_indexer'
   autoload :LocationIndexer, 'pelias/location_indexer'
 
-  autoload :Poi, 'pelias/poi'
-
   # Load configurations
   Dir.glob('config/initializers/**/*.rb').each { |f| load(f) }
 

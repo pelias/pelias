@@ -1,6 +1,6 @@
 module Pelias
 
-  class Poi < Location
+  class Poi
 
     def pre_process
       self.feature = self.feature.map { |f| f.strip.downcase.gsub('_', ' ') }
