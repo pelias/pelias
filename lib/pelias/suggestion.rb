@@ -82,12 +82,11 @@ module Pelias
     end
 
     def rebuild_suggestions_for_poi(e)
-      inputs = [e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name].compact.map { |f| "#{e.name} #{e.address_name || e.street_name}" }
-      output << [e.name, e.address_name, e.local_admin_name || e.locality_name, e.admin1_abbr || e.admin1_name].compact.join(', ')
+      inputs = [e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name].compact.map { |v| [e.name, e.address_name || e.street_name, v].compact.join(' ') }
       {
         input: inputs,
-        output: output,
-        weight: (e.locality_name || e.local_admin_name) ? 6 : 0
+        output: [e.name, e.address_name, e.local_admin_name || e.locality_name, e.admin1_abbr || e.admin1_name].compact.join(', '),
+        weight: e.locality_name || e.local_admin_name ? 6 : 0
       }
     end
 

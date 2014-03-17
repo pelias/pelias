@@ -7,9 +7,10 @@ module Pelias
     def search(term, viewbox = nil, center = nil, size = 10)
       query = {
         query: {
-          multi_match: {
+          query_string: {
             query: term,
-            fields: ['name^3'].concat(QuattroIndexer::SHAPE_ORDER.map { |f| "#{f}_name" })
+            fields: ['name^3'].concat(QuattroIndexer::SHAPE_ORDER.map { |f| "#{f}_name" }),
+            default_operator: 'AND'
           }
         }
       }
@@ -120,8 +121,8 @@ module Pelias
       shapes = encompassing_shapes(lng, lat)
       unless shapes['hits']['hits'].empty?
         shapes = shapes['hits']['hits']
-        %w(neighborhood locality local_admin admin2).each do |type|
-          shape = shapes.detect { |s| s['_type'] == type }
+        %w(neighborhood locality local_admin admin2 admin1 admin0).each do |type|
+          shape = shapes.detect { |s| s['_source']['location_type'] == type }
           return shape if shape
         end
       end
