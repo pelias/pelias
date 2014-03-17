@@ -2,60 +2,6 @@ module Pelias
 
   class Poi < Location
 
-    SUGGEST_WEIGHT = 6
-
-    def suggest_weight
-      (locality_name || local_admin_name) ? SUGGEST_WEIGHT : 0
-    end
-
-    def suggest_input
-      input = []
-      ns_str, s_str = nil
-      if number && street_name
-        ns_str = "#{name} #{number} #{street_name}"
-      elsif street_name
-        s_str = "#{name} #{street_name}"
-      end
-      if local_admin_name
-        input << "#{name} #{local_admin_name}"
-        input << "#{ns_str} #{local_admin_name}" if ns_str
-        input << "#{s_str} #{local_admin_name}" if s_str
-      end
-      if locality_name
-        input << "#{name} #{locality_name}"
-        input << "#{ns_str} #{locality_name}" if ns_str
-        input << "#{s_str} #{locality_name}" if s_str
-      end
-      if neighborhood_name
-        input << "#{name} #{neighborhood_name}"
-        input << "#{ns_str} #{neighborhood_name}" if ns_str
-        input << "#{s_str} #{neighborhood_name}" if s_str
-      end
-      if admin2_name
-        input << "#{name} #{admin2_name}"
-        input << "#{ns_str} #{admin2_name}" if ns_str
-        input << "#{s_str} #{admin2_name}" if s_str
-      end
-      input
-    end
-
-    def suggest_output
-      output = "#{name}"
-      if number && street_name
-        output << " - #{number} #{street_name}"
-      end
-      if local_admin_name
-        output << " - #{local_admin_name}"
-      elsif locality_name
-        output << " - #{locality_name}"
-      end
-      if admin1_abbr
-        output << ", #{admin1_abbr}"
-      elsif admin1_name
-        output << ", #{admin1_name}"
-      end
-    end
-
     def pre_process
       self.feature = self.feature.map { |f| f.strip.downcase.gsub('_', ' ') }
       to_add = []
