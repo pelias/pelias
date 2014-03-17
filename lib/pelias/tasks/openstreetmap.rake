@@ -9,6 +9,7 @@ namespace :osm do
         i += 1
         puts "Prepared #{i}" if i % 10000 == 0
         next unless osm_id = sti(poi[:osm_id])
+        next unless poi[:name]
         # Grab the feature list
         features = osm_features.flat_map do |feature_type|
           val = poi[feature_type.to_sym]
@@ -65,6 +66,7 @@ namespace :osm do
       Pelias::DB[all_addresses_sql_for(shape)].use_cursor.each do |address|
         i += 1
         puts "Prepared #{i}" if i % 10000 == 0
+        next unless address[:housenumber] && address[:street]
         next unless osm_id = sti(address[:osm_id])
         name = "#{address[:housenumber]} #{address[:street_name]}"
         Pelias::LocationIndexer.perform_async({}, :address, :street, {
@@ -92,9 +94,7 @@ namespace :osm do
        ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location,
        \"#{osm_features * '","'}\"
     FROM planet_osm_#{shape}
-    WHERE name IS NOT NULL
-      AND (\"#{osm_features * '" IS NOT NULL OR "'}\" IS NOT NULL)
-    ORDER BY osm_id"
+    WHERE osm_id != 0"
   end
 
   def all_streets_sql
@@ -111,9 +111,7 @@ namespace :osm do
       \"addr:housenumber\" AS housenumber,
       ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location
     FROM planet_osm_#{shape}
-    WHERE \"addr:housenumber\" IS NOT NULL
-      AND \"addr:street\" IS NOT NULL
-    ORDER BY osm_id"
+    WHERE osm_id != 0"
   end
 
   def osm_features
