@@ -10,7 +10,6 @@ namespace :osm do
         puts "Prepared #{i}" if i % 10000 == 0
         next unless osm_id = sti(poi[:osm_id])
         # Grab the feature list
-        puts poi.inspect
         features = osm_features.flat_map do |feature_type|
           val = poi[feature_type.to_sym]
           next if val.nil?
