@@ -4,7 +4,7 @@ namespace :osm do
 
   task :populate_pois do
     %w(point polygon line).each do |shape|
-      Pelias::DB[Pelias::Poi.get_sql(shape)].use_cursor.each do |poi|
+      Pelias::DB[all_poi_sql_for(shape)].use_cursor.each do |poi|
         next unless osm_id = str(street[:osm_id])
         hash = Pelias::Poi.create_hash(poi.stringify_keys, shape)
         Pelias::LocationIndexer.perform_async({ osm_id: osm_id }, :poi, :street, hash)
@@ -49,6 +49,23 @@ namespace :osm do
   end
 
   private
+
+  def all_poi_sql_for(shape)
+    osm_features = %w{
+      aerialway aeroway amenity building craft cuisine historic
+      landuse leisure man_made military natural office public_transport
+      railway shop sport tourism waterway
+    }
+    "SELECT osm_id, name, phone, website,
+       \"addr:street\" AS street_name,
+       \"addr:housenumber\" AS housenumber,
+       ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location,
+       \"#{osm_features * '","'}\"
+    FROM planet_osm_#{shape}
+    WHERE name IS NOT NULL
+      AND (\"#{osm_features * '" IS NOT NULL OR "'}\" IS NOT NULL)
+    ORDER BY osm_id"
+  end
 
   def all_streets_sql
     "SELECT osm_id, name, highway,

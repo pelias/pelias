@@ -19,25 +19,6 @@ module Pelias
       @@feature_synonyms ||= YAML::load(File.open('config/feature_synonyms.yml'))
     end
 
-    def self.osm_features
-      %w(aerialway aeroway amenity building craft cuisine historic
-         landuse leisure man_made military natural office public_transport
-         railway shop sport tourism waterway)
-    end
-
-    def self.get_sql(shape)
-      "SELECT
-         osm_id, name, phone, website,
-         \"addr:street\" AS street_name,
-         \"addr:housenumber\" AS housenumber,
-         ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location,
-         \"#{osm_features * '","'}\"
-      FROM planet_osm_#{shape}
-      WHERE name IS NOT NULL
-        AND (\"#{osm_features * '" IS NOT NULL OR "'}\" IS NOT NULL)
-      ORDER BY osm_id"
-    end
-
     def self.create_hash(result, shape)
       result = result.delete_if { |k,v| v.nil? }
       center = JSON.parse(result.delete('location'))
