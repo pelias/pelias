@@ -27,9 +27,8 @@ namespace :osm do
         features.map! { |f| f.gsub('_', '').gsub('"', '').downcase.strip }
         features.uniq!
         # And then insert
-        record_set = ENV['SKIP_LOOKUP'] == '1' ? {} : { osm_id: osm_id }
-        Pelias::LocationIndexer.perform_async(record_set, :poi, :street, {
-          osm_id: poi[:osm_id],
+        Pelias::LocationIndexer.perform_async({}, :poi, :street, {
+          _id: "osm:#{osm_id}",
           name: poi[:name],
           poi_name: poi[:name],
           address_name: ("#{poi[:housenumber]} #{poi[:street_name]}" if poi[:housenumber]),
@@ -50,9 +49,8 @@ namespace :osm do
       puts "Prepared #{i}" if i % 10000 == 0
       next unless osm_id = sti(street[:osm_id])
       next unless street[:highway] && street[:name]
-      record_set = ENV['SKIP_LOOKUP'] == '1' ? {} : { osm_id: osm_id }
-      Pelias::LocationIndexer.perform_async(record_set, :street, :street, {
-        osm_id: osm_id,
+      Pelias::LocationIndexer.perform_async({}, :street, :street, {
+        _id: "osm:#{osm_id}",
         name: street[:name],
         street_name: street[:name],
         center_point: JSON.parse(street[:center])['coordinates'],
@@ -68,10 +66,9 @@ namespace :osm do
         i += 1
         puts "Prepared #{i}" if i % 10000 == 0
         next unless osm_id = sti(address[:osm_id])
-        record_set = ENV['SKIP_LOOKUP'] == '1' ? {} : { osm_id: osm_id }
         name = "#{address[:housenumber]} #{address[:street_name]}"
-        Pelias::LocationIndexer.perform_async(record_set, :address, :street, {
-          osm_id: osm_id,
+        Pelias::LocationIndexer.perform_async({}, :address, :street, {
+          _id: "osm:#{osm_id}",
           name: name,
           address_name: name,
           street_name: address[:street_name],
