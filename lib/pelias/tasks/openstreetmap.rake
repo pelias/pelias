@@ -86,6 +86,18 @@ namespace :osm do
     @feature_synonyms ||= YAML::load(File.open('config/feature_synonyms.yml'))
   end
 
+  def all_poi_sql_for(shape)
+    "SELECT osm_id, name, phone, website,
+       \"addr:street\" AS street_name,
+       \"addr:housenumber\" AS housenumber,
+       ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location,
+       \"#{osm_features * '","'}\"
+    FROM planet_osm_#{shape}
+    WHERE name IS NOT NULL
+      AND (\"#{osm_features * '" IS NOT NULL OR "'}\" IS NOT NULL)
+    ORDER BY osm_id"
+  end
+
   def all_streets_sql
     "SELECT osm_id, name, highway,
       ST_AsGeoJSON(ST_Transform(way, 4326), 6) AS street,
@@ -102,18 +114,6 @@ namespace :osm do
     FROM planet_osm_#{shape}
     WHERE \"addr:housenumber\" IS NOT NULL
       AND \"addr:street\" IS NOT NULL
-    ORDER BY osm_id"
-  end
-
-  def all_poi_sql_for(shape)
-    "SELECT osm_id, name, phone, website,
-       \"addr:street\" AS street_name,
-       \"addr:housenumber\" AS housenumber,
-       ST_AsGeoJSON(ST_Transform(ST_Centroid(way), 4326), 6) AS location,
-       \"#{osm_features * '","'}\"
-    FROM planet_osm_#{shape}
-    WHERE name IS NOT NULL
-      AND (\"#{osm_features * '" IS NOT NULL OR "'}\" IS NOT NULL)
     ORDER BY osm_id"
   end
 
