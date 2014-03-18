@@ -34,7 +34,7 @@ namespace :quattroshapes do
     # And execute each
     Pelias::DB["select gid from qs.qs_#{type}"].use_cursor.each do |row|
       bar.progress += 1
-      Pelias::QuattroIndexer.perform_async type, row[:gid]
+      Pelias::QuattroIndexer.perform_async type, row[:gid], ENV['SKIP_LOOKUP'] == '1'
     end
   end
 
