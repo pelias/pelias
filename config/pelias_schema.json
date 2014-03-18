@@ -28,7 +28,7 @@
           "payloads": true
         },
 
-        "ref": {
+        "refs": {
           "type": "object",
           "properties": {
             "admin0":       { "type": "string", "index": "not_analyzed" },
