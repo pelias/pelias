@@ -3,15 +3,10 @@ require_relative 'task_helper'
 namespace :quattroshapes do
 
   task :prepare_all  => Pelias::QuattroIndexer::PATHS.map { |t, _| "prepare_#{t}" }
-  task :populate_all => Pelias::QuattroIndexer::PATHS.map { |t, _| "populate_#{t}" }
 
   Pelias::QuattroIndexer::PATHS.each do |type, file|
     task(:"prepare_#{type}") { perform_prepare(type, file) }
     task(:"populate_#{type}") { perform_index(type) }
-  end
-
-  task :populate_single do
-    Pelias::QuattroIndexer.perform_async ENV['LOCATION_TYPE'], ENV['LOCATION_IDX'].to_i, ENV['SKIP_LOOKUP'] == '1'
   end
 
   private
