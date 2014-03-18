@@ -42,6 +42,7 @@ module Pelias
       fields << ',ST_AsGeoJson(geom) as st_geom' if include_boundaries
       fields << ",#{NAME_FIELDS[type_sym]}"
       fields << ",#{ABBR_FIELDS[type_sym]}" if ABBR_FIELDS.key?(type_sym)
+      fields << ',qs_iso_cc' if type_sym == :admin1
       results = Pelias::DB["SELECT #{fields} from qs.qs_#{type} WHERE gid=#{gid}"]
       record = results.first
 
@@ -66,6 +67,7 @@ module Pelias
 
         entry['name'] = record[NAME_FIELDS[type_sym]]
         entry['abbr'] = record[ABBR_FIELDS[type_sym]] if ABBR_FIELDS.key?(type_sym)
+        entry['abbr'] = self.class.state_map.key(entry['name']) if type_sym == :admin1 && record[:qs_iso_cc] == 'US'
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
         entry['boundaries'] = JSON.parse(record[:st_geom]) if include_boundaries
@@ -75,7 +77,6 @@ module Pelias
         entry['refs'][type] = _id
         entry["#{type}_name"] = entry['name']
         entry["#{type}_abbr"] = entry['abbr']
-        entry["#{type}_alternate_names"] = entry['alternate_names']
 
         set.grab_parents(parent_types, entry)
 
@@ -98,6 +99,10 @@ module Pelias
         n_i = n.to_i
         n_i if n_i > 0
       end
+    end
+
+    def self.state_map
+      @states ||= YAML.load_file 'config/us_states.yml'
     end
 
     def self.parent_types_for(type)
