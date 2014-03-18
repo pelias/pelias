@@ -28,15 +28,17 @@ module Pelias
     def finalize!
       return if records.empty?
       rebuild_suggestions!
-      bulk = []
-      records.each do |record|
-        if record['_source']
-          bulk << { index: { _id: record.delete('_id'), data: record['_source'] } }
-        else
-          bulk << { index: { _id: record.delete('_id'), data: record } }
+      records.each_slice(100) do |slice|
+        bulk = []
+        slice.each do |record|
+          if record['_source']
+            bulk << { index: { _id: record.delete('_id'), data: record['_source'] } }
+          else
+            bulk << { index: { _id: record.delete('_id'), data: record } }
+          end
         end
+        ES_CLIENT.bulk(index: Pelias::INDEX, type: 'location', body: bulk)
       end
-      ES_CLIENT.bulk(index: Pelias::INDEX, type: 'location', body: bulk)
     end
 
     def grab_parents(shape_types, entry)
