@@ -27,7 +27,7 @@ module Pelias
 
     SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood, :street, :address, :poi]
 
-    def perform(type, gid)
+    def perform(type, gid, skip_lookup)
 
       type_sym = type.to_sym
       include_boundaries = type_sym != :admin0 && type_sym != :admin1
@@ -51,8 +51,10 @@ module Pelias
 
       # Build a set
       set = Pelias::LocationSet.new
-      set.append_records "#{type}.gn_id", gn_id
-      set.append_records "#{type}.woe_id", woe_id
+      unless skip_lookup
+        set.append_records "#{type}.gn_id", gn_id
+        set.append_records "#{type}.woe_id", woe_id
+      end
       set.close_records_for type
 
       # Update it

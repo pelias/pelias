@@ -11,7 +11,7 @@ namespace :quattroshapes do
   end
 
   task :populate_single do
-    Pelias::QuattroIndexer.perform_async ENV['LOCATION_TYPE'], ENV['LOCATION_IDX'].to_i
+    Pelias::QuattroIndexer.perform_async ENV['LOCATION_TYPE'], ENV['LOCATION_IDX'].to_i, ENV['SKIP_LOOKUP'] == '1'
   end
 
   private
