@@ -4,6 +4,7 @@ require 'sinatra/jbuilder'
 module Pelias
   class Server < Sinatra::Base
 
+    set :public_folder, 'lib/pelias/server/static'
     set :show_exceptions, false
 
     before do
@@ -35,6 +36,10 @@ module Pelias
       results = Pelias::Search.closest(params[:lng], params[:lat], params[:type], 1500)
       @hits = results['hits']['hits']
       jbuilder :search
+    end
+
+    get '/demo' do
+      erb :demo
     end
 
     # override the default "Sinatra doesn't know this ditty" error page

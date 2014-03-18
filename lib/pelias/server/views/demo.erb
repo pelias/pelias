@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Pelias</title>
+
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.js"></script>
+    <script src="javascript/application.js"></script>
+
+    <style>
+      .row { margin-top: 20px; }
+      .small { margin-bottom: 20px; font-size: 12px; }
+      .top { position: fixed; top: 20px; left: 60px; right: 60px; background: #fff; z-index: 100; }
+      body { padding: 150px 60px 60px 60px; }
+    </style>
+
+  </head>
+
+  <body ng-app="play">
+
+    <div class="container-fluid" ng-controller="SearchCtrl">
+
+      <div class="top">
+        <div class="row">
+          <input class="col-md-12 form-control" placeholder="Hostname" ng-model="host"/>
+        </div>
+
+        <div class="row">
+          <input class="col-md-12 form-control input-lg" placeholder="Type something..." ng-model="input" focus/>
+        </div>
+      </div>
+
+      <div class="row" ng-show="input">
+
+        <div class="col-md-6">
+          <div class="lead">Search</div>
+          <div ng-repeat="result in searchResults" class="small">
+            <strong>{{ result.properties.name }} ({{result.properties.type}})</strong><br/>
+            <div ng-repeat="field in fieldsFor(result)">{{ field }}: {{ result.properties[field + '_name'] }}</div>
+          </div>
+          <p ng-if="!searchResults.length"><em>Nothing to see here</em></p>
+        </div>
+
+        <div class="col-md-6">
+          <div class="lead">Suggest</div>
+          <div ng-repeat="result in suggestResults" class="small">
+            <strong>{{ result.properties.name }} ({{result.properties.type}})</strong><br/>
+            <em>{{ result.properties.hint }}</em><br/>
+            <div ng-repeat="field in fieldsFor(result)">{{ field }}: {{ result.properties[field + '_name'] }}</div>
+          </div>
+          <p ng-if="!suggestResults.length"><em>Nothing to see here</em></p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+
+</html>
