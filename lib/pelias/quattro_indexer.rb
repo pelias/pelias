@@ -73,6 +73,7 @@ module Pelias
         entry['refs'][type] = _id
         entry["#{type}_name"] = entry['name']
         entry["#{type}_abbr"] = entry['abbr']
+        entry["#{type}_alternate_names"] = entry['alternate_names']
 
         set.grab_parents(parent_types, entry)
 
