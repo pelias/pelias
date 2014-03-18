@@ -1,5 +1,4 @@
 require 'pelias'
-require 'ruby-progressbar'
 
 namespace :geonames do
 
