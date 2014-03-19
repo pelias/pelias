@@ -76,6 +76,20 @@ describe Pelias::Server do
 
     end
 
+    [0, 1000, 'a'].each do |size|
+      context "with invalid size == #{size}" do
+
+        before do
+          get "/suggest?query=hello&size=#{size}"
+        end
+
+        it 'should receive a 200' do
+          last_response.should be_bad_request
+        end
+
+      end
+    end
+
   end
 
 

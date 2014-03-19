@@ -16,6 +16,7 @@ module Pelias
     # size:  The number of results to return (default 10)
     get '/search' do
       size = params[:size] ? params[:size].to_i : 10
+      return bad_request('invalid size') if size <= 0 || size > 100
       results = Pelias::Search.search(params[:query], params[:viewbox], params[:center], size)
       @hits = results['hits'] ? results['hits']['hits'] : []
       jbuilder :search
@@ -26,6 +27,7 @@ module Pelias
     # size:  The number of results to return (default 10)
     get '/suggest' do
       size = params[:size] ? params[:size].to_i : 10
+      return bad_request('invalid size') if size <= 0 || size > 100
       results = Pelias::Search.suggest(params[:query], size)
       @hits = results['suggestions'] ? results['suggestions'][0]['options'] : []
       jbuilder :search
@@ -50,6 +52,13 @@ module Pelias
     error Sinatra::NotFound do
       content_type 'text/plain'
       [404, 'Not Found']
+    end
+
+    # How to respond to a bad request
+    def bad_request(msg)
+      content_type :json
+      status 400
+      { message: msg }.to_json
     end
 
   end
