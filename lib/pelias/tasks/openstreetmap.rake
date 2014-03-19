@@ -6,8 +6,7 @@ namespace :osm do
     %w(point polygon line).each do |shape|
       i = 0
       Pelias::DB[all_poi_sql_for(shape)].use_cursor.each do |poi|
-        i += 1
-        puts "Prepared #{i}" if i % 10000 == 0
+        puts "Prepared #{i} #{shape}" if (i += 1) % 10_000 == 0
         next unless osm_id = sti(poi[:osm_id])
         next unless poi[:name]
         # Grab the feature list
@@ -46,8 +45,7 @@ namespace :osm do
   task :populate_street do
     i = 0
     Pelias::DB[all_streets_sql].use_cursor.each do |street|
-      i += 1
-      puts "Prepared #{i}" if i % 10000 == 0
+      puts "Prepared #{i}" if (i += 1) % 10_000 == 0
       next unless osm_id = sti(street[:osm_id])
       next unless street[:highway] && street[:name]
       Pelias::LocationIndexer.perform_async({}, :street, :street, {
@@ -64,8 +62,7 @@ namespace :osm do
     %w(point polygon line).each do |shape|
       i = 0
       Pelias::DB[all_addresses_sql_for(shape)].use_cursor.each do |address|
-        i += 1
-        puts "Prepared #{i}" if i % 10000 == 0
+        puts "Prepared #{i} #{shape}" if (i += 1) % 10_000 == 0
         next unless address[:housenumber] && address[:street]
         next unless osm_id = sti(address[:osm_id])
         name = "#{address[:housenumber]} #{address[:street_name]}"

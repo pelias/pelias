@@ -22,13 +22,9 @@ namespace :quattroshapes do
 
   # Perform an index
   def perform_index(type)
-    # Get count
-    results = Pelias::DB["SELECT COUNT(1) as count from qs.qs_#{type}"]
-    count = results.first[:count].to_i
-    bar = ProgressBar.create(total: count, format: '%e |%b>%i| %p%%')
-    # And execute each
+    i = 0
     Pelias::DB["select gid from qs.qs_#{type}"].use_cursor.each do |row|
-      bar.progress += 1
+      puts "Prepared #{i}" if (i += 1) % 10_000 == 0
       Pelias::QuattroIndexer.perform_async type, row[:gid], ENV['SKIP_LOOKUP'] == '1'
     end
   end

@@ -1,6 +1,5 @@
 require 'bundler/setup'
 require 'pelias'
-require 'ruby-progressbar'
 
 # Hide the sidekiq log
 Sidekiq::Logging.logger = nil

@@ -92,7 +92,6 @@ GEM
     rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.5)
-    ruby-progressbar (1.4.1)
     sequel (4.8.0)
     sidekiq (2.17.7)
       celluloid (>= 0.15.2)
@@ -136,7 +135,6 @@ DEPENDENCIES
   rack-test
   rake
   rspec
-  ruby-progressbar
   sequel
   sidekiq
   sidekiq-failures
