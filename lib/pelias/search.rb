@@ -4,7 +4,7 @@ module Pelias
 
     extend self
 
-    FIELD_NAMES = ['name^3', 'admin1_abbr'].
+    FIELD_NAMES = ['name^3', 'admin1_abbr', 'features'].
       concat(QuattroIndexer::SHAPE_ORDER.flat_map { |f| ["#{f}_name", "#{f}_alternate_names"] })
 
     def search(term, viewbox = nil, center = nil, size = 10)
@@ -23,12 +23,12 @@ module Pelias
           geo_bounding_box: {
             center_point: {
               top_left: {
-                lat: viewbox[1],
-                lon: viewbox[0]
+                lat: viewbox[1].to_f,
+                lon: viewbox[0].to_f
               },
               bottom_right: {
-                lat: viewbox[3],
-                lon: viewbox[2]
+                lat: viewbox[3].to_f,
+                lon: viewbox[2].to_f
               }
             }
           }
@@ -44,7 +44,7 @@ module Pelias
         query[:sort] = [
           {
             _geo_distance: {
-              center_point: [center[0], center[1]],
+              center_point: [center[0].to_f, center[1].to_f],
               order: 'asc',
               unit: 'km'
             }
