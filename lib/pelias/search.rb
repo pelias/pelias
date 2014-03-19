@@ -4,7 +4,7 @@ module Pelias
 
     extend self
 
-    FIELD_NAMES = ['name^3', 'admin1_abbr', 'features'].
+    FIELD_NAMES = ['name^3', 'admin1_abbr', 'admin0_abbr', 'features'].
       concat(QuattroIndexer::SHAPE_ORDER.flat_map { |f| ["#{f}_name", "#{f}_alternate_names"] })
 
     def search(term, viewbox = nil, center = nil, size = 10)
