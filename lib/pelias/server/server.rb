@@ -16,7 +16,7 @@ module Pelias
     # size:  The number of results to return (default 10)
     get '/search' do
       size = params[:size] ? params[:size].to_i : 10
-      return bad_request('invalid size') if size <= 0 || size > 100
+      return render_error(400, 'invalid size') if size <= 0 || size > 100
       results = Pelias::Search.search(params[:query], params[:viewbox], params[:center], size)
       @hits = results['hits'] ? results['hits']['hits'] : []
       jbuilder :search
@@ -27,7 +27,7 @@ module Pelias
     # size:  The number of results to return (default 10)
     get '/suggest' do
       size = params[:size] ? params[:size].to_i : 10
-      return bad_request('invalid size') if size <= 0 || size > 100
+      return render_error(400, 'invalid size') if size <= 0 || size > 100
       results = Pelias::Search.suggest(params[:query], size)
       @hits = results['suggestions'] ? results['suggestions'][0]['options'] : []
       jbuilder :search
@@ -44,20 +44,20 @@ module Pelias
       jbuilder :search
     end
 
+    # Render a demo page to allow search & autocomplete
     get '/demo' do
       erb :demo
     end
 
     # override the default "Sinatra doesn't know this ditty" error page
     error Sinatra::NotFound do
-      content_type 'text/plain'
-      [404, 'Not Found']
+      render_error 404, 'invalid route'
     end
 
     # How to respond to a bad request
-    def bad_request(msg)
+    def render_error(status, msg)
       content_type :json
-      status 400
+      status status
       { message: msg }.to_json
     end
 

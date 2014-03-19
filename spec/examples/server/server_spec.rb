@@ -40,6 +40,20 @@ describe Pelias::Server do
 
     end
 
+    [0, 1000, 'a'].each do |size|
+      context "with invalid size == #{size}" do
+
+        before do
+          get "/suggest?query=hello&size=#{size}"
+        end
+
+        it 'should receive a 200' do
+          last_response.should be_bad_request
+        end
+
+      end
+    end
+
   end
 
   describe '/suggest' do
@@ -92,6 +106,32 @@ describe Pelias::Server do
 
   end
 
+  describe '/demo' do
 
+    before do
+      get '/demo'
+    end
+
+    it 'should be able to render the demo' do
+      last_response.should be_ok
+    end
+
+  end
+
+  describe 'invalid route' do
+
+    before do
+      get '/nothing'
+    end
+
+    it 'should get a 404' do
+      last_response.should be_not_found
+    end
+
+    it 'should get a message' do
+      JSON.parse(last_response.body)['message'].should == 'invalid route'
+    end
+
+  end
 
 end
