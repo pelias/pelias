@@ -4,12 +4,10 @@ namespace :geonames do
 
   task :populate => :download do
     i = 0
-    File.open("#{TEMP_PATH}/allCountries.txt") do |file|
-      file.each_line do |line|
-        i += 1
-        puts "Prepared #{i}" if i % 10000 == 0
-        Pelias::GeonameIndexer.perform_async line
-      end
+    File.open("#{TEMP_PATH}/allCountries.txt").lazy.each_slice(1000) do |lines|
+      i += 1000
+      puts "Prepared #{i}" if i % 100000 == 0
+      Pelias::GeonameIndexer.perform_async lines
     end
   end
 
