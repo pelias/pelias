@@ -32,8 +32,8 @@ json.features(@hits) do |hit|
     json.poi_name          source['poi_name']
 
     # Abbreviations
-    json.admin0_attr       source['admin0_attr']
-    json.admin1_attr       source['admin1_attr']
+    json.admin0_abbr       source['admin0_abbr']
+    json.admin1_abbr       source['admin1_abbr']
 
   end
 
