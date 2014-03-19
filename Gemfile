@@ -17,6 +17,7 @@ gem 'yajl-ruby'
 
 group :test, :development do
   gem 'debugger'
+  gem 'guard-rspec', require: false
 end
 
 group :test do
