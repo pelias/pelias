@@ -12,16 +12,20 @@ module Pelias
     end
 
     # Search endpoint
+    # query: The query to look up
+    # size:  The number of results to return (default 10)
     get '/search' do
-      size = params[:size] || 10
+      size = params[:size] ? params[:size].to_i : 10
       results = Pelias::Search.search(params[:query], params[:viewbox], params[:center], size)
       @hits = results['hits'] ? results['hits']['hits'] : []
       jbuilder :search
     end
 
     # Suggest endpoint
+    # query: The query to look up
+    # size:  The number of results to return (default 10)
     get '/suggest' do
-      size = params[:size] || 20
+      size = params[:size] ? params[:size].to_i : 10
       results = Pelias::Search.suggest(params[:query], size)
       @hits = results['suggestions'] ? results['suggestions'][0]['options'] : []
       jbuilder :search
