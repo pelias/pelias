@@ -30,8 +30,6 @@ module Pelias
     def perform(type, gid, skip_lookup)
 
       type_sym = type.to_sym
-      include_boundaries = type_sym != :admin0 && type_sym != :admin1
-      include_boundaries = false
 
       # Load up our record
       fields = 'ST_AsText(ST_Centroid(geom)) as st_centroid'
@@ -40,7 +38,6 @@ module Pelias
       else
         fields << ',qs_gn_id,qs_woe_id'
       end
-      fields << ',ST_AsGeoJson(geom) as st_geom' if include_boundaries
       fields << ",#{NAME_FIELDS[type_sym]}"
       fields << ",#{ABBR_FIELDS[type_sym]}" if ABBR_FIELDS.key?(type_sym)
       fields << ',qs_iso_cc' if type_sym == :admin1
@@ -71,7 +68,6 @@ module Pelias
         entry['abbr'] = self.class.state_map.key(entry['name']) if type_sym == :admin1 && record[:qs_iso_cc] == 'US'
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
-        entry['boundaries'] = JSON.parse(record[:st_geom]) if include_boundaries
         entry['center_point'] = parse_point record[:st_centroid]
 
         entry['refs'] ||= {}
