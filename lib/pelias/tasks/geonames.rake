@@ -7,7 +7,6 @@ namespace :geonames do
     File.open("#{TEMP_PATH}/allCountries.txt").each do |line|
       puts "Inserted #{i}" if (i += 1) % 10_000 == 0
       arr = line.chomp.split("\t")
-      puts arr[0]
       Pelias::REDIS.hset('geoname', arr[0], {
         name: arr[1],
         alternate_names: arr[3].split(','),
