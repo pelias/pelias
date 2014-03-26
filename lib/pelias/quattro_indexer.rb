@@ -63,6 +63,7 @@ module Pelias
         _id ||= "qs:#{type}:#{gid}"
         entry['_id'] = _id
 
+        # Data about this particular one
         entry['name'] = record[NAME_FIELDS[type_sym]]
         entry['abbr'] = record[ABBR_FIELDS[type_sym]] if ABBR_FIELDS.key?(type_sym)
         entry['abbr'] = self.class.state_map.key(entry['name']) if type_sym == :admin1 && record[:qs_iso_cc] == 'US'
@@ -70,11 +71,22 @@ module Pelias
         entry['woe_id'] = woe_id
         entry['center_point'] = parse_point record[:st_centroid]
 
+        # Use GN data if we have it
+        if gn_id && gn_raw = Pelias::REDIS.hget('geoname', gn_id)
+          gn_data = JSON.parse(gn_raw)
+          entry['name'] = gn_data['name']
+          entry['alternate_names'] = gn_data['alternate_names'] || []
+          entry['population'] = gn_data['population'].to_i
+        end
+
+        # Copy down for the level
         entry['refs'] ||= {}
         entry['refs'][type] = _id
         entry["#{type}_name"] = entry['name']
         entry["#{type}_abbr"] = entry['abbr']
+        entry["#{type}_alternate_names"] = entry['alternate_names']
 
+        # And look up the parents
         set.grab_parents(parent_types, entry)
 
       end
