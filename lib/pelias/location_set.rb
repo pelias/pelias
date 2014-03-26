@@ -37,7 +37,8 @@ module Pelias
             bulk << { index: { _id: record.delete('_id'), data: record } }
           end
         end
-        ES_CLIENT.bulk(index: Pelias::INDEX, type: 'location', body: bulk)
+        r = ES_CLIENT.bulk(index: Pelias::INDEX, type: 'location', body: bulk)
+        raise r.inspect if r['errors']
       end
     end
 

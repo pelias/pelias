@@ -31,6 +31,7 @@ module Pelias
 
       type_sym = type.to_sym
       include_boundaries = type_sym != :admin0 && type_sym != :admin1
+      include_boundaries = false
 
       # Load up our record
       fields = 'ST_AsText(ST_Centroid(geom)) as st_centroid'
