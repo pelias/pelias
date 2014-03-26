@@ -2,11 +2,17 @@ require 'pelias'
 
 namespace :geonames do
 
-  task :populate => :download do
+  task :prepare => :download do
     i = 0
-    File.open("#{TEMP_PATH}/allCountries.txt").lazy.each_slice(1000) do |lines|
-      puts "Prepared #{i}" if (i += 1_000) % 100_000 == 0
-      Pelias::GeonameIndexer.perform_async lines
+    File.open("#{TEMP_PATH}/allCountries.txt").each do |line|
+      puts "Inserted #{i}" if (i += 1) % 10_000 == 0
+      arr = line.chomp.split("\t")
+      puts arr[0]
+      Pelias::REDIS.hset('geoname', arr[0], {
+        name: arr[1],
+        alternate_names: arr[3].split(','),
+        population: arr[14].to_i
+      }.to_json)
     end
   end
 
