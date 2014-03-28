@@ -63,7 +63,7 @@ namespace :osm do
       i = 0
       Pelias::DB[all_addresses_sql_for(shape)].use_cursor.each do |address|
         puts "Prepared #{i} #{shape}" if (i += 1) % 10_000 == 0
-        next unless address[:housenumber] && address[:street]
+        next unless address[:housenumber] && address[:street_name]
         next unless osm_id = sti(address[:osm_id])
         name = "#{address[:housenumber]} #{address[:street_name]}"
         Pelias::LocationIndexer.perform_async({}, :address, :street, {
