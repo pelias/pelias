@@ -11,7 +11,7 @@ Pelias is a set of tools for importing [OpenStreetMap](http://www.openstreetmap.
 * _Elasticsearch_: For Search download the latest version of [Elasticsearch](http://www.elasticsearch.org/download/)
 * _Redis_: Geonames lookup for quattroshapes cross-referencing
 * _Sidekiq_: Used for background processing (also uses Redis)
-* Ruby 2
+* Ruby >= 2
 
 ## Usage
 
