@@ -1,4 +1,4 @@
-script: 'rspec spec'
+script: 'bundle exec rspec spec'
 notifications:
   email:
     - john.crepezzi@gmail.com
