@@ -32,13 +32,13 @@ module Pelias
       type_sym = type.to_sym
 
       fields = []
-      fields << type_sym == :neighborhood ? 'gn_id as qs_gn_id'  : 'qs_gn_id'
-      fields << type_sym == :neighborhood ? 'woe_id as qs_woe_id': 'qs_woe_id'
-      fields << 'ST_AsText(ST_Centroid(geom)) as st_centroid'
+      fields << (type_sym == :neighborhood ? :gn_id___qs_gn_id   : :qs_gn_id)
+      fields << (type_sym == :neighborhood ? :woe_id___qs_woe_id : :qs_woe_id)
+      fields << Sequel.function('st_astext', Sequel.function('st_centroid', :geom)).as('st_centroid')
       fields << NAME_FIELDS[type_sym]
       fields << ABBR_FIELDS[type_sym] if ABBR_FIELDS.key?(type_sym)
       fields << :qs_iso_cc if type_sym == :admin1
-      record = DB[:"qs.qs_#{type}"].select(*fields).first
+      record = DB[:"qs_#{type}"].select(*fields).first
 
       # grab our ids
       gn_id = sti record[:qs_gn_id]
