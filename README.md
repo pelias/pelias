@@ -1,6 +1,6 @@
 # Pelias
 
-[![Build Status][travis-pelias-png]][travis-pelias]
+[![Build Status][https://travis-ci.org/mapzen/pelias.png]](https://travis-ci.org/mapzen/pelias)
 
 Pelias is a set of tools for importing [OpenStreetMap](http://www.openstreetmap.org/) data into [Elasticsearch](http://www.elasticsearch.org/), and a simple server to handle queries and autocomplete suggestions.
 
