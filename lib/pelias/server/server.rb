@@ -33,14 +33,11 @@ module Pelias
       jbuilder :search
     end
 
+    # Reverse geocode endpoint
+    # lng: the longitude to lookup
+    # lat: the latitude to lookup
     get '/reverse' do
-      @hits = [Pelias::Search.reverse_geocode(params[:lng], params[:lat])].compact
-      jbuilder :search
-    end
-
-    get '/closest' do
-      results = Pelias::Search.closest(params[:lng], params[:lat], params[:type], 1500)
-      @hits = results['hits']['hits']
+      @hits = [Pelias::Search.reverse_geocode(params[:lng].to_f, params[:lat].to_f)].compact
       jbuilder :search
     end
 

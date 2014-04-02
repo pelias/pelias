@@ -106,6 +106,28 @@ describe Pelias::Server do
 
   end
 
+  describe '/reverse' do
+
+    context 'with a regular reverse lookup - no size specified' do
+
+      before do
+        res = { '_source' => { 'name' => 'nyc' } }
+        Pelias::Search.should_receive(:reverse_geocode).with(1, 2).and_return(res)
+        get '/reverse?lng=1&lat=2' # as it were
+      end
+
+      it 'should get a 200' do
+        last_response.should be_ok
+      end
+
+      it 'should get the result' do
+        JSON.parse(last_response.body)['features'].map { |f| f['properties']['name'] }.should == ['nyc']
+      end
+
+    end
+
+  end
+
   describe '/demo' do
 
     before do

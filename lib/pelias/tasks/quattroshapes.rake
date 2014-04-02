@@ -25,7 +25,7 @@ namespace :quattroshapes do
     i = 0
     Pelias::DB["select gid from qs.qs_#{type}"].use_cursor.each do |row|
       puts "Prepared #{i}" if (i += 1) % 10_000 == 0
-      Pelias::QuattroIndexer.perform_async type, row[:gid], ENV['SKIP_LOOKUP'] == '1'
+      Pelias::QuattroIndexer.perform_async type, row[:gid]
     end
   end
 

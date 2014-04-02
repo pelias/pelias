@@ -27,33 +27,27 @@ module Pelias
 
     SHAPE_ORDER = [:admin0, :admin1, :admin2, :local_admin, :locality, :neighborhood, :street, :address, :poi]
 
-    def perform(type, gid, skip_lookup)
+    def perform(type, gid)
 
       type_sym = type.to_sym
 
-      # Load up our record
-      fields = 'ST_AsText(ST_Centroid(geom)) as st_centroid'
-      if type_sym == :neighborhood
-        fields << ',gn_id,woe_id'
-      else
-        fields << ',qs_gn_id,qs_woe_id'
-      end
-      fields << ",#{NAME_FIELDS[type_sym]}"
-      fields << ",#{ABBR_FIELDS[type_sym]}" if ABBR_FIELDS.key?(type_sym)
-      fields << ',qs_iso_cc' if type_sym == :admin1
-      results = Pelias::DB["SELECT #{fields} from qs.qs_#{type} WHERE gid=#{gid}"]
-      record = results.first
+      fields = []
+      fields << type_sym == :neighborhood ? 'gn_id as qs_gn_id'  : 'qs_gn_id'
+      fields << type_sym == :neighborhood ? 'woe_id as qs_woe_id': 'qs_woe_id'
+      fields << 'ST_AsText(ST_Centroid(geom)) as st_centroid'
+      fields << NAME_FIELDS[type_sym]
+      fields << ABBR_FIELDS[type_sym] if ABBR_FIELDS.key?(type_sym)
+      fields << :qs_iso_cc if type_sym == :admin1
+      record = DB[:"qs.qs_#{type}"].select(*fields).first
 
       # grab our ids
-      gn_id = sti record[:qs_gn_id] || record[:gn_id]
-      woe_id = sti record[:qs_woe_id] || record[:woe_id]
+      gn_id = sti record[:qs_gn_id]
+      woe_id = sti record[:qs_woe_id]
 
       # Build a set
       set = Pelias::LocationSet.new
-      unless skip_lookup
-        set.append_records "#{type}.gn_id", gn_id
-        set.append_records "#{type}.woe_id", woe_id
-      end
+      set.append_records "#{type}.gn_id", gn_id
+      set.append_records "#{type}.woe_id", woe_id
       set.close_records_for type
 
       # Update it
