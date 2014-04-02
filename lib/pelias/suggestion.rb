@@ -33,7 +33,7 @@ module Pelias
       inputs.concat [e.locality_name, e.admin2_name].compact.map { |v| [e.name, v, e.admin1_abbr || e.admin1_name].join(' ') }
       {
         input: inputs,
-        output: [e.name, e.admin1_abr || e.admin1_name].compact.join(', '),
+        output: [e.name, e.admin1_abbr || e.admin1_name].compact.join(', '),
         weight: (e.population.to_i / 100_000) + 12
       }
     end
