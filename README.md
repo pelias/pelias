@@ -24,7 +24,7 @@ To get set up, run the following.
 
 ### Set up the index & mappings:
 
-    $ rake index:create
+    $ bundle exec rake index:create
 
 ### Prepare geonames
 
@@ -32,7 +32,9 @@ Geonames provide nice alternative names and populations for locations.  We
 cross-reference this data with quattroshapes in the next step in order to
 provide a better search experience.
 
-    $ rake geonames:populate
+    $ bundle exec rake geonames:prepare
+
+Follow along at http://localhost:8080/workers
 
 ### Insert quattroshapes
 
@@ -42,13 +44,13 @@ http://quattroshapes.com/ project.
 NOTE: These tasks are enqueued via Sidekiq and must be run in isolated steps.
 You can run them inline by using the environment variable `ES_INLINE=1`.
 
-    $ rake quattroshapes:prepare_all
-    $ rake quattroshapes:populate_admin0
-    $ rake quattroshapes:populate_admin1
-    $ rake quattroshapes:populate_admin2
-    $ rake quattroshapes:populate_local_admin
-    $ rake quattroshapes:populate_locality
-    $ rake quattroshapes:populate_neighborhood
+    $ bundle exec rake quattroshapes:prepare_all
+    $ bundle exec rake quattroshapes:populate_admin0 ES_INLINE=1
+    $ bundle exec rake quattroshapes:populate_admin1 ES_INLINE=1
+    $ bundle exec rake quattroshapes:populate_admin2 ES_INLINE=1
+    $ bundle exec rake quattroshapes:populate_local_admin ES_INLINE=1
+    $ bundle exec rake quattroshapes:populate_locality ES_INLINE=1
+    $ bundle exec rake quattroshapes:populate_neighborhood ES_INLINE=1
 
 ### Add OSM data
 
@@ -56,9 +58,9 @@ Assuming you've set up a postGIS-enabled database with OSM data, the following
 will add all streets and addresses to the index, reverse geocoding them into
 the above shapes.
 
-    $ rake osm:populate_street
-    $ rake osm:populate_address
-    $ rake osm:populate_poi
+    $ bundle exec rake osm:populate_street
+    $ bundle exec rake osm:populate_address
+    $ bundle exec rake osm:populate_poi
 
 ## Start the server
 
