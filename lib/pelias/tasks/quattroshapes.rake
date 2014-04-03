@@ -15,7 +15,7 @@ namespace :quattroshapes do
   def perform_prepare(type, file)
     sh "wget http://static.quattroshapes.com/#{file}.zip -P #{TEMP_PATH}" # download
     sh "unzip #{TEMP_PATH}/#{file}.zip -d #{TEMP_PATH}" # expand
-    sh "shp2pgsql -D -d -Nskip -I -WLATIN1 #{TEMP_PATH}/#{file}.shp qs.qs_#{type} > #{TEMP_PATH}/#{file}.sql" # convert
+    sh "shp2pgsql -D -d -Nskip -I -WLATIN1 #{TEMP_PATH}/#{file}.shp qs_#{type} > #{TEMP_PATH}/#{file}.sql" # convert
     sh "#{psql_command} < #{TEMP_PATH}/#{file}.sql" # import
     sh "rm #{TEMP_PATH}/#{file}*" # clean up
   end
@@ -23,7 +23,7 @@ namespace :quattroshapes do
   # Perform an index
   def perform_index(type)
     i = 0
-    Pelias::DB["select gid from qs.qs_#{type}"].use_cursor.each do |row|
+    Pelias::DB["select gid from qs_#{type}"].use_cursor.each do |row|
       puts "Prepared #{i}" if (i += 1) % 10_000 == 0
       Pelias::QuattroIndexer.perform_async type, row[:gid]
     end
