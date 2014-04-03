@@ -90,6 +90,14 @@ Using the above architecture, we've observed the following load times:
 * geonames + quattroshapes: roughly an hour
 * osm: ~3 days
 
+### Data Footprint
+
+Documents in Elasticsearch upon completion of load:
+* ~66 million
+
+Unique data size on disk:
+* ~270GB
+
 ## API
 
 ### search
