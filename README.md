@@ -34,8 +34,6 @@ provide a better search experience.
 
     $ bundle exec rake geonames:prepare
 
-Follow along at http://localhost:8080/workers
-
 ### Insert quattroshapes
 
 These are shapes for various administrative shapes. They are provided by the
