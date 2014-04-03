@@ -80,9 +80,10 @@ will look like in terms of amount of data, number of documents, etc.
 * Sidekiq: 8 c1.medium
 
 Using this hardware allocation, we also recommend the following during the initial data load:
-* disable replication in elasticsearch: `curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"number_of_replicas\" : \"0\"}}"`
-* set the index refresh interval to something north of an hour: `curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"refresh_interval\" : \"3600s\"}}"`
-* in PostgreSQL, add the following index (this will take some time if you're working with a full planet installation): `CREATE INDEX limit_street_line ON planet_osm_line (name, highway);`
+* disable replication in elasticsearch
+* set the index refresh interval to something north of an hour (or disable it altogether for the duration of the indexing process)
+* in PostgreSQL, add the following index (this will take some time if you're working with a full planet installation):
+  * `CREATE INDEX limit_street_line ON planet_osm_line (name, highway);`
 
 ### Load Times
 
