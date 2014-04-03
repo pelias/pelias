@@ -76,22 +76,19 @@ will look like in terms of amount of data, number of documents, etc.
 ### Architecture/Tuning
 
 * PostgreSQL/PostGIS: 1 c3.8xlarge
-* Elasticsearch: 4 c3.4xlarge
-* Sidekiq: 4 c1.medium
+* Elasticsearch: 20 m3.2xlarge
+* Sidekiq: 8 c1.medium
 
 Using this hardware allocation, we also recommend the following during the initial data load:
 * disable replication in elasticsearch: `curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"number_of_replicas\" : \"0\"}}"`
-* set the index refresh interval to something north of 60 seconds: `curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"refresh_interval\" : \"3600s\"}}"`
+* set the index refresh interval to something north of an hour: `curl -s -XPUT http://localhost:9200/_settings -d "{\"index\": {\"refresh_interval\" : \"3600s\"}}"`
 * in PostgreSQL, add the following index (this will take some time if you're working with a full planet installation): `CREATE INDEX limit_street_line ON planet_osm_line (name, highway);`
 
 ### Load Times
 
 Using the above architecture, we've observed the following load times:
-* `rake quattroshapes:prepare_all` ~ 1.5 hours. Load on Elasticsearch is generally near 100% CPU with a 5 minute load average of 14 (the c3.4xlarge instances provide 16 cores)
-* `rake quattroshapes:populate_all`
-* `rake geonames:populate`
-* `rake osm:populate_street`
-* `rake osm:populate_address`
+* geonames + quattroshapes: roughly an hour
+* osm: ~3 days
 
 ## API
 
