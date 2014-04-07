@@ -38,7 +38,7 @@ module Pelias
       fields << NAME_FIELDS[type_sym]
       fields << ABBR_FIELDS[type_sym] if ABBR_FIELDS.key?(type_sym)
       fields << :qs_iso_cc if type_sym == :admin1
-      record = DB[:"qs_#{type}"].select(*fields).first
+      record = DB[:"qs_#{type}"].select(*fields).where(gid: gid).first
 
       # grab our ids
       gn_id = sti record[:qs_gn_id]

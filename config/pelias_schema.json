@@ -1,5 +1,32 @@
 {
 
+  "settings": {
+
+    "analysis": {
+
+      "analyzer": {
+
+        "suggest_synonyms": {
+          "type": "custom",
+          "tokenizer": "lowercase",
+          "filter": ["synonym_filter"]
+        }
+
+      },
+
+      "filter": {
+
+        "synonym_filter": {
+          "type": "synonym",
+          "synonyms_path": "%DIRPATH%/config/synonyms.txt"
+        }
+
+      }
+
+    }
+
+  },
+
   "mappings": {
 
     "location": {
@@ -23,8 +50,10 @@
 
         "suggest": {
           "type": "completion",
-          "index_analyzer": "standard",
-          "search_analyzer": "standard",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms",
           "payloads": true
         },
 
