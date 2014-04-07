@@ -8,6 +8,7 @@ module Pelias
       concat(QuattroIndexer::SHAPE_ORDER.flat_map { |f| ["#{f}_name", "#{f}_alternate_names"] })
 
     def search(term, viewbox = nil, center = nil, size = 10)
+      term.downcase!
       query = {
         query: {
           query_string: {

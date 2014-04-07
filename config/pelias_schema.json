@@ -8,8 +8,8 @@
 
         "suggest_synonyms": {
           "type": "custom",
-          "tokenizer": "lowercase",
-          "filter": ["synonym_filter"]
+          "tokenizer": "whitespace",
+          "filter": ["synonym_filter", "lowercase"]
         }
 
       },
@@ -18,7 +18,8 @@
 
         "synonym_filter": {
           "type": "synonym",
-          "synonyms_path": "%DIRPATH%/config/synonyms.txt"
+          "synonyms_path": "%DIRPATH%/config/synonyms.txt",
+          "expand": true
         }
 
       }
@@ -38,6 +39,125 @@
         "osm_id": { "type": "long", "index": "not_analyzed" },
 
         "location_type": { "type": "string" },
+
+        "name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "alternate_names": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "admin0_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "admin0_alternate_names": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "admin1_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "admin1_alternate_names": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "admin2_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "admin2_alternate_names": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "local_admin_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "local_admin_alternate_names": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "locality_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "locality_alternate_names": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "neighborhood_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "neighborhood_alternate_names": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "street_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "address_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
+
+        "poi_name": {
+          "type": "string",
+          "index": "analyzed",
+          "index_analyzer": "suggest_synonyms",
+          "search_analyzer": "suggest_synonyms"
+        },
 
         "boundaries": {
           "type": "geo_shape",
