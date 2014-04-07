@@ -9,7 +9,7 @@
         "suggest_synonyms": {
           "type": "custom",
           "tokenizer": "whitespace",
-          "filter": ["synonym_filter", "lowercase"]
+          "filter": ["lowercase", "synonym_filter"]
         }
 
       },
@@ -44,119 +44,119 @@
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "alternate_names": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "admin0_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "admin0_alternate_names": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "admin1_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "admin1_alternate_names": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "admin2_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "admin2_alternate_names": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "local_admin_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "local_admin_alternate_names": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "locality_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "locality_alternate_names": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "neighborhood_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "neighborhood_alternate_names": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "street_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "address_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "poi_name": {
           "type": "string",
           "index": "analyzed",
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms"
+          "search_analyzer": "standard"
         },
 
         "boundaries": {
@@ -173,7 +173,7 @@
           "preserve_position_increments": false,
           "preserve_separators": false,
           "index_analyzer": "suggest_synonyms",
-          "search_analyzer": "suggest_synonyms",
+          "search_analyzer": "standard",
           "payloads": true
         },
 
