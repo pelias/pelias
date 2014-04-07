@@ -21,16 +21,14 @@ module Pelias
     def rebuild_suggestions_for_admin2(e)
       boost = e.population.to_i / 100_000
       {
-        input:  [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" },
+        input:  [e.name, e.admin1_abbr, e.admin1_name],
         output: [e.name, e.admin1_abbr || e.admin1_name].compact.join(', '),
         weight: boost < 1 ? 1 : boost
       }
     end
 
     def rebuild_suggestions_for_local_admin(e)
-      inputs = []
-      inputs.concat [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" }
-      inputs.concat [e.locality_name, e.admin2_name].compact.map { |v| [e.name, v, e.admin1_abbr || e.admin1_name].join(' ') }
+      inputs = [e.name, e.admin1_abbr, e.admin1_name, e.locality_name, e.admin2_name]
       {
         input: inputs,
         output: [e.name, e.admin1_abbr || e.admin1_name].compact.join(', '),
@@ -39,9 +37,7 @@ module Pelias
     end
 
     def rebuild_suggestions_for_locality(e)
-      inputs = []
-      inputs.concat [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" }
-      inputs.concat [e.local_admin_name, e.admin2_name].compact.map { |v| [e.name, v, e.admin1_abbr || e.admin1_name].join(' ') }
+      inputs = [e.name, e.admin1_abbr, e.admin1_name, e.local_admin_name, e.admin2_name]
       {
         input: inputs,
         output: [e.name, e.admin1_abbr || e.admin1_name].compact.join(', '),
@@ -51,9 +47,7 @@ module Pelias
 
     def rebuild_suggestions_for_neighborhood(e)
       adn = e.locality_name || e.local_admin_name || e.admin2_name
-      inputs = []
-      inputs.concat [e.admin1_abbr, e.admin1_name].compact.map { |v| "#{e.name} #{v}" }
-      inputs.concat [e.local_admin_name, e.locality_name, e.admin2_name].compact.map { |v| [e.name, v, e.admin1_abbr || e.admin1_name].join(' ') }
+      inputs = [e.name, e.admin1_abbr, e.admin1_name, e.locality_name, e.local_admin_name, e.admin2_name]
       {
         input: inputs,
         output: [e.name, adn, e.admin1_abbr || e.admin1_name].compact.join(', '),
@@ -63,7 +57,7 @@ module Pelias
 
     def rebuild_suggestions_for_address(e)
       adn = e.local_admin_name || e.locality_name || e.neighborhood_name || e.admin2_name
-      inputs = [e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name].compact.map { |v| "#{e.name} #{v}" }
+      inputs = [e.name, e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name]
       {
         input: inputs,
         output: [e.name, adn, e.admin1_abbr || e.admin1_name].compact.join(', '),
@@ -73,7 +67,7 @@ module Pelias
 
     def rebuild_suggestions_for_street(e)
       adn = e.local_admin_name || e.locality_name || e.neighborhood_name || e.admin2_name
-      inputs = [e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name].compact.map { |v| "#{e.name} #{v}" }
+      inputs = [e.name, e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name]
       {
         input: inputs,
         output: [e.name, adn, e.admin1_abbr || e.admin1_name].join(', '),
@@ -82,8 +76,7 @@ module Pelias
     end
 
     def rebuild_suggestions_for_poi(e)
-      inputs = [e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name].compact.map { |v| [e.name, e.address_name || e.street_name, v].compact.join(' ') }
-      inputs << e.name
+      inputs = [e.name, e.address_name, a.street_name, e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name, e.admin1_name, e.admin1_abbr]
       {
         input: inputs,
         output: [e.name, e.address_name, e.local_admin_name || e.locality_name, e.admin1_abbr || e.admin1_name].compact.join(', '),

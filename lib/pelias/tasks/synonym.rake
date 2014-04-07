@@ -35,10 +35,10 @@ namespace :synonyms do
       (0..1000).each do |num|
         file.puts [
           num,
-          num.to_words(remove_hyphen: true),
-          num.to_words(remove_hyphen: true, ordinal: true),
+          (num.to_words(remove_hyphen: true) if num < 100),
+          (num.to_words(remove_hyphen: true, ordinal: true) if num < 100),
           "#{num}#{suffix_for(num)}"
-        ].join(',')
+        ].compact.join(',')
       end
 
     end
