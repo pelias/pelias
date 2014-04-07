@@ -67,6 +67,9 @@ GEM
     multi_json (1.9.0)
     multipart-post (2.0.0)
     nio4r (1.0.0)
+    numbers_and_words (0.10.0)
+      activesupport
+      i18n
     pg (0.17.1)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -137,6 +140,7 @@ DEPENDENCIES
   elasticsearch
   guard-rspec
   hashie
+  numbers_and_words
   pg
   rack-test
   rake

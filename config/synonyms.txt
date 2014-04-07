@@ -1,4 +1,0 @@
-east,e
-west,w
-north,n
-south,s
