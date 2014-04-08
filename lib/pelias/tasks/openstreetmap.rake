@@ -65,6 +65,7 @@ namespace :osm do
         puts "Prepared #{i} #{shape}" if (i += 1) % 10_000 == 0
         next unless address[:housenumber] && address[:street_name]
         next unless osm_id = sti(address[:osm_id])
+        next unless address[:street_name] == 'East 6 Street'
         name = "#{address[:housenumber]} #{address[:street_name]}"
         Pelias::LocationIndexer.perform_async({}, :address, :street, {
           _id: "osm:#{osm_id}",
