@@ -13,7 +13,7 @@ namespace :geonames do
           alternate_names: arr[3].split(','),
           population: arr[14].to_i
         }.to_json)
-      rescue Redis::TimeoutError
+      rescue Redis::BaseConnectionError
         retry
       end
     end
