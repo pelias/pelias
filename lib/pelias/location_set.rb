@@ -24,7 +24,7 @@ module Pelias
         entry['suggest'][:input] << entry['name'] # of course
         entry['suggest'][:input].compact!
         entry['suggest'][:input].uniq!
-        denied = ['boundaries', 'suggest', 'refs']
+        denied = %w{boundaries suggest refs}
         entry['suggest']['payload'] = entry.reject { |k, v| denied.include?(k) }
       end
     end
