@@ -7,11 +7,15 @@ namespace :geonames do
     File.open("#{TEMP_PATH}/allCountries.txt").each do |line|
       puts "Inserted #{i}" if (i += 1) % 10_000 == 0
       arr = line.chomp.split("\t")
-      Pelias::REDIS.hset('geoname', arr[0], {
-        name: arr[1],
-        alternate_names: arr[3].split(','),
-        population: arr[14].to_i
-      }.to_json)
+      begin
+        Pelias::REDIS.hset('geoname', arr[0], {
+          name: arr[1],
+          alternate_names: arr[3].split(','),
+          population: arr[14].to_i
+        }.to_json)
+      rescue Redis::TimeoutError
+        retry
+      end
     end
   end
 
