@@ -20,9 +20,11 @@ module Pelias
       update do |_id, entry|
         suggest = Suggestion.send :"rebuild_suggestions_for_#{entry['location_type']}", Hashie::Mash.new(entry)
         entry['suggest'] = suggest
-        denied = ['boundaries', 'suggest', 'refs']
+        entry['suggest'][:input] = Pelias::QuattroIndexer::SHAPE_ORDER.map { |s| entry["#{s}_name"] }
+        entry['suggest'][:input] << entry['name'] # of course
         entry['suggest'][:input].compact!
         entry['suggest'][:input].uniq!
+        denied = ['boundaries', 'suggest', 'refs']
         entry['suggest']['payload'] = entry.reject { |k, v| denied.include?(k) }
       end
     end
