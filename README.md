@@ -68,7 +68,7 @@ You should now be able to access the server at http://localhost:8080/suggest?que
 
 ## Setup Performance Information
 
-The following is a breif synopsis of setting up this environment including: approximate times to complete each step, amount of data, number of documents, etc.
+The following is a brief synopsis of setting up this environment including: approximate times to complete each step, amount of data, number of documents, etc.
 
 ### Architecture/Tuning
 
