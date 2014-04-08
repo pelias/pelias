@@ -64,14 +64,11 @@ the above shapes.
 
     $ unicorn
 
-You should now be able to access the server at http://localhost:8080/suggest?query=bro
+You should now be able to access the server at http://localhost:8080/suggest?query=party
 
-## Production-like Setup Performance Information
+## Setup Performance Information
 
-To give you an idea of what you're getting into, we provide the following
-synopsis of an environment purpose built for the loading of this data. In
-addition, rough times to complete each step, along with what the end product
-will look like in terms of amount of data, number of documents, etc.
+The following is a breif synopsis of setting up this environment including: approximate times to complete each step, amount of data, number of documents, etc.
 
 ### Architecture/Tuning
 
