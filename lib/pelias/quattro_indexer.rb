@@ -60,7 +60,6 @@ module Pelias
         # Data about this particular one
         entry['name'] = record[NAME_FIELDS[type_sym]]
         entry['abbr'] = record[ABBR_FIELDS[type_sym]] if ABBR_FIELDS.key?(type_sym)
-        entry['abbr'] = nil if type_sym == :admin0 && entry['abbr'] == 'XX'
         entry['abbr'] = self.class.state_map.key(entry['name']) if type_sym == :admin1 && record[:qs_iso_cc] == 'US'
         entry['gn_id'] = gn_id
         entry['woe_id'] = woe_id
