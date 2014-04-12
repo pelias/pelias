@@ -75,6 +75,7 @@ The following is a brief synopsis of setting up this environment including: appr
 * PostgreSQL/PostGIS: 1 c3.8xlarge
 * Elasticsearch: 20 m3.2xlarge
   * optimization work to be done to lessen on heap storage requirements
+  * assumes 80 shards, 1 replica per shard
 * Sidekiq: 8 c1.medium
   * only required for initial import to complete in a timely manner
   * can be removed once complete or scaled back as required for updates on an ongoing basis
@@ -97,7 +98,8 @@ Documents in Elasticsearch upon completion of load:
 * ~66 million
 
 Unique data size on disk:
-* ~270GB
+* ~300GB
+  * ~600GB with one replica
 
 ## API
 
