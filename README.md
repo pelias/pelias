@@ -75,7 +75,7 @@ The following is a brief synopsis of setting up this environment including: appr
 * PostgreSQL/PostGIS: 1 c3.8xlarge
 * Elasticsearch: 20 m3.2xlarge
   * optimization work to be done to lessen on heap storage requirements
-  * assumes 80 shards, 1 replica per shard
+  * assumes 80 shards, 1 replica per shard, half of physical memory allocated to ES for heap
 * Sidekiq: 8 c1.medium
   * only required for initial import to complete in a timely manner
   * can be removed once complete or scaled back as required for updates on an ongoing basis
