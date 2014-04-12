@@ -70,11 +70,14 @@ You should now be able to access the server at http://localhost:8080/suggest?que
 
 The following is a brief synopsis of setting up this environment including: approximate times to complete each step, amount of data, number of documents, etc.
 
-### Architecture/Tuning
+### Architecture/Tuning for a FULL PLANET index
 
 * PostgreSQL/PostGIS: 1 c3.8xlarge
 * Elasticsearch: 20 m3.2xlarge
+  * optimization work to be done to lessen on heap storage requirements
 * Sidekiq: 8 c1.medium
+  * only required for initial import to complete in a timely manner
+  * can be removed once complete or scaled back as required for updates on an ongoing basis
 
 Using this hardware allocation, we also recommend the following during the initial data load:
 * disable replication in elasticsearch
