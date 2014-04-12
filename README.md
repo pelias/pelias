@@ -70,9 +70,10 @@ You should now be able to access the server at http://localhost:8080/suggest?que
 
 The following is a brief synopsis of setting up this environment including: approximate times to complete each step, amount of data, number of documents, etc.
 
-### Architecture/Tuning for a FULL PLANET index
+### Architecture/Tuning for a FULL PLANET index in shortest time period
 
 * PostgreSQL/PostGIS: 1 c3.8xlarge
+  * this is only to facilitate the fastest of initial load times into pelias
 * Elasticsearch: 20 m3.2xlarge
   * optimization work to be done to lessen on heap storage requirements
   * assumes 80 shards, 1 replica per shard, half of physical memory allocated to ES for heap
