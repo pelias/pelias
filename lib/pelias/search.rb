@@ -121,6 +121,9 @@ module Pelias
       # then closest street
       street = closest(lng, lat, 'street')
       return street['hits']['hits'].first if street['hits']['hits'].any?
+      # then closest poi
+      poi = closest(lng, lat, 'poi')
+      return poi['hits']['hits'].first if poi['hits']['hits'].any?
       # otherwise encompassing shapes in order
       shapes = encompassing_shapes(lng, lat)
       unless shapes['hits']['hits'].empty?
