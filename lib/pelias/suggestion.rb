@@ -76,7 +76,7 @@ module Pelias
     end
 
     def rebuild_suggestions_for_poi(e)
-      inputs = [e.name, e.address_name, a.street_name, e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name, e.admin1_name, e.admin1_abbr]
+      inputs = [e.name, e.address_name, e.street_name, e.local_admin_name, e.locality_name, e.neighborhood_name, e.admin2_name, e.admin1_name, e.admin1_abbr]
       {
         input: inputs,
         output: [e.name, e.address_name, e.local_admin_name || e.locality_name, e.admin1_abbr || e.admin1_name].compact.join(', '),

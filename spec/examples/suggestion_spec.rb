@@ -119,4 +119,20 @@ describe Pelias::Suggestion do
 
   end
 
+  describe :rebuild_suggestions_for_poi do
+
+    let(:suggestion) { Pelias::Suggestion.rebuild_suggestions_for_poi(Hashie::Mash.new(data)) }
+
+    context 'with a basic poi' do
+
+      let(:data) { { name: 'name' } }
+
+      it 'should use the name as an input' do
+        suggestion[:input].should include 'name'
+      end
+
+    end
+
+  end
+
 end
