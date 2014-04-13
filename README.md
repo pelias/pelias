@@ -70,11 +70,16 @@ You should now be able to access the server at http://localhost:8080/suggest?que
 
 The following is a brief synopsis of setting up this environment including: approximate times to complete each step, amount of data, number of documents, etc.
 
-### Architecture/Tuning
+### Architecture/Tuning for a FULL PLANET index in shortest time period
 
 * PostgreSQL/PostGIS: 1 c3.8xlarge
+  * this is only to facilitate the fastest of initial load times into pelias
 * Elasticsearch: 20 m3.2xlarge
+  * optimization work to be done to lessen on heap storage requirements
+  * assumes 80 shards, 1 replica per shard, half of physical memory allocated to ES for heap
 * Sidekiq: 8 c1.medium
+  * only required for initial import to complete in a timely manner
+  * can be removed once complete or scaled back as required for updates on an ongoing basis
 
 Using this hardware allocation, we also recommend the following during the initial data load:
 * disable replication in elasticsearch
@@ -94,7 +99,8 @@ Documents in Elasticsearch upon completion of load:
 * ~66 million
 
 Unique data size on disk:
-* ~270GB
+* ~300GB
+  * ~600GB with one replica
 
 ## API
 
