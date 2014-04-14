@@ -22,6 +22,10 @@ To get set up, run the following.
     $ git clone git@github.com:mapzen/pelias.git
     $ bundle
 
+### Prepare synonyms
+
+    $ bundle exec rake synonyms:build
+
 ### Set up the index & mappings:
 
     $ bundle exec rake index:create
