@@ -19,7 +19,7 @@ To get set up, run the following.
 
 ### Get the code and bundle to download dependencies
 
-    $ git clone git@github.com:mapzen/pelias.git
+    $ git clone git@github.com:mapzen/pelias.git && cd pelias
     $ bundle
 
 ### Prepare synonyms
