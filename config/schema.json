@@ -1,0 +1,295 @@
+{
+
+  "settings": {
+
+    "analysis": {
+
+      "analyzer": {
+
+        "suggestions": {
+          "type": "custom",
+          "tokenizer": "whitespace",
+          "filter": "lowercase"
+        }
+
+      }
+
+    }
+
+  },
+
+  "mappings": {
+
+    "geoname": {
+
+      "properties": {
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "admin0": {
+
+      "properties": {
+
+        "gn_id":  { "type": "long", "index": "not_analyzed" },
+        "woe_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "admin1": {
+
+      "properties": {
+
+        "gn_id":  { "type": "long", "index": "not_analyzed" },
+        "woe_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "admin2": {
+
+      "properties": {
+
+        "gn_id":  { "type": "long", "index": "not_analyzed" },
+        "woe_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "local_admin": {
+
+      "properties": {
+
+        "gn_id":  { "type": "long", "index": "not_analyzed" },
+        "woe_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "locality": {
+
+      "properties": {
+
+        "gn_id":  { "type": "long", "index": "not_analyzed" },
+        "woe_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "neighborhood": {
+
+      "properties": {
+
+        "gn_id":  { "type": "long", "index": "not_analyzed" },
+        "woe_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "street": {
+
+      "properties": {
+
+        "osm_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "address": {
+
+      "properties": {
+
+        "osm_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    },
+
+    "poi": {
+
+      "properties": {
+
+        "osm_id": { "type": "long", "index": "not_analyzed" },
+
+        "boundaries": {
+          "type": "geo_shape"
+        },
+
+        "center_point": {
+          "type": "geo_point"
+        },
+
+        "suggest": {
+          "type": "completion",
+          "preserve_position_increments": false,
+          "preserve_separators": false,
+          "index_analyzer": "suggestions",
+          "search_analyzer": "standard",
+          "payloads": true
+        }
+
+      }
+
+    }
+
+  }
+
+}
