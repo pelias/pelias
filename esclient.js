@@ -36,7 +36,7 @@ client.errorHandler = function(cb) {
 client.stream = new Writable();
 
 var buff = [];
-var bufferMaxSize = 100;
+var bufferMaxSize = 1000;
 var insertedCount = 0;
 
 // Flush buffer to ES
