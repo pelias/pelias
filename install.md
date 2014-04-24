@@ -38,14 +38,14 @@ curl http://127.0.0.1:9200
 ```bash
 cd /tmp
 wget https://raw.githubusercontent.com/isaacs/nave/master/nave.sh
-sudo bash nave.sh usemain latest
+sudo bash nave.sh usemain stable
 ```
 
 ### Confirm Install
 
 ```bash
 node --version
-v0.11.12
+v0.10.26
 
 npm --version
 1.4.3
