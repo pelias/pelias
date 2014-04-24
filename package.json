@@ -1,0 +1,33 @@
+{
+  "name": "pelias",
+  "author": "mapzen",
+  "version": "0.0.0",
+  "description": "Open-source geo-coder & reverse geo-coder",
+  "homepage": "https://github.com/mapzen/pelias",
+  "license": "TBA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mapzen/pelias.git"
+  },
+  "keywords": [
+    "geocoder",
+    "osm",
+    "maps"
+  ],
+  "bugs": {
+    "url": "https://github.com/mapzen/pelias/issues"
+  },
+  "engines": {
+    "node": ">=0.10.26",
+    "elasticsearch": ">=1.1.1"
+  },
+  "dependencies": {
+    "csv": "^0.3.7",
+    "unzip": "^0.1.9",
+    "elasticsearch": "^2.1.4"
+  }
+}
