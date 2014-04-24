@@ -29,6 +29,10 @@
   "dependencies": {
     "csv": "^0.3.7",
     "unzip": "^0.1.9",
-    "elasticsearch": "^2.1.4"
+    "elasticsearch": "^2.1.4",
+    "request": "^2.34.0",
+    "progress": "^1.1.5",
+    "progress-stream": "^0.4.0",
+    "mkdirp": "^0.4.0"
   }
 }

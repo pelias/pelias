@@ -1,46 +1,39 @@
-var fs = require('fs');
-var request = require('request');
-var unzip = require('unzip');
-var elasticsearch = require('elasticsearch');
-var csv = require('csv');
 
-function buildJson(row) {
-  return { _id: row[0], data: { name: row[1] } };
-}
+var fs = require('fs'),
+    request = require('request'),
+    unzip = require('unzip'),
+    csv = require('csv'),
+    esclient = require('../esclient');
 
-function jsonifyGeonames() {
-  var geonames = [];
-  var group_count = 1000;
-  var group_size = 1000;
-  csv()
-    .from.path('data/geonames/allCountries.txt', { delimiter: '\t' })
-    .to.stream(fs.createWriteStream('data/geonames/allCountries.json'))
-    .transform( function(row, index) {
-      if (index < group_count) {
-        geonames.push(buildJson(row));
-      } else {
-        group_count += group_size;
-        var geonames_group = geonames;
-        geonames = [];
-        return JSON.stringify(geonames_group) + "\n";
-      }
-    });
-}
+var columns = [
+  '_id','name','asciiname','alternatenames','latitude','longitude','feature_class',
+  'feature_code','country_code','cc2','admin1_code','admin2_code','admin3_code',
+  'admin4_code', 'population','elevation','dem','timezone','modification_date'
+];
 
-function unzipGeonames() {
-  fs.createReadStream('data/geonames/allCountries.zip')
-    .pipe(unzip.Extract({ path: 'data/geonames' }))
-    .on('close', jsonifyGeonames);
-}
+var source = fs.existsSync('data/geonames/allCountries.zip')
+  ? fs.createReadStream('data/geonames/allCountries.zip')
+  : request.get('http://download.geonames.org/export/dump/allCountries.zip');
 
-function downloadGeonames() {
-  request('http://download.geonames.org/export/dump/allCountries.zip')
-    .pipe(fs.createWriteStream('data/geonames/allCountries.zip'))
-    .on('close', unzipGeonames);
-}
-
-if (!fs.existsSync('data/geonames/allCountries.zip')) {
-  downloadGeonames();
-} else {
-  unzipGeonames();
-}
+source
+  .pipe(unzip.Parse())
+  .on('entry', function (entry) {
+    entry.pipe(
+      csv()
+        .from.options({
+          columns: columns,
+          delimiter: '\t',
+          quote: null,
+          trim: true
+        })
+        .transform(function (data) {
+          return JSON.stringify({
+            _index: 'pelias',
+            _type: 'geoname',
+            _id: data._id,
+            data: data
+          });
+        })
+    )
+    .pipe(esclient.stream)
+  });
