@@ -27,13 +27,27 @@ source
           trim: true
         })
         .transform(function (data) {
-          return JSON.stringify({
-            _index: 'pelias',
-            _type: 'geoname',
-            _id: data._id,
-            data: data
+
+          // geoname type
+          esclient.stream.write(JSON.stringify({
+            _index: 'pelias', _type: 'geoname', _id: data._id,
+            data: {
+              center_point: { lat: data.latitude, lon: data.longitude }
+            }
           });
+
+          // admin0 type
+          esclient.stream.write(JSON.stringify({
+            _index: 'pelias', _type: 'admin0', _id: '??????',
+            data: {
+              gn_id: data._id,
+              woe_id: '??????',
+              center_point: { lat: '??????', lon: '??????' }
+            }
+          });
+
+          // etc...
+
         })
     )
-    .pipe(esclient.stream)
   });
