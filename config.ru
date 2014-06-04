@@ -1,4 +1,4 @@
-require_relative 'lib/pelias'
+require './lib/pelias'
 
 # Mount the root app
 map '/' do
