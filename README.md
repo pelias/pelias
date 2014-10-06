@@ -39,7 +39,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 Pelias was rebuilt from scratch and re-launched at the end of Sept '14 so the API is still in Alpha and will be subject to change for the rest of the year.
 
-You don't need a key to access the demo API however we are enforcing some generous rate limits. If you need help building your own Pelias server, get in touch!
+You don't need a key to access the demo API, however we are enforcing some generous rate limits. If you need help building your own Pelias server get in touch!
 
 #### /suggest
 
