@@ -65,7 +65,7 @@ The reverse endpoint returns the nearest locations to your input lat/lon.
 
 You must provide a latitude and longitude so that the results are localised. You may additionally provide a zoom value.
 
-http://pelias.mapzen.com/reverse?lat=51.5&lon=-0.06h
+http://pelias.mapzen.com/reverse?lat=51.5&lon=-0.06
 ![reverse](./img/reverse2.gif)
 
 ### Contributing
@@ -73,7 +73,3 @@ http://pelias.mapzen.com/reverse?lat=51.5&lon=-0.06h
 If you would like to report a problem please [open an issue](https://github.com/pelias/pelias/issues).
 Pull requests are welcome!
 <span id="scroll_mark"></span>
-
-
-
-
