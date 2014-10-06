@@ -27,7 +27,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - Provide accurate search results
 - Give users query suggestions (typeahead in the search box)
 - Account for location bias (places nearer to you appear higher in the results)
-- Supports multiple data sources (OSM, geonames, quattroshapes etc)
+- Support multiple data sources (OSM, geonames, quattroshapes etc)
 - Flexible software architecture
 - Easy to contribute software patches and features to
 - Easy to set-up and configure your own instance
@@ -39,7 +39,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 Pelias was rebuilt from scratch and re-launched at the end of Sept '14 so the API is still in Alpha and will be subject to change for the rest of the year.
 
-You don't need a key to access the demo API however we are inforcing some generous ratelimits. If you need help building your own Pelias server, get in touch!
+You don't need a key to access the demo API, however we are enforcing some generous rate limits. If you need help building your own Pelias server get in touch!
 
 #### /suggest
 
@@ -52,9 +52,9 @@ http://pelias.mapzen.com/suggest?input=big%20ben&lat=51.5&lon=-0.06
 
 #### /search
 
-The search endpoint provides a full-text search. This search is far more flexible than `/suggest`, it will try to account for spelling mistakes and will search for your input at any position in the location name.
+The search endpoint provides a full-text search. This search is far more flexible than `/suggest`. It will try to account for spelling mistakes and will search for your input at any position in the location name.
 
-You must provide a latitude and longitude so that the results are localised, you may additionally provide a zoom value.
+You must provide a latitude and longitude so that the results are localised. You may additionally provide a zoom value.
 
 http://pelias.mapzen.com/search?input=shoreditch&lat=51.5&lon=-0.06
 ![search](./img/search.gif)
@@ -63,15 +63,13 @@ http://pelias.mapzen.com/search?input=shoreditch&lat=51.5&lon=-0.06
 
 The reverse endpoint returns the nearest locations to your input lat/lon.
 
-You must provide a latitude and longitude so that the results are localised, you may additionally provide a zoom value.
+You must provide a latitude and longitude so that the results are localised. You may additionally provide a zoom value.
 
 http://pelias.mapzen.com/reverse?lat=51.5&lon=-0.06
 ![reverse](./img/reverse2.gif)
 
 ### Contributing
 
-If you would like to report an issue or would like to contribute to the project, please [get in touch](mailto:pelias@mapzen.com)
-
-
-
-
+If you would like to report a problem please [open an issue](https://github.com/pelias/pelias/issues).
+Pull requests are welcome!
+<span id="scroll_mark"></span>
