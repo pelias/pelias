@@ -70,7 +70,8 @@ http://pelias.mapzen.com/reverse?lat=51.5&lon=-0.06h
 
 ### Contributing
 
-If you would like to report an issue or would like to contribute to the project, please [get in touch](mailto:pelias@mapzen.com)
+If you would like to report a problem please [open an issue](https://github.com/pelias/pelias/issues).
+Pull requests are welcome!
 <span id="scroll_mark"></span>
 
 
