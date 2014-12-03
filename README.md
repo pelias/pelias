@@ -1,6 +1,7 @@
 Pelias is a modular open-source geocoder built on top of ElasticSearch for fast geocoding. 
 
 ### What's a geocoder do anyway?
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/pelias/pelias?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Geocoding is the process of transforming input text, such as an address, or a name of a place—to a location on the earth's surface.
 
