@@ -4,13 +4,13 @@ Pelias is a modular open-source geocoder built on top of ElasticSearch for fast 
 
 Geocoding is the process of transforming input text, such as an address, or a name of a place—to a location on the earth's surface.
 
-![geocode](https://github.com/pelias/pelias/blob/master/img/geocoding.gif)
+![geocode](https://raw.githubusercontent.com/pelias/pelias/master/img/geocoding.gif)
 
 ### ... and a reverse geocoder, what's that?
 
 Reverse geocoding is the opposite, it transforms your current geographic location in to a list of places nearby.
 
-![reverse](https://github.com/pelias/pelias/blob/master/img/reverse.gif)
+![reverse](https://raw.githubusercontent.com/pelias/pelias/master/img/reverse.gif)
 
 ### What makes Pelias different from other geocoders?
 
@@ -52,7 +52,7 @@ The suggest endpoint provides a super-fast autocomplete. This API can be used to
 You must provide a latitude and longitude so that the results are localised, you may additionally provide a zoom value.
 
 http://pelias.mapzen.com/suggest?input=big%20ben&lat=51.5&lon=-0.06
-![suggest](https://github.com/pelias/pelias/blob/master/img/suggest.gif)
+![suggest](https://raw.githubusercontent.com/pelias/pelias/master/img/suggest.gif)
 
 #### /search
 
@@ -61,7 +61,7 @@ The search endpoint provides a full-text search. This search is far more flexibl
 You must provide a latitude and longitude so that the results are localised. You may additionally provide a zoom value.
 
 http://pelias.mapzen.com/search?input=shoreditch&lat=51.5&lon=-0.06
-![search](https://github.com/pelias/pelias/blob/master/img/search.gif)
+![search](https://raw.githubusercontent.com/pelias/pelias/master/img/search.gif)
 
 #### /reverse
 
@@ -70,7 +70,7 @@ The reverse endpoint returns the nearest locations to your input lat/lon.
 You must provide a latitude and longitude so that the results are localised. You may additionally provide a zoom value.
 
 http://pelias.mapzen.com/reverse?lat=51.5&lon=-0.06
-![reverse](https://github.com/pelias/pelias/blob/master/img/reverse2.gif)
+![reverse](https://raw.githubusercontent.com/pelias/pelias/master/img/reverse2.gif)
 
 ### Contributing
 
