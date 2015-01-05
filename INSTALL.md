@@ -5,6 +5,8 @@
 
 You can run elasticsearch with `openjdk-7` (such as the `openjdk-7-jre-headless` which ships with ubuntu); however elasticsearch recommend you use `oracle-7`.
 
+Some Elasticsearch documentation can naturally fall out-of-date, for definitive info on the latest supported java versions, use the following link: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup.html#jvm-version
+
 To install `oracle` java on `ubuntu`:
 
 ```bash
