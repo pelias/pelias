@@ -1,1 +1,18 @@
-This is where we're going to put contribution guidelines! 
+## Submitting Issues
+
+All issues for Pelias are housed in the [pelias/pelias](https://github.com/pelias/pelias) repo. Before opening an issue, be sure to search the repository to see if someone else has asked your question before. If not, go ahead and [open a new issue](https://github.com/pelias/pelias/issues/new).
+
+### Submitting issues around search result quality
+
+It's important to get feedback about the quality of local search results. When it comes to things like address structure, capitalization, and spelling errors, your local knowledge will make it easier for us to understand the problem. When submitting issues be sure to include:
+- Where in the world you were searching
+- Your search query
+- Your expected result
+- Your actual result
+
+## Submitting Pull Requests
+
+
+- Expectations of PRs
+- Coding standards? Where are they written down?
+- tests
