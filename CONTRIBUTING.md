@@ -1,6 +1,17 @@
+Pelias can't succeed without contributions from community members like you! Contributions come in many different shapes and sizes. In this file we provide guidance around two of the most common types of contributions: opening issues and opening pull requests.
+
 # Submitting Issues
 
 All issues for Pelias are housed in the [pelias/pelias](https://github.com/pelias/pelias) repo. Before opening an issue, be sure to search the repository to see if someone else has asked your question before. If not, go ahead and [open a new issue](https://github.com/pelias/pelias/issues/new).
+
+## Submitting technical bugs
+
+When submitting bug reports, please be sure to give us as much context as possible so that we can reproduce the error you encountered. Be sure to include:
+- System conditons (OS, browser, etc)
+- Steps to reproduce
+- Expected outcome
+- Actual outcome
+- Screenshots, if applicable
 
 ## Submitting issues around search result quality
 
@@ -10,13 +21,10 @@ It's important to get feedback about the quality of local search results. When i
 - Your expected result
 - Your actual result
 
-# Submitting Pull Requests
 
-- Expectations of PRs
-- Coding standards? Where are they written down?
-- tests
+# Pull Requests Welcome!
 
-# Project standards overview
+## Project standards overview
 
 Pelias has several miscellaneous standards:
 
@@ -29,7 +37,7 @@ Pelias has several miscellaneous standards:
 `jshint` and any unit tests in a project will be automatically invoked when you commit to an existing project; make
 sure they exit successfully!
 
-# Active contributors
+## Active contributors
 
 We'll gladly invite active contributors to become members of the [Pelias organization](https://github.com/pelias). New
 members will gain direct write permissions, *and with great power comes great responsibility*. To ensure that any new
