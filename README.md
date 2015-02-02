@@ -74,6 +74,7 @@ http://pelias.mapzen.com/reverse?lat=51.5&lon=-0.06
 
 ### Contributing
 
-If you would like to report a problem please [open an issue](https://github.com/pelias/pelias/issues).
-Pull requests are welcome!
+Please review [our guidelines for contributing to Pelias](https://github.com/pelias/pelias/blob/master/CONTRIBUTING.md).
+
+[New issues](https://github.com/pelias/pelias/issues) and pull requests are welcome!
 <span id="scroll_mark"></span>
