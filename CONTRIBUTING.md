@@ -37,9 +37,9 @@ Pelias has several miscellaneous standards:
 
 - we use [JSHint](http://jshint.com/docs/) for linting
 - we use [TravisCI](https://travis-ci.org/) for continuous integration
+- we use [Winston](https://www.npmjs.com/package/winston) for logging
 - we *love* tests, especially when written with [tape](https://github.com/substack/tape)
-- modularity is key. Don't contribute/develop packages that are tightly coupled to another, and make them general
-  purpose where possible.
+- we use [semver](http://semver.org/) for package versioning
 
 `jshint` and any unit tests in a project will be automatically invoked when you commit to an existing project; make
 sure they exit successfully!
@@ -49,4 +49,4 @@ sure they exit successfully!
 We'll gladly invite active contributors to become members of the [Pelias organization](https://github.com/pelias). New
 members will gain direct write permissions, *and with great power comes great responsibility*. To ensure that any new
 repositories that you create conform to Pelias standards, we developed [pelias-init](https://github.com/pelias/init), a
-simple project generator that will initialize all of the boilerplate needed to get started on a new project.
+simple project generator that will initialize all of the boilerplate needed to get started on something new.
