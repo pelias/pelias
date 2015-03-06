@@ -109,7 +109,3 @@ npm --version
 ```
 
 **note** you should be running `at least` npm `1.4+`
-
-### Pelias build script
-
-https://gist.github.com/missinglink/3129f7cdf7ec3aba2f65
