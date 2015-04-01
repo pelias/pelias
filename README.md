@@ -1,4 +1,4 @@
-Pelias is a modular open-source geocoder built on top of ElasticSearch for fast geocoding. 
+Pelias is a modular, open-source geocoder built on top of ElasticSearch for fast geocoding. 
 
 ### What's a geocoder do anyway?
 
@@ -35,46 +35,76 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - Reliable, configurable & fast import process
 - Work equally well for a small city and the entire planet
 
+### I'm a developer, can I get access to the API?
+
+Sure! Our API lives at [pelias.mapzen.com](http://pelias.mapzen.com/), and is usable without an API key and generous
+rate-limits. The endpoints are documented [here](https://github.com/pelias/api/wiki/API-Endpoints); happy
+geocoding!
+
+```javascript
+$ curl "pelias.mapzen.com/reverse?lat=40.74358294846026&lon=-73.99047374725342" | python -m json.tool
+{
+    "bbox": [
+        -73.99051,
+        40.74361,
+        -73.99051,
+        40.74361
+    ],
+    "date": 1427901226020,
+    "features": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.99051,
+                    40.74361
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "admin0": "United States",
+                "admin1": "New York",
+                "admin2": "New York County",
+                "alpha3": "USA",
+                "id": "9851011",
+                "layer": "geoname",
+                "name": "Arlington",
+                "text": "Arlington, New York County, New York",
+                "type": "geoname"
+            },
+            "type": "Feature"
+        }
+    ],
+    "type": "FeatureCollection"
+}
+```
+
 ### How can I install my own instance of Pelias?
 
 Check out our [vagrant development environment](https://github.com/pelias/vagrant).
 
-### I'm a developer, can I get access to the API?
+### How does it work?
 
-Pelias was rebuilt from scratch and re-launched at the end of Sept '14 so the API is still in Alpha and will be subject to change for the rest of the year.
+Magic! Well, like any geocoder, Pelias essentially just executes search queries against an enormous amount of
+geographic data that maps longitude/latitude coordinates on the Earth to searchable names (eg `Empire State Building`
+or `28 Elm Street`).  We run entirely on open datasets, like [OpenStreetMap](http://www.openstreetmap.org/),
+[GeoNames](http://www.geonames.org/about.html), and [OpenAddresses](http://openaddresses.io/).
 
-You don't need a key to access the demo API, however we are enforcing some generous rate limits. If you need help building your own Pelias server get in touch!
+The underlying architecture has three components:
 
-#### /suggest
+  * **import pipelines**: the pipelines used to filter, normalize, and ingest geographic datasets into the Pelias database.
+  * **database**: the underlying datastore that does all of the query heavy-lifting and powers our search results. We use
+    [ElasticSearch](https://www.elastic.co/).
+  * **API**: the thing that users interact with. A thin layer sitting on top of the datastore that implements additional
+    logic and features.
 
-The suggest endpoint provides a super-fast autocomplete. This API can be used to quickly find location names which BEGIN with the input text.
+Here's how they interact:
 
-You must provide a latitude and longitude so that the results are localised, you may additionally provide a zoom value.
+![A diagram of the Pelias architecture.](https://cloud.githubusercontent.com/assets/4467604/6944539/3b1cdd0e-d862-11e4-995d-0b376caacad6.png)
 
-http://pelias.mapzen.com/suggest?input=big%20ben&lat=51.5&lon=-0.06
-![suggest](https://raw.githubusercontent.com/pelias/pelias/master/img/suggest.gif)
-
-#### /search
-
-The search endpoint provides a full-text search. This search is far more flexible than `/suggest`. It will try to account for spelling mistakes and will search for your input at any position in the location name.
-
-You must provide a latitude and longitude so that the results are localised. You may additionally provide a zoom value.
-
-http://pelias.mapzen.com/search?input=shoreditch&lat=51.5&lon=-0.06
-![search](https://raw.githubusercontent.com/pelias/pelias/master/img/search.gif)
-
-#### /reverse
-
-The reverse endpoint returns the nearest locations to your input lat/lon.
-
-You must provide a latitude and longitude so that the results are localised. You may additionally provide a zoom value.
-
-http://pelias.mapzen.com/reverse?lat=51.5&lon=-0.06
-![reverse](https://raw.githubusercontent.com/pelias/pelias/master/img/reverse2.gif)
-
-### Contributing
-
-Please review [our guidelines for contributing to Pelias](https://github.com/pelias/pelias/blob/master/CONTRIBUTING.md).
-
-[New issues](https://github.com/pelias/pelias/issues) and pull requests are welcome!
-<span id="scroll_mark"></span>
+### What's it built with?
+Pelias itself (the import pipelines and API) is written in [Node](https://nodejs.org/), which makes it highly
+accessible for other developers and performant under heavy I/O. It aims to be modular and is distributed across a
+number of Node packages, each with its own repository under the [Pelias GitHub
+organization](https://github.com/pelias). ElasticSearch is our unconventional datastore of choice because of its
+unparalleled text functionality, which makes text search *just work* right out of the box, and sufficiently robust
+geospatial support.
