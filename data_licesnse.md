@@ -1,4 +1,4 @@
-# Data Licesnses
+# Data Licenses
 This is a list of all the current data sources ingested by `pelias`
 
 ### [OpenStreetMap](http://www.openstreetmap.org/about)
