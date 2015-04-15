@@ -16,13 +16,17 @@ Use [JSDoc](http://usejsdoc.org/howto-commonjs-modules.html) syntax.
 You can be as generous with your doc-blocks as you'd like.
 We ask at a minimum that you decorate the public function of a module with a doc-block.
 
+If a function is expecting an object parameter, please document the properties that object is
+expected to have.
+
 #### module.exports
 ```javascript
 /**
  * Do something important
  *
- * @param {string} param1
- * @param {object} param2
+ * @param {string} param1 brief description if necessary
+ * @param {object} param2 
+ * @param {string} param2.childParam
  * @return {boolean}
  */
 module.exports = function doIt(param1, param2) {
