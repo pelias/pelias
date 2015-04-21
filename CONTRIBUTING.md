@@ -40,6 +40,7 @@ Pelias has several miscellaneous standards:
 - we use [Winston](https://www.npmjs.com/package/winston) for logging
 - we *love* tests, especially when written with [tape](https://github.com/substack/tape)
 - we use [semver](http://semver.org/) for package versioning
+- we *loosely* use [JSDoc](http://usejsdoc.org/index.html) for documenting code, as described [here](in_code_documentation_guidelines.md)
 
 `jshint` and any unit tests in a project will be automatically invoked when you commit to an existing project; make
 sure they exit successfully!
