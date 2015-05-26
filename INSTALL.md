@@ -78,7 +78,7 @@ curl localhost:9200
 
 ### EsRejectedExecutionException in ES > `1.2.1`
 
-If you expereience the error `EsRejectedExecutionException` during imports you may be able to fix this with:
+If you experience the error `EsRejectedExecutionException` during imports you may be able to fix this with:
 
 ```bash
 curl -XPUT localhost:9200/_cluster/settings -d '{
