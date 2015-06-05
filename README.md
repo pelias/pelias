@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/pelias/pelias.png?label=ready&title=Ready)](https://waffle.io/pelias/pelias)
 Pelias is a modular, open-source geocoder built on top of ElasticSearch for fast geocoding. 
 
 ### What's a geocoder do anyway?
