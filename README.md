@@ -42,39 +42,64 @@ rate-limits. The endpoints are documented [here](https://github.com/pelias/api/w
 geocoding!
 
 ```javascript
-$ curl "pelias.mapzen.com/reverse?lat=40.74358294846026&lon=-73.99047374725342" | python -m json.tool
+$ curl -s "pelias.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342" | json
 {
-    "bbox": [
-        -73.99051,
-        40.74361,
-        -73.99051,
-        40.74361
-    ],
-    "date": 1427901226020,
-    "features": [
-        {
-            "geometry": {
-                "coordinates": [
-                    -73.99051,
-                    40.74361
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "admin0": "United States",
-                "admin1": "New York",
-                "admin2": "New York County",
-                "alpha3": "USA",
-                "id": "9851011",
-                "layer": "geoname",
-                "name": "Arlington",
-                "text": "Arlington, New York County, New York",
-                "type": "geoname"
-            },
-            "type": "Feature"
-        }
-    ],
-    "type": "FeatureCollection"
+  "geocoding": {
+    "version": "0.1",
+    "attribution": "http://pelias.bigdev.mapzen.com/v1/attribution",
+    "query": {
+      "size": 1,
+      "private": false,
+      "point.lat": 40.74358294846026,
+      "point.lon": -73.99047374725342,
+      "boundary.circle.lat": 40.74358294846026,
+      "boundary.circle.lon": -73.99047374725342,
+      "boundary.circle.radius": 50
+    },
+    "engine": {
+      "name": "Pelias",
+      "author": "Mapzen",
+      "version": "1.0"
+    },
+    "timestamp": 1443189055394
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "9851011",
+        "gid": "gn:venue:9851011",
+        "layer": "venue",
+        "source": "gn",
+        "name": "Arlington",
+        "country_a": "USA",
+        "country": "United States",
+        "region": "New York",
+        "region_a": "NY",
+        "county": "New York County",
+        "localadmin": "Manhattan",
+        "locality": "New York",
+        "neighbourhood": "Flatiron District",
+        "confidence": 0.9,
+        "distance": 0.004,
+        "label": "Arlington, Manhattan, NY"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99051,
+          40.74361
+        ]
+      }
+    }
+  ],
+  "bbox": [
+    -73.99051,
+    40.74361,
+    -73.99051,
+    40.74361
+  ]
 }
 ```
 
