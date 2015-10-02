@@ -37,12 +37,12 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ### I'm a developer, can I get access to the API?
 
-Sure! Our API lives at [pelias.mapzen.com](http://pelias.mapzen.com/), and is usable with an API key and generous
+Sure! Our API lives at [search.mapzen.com](http://search.mapzen.com/), and is usable with an API key and generous
 rate-limits. The endpoints are documented [here](https://github.com/pelias/api/wiki/API-Endpoints); happy
 geocoding!
 
 ```javascript
-$ curl -s "pelias.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342&api_key={YOUR_API_KEY}" | json
+$ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342&api_key={YOUR_API_KEY}" | json
 {
   "geocoding": {
     "version": "0.1",
