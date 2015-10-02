@@ -42,7 +42,7 @@ rate-limits. The endpoints are documented [here](https://github.com/pelias/api/w
 geocoding!
 
 ```javascript
-$ curl -s "pelias.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342" | json
+$ curl -s "pelias.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342&api_key={YOUR_API_KEY}" | json
 {
   "geocoding": {
     "version": "0.1",
