@@ -37,7 +37,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ### I'm a developer, can I get access to the API?
 
-Sure! Our API lives at [pelias.mapzen.com](http://pelias.mapzen.com/), and is usable without an API key and generous
+Sure! Our API lives at [pelias.mapzen.com](http://pelias.mapzen.com/), and is usable with an API key and generous
 rate-limits. The endpoints are documented [here](https://github.com/pelias/api/wiki/API-Endpoints); happy
 geocoding!
 
