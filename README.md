@@ -133,3 +133,18 @@ number of Node packages, each with its own repository under the [Pelias GitHub
 organization](https://github.com/pelias). ElasticSearch is our unconventional datastore of choice because of its
 unparalleled text functionality, which makes text search *just work* right out of the box, and sufficiently robust
 geospatial support.
+
+### Contributing
+
+We built Pelias as an open source project not just because we believe that users should be able to view and play with
+the source code of tools they use, but to get the community involved in the project itself.
+
+Anything that we can do to make contributing easier, we want to know about.  Feel free to reach out to us via Github,
+[Gitter](https://gitter.im/pelias/api), or Twitter. We'd love to help people get started working on Pelias, especially
+if you're new to open source or programming in general. Both this [meta-repo](https://github.com/pelias/pelias/issues)
+and the [API repo](https://github.com/pelias/api/issues) are good places to get started looking for tasks to tackle. We
+also welcome reporting issues or suggesting improvements to our [documentation](https://github.com/pelias/pelias-doc).
+
+The Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
+[missinglink](https://github.com/missinglink), [orangejulius](https://github.com/orangejulius),
+[riordan](https://github.com/riordan), and [stephenkhess](https://github.com/stephenkhess).
