@@ -1,4 +1,6 @@
-Pelias is a modular, open-source geocoder built on top of ElasticSearch for fast geocoding. 
+Pelias is a modular, open-source geocoder built on top of ElasticSearch for fast geocoding.
+
+Pelias is the project used to power [Mapzen Search](https://mapzen.com/projects/search)
 
 ### What's a geocoder do anyway?
 
@@ -35,18 +37,20 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - Reliable, configurable & fast import process
 - Work equally well for a small city and the entire planet
 
-### I'm a developer, can I get access to the API?
+### Developer Documentation & API Access
 
-Sure! Our API lives at [search.mapzen.com](http://search.mapzen.com/), and is usable with an API key and generous
-rate-limits. The endpoints are documented [here](https://github.com/pelias/api/wiki/API-Endpoints); happy
+Sure! Our API lives at [search.mapzen.com](http://search.mapzen.com/), and is usable with a free API key ([register here](https://mapzen.com/developers)) and generous
+rate-limits. The endpoints are documented [here](https://github.com/pelias/pelias-doc/blob/master/index.md); happy
 geocoding!
+
+[This documentation](https://github.com/pelias/pelias-doc/blob/master/index.md) also applies to standalone versions of Pelias, leaving aside API keys, privacy flags, and data sources which may be configured differently for other installations.
 
 ```javascript
 $ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342&api_key={YOUR_API_KEY}" | json
 {
   "geocoding": {
     "version": "0.1",
-    "attribution": "http://pelias.bigdev.mapzen.com/v1/attribution",
+    "attribution": "http://search.mapzen.com/v1/attribution",
     "query": {
       "size": 1,
       "private": false,
