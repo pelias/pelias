@@ -149,6 +149,8 @@ if you're new to open source or programming in general. Both this [meta-repo](ht
 and the [API repo](https://github.com/pelias/api/issues) are good places to get started looking for tasks to tackle. We
 also welcome reporting issues or suggesting improvements to our [documentation](https://github.com/pelias/pelias-doc).
 
-The Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
+The current Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
 [missinglink](https://github.com/missinglink), [orangejulius](https://github.com/orangejulius),
 [riordan](https://github.com/riordan), and [stephenkhess](https://github.com/stephenkhess).
+
+Members emeritus include: [randyme](https://github.com/randyme), [seejohnrun](https://github.com/seejohnrun), [sevko](https://github.com/sevko), and [harishk](https://github.com/harishk].
