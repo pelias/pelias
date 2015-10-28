@@ -29,7 +29,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - Provide accurate search results
 - Give users query suggestions (typeahead in the search box)
 - Account for location bias (places nearer to you appear higher in the results)
-- Support multiple data sources (OSM, geonames, quattroshapes etc)
+- Support multiple data sources (Defaults include OpenStreetMap, OpenAddresses, geonames, quattroshapes etc)
 - Flexible software architecture
 - Easy to contribute software patches and features to
 - Easy to set-up and configure your own instance
@@ -144,11 +144,16 @@ We built Pelias as an open source project not just because we believe that users
 the source code of tools they use, but to get the community involved in the project itself.
 
 Anything that we can do to make contributing easier, we want to know about.  Feel free to reach out to us via Github,
-[Gitter](https://gitter.im/pelias/pelias), or Twitter. We'd love to help people get started working on Pelias, especially
+[Gitter](https://gitter.im/pelias/pelias), [email](mailto:search@mapzen.com), or [Twitter](https://twitter.com/mapzen])
+ We'd love to help people get started working on Pelias, especially
 if you're new to open source or programming in general. Both this [meta-repo](https://github.com/pelias/pelias/issues)
-and the [API repo](https://github.com/pelias/api/issues) are good places to get started looking for tasks to tackle. We
-also welcome reporting issues or suggesting improvements to our [documentation](https://github.com/pelias/pelias-doc).
+and the [API repo](https://github.com/pelias/api/issues) are good places to get started looking for tasks to tackle.
+You can also look across all of our issues on our [meta-issue tracker](https://waffle.io/pelias/pelias), Waffle.
+ We also welcome reporting issues or suggesting improvements to our [documentation](https://github.com/pelias/pelias-doc).
 
-The Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
+The current Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
 [missinglink](https://github.com/missinglink), [orangejulius](https://github.com/orangejulius),
 [riordan](https://github.com/riordan), and [stephenkhess](https://github.com/stephenkhess).
+
+Members emeritus include: [randyme](https://github.com/randyme), [seejohnrun](https://github.com/seejohnrun),
+ [sevko](https://github.com/sevko), and [hkrishna](https://github.com/hkrishna).
