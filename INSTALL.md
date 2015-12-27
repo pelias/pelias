@@ -10,7 +10,7 @@ Some Elasticsearch documentation can naturally fall out-of-date, for definitive 
 To install `oracle` java on `ubuntu`:
 
 ```bash
-sudo apt-get remove openjdk-7-jre*;
+sudo apt-get remove 'openjdk-7-jre*';
 sudo add-apt-repository ppa:webupd8team/java;
 sudo apt-get update;
 sudo apt-get install oracle-java7-installer;
@@ -23,8 +23,8 @@ sudo apt-get install oracle-java7-installer;
 ```bash
 sudo apt-get update
 cd /tmp
-wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb
-sudo dpkg -i elasticsearch-1.3.4.deb
+wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.4.deb
+sudo dpkg -i elasticsearch-1.7.4.deb
 sudo service elasticsearch start
 ```
 
@@ -57,7 +57,7 @@ On `ubuntu` you can change this setting by editing `/etc/init.d/elasticsearch` a
 ### Confirm Install
 
 ```bash
-curl localhost:9200
+curl 127.0.0.1:9200
 ```
 
 ```javascript
@@ -93,7 +93,7 @@ curl -XPUT localhost:9200/_cluster/settings -d '{
 ```bash
 cd /tmp
 wget https://raw.githubusercontent.com/isaacs/nave/master/nave.sh
-sudo bash nave.sh usemain stable
+sudo env SHELL=`which bash` bash nave.sh usemain stable
 ```
 
 ### Confirm Install
