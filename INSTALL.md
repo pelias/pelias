@@ -50,7 +50,7 @@ cd releases/elasticsearch*
 
 ### Configure Elasticsearch
 
-You should tune your `ES_HEAP_SIZE` to half your available RAM.
+You should tune your `ES_HEAP_SIZE` to half your available RAM. '@ref' https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html
 
 On `ubuntu` you can change this setting by editing `/etc/init.d/elasticsearch` and then restarting the service with `sudo service elasticsearch stop; sudo service elasticsearch start`
 
@@ -59,7 +59,7 @@ On `ubuntu` you can change this setting by editing `/etc/init.d/elasticsearch` a
 ```bash
 curl 127.0.0.1:9200
 ```
-
+You'll see output similar to the following:
 ```javascript
 {
   "status" : 200,
@@ -90,6 +90,8 @@ curl -XPUT localhost:9200/_cluster/settings -d '{
 
 ### Install node.js
 
+There are many ways to install npm/node.js, but the following is one of the most simple and straightforward:
+
 ```bash
 cd /tmp
 wget https://raw.githubusercontent.com/isaacs/nave/master/nave.sh
@@ -102,10 +104,10 @@ sudo env SHELL=`which bash` bash nave.sh usemain stable
 
 ```bash
 node --version
-v0.10.30
+v0.10.42
 
 npm --version
-1.4.21
+3.7.3
 ```
 
 **note** you should be running `at least` npm `1.4+`
