@@ -1,4 +1,4 @@
-# ![](https://avatars.githubusercontent.com/u/8240367?v=3) pelias packages
+# ![](https://avatars.githubusercontent.com/u/8240367?v=3) Pelias Packages
 Table of contents:
 
   [pelias-openstreetmap](#pelias-openstreetmap)
