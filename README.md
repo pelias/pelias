@@ -113,10 +113,8 @@ Check out our [vagrant development environment](https://github.com/pelias/vagran
 
 ### How does it work?
 
-Magic! Well, like any geocoder, Pelias essentially just executes search queries against an enormous amount of
-geographic data that maps longitude/latitude coordinates on the Earth to searchable names (eg `Empire State Building`
-or `28 Elm Street`).  We run entirely on open datasets, like [OpenStreetMap](http://www.openstreetmap.org/),
-[GeoNames](http://www.geonames.org/about.html), and [OpenAddresses](http://openaddresses.io/).
+Magic! Well, like any geocoder, Pelias essentially combines [full text search](https://en.wikipedia.org/wiki/Full_text_search)
+techniques with knowledge of geography to quickly search over many millions of records, each of which representing some sort of location on Earth.
 
 The underlying architecture has three components:
 
