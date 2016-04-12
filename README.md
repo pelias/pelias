@@ -29,7 +29,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - Provide accurate search results
 - Give users query suggestions (typeahead in the search box)
 - Account for location bias (places nearer to you appear higher in the results)
-- Support multiple data sources (Defaults include OpenStreetMap, OpenAddresses, geonames, quattroshapes etc)
+- Support multiple data sources (the defaults are [OpenStreetMap](http://openstreetmap.org/), [OpenAddresses](http://openaddresses.io), [Geonames](http://geonames.org), and [Who's on First](http://whosonfirst.mapzen.com/))
 - Flexible software architecture
 - Easy to contribute software patches and features to
 - Easy to set-up and configure your own instance
