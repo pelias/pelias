@@ -10,7 +10,7 @@ Geocoding is the process of transforming input text, such as an address, or a na
 
 ### ... and a reverse geocoder, what's that?
 
-Reverse geocoding is the opposite, it transforms your current geographic location in to a list of places nearby.
+Reverse geocoding is the opposite: returning a list of places near a given point.
 
 ![reverse](https://raw.githubusercontent.com/pelias/pelias/master/img/reverse.gif)
 
@@ -29,7 +29,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - Provide accurate search results
 - Give users query suggestions (typeahead in the search box)
 - Account for location bias (places nearer to you appear higher in the results)
-- Support multiple data sources (Defaults include OpenStreetMap, OpenAddresses, geonames, quattroshapes etc)
+- Support multiple data sources (the defaults are [OpenStreetMap](http://openstreetmap.org/), [OpenAddresses](http://openaddresses.io), [Geonames](http://geonames.org), and [Who's on First](http://whosonfirst.mapzen.com/))
 - Flexible software architecture
 - Easy to contribute software patches and features to
 - Easy to set-up and configure your own instance
@@ -39,11 +39,11 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ### Developer Documentation & API Access
 
-Sure! Our API lives at [search.mapzen.com](http://search.mapzen.com/), and is usable with a free API key ([register here](https://mapzen.com/developers)) and generous
+Sure! Our API lives at [search.mapzen.com](http://search.mapzen.com/), and is usable with an API key ([register here](https://mapzen.com/developers)) and generous
 rate-limits. The endpoints are documented [here](https://github.com/pelias/pelias-doc/blob/master/index.md); happy
 geocoding!
 
-[This documentation](https://github.com/pelias/pelias-doc/blob/master/index.md) also applies to standalone versions of Pelias, leaving aside API keys, privacy flags, and data sources which may be configured differently for other installations.
+[The Mapzen Search documentation](https://github.com/pelias/pelias-doc/blob/master/index.md) also applies to standalone versions of Pelias, leaving aside API keys, privacy flags, and data sources which may be configured differently for other installations.
 
 ```javascript
 $ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342&api_key={YOUR_API_KEY}" | json
@@ -113,10 +113,8 @@ Check out our [vagrant development environment](https://github.com/pelias/vagran
 
 ### How does it work?
 
-Magic! Well, like any geocoder, Pelias essentially just executes search queries against an enormous amount of
-geographic data that maps longitude/latitude coordinates on the Earth to searchable names (eg `Empire State Building`
-or `28 Elm Street`).  We run entirely on open datasets, like [OpenStreetMap](http://www.openstreetmap.org/),
-[GeoNames](http://www.geonames.org/about.html), and [OpenAddresses](http://openaddresses.io/).
+Magic! Well, like any geocoder, Pelias essentially combines [full text search](https://en.wikipedia.org/wiki/Full_text_search)
+techniques with knowledge of geography to quickly search over many millions of records, each of which representing some sort of location on Earth.
 
 The underlying architecture has three components:
 
