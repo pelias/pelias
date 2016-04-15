@@ -48,62 +48,69 @@ geocoding!
 ```javascript
 $ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342&api_key={YOUR_API_KEY}" | json
 {
-  "geocoding": {
-    "version": "0.1",
-    "attribution": "http://search.mapzen.com/v1/attribution",
-    "query": {
-      "size": 1,
-      "private": false,
-      "point.lat": 40.74358294846026,
-      "point.lon": -73.99047374725342,
-      "boundary.circle.lat": 40.74358294846026,
-      "boundary.circle.lon": -73.99047374725342,
-      "boundary.circle.radius": 50
+    "geocoding": {
+        "attribution": "https://search.mapzen.com/v1/attribution",
+        "engine": {
+            "author": "Mapzen",
+            "name": "Pelias",
+            "version": "1.0"
+        },
+        "query": {
+            "boundary.circle.lat": 40.74358294846026,
+            "boundary.circle.lon": -73.99047374725342,
+            "boundary.circle.radius": 500,
+            "point.lat": 40.74358294846026,
+            "point.lon": -73.99047374725342,
+            "private": false,
+            "querySize": 1,
+            "size": 1
+        },
+        "timestamp": 1460736907438,
+        "version": "0.1"
     },
-    "engine": {
-      "name": "Pelias",
-      "author": "Mapzen",
-      "version": "1.0"
-    },
-    "timestamp": 1443189055394
-  },
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "id": "9851011",
-        "gid": "gn:venue:9851011",
-        "layer": "venue",
-        "source": "gn",
-        "name": "Arlington",
-        "country_a": "USA",
-        "country": "United States",
-        "region": "New York",
-        "region_a": "NY",
-        "county": "New York County",
-        "localadmin": "Manhattan",
-        "locality": "New York",
-        "neighbourhood": "Flatiron District",
-        "confidence": 0.9,
-        "distance": 0.004,
-        "label": "Arlington, Manhattan, NY"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -73.99051,
-          40.74361
-        ]
-      }
-    }
-  ],
-  "bbox": [
-    -73.99051,
-    40.74361,
-    -73.99051,
-    40.74361
-  ]
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.99051,
+                    40.74361
+                ],
+                "type": "Point"
+            },
+            "properties": {
+                "borough": "Manhattan",
+                "borough_gid": "whosonfirst:borough:421205771",
+                "confidence": 0.9,
+                "country": "United States",
+                "country_a": "USA",
+                "country_gid": "whosonfirst:country:85633793",
+                "county": "New York County",
+                "county_gid": "whosonfirst:county:102081863",
+                "distance": 0.004,
+                "gid": "geonames:venue:9851011",
+                "id": "9851011",
+                "label": "Arlington, Manhattan, NY, USA",
+                "layer": "venue",
+                "locality": "New York",
+                "locality_gid": "whosonfirst:locality:85977539",
+                "name": "Arlington",
+                "neighbourhood": "Flatiron District",
+                "neighbourhood_gid": "whosonfirst:neighbourhood:85869245",
+                "region": "New York",
+                "region_a": "NY",
+                "region_gid": "whosonfirst:region:85688543",
+                "source": "geonames"
+            },
+            "type": "Feature"
+        }
+    ],
+    "bbox": [
+        -73.99051,
+        40.74361,
+        -73.99051,
+        40.74361
+    ]
 }
 ```
 
