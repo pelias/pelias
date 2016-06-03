@@ -1,4 +1,8 @@
-Pelias is a modular, open-source geocoder built on top of ElasticSearch for fast geocoding.
+# Pelias
+
+> A modular, open-source geocoder built on top of ElasticSearch for fast geocoding.
+
+[![Gitter](https://badges.gitter.im/pelias/pelias.svg)](https://gitter.im/pelias/pelias?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Pelias is the project used to power [Mapzen Search](https://mapzen.com/projects/search)
 
