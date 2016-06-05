@@ -21,8 +21,8 @@ Reverse geocoding is the opposite: returning a list of places near a given point
 ### What makes Pelias different from other geocoders?
 
 - It's completely open-source and MIT licensed
-- It's based on open-data, so you can run it yourself
-- You can install it locally and modify to suit your needs
+- It's based on open data, so you can run it yourself
+- You can install it locally and modify it to suit your needs
 - It has an impressive list of features, such as fast autocomplete
 - It's modular, so you don't need to be an expert to make changes
 - It's easy to install and requires no external dependencies
@@ -36,10 +36,10 @@ Reverse geocoding is the opposite: returning a list of places near a given point
 - Support multiple data sources (the defaults are [OpenStreetMap](http://openstreetmap.org/), [OpenAddresses](http://openaddresses.io), [Geonames](http://geonames.org), and [Who's on First](http://whosonfirst.mapzen.com/))
 - Flexible software architecture
 - Easy to contribute software patches and features to
-- Easy to set-up and configure your own instance
+- Easy to set up and configure your own instance
 - No external dependencies (such as postgres)
 - Reliable, configurable & fast import process
-- Work equally well for a small city and the entire planet
+- Works equally well for a small city and the entire planet
 
 ### Developer Documentation & API Access
 
