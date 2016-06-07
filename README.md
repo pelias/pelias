@@ -39,7 +39,7 @@ Reverse geocoding is the opposite: returning a list of places near a given point
 - Easy to set up and configure your own instance
 - No external dependencies (such as postgres)
 - Reliable, configurable & fast import process
-- Works equally well for a small city and the entire planet
+- Work equally well for a small city and the entire planet
 
 ### Developer Documentation & API Access
 
