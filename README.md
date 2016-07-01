@@ -10,13 +10,13 @@ Pelias is the project used to power [Mapzen Search](https://mapzen.com/projects/
 
 Geocoding is the process of transforming input text, such as an address, or a name of a place—to a location on the earth's surface.
 
-![geocode](https://raw.githubusercontent.com/pelias/pelias/master/img/geocoding.gif)
+![geocode](https://cloud.githubusercontent.com/assets/4246770/16500453/76d6d8cc-3eb9-11e6-85d8-f57894ba7b73.gif)
 
 ### ... and a reverse geocoder, what's that?
 
 Reverse geocoding is the opposite: returning a list of places near a given point.
 
-![reverse](https://raw.githubusercontent.com/pelias/pelias/master/img/reverse.gif)
+![reverse](https://cloud.githubusercontent.com/assets/4246770/16506005/a2429288-3ed4-11e6-8af0-7ef78824213f.gif)
 
 ### What makes Pelias different from other geocoders?
 
