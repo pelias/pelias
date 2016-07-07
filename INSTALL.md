@@ -23,8 +23,8 @@ sudo apt-get install oracle-java7-installer;
 ```bash
 sudo apt-get update
 cd /tmp
-wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.4.deb
-sudo dpkg -i elasticsearch-1.7.4.deb
+wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.3.3.deb
+sudo dpkg -i elasticsearch-2.3.3.deb
 sudo service elasticsearch start
 ```
 
@@ -62,21 +62,22 @@ curl 127.0.0.1:9200
 You'll see output similar to the following:
 ```javascript
 {
-  "status" : 200,
-  "name" : "Iron Man",
+  "name" : "pelias",
+  "cluster_name" : "pelias",
   "version" : {
-    "number" : "1.3.4",
-    "build_hash" : "a70f3ccb52200f8f2c87e9c370c6597448eb3e45",
-    "build_timestamp" : "2014-09-30T09:07:17Z",
+    "number" : "2.3.3",
+    "build_hash" : "218bdf10790eef486ff2c41a3df5cfa32dadcfde",
+    "build_timestamp" : "2016-05-17T15:40:04Z",
     "build_snapshot" : false,
-    "lucene_version" : "4.9"
+    "lucene_version" : "5.5.0"
   },
   "tagline" : "You Know, for Search"
 }
-
 ```
 
 ### EsRejectedExecutionException in ES > `1.2.1`
+
+> this section was written some time ago and may no longer be relevant for elasticsearch version 2.x
 
 If you experience the error `EsRejectedExecutionException` during imports you may be able to fix this with:
 
@@ -98,16 +99,20 @@ wget https://raw.githubusercontent.com/isaacs/nave/master/nave.sh
 sudo env SHELL=`which bash` bash nave.sh usemain stable
 ```
 
+You can optionally select a different version to install:
+
+```bash
+nave ls-remote
+```
+
 ### Confirm Install
 
 **Always use the latest version over the one specified here**
 
 ```bash
 node --version
-v0.10.42
+v6.2.2
 
 npm --version
-3.7.3
+3.10.3
 ```
-
-**note** you should be running `at least` npm `1.4+`
