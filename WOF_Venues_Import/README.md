@@ -11,8 +11,8 @@ In order for this work to be completed successfully, WOF bundles must be impleme
 ## Functionality
 
 ### Required
-- [ ] Implement script(s) to download venue data bundles to a target machine. This will be used by engineers to set up their local development environments as well as by the ops framework to setup dev/staging/production import pipeline worker machines. 
-		> QUESTION: Determine if this should include campus records, since all airports are stored with type campus as opposed to venue. 
+- [ ] Implement script(s) to download venue data bundles to a target machine. This will be used by engineers to set up their local development environments as well as by the ops framework to setup dev/staging/production import pipeline worker machines. :question: Determine if this should include campus records, since all airports are stored with type campus as opposed to venue. :question:
+		
 - [ ] Improve WOF venue bundle generation code to build more venue bundles. Ideally this work would result in a single planet-wide bundle of venue data that can be downloaded without the use of GitLFS.
 - [ ] Update existing WOF importer to index venue records as well as administrative areas.
 - [ ] Update the logic that guards against invalid combinations of layers and sources parameters in queries. API should allow users to search with sources=wof&layers=venue,address.
