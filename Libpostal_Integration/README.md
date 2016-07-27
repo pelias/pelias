@@ -56,9 +56,15 @@ Update the section describing the `size` parameter to indicate that there will o
 
 |input query|expected result|
 |---|---|
-| | |
-| | |
-| | |
+| 30 W 26th St | many exact matches from various cities in USA) |
+| 30 W 26th St, New York, NY | single exact match (with possiblity of duplicate) |
+| Ontario | all the Ontario's from all the countries |
+| text=Ontario&boundary.country=USA | only Ontario's from USA |
+| Ontario, USA | only Ontario's from USA |
+| FooBlah, New York | fallback to New York, make sure accuracy level is set to `fallback_locality` or `fallback_region` depending on which one is being returned |
+| Paris | results should be sorted according to population |
+| Whole Foods, New York | results should be only venues from New York area |
+| add more here... | please :) |
 
 ## Future Work
 
