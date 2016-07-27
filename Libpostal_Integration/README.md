@@ -1,6 +1,6 @@
 # Address Parsing (aka libpostal integration)
 
-[Track Milestone Here](<TBD>https://github.com/pelias/pelias/milestone/4)
+[Track Milestone Here](https://github.com/pelias/pelias/milestone/4)
 
 ## Overview
 
