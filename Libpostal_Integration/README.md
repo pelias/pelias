@@ -4,9 +4,9 @@
 
 ## Overview
 
-Pelias currently uses the `addressit` module to parse incoming query text and break it into corresponding parts where appropriate. This module presents many issues, main one being that it is not internationalization-friendly. It does marginally well with US and CA addresses, but fairs poorly when confronted with addresses from RU or DE to name a few.
+Pelias currently uses the `addressit` module to parse incoming query text and break it into corresponding parts where appropriate. This module presents many issues, the main one being that it is not internationalization-friendly. It does marginally well with US and CA addresses, but fairs poorly when confronted with addresses from RU or DE to name a few.
 
-The libpostal module, written by Al Barentine, does phenomenaly well across the world and is ready for integration with Pelias. The goal of this milestone is to incorporate the libpostal module into the API query processing workflow and then take advantage of the parsed out parts of the query to improve our query logic.
+The libpostal module, written by Al Barentine, does phenomenally well across the world and is ready for integration with Pelias. The goal of this milestone is to incorporate the libpostal module into the API query processing workflow and then take advantage of the parsed out parts of the query to improve our query logic.
 
 See [proposal document](proposal.md) for background and additional details.
 
@@ -18,7 +18,7 @@ Heavily depending on the [libpostal](https://github.com/openvenues/libpostal) mo
 
 ## Functionality
 
-- [ ] Refactor the address parsing component out of APi to allow us to easily swap out parsing logic.
+- [ ] Refactor the address parsing component out of API to allow us to easily swap out parsing logic.
 - [ ] Replace `addressit` with `libpostal` in the API.
 - [ ] Update query logic to accept specific address parts in the query instead of always relying on the `name` property.
 - [ ] Allow query logic to fallback to admin areas where an exact address has not been located.
@@ -35,7 +35,7 @@ Heavily depending on the [libpostal](https://github.com/openvenues/libpostal) mo
 | fallback_region | address (and possibly locality) not found, fallback to region |
 | fallback_country | nothing more granular found, fallback to country |
 
-- [ ] When nothing has been found using this new strategy, attempt a query using the old query logic approach and evaluate if results are reasonable. This can be tricky, so should first consider how often this will get called. This will be particularly important in order to accommodate for misspelled queries, since the proposed implementation will typically not handle these cases correctly.
+- [ ] When nothing has been found using this new strategy, attempt a query using the old query logic approach and evaluate if results are reasonable. This can be tricky, so we should first consider how often this will get called. This will be particularly important in order to accommodate for misspelled queries, since the proposed implementation will typically not handle these cases correctly.
 
 ## Operations
 
@@ -44,7 +44,7 @@ Heavily depending on the [libpostal](https://github.com/openvenues/libpostal) mo
 
 ## Documentation
 
-Add a brand new documentation page devoted to the fallback mechanism. This is a new feature and significantly impacts results. Sweet all existing documentation to ensure all result examples are up-to-date, as many will have drastically changed for the better. There will be times when only a single result will be returned.
+Add a brand new documentation page devoted to the fallback mechanism. This is a new feature and significantly impacts results. Sweet *(what is this?)* all existing documentation to ensure all result examples are up-to-date, as many will have drastically changed for the better. There will be times when only a single result will be returned.
 
 Update the section describing the `size` parameter to indicate that there will often be only 1 result and occasionally 0 results, even if the size is set to a larger number. The size will reflect the maximum number of results to return.
 
