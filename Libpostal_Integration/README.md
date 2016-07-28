@@ -44,7 +44,7 @@ Heavily depending on the [libpostal](https://github.com/openvenues/libpostal) mo
 
 ## Documentation
 
-Add a brand new documentation page devoted to the fallback mechanism. This is a new feature and significantly impacts results. Sweet *(what is this?)* all existing documentation to ensure all result examples are up-to-date, as many will have drastically changed for the better. There will be times when only a single result will be returned.
+Add a brand new documentation page devoted to the fallback mechanism. This is a new feature and significantly impacts results. Sweep all existing documentation to ensure all result examples are up-to-date, as many will have drastically changed for the better. There will be times when only a single result will be returned.
 
 Update the section describing the `size` parameter to indicate that there will often be only 1 result and occasionally 0 results, even if the size is set to a larger number. The size will reflect the maximum number of results to return.
 
