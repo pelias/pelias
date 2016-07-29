@@ -18,7 +18,6 @@ Just the people we are trying to attract to our community of contributors.
 
 ## Functionality
 
-- [x] Register `pelias.io` domain
 - [ ] Host a landing page for the project with all the details needed for someone to understand what it is and how they can use it and/or get involved. The site should at a minimum contain the following information.
     - Links to github, waffle, gitter chat room, npm?, twitter?
     - General overview documentation about what geocoding is and how it works.
@@ -29,7 +28,10 @@ Just the people we are trying to attract to our community of contributors.
 
 ## Operations
 
-Make the slackbot. :robot:
+- [x] Register `pelias.io` domain
+- [ ] Make the slackbot. :robot:
+- [ ] Deploy pelias.io docs site
+- [ ] Setup automated updates to pelias.io every time pelias/pelias repo is updated with documentation
 
 
 ## Future Work
