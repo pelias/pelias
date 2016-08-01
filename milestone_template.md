@@ -1,6 +1,6 @@
 # <TBD> Milestone Name
 
-[Track Milestone Here](<TBD>https://github.com/pelias/pelias/milestone/?)
+[Track Milestone Here](https://github.com/issues?utf8=%E2%9C%93&q=is%3Aopen+user%3Apelias+milestone%3A%22WOF+Venues%22)
 
 
 ## Overview

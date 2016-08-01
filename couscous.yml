@@ -1,0 +1,54 @@
+# Any variable you put in this file is also available in the Twig layouts:
+title: 'Pelias'
+subTitle: 'The organic, sustainable geocoder'
+template:
+    directory: website
+
+include:
+    - .
+
+# The left menu bar
+menu:
+    sections:
+        home:
+            name:
+            items:
+                home:
+                    text: Overview
+                    relativeUrl: index.html
+                install:
+                    text: Getting Started
+                    relativeUrl: INSTALL.html
+                license:
+                    text: License
+                    relativeUrl: data_licenses.html
+                conduct:
+                    text: Code of Conduct
+                    relativeUrl: CODE_OF_CONDUCT.html
+                contribute:
+                    text: Contribute
+                    relativeUrl: CONTRIBUTING.html
+        goals:
+            name: '#Goals'
+            items:
+                current:
+                    text: Q3-2016 Milestones
+                    relativeUrl: quarterly_goals
+                q2:
+                    text: Q2-2016 Milestones
+                    relativeUrl: quarterly_goals/q2-2016.html
+                address_parsing:
+                    text: Address Parsing w/ libpostal
+                    relativeUrl: milestones/libpostal_integration
+                interpolation:
+                    text: Interpolation
+                    relativeUrl: milestones/interpolation
+                wof_venues:
+                    text: WOF Venues Import
+                    relativeUrl: milestones/wof_venues_import
+                community:
+                    text: Community Building
+                    relativeUrl: milestones/community_building
+                categories:
+                    text: Category Support
+                    relativeUrl: milestones/categories
