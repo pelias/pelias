@@ -1,5 +1,7 @@
 # WOF Venues Import
 
+[Track Milestone Here](https://github.com/issues?utf8=%E2%9C%93&q=is%3Aopen+user%3Apelias+milestone%3A%22WOF+Venues%22)
+
 ## Overview
 
 The Who's on First dataset provides a large number of venue and point of interest (POI) records. Mapzen Search should allow users to search all of those POIs. This means that the importing of these records must be added to the import pipeline. They should be updated automatically as part of the regularly scheduled weekly build. The records should include a full administrative hierarchy with respective Pelias gids for each parent. In cases where a POI had address information, a duplicate record containing only the address must be created and added to the address index.
