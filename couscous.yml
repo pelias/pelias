@@ -7,6 +7,13 @@ template:
 include:
     - .
 
+exclude:
+    - website
+    - %gitignore%
+
+cname: pelias.io
+branch: gh-pages
+
 # The left menu bar
 menu:
     sections:
