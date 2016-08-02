@@ -29,16 +29,16 @@ menu:
                     relativeUrl: index.html
                 install:
                     text: Getting Started
-                    relativeUrl: INSTALL.html
+                    relativeUrl: install.html
                 license:
                     text: License
                     relativeUrl: data_licenses.html
                 conduct:
                     text: Code of Conduct
-                    relativeUrl: CODE_OF_CONDUCT.html
+                    relativeUrl: code_of_conduct.html
                 contribute:
                     text: Contribute
-                    relativeUrl: CONTRIBUTING.html
+                    relativeUrl: contributing.html
         goals:
             name: '#Goals'
             items:
