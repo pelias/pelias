@@ -8,7 +8,7 @@ Add streets from OSM as a new layer to the Elasticsearch index. Allow them to be
 ### Street Fallback
 Using the new street layer, return the street centroid in cases where the specified house number was not found in the index. For example, if 100 Main Street doesn’t exist, return Main Street.
 
-### [Interpolation](interpolation/)
+### [Interpolation](/milestones/interpolation/)
 Implement a basic address interpolation solution using a point-based approach. The specific and scope of the the implementation will be defined by the Interpolation R&D findings and recommendations from Q2.
 
 ### Reverse geocoding
