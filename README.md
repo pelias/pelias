@@ -44,10 +44,10 @@ Reverse geocoding is the opposite: returning a list of places near a given point
 ### Developer Documentation & API Access
 
 Sure! Our API lives at [search.mapzen.com](http://search.mapzen.com/), and is usable with an API key ([register here](https://mapzen.com/developers)) and generous
-rate-limits. The endpoints are documented [here](https://github.com/pelias/pelias-doc/blob/master/index.md); happy
+rate-limits. The endpoints are documented [here](https://mapzen.com/documentation/search); happy
 geocoding!
 
-[The Mapzen Search documentation](https://github.com/pelias/pelias-doc/blob/master/index.md) also applies to standalone versions of Pelias, leaving aside API keys, privacy flags, and data sources which may be configured differently for other installations.
+[The Mapzen Search documentation](https://mapzen.com/documentation/search) also applies to standalone versions of Pelias, leaving aside API keys, privacy flags, and data sources which may be configured differently for other installations.
 
 ```javascript
 $ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342&api_key={YOUR_API_KEY}" | json
