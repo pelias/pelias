@@ -161,7 +161,7 @@ You can also look across all of our issues on our [meta-issue tracker](https://w
  We also welcome reporting issues or suggesting improvements to our [documentation](https://github.com/pelias/pelias-doc).
 
 The current Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
-[missinglink](https://github.com/missinglink), [orangejulius](https://github.com/orangejulius), [trescube](https://github.com/trescube), and [avulfson17](https://github.com/avulfson17).
+[missinglink](https://github.com/missinglink), [orangejulius](https://github.com/orangejulius), and [trescube](https://github.com/trescube).
 
 Members emeritus include:
 * [randyme](https://github.com/randyme)
@@ -170,3 +170,4 @@ Members emeritus include:
 * [sevko](https://github.com/sevko)
 * [hkrishna](https://github.com/hkrishna)
 * [riordan](https://github.com/riordan)
+* [avulfson17](https://github.com/avulfson17)
