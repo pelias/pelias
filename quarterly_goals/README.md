@@ -2,10 +2,10 @@
 
 ## Features
 
-### Index streets
+### [~~Index streets~~](https://github.com/pelias/pelias/issues/375)
 Add streets from OSM as a new layer to the Elasticsearch index. Allow them to be searched as first class citizens. Searching for Main Street, for example, will return the Main Street record. Street records will be represented by a single reasonable centroid of each given street.
 
-### Street Fallback
+### [~~Street Fallback~~](https://github.com/pelias/pelias/issues/380)
 Using the new street layer, return the street centroid in cases where the specified house number was not found in the index. For example, if 100 Main Street doesn’t exist, return Main Street.
 
 ### [Interpolation](/milestones/interpolation/)
@@ -14,15 +14,15 @@ Implement a basic address interpolation solution using a point-based approach. T
 ### Reverse geocoding
 The current implementation of coarse reverse geocoding is problematic and often returns incorrect results. We will switch over to a true point-in-polygon solution when the query specifies the “coarse” alias or any of the administrative layers in the filters.
 
-### Five box
+### [Five box](https://github.com/pelias/pelias/milestone/47)
 Add support for address search where the five traditional parts of an address are specified independently, instead of the current single “text” input parameter. Currently users are forced to concatenate the address parts into a single string, often resulting in formatting issues and encoding errors.
 
-### Add Postcodes as a layer to the index
+### [Add Postcodes as a layer to the index](https://github.com/pelias/pelias/milestone/30)
 Postal codes will be added to the Elasticsearch index as a new layer. Searching for a specific postal code will return the appropriate record. Postal code records will be represented by reasonable centroids. Geometries will be ignored for this round of work. This will be a stepping stone towards future postal codes integration, with an accent on geometries and biasing results towards centroids of postal codes.
 
 ## Infrastructure
 
-### [OSS Community](community_building/)
+### [OSS Community](/milestones/community_building/)
 
 ### Revisit fastly caching configuration
 
