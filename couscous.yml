@@ -43,11 +43,20 @@ menu:
             name: '#Goals'
             items:
                 current:
+                    text: Q4-2016 Milestones
+                    relativeUrl: quarterly_goals/q4-2016.html
+                q3:
                     text: Q3-2016 Milestones
-                    relativeUrl: quarterly_goals
+                    relativeUrl: quarterly_goals/q3-2016.html
                 q2:
                     text: Q2-2016 Milestones
                     relativeUrl: quarterly_goals/q2-2016.html
+                alt_names:
+                    text: Alt-Names
+                    relativeUrl: milestones/alt_names
+                coarse_reverse:
+                    text: Coarse Reverse
+                    relativeUrl: milestones/coarse_reverse
                 address_parsing:
                     text: Address Parsing w/ libpostal
                     relativeUrl: milestones/libpostal_integration

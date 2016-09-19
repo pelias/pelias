@@ -43,9 +43,7 @@ We will be working closely with the Routing (Valhalla) team to post-process the 
 
 |input query|expected result|
 |---|---|
-| | |
-| | |
-| | |
+| insert | test |
 
 
 ## Future Work
