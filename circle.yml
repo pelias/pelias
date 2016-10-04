@@ -1,0 +1,18 @@
+machine:
+  node:
+    version: 4.0.0
+  ruby:
+    version: 2.2.3
+dependencies:
+  post:
+    - curl -OS http://couscous.io/couscous.phar
+    - chmod +x couscous.phar
+    - sudo mv couscous.phar /usr/local/bin/couscous
+
+test:
+  override:
+    - couscous generate
+
+general:
+  artifacts:
+    - ".couscous/generated/"
