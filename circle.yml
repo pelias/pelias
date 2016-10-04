@@ -16,4 +16,4 @@ deployment:
   production:
     branch: q4-2016
     commands:
-      - aws s3 sync _site "s3://pelias.io/"
+      - aws s3 sync .couscous/generated/ "s3://pelias.io/"
