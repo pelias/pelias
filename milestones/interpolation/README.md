@@ -8,10 +8,10 @@ Housenumber interpolation is a key feature of any geocoder. Our goal is to imple
 conditions, such as availability of address range data (such as TIGER) or the presence of street geometry and existing address 
 points along that street. See all the wonderful detailed writeups about this complex feature at these link:
  
-### [Introduction](introduction)
-### [Conflation](conflation)
-### [Existing Standards](existing_standards)
-### [Proposed Solution](design_doc)
+### [Introduction](./introduction)
+### [Conflation](./conflation)
+### [Existing Standards](./existing_standards)
+### [Proposed Solution](./design_doc)
 
 
 ## External Dependencies
@@ -20,33 +20,31 @@ We will be working closely with the Routing (Valhalla) team to post-process the 
 
 ## Functionality
 
-- [ ] <TBD> list out all the required features here.
-- [ ] <TBD> link to github issues as they are generated.
-- [ ] <TBD> ensure each new issue is added to the github milestone.
-
+- Import streets (centroid geometry) into a new `street` index as first class records
+- Allow users to search for streets without house numbers
+- Fallback to street centroid when housenumber is not found in the index
+- Build address range data
+- Search address range data when an exact address match is not found
+- Search only range data when an address query is specified
+- Consider deprecating point data for addresses in favor of new range data index 
 
 ## Operations
 
-<TBD> Add any work required on the ops side.
+- Add new importer type for range data generation
 
 
 ## Documentation
 
-<TBD> Call out places that need to be updated with links to github markdown files
+- Add a new section describing interpolation
+- Add new result property that indicates accuracy level of each record (point,interpolated,centroid)
 
 
 ## Validation
 
-<TBD> 
-- [ ] Publish the results of benchmark / load-test execution and make scaling recommendations.
-- [ ] Update / add acceptance tests to validate that the all required functionality has been implemented successfully.
+- Publish the results of benchmark / load-test execution and make scaling recommendations.
+- Update / add acceptance tests to validate that the all required functionality has been implemented successfully.
 
 |input query|expected result|
 |---|---|
-| insert | test |
-
-
-## Future Work
-
-<TBD> Outline anything that won't be done as part of this milestone but should be tracked and prioritized in the future.
-
+| 30 W 26th St | point |
+| 5 W 26th St | interpolated |
