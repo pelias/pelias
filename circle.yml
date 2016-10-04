@@ -16,3 +16,9 @@ test:
 general:
   artifacts:
     - ".couscous/generated/"
+
+deployment:
+  production:
+    branch: q4-2016
+    commands:
+      - aws s3 sync _site "s3://pelias.io/"
