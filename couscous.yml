@@ -12,7 +12,6 @@ exclude:
     - %gitignore%
 
 cname: pelias.io
-branch: gh-pages
 
 # Base URL of the published website (no "/" at the end!)
 # You are advised to set and use this variable to write your links in the HTML layouts
