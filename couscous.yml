@@ -12,7 +12,6 @@ exclude:
     - %gitignore%
 
 cname: pelias.io
-branch: gh-pages
 
 # Base URL of the published website (no "/" at the end!)
 # You are advised to set and use this variable to write your links in the HTML layouts
@@ -53,22 +52,22 @@ menu:
                     relativeUrl: quarterly_goals/q2-2016.html
                 alt_names:
                     text: Alt-Names
-                    relativeUrl: milestones/alt_names
+                    relativeUrl: milestones/alt_names/index.html
                 coarse_reverse:
                     text: Coarse Reverse
-                    relativeUrl: milestones/coarse_reverse
+                    relativeUrl: milestones/coarse_reverse/index.html
                 address_parsing:
                     text: Address Parsing w/ libpostal
-                    relativeUrl: milestones/libpostal_integration
+                    relativeUrl: milestones/libpostal_integration/index.html
                 interpolation:
                     text: Interpolation
-                    relativeUrl: milestones/interpolation
+                    relativeUrl: milestones/interpolation/index.html
                 wof_venues:
                     text: WOF Venues Import
-                    relativeUrl: milestones/wof_venues_import
+                    relativeUrl: milestones/wof_venues_import/index.html
                 community:
                     text: Community Building
-                    relativeUrl: milestones/community_building
+                    relativeUrl: milestones/community_building/index.html
                 categories:
                     text: Category Support
-                    relativeUrl: milestones/categories
+                    relativeUrl: milestones/categories/index.html

@@ -7,7 +7,7 @@ The current coarse reverse geocoding solution is effectively broken and often re
  It needs to be updated to ensure that a proper point in polygon lookup takes place instead of
  estimating with a best guess from nearby centroids of admin areas.
 
-## [Background](background)
+## [Background](./background.md)
 
 ## External Dependencies
 None

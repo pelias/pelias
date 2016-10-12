@@ -8,7 +8,7 @@ Pelias currently uses the `addressit` module to parse incoming query text and br
 
 The libpostal module, written by Al Barentine, does phenomenally well across the world and is ready for integration with Pelias. The goal of this milestone is to incorporate the libpostal module into the API query processing workflow and then take advantage of the parsed out parts of the query to improve our query logic.
 
-See [proposal document](proposal) for background and additional details.
+See [proposal document](./proposal.md) for background and additional details.
 
 
 ## External Dependencies
