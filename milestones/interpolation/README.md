@@ -8,10 +8,10 @@ Housenumber interpolation is a key feature of any geocoder. Our goal is to imple
 conditions, such as availability of address range data (such as TIGER) or the presence of street geometry and existing address 
 points along that street. See all the wonderful detailed writeups about this complex feature at these link:
  
-### [Introduction](introduction.html)
-### [Conflation](conflation.html)
-### [Existing Standards](existing_standards.html)
-### [Proposed Solution](design_doc.html)
+### [Introduction](introduction.md)
+### [Conflation](conflation.md)
+### [Existing Standards](existing_standards.md)
+### [Proposed Solution](design_doc.md)
 
 
 ## External Dependencies
