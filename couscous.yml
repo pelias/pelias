@@ -56,6 +56,9 @@ menu:
                 coarse_reverse:
                     text: Coarse Reverse
                     relativeUrl: milestones/coarse_reverse/index.html
+                component_geocoding:
+                    text: Component Geocoding
+                    relativeUrl: milestones/component_geocoding/index.html
                 address_parsing:
                     text: Address Parsing w/ libpostal
                     relativeUrl: milestones/libpostal_integration/index.html
