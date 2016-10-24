@@ -4,6 +4,18 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 24 October 2016
+
+### New features and fixes
+* The `/v1/autocomplete` endpoint now supports [boundary.rect](https://mapzen.com/documentation/search/search/#search-within-a-rectangular-region) just like `/v1/search`
+* Labels for administrative areas should be [improved in a few cases](https://github.com/pelias/whosonfirst/pull/139)
+
+### Code level changes
+* All Pelias code now requires Node.js 4.0 or newer! This means we can start using ES6 features. `let` us have a party to celebrate! :tada:
+* Label generation code has been extracted into [pelias-labels](https://github.com/pelias/labels)
+* Elasticsearch settings have been moved [out of a dark corner and into pelias/config](https://github.com/pelias/schema/pull/183)
+* The whosonfirst importer has a better method for [calculating hierarchy information](https://github.com/pelias/whosonfirst/pull/157). It's simpler and should be more accurate and faster!
+
 ## 10 October 2016
 
 * [libpostal](https://github.com/openvenues/libpostal), the super-sophisticated address parser, has been integrated for more accurate analysis of inputs at `/v1/search`.
