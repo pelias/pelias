@@ -29,6 +29,9 @@ menu:
                 install:
                     text: Getting Started
                     relativeUrl: install.html
+                release_notes:
+                    text: Release Notes
+                    relativeUrl: release-notes.html
                 license:
                     text: License
                     relativeUrl: data_licenses.html
