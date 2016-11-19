@@ -5,8 +5,8 @@ We need the ability to geocode an input by its constituent parts when supplied b
 ```
 {
   address: '30 West 26th Street',
-  city: 'New York',
-  state: 'NY'
+  locality: 'New York',
+  region: 'NY'
 }
 ```
 
