@@ -14,6 +14,7 @@
 
 * We're enabling support for more response scenarios from [libpostal](https://github.com/openvenues/libpostal)!  This release we're adding support for city+country, so requests for Paris, France and Reykjavík, Iceland are a lot cleaner.  
 * Speaking of Reykjavík, Iceland, support for inputs containing diacritics has improved.  Now whether the input is Reykjavík, Iceland or Reykjavik, Iceland, results should be the same.
+* Whether your input contains a 2- or 3-character ISO country code (`FRA` vs `FR`), we'll find it!
 
 ## 24 October 2016
 
