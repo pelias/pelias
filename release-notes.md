@@ -4,6 +4,17 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 18 November 2016
+
+### New features
+
+* We've just released beta support for component geocoding so instead of passing in a single input to the `/v1/search` endpoint, the parts of an address can be sent to `/v1/beta/component`!  An example of this is `address=201+Spear+St&locality=San+Francisco&region=CA`.  We haven't officially named this geocoding type yet, so if you have a naming suggestion, please weigh in [here](https://github.com/pelias/pelias/issues/455)!  Our basic design doc for using this new beta feature is [here](https://github.com/pelias/pelias/tree/master/milestones/component_geocoding), please check it out.  We're still working out the final implementation (why it's currently deployed to our `/v1/beta` test bed) so check it out and don't hesitate to [raise any issues](https://github.com/pelias/pelias/issues) you might encounter.  Check out the [acceptance tests](https://github.com/pelias/acceptance-tests/blob/master/test_cases/component_geocoding.json) for some more examples.  
+
+### Code level changes
+
+* We're enabling support for more response scenarios from [libpostal](https://github.com/openvenues/libpostal)!  This release we're adding support for city+country, so requests for Paris, France and Reykjavík, Iceland are a lot cleaner.  
+* Speaking of Reykjavík, Iceland, support for inputs containing diacritics has improved.  Now whether the input is Reykjavík, Iceland or Reykjavik, Iceland, results should be the same.
+
 ## 24 October 2016
 
 ### New features and fixes
