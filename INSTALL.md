@@ -36,7 +36,7 @@ In general, Pelias will require:
 ## Choose your datasets
 
 Pelias can currently import data from four different sources. The contents and description of these
-sources are available on our [data sources page](./data-sources.md). Here we'll just focus on what to
+sources are available on our [data sources page](https://github.com/pelias/pelias-doc/blob/master/data-sources.md). Here we'll just focus on what to
 download for each one.
 
 ### Who's on First
