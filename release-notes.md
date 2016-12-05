@@ -4,6 +4,14 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 05 December 2016
+
+### New features
+
+* We've released what was previously referred to as component geocoding in the new structured geocoding endpoint! It lives at `/v1/search/structured`
+* We fixed a bug where [specifying the same parameter twice](https://github.com/pelias/api/issues/744) (eg `/v1/search?text=paris&sources=geonames&sources=gn`) would cause a 500 error. It now returns a helpful 400 error message that includes which parameter is duplicated, so that the request can be fixed.
+* Other errors that should have been 500 errors were [being returned with status code 400](https://github.com/pelias/api/pull/742). Fixing this will allow us to more quickly catch any 500 errors that happen in the future.
+
 ## 18 November 2016
 
 ### New features
