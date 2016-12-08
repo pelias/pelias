@@ -1,13 +1,14 @@
 # Installing Pelias
 
-Mapzen offers the Mapzen Search service in hopes that as many people as possible will use it,
-but we also encourage people to set up their own Pelias instance.
+These instructions will help you set up the Pelias geocoder from scratch. It assumes some knowlege
+of the command line and Node.js, but we'd like as many people as possible to be able to install
+Pelias, so if anything is confusing, please don't hesitate to reach out. We'll do what we can to
+help and also improve the documentation.
 
-For most cases, it's useful to have much of the installation process automated, so we suggest
-looking at the [Pelias Vagrant image](https://github.com/pelias/vagrant).
-
-However, for more in-depth usage, to learn more about the working of Pelias, or to contribute back,
-manual setup is useful. These instructions will help you install Pelias from scratch manually.
+_Mapzen also hosts an instance of Pelias with data for the whole planet loaded, that can be used for
+free with just an API key. It's a great way to try out Pelias before setting it up, or for comparing
+your setup to a reference. All information on Mapzen Search can be found
+[here](https://mapzen.com/products/search/)._
 
 ## Installation Overview
 
@@ -19,7 +20,7 @@ The steps for fully installing Pelias look like this:
 4. Set up Elasticsearch
 5. Install the Elasticsearch schema using pelias-schema
 6. Use one or more importers to load data into Elasticsearch
-7. Install the libpostal text analyzer (optional)
+7. Install the libpostal text analyzer (recommended)
 8. Start the API server to begin handling queries
 
 ## System Requirements
@@ -29,15 +30,15 @@ In general, Pelias will require:
 * A working [Elasticsearch](https://www.elastic.co/products/elasticsearch) 2.3 cluster. It can be on
   a single machine or across several
 * [Node.js](https://nodejs.org/) 4.0 or newer (the latest in the Node 4 or 6 series is recommended). Node.js 0.10 and 0.12 are no longer supported
-* Up to 100GB disk space to download and extract data
-* Lots of RAM, 8GB is a good minimum. A full North America OSM import just fits in 16GB RAM
+* At a minimum 100GB disk space to download, extract, and process data
+* Lots of RAM, 8GB is a good minimum for a small import like a single city. A full North America OSM import just fits in 16GB RAM
 
 
 ## Choose your datasets
 
-Pelias can currently import data from four different sources. The contents and description of these
-sources are available on our [data sources page](./data-sources.md). Here we'll just focus on what to
-download for each one.
+Pelias can currently import data from four different sources, using five different importers. The contents and description of these
+sources are available on our [data sources page](https://mapzen.com/documentation/search/data-sources/).
+Here we'll just focus on what to download for each one.
 
 ### Who's on First
 
@@ -66,12 +67,20 @@ have the extension `.osm.pbf`. Good sources include the [Mapzen Metro Extracts](
 a few minutes to build), and planet files listed on the [OSM wiki](http://wiki.openstreetmap.org/wiki/Planet.osm).
 A full planet PBF file is about 36GB.
 
+#### Street Data
+
+To import street data from OSM, a separate importer is used that operates on a preprocessed dataset
+derived from the OSM planet file. The importer's documentation includes a [download section](https://github.com/pelias/polylines#download-data)
+with instructions on where to get this data.
+
 ## Choose your import settings
 
 There are several options that should be discussed before starting any data imports, as they require
 a compromise between import speed and resulting data quality and richness.
 
-### Admin Lookup
+### Admin Lookup (city, state, etc information on addresses/venues)
+
+_Recommendation_: **enable**
 
 Most data that is imported by Pelias comes to us incomplete: many data sources don't supply what we
 call admin hierarchy information: the neighbourhood, city, country, or other region that contains
@@ -94,6 +103,8 @@ and with full hierarchy information.
 
 ### Address Deduplication
 
+_Recommendation_: **disable**
+
 OpenAddresses data contains lots of addresses, but it also contains lots of duplicate data. To help
 reduce this problem we've built an [address-deduplicator](https://github.com/pelias/address-deduplicator)
 that can be run at import. It uses the [OpenVenues deduplicator](https://github.com/openvenues/address_deduper)
@@ -111,15 +122,47 @@ it eventually.
 
 ## Considerations for full-planet builds
 
-As may be evident from the dataset section above, importing all the data in all four supported datasets is
+As may be evident from the dataset section above, importing all the data in all five supported datasets is
 worthy of its own discussion. Current [full planet builds](https://pelias-dashboard.mapzen.com/pelias)
-weigh in at over 320 million documents, and require about 230GB total storage in Elasticsearch.
+weigh in at over 340 million documents, and require about 230GB total storage in Elasticsearch.
 Needless to say, a full planet build is not likely to succeed on most personal computers.
 
 Fortunately, because of services like AWS and the scalability of Elasticsearch, full planet builds
-are possible without too much extra effort. To set expectations, a cluster of 4
-[r3.xlarge](https://aws.amazon.com/ec2/instance-types/) AWS instances running Elasticsearch, and one
-c4.8xlarge instance running the importers can complete a full planet build in about two days.
+are possible without too much extra effort. The process is no different, it just requires more
+hardware and takes longer.
+
+To set expectations, a cluster of 4 [r3.xlarge](https://aws.amazon.com/ec2/instance-types/) AWS
+instances (30GB RAM each) running Elasticsearch, and one c4.8xlarge instance running the importers
+can complete a full planet build in about two days.
+
+### Recommended hardware
+
+For a production ready instance of Pelias, capable of supporting a few hundred queries per second
+across a full planet build, a setup like the following should be sufficient.
+
+#### Elasticsearch cluster
+
+The main requirement of Elasticsearch is that it has lots of disk and RAM. 120GB of RAM across the
+cluster is a good minimum. Increased CPU power is useful to achieve a higher throughput for queries,
+but not as important as RAM.
+
+_Example configuration:_ 4 to 8 `c4.4xlarge` (16 CPU, 30GB RAM)
+
+#### Importer machine
+
+The importers are each single-threaded Node.js processes, which require around 8GB of RAM
+each with admin lookup enabled. Faster CPUs will help increase the import speed. Running multiple
+importers in parallel is recommended if the importer machine has enough RAM and CPU to support them.
+
+_Example configuration:_ 1 `c4.4xlarge` (16 CPU, 30GB RAM), running two parallel importers
+
+#### API server
+
+The API servers are generally under very light load even with hundreds of queries per second going
+to Elasticsearch, where most of the heavy lifting is done. However, with libpostal, they require
+around 4GB of RAM to be comfortable.
+
+_Example configuration:_ 3 `t2.large` (2 CPU, 8GB RAM)
 
 ## Choose your Pelias code branch
 
@@ -127,7 +170,7 @@ As part of the setup instructions below, you'll be downloading several Pelias pa
 on Github. All of these packages offer 3 branches for various use cases. Based on your needs, you
 should pick one of these branches and use the same one across all of the Pelias packages.
 
-`production`: contains only code that has been tested against a full-planet build and is live on
+`production` **(recommended)**: contains only code that has been tested against a full-planet build and is live on
 Mapzen Search. This is the "safest" branch and it will change the least frequently, although we
 generally release new code at least once a week.
 
@@ -151,12 +194,12 @@ have to worry about the space of the code itself), check out the production bran
 probably the one you want), and install all the node module dependencies.
 
 ```bash
-for repository in schema api whosonfirst geonames openaddresses openstreetmap; do
-	git clone git@github.com:pelias/${repository}.git
-	pushd $repository > /dev/null
-	git checkout production # or staging, or remove this line to stay with master
-	npm install
-	popd > /dev/null
+for repository in schema api whosonfirst geonames openaddresses openstreetmap polylines; do
+	git clone git@github.com:pelias/${repository}.git    # clone from Github
+	pushd $repository > /dev/null                        # switch into importer directory
+	git checkout production                              # or remove this line to stay with master
+	npm install                                          # install npm dependencies
+	popd > /dev/null                                     # return to code directory
 done
 ```
 
@@ -258,7 +301,7 @@ data.
 
 If you're using a terminal, you can also search and/or monitor Elasticsearch using their [APIs.](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/api-conventions.html)
 
-**Note:** On large imports, Elasticsearch can be very sensitive to memory issues. Be sure to modify it's [heap size](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/heap-sizing.html) from the default confiration to something more appropriate to your machine.
+**Note:** On large imports, Elasticsearch can be very sensitive to memory issues. Be sure to modify it's [heap size](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/heap-sizing.html) from the default confirmation to something more appropriate to your machine.
 
 ### Set up the Elasticsearch Schema
 
@@ -269,10 +312,13 @@ data without first applying the Pelias schema will cause all queries to fail com
 requires specific configuration settings for both performance and accuracy reasons.
 
 Fortunately, now that your `pelias.json` file is configured with how to connect to Elasticsearch,
-the Schema repository can automatically create the Pelias index and configure it exactly as needed:
+the schema repository can automatically create the Pelias index and configure it exactly as needed.
+
+_Note:_ The schema scripts also check for required Elasticsearch plugins, and will tell you how to
+install them if not present.
 
 ```bash
-cd schema # assuming you've just run the bash snippet to download the repos from earlier
+cd schema                      # assuming you've just run the bash snippet to download the repos from earlier
 node scripts/create_index.js
 ```
 
@@ -281,11 +327,11 @@ has been updated), you can drop the index and start over like so:
 
 ```bash
 # !! WARNING: this will remove all your data from pelias!!
-node scripts/drop_index.js # it will ask for confirmation first
+node scripts/drop_index.js      # it will ask for confirmation first
 node scripts/create_index.js
 ```
 
-Note that Elasticsearch has no analogy to a database migration, so you generally have to delete and
+_Note_: Elasticsearch has no analogy to a database migration, so you generally have to delete and
 reindex all your data after making schema changes.
 
 ### Run the importers
@@ -314,7 +360,7 @@ Pelias is now able to use the [libpostal](https://github.com/openvenues/libposta
 which greatly increases the quality of search results. Libpostal must be installed on the machines
 running the Pelias API, and requires about 4GB of disk space to download all the required data. This
 data represents a statistical natural language processing model of address parsing trained on
-OpenStreetMap data. The API will also require about 2GB of memory (it used only a few hundred
+OpenStreetMap data. The API will also require about 4GB of memory (it used only a few hundred
 before), to store the needed data for queries.
 
 First, install libpostal following its [installation docs](https://github.com/openvenues/libpostal#installation).
@@ -344,4 +390,22 @@ As soon as you have any data in Elasticsearch, you can start running queries aga
 [Pelias API server](https://github.com/pelias/api/).
 
 Again thanks to `pelias.json`, the API already knows how to connect to Elasticsearch, so all that's
-required to star the API is `npm start`. You can now send queries to `http://localhost:3100/`!
+required to star the API is `npm start`. You can now send queries to Pelias!
+
+## Geocode with Pelias
+
+Pelias should now be up and running and will respond to your queries.
+
+For a quick check, a request to `http://localhost:3100` should display a link to the documentation
+for handy reference.
+
+*Here are some queries to try:*
+
+[http://localhost:3100/v1/search?text=london](http://localhost:3100/v1/search?text=london): a search
+for the city of London.
+
+[http://localhost:3100/v1/autocomplete?text=londo](http://localhost:3100/v1/autocomplete?text=londo): another query for London, but using the autocomplete endpoint which supports partial matches and is intended to be sent queries as a user types (note the query is for `londo` but London is returned)
+
+[http://localhost:3100/v1/reverse?point.lon=-73.986027&point.lat=40.748517](http://localhost:3100/v1/reverse?point.lon=-73.986027&point.lat=40.748517): a reverse geocode for results near the Empire State Building in New York City.
+
+For information on the Pelias endpoints and their parameters, see the [Mapzen Search documentation](https://mapzen.com/documentation/search/).
