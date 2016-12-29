@@ -4,6 +4,16 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 28 December 2016
+
+### New features
+
+* Searches for `St Louis, MO` and `Saint Louis, MO` now return the same thing (the same goes for towns starting with `Mount`/`Mt` and `Fort`/`Ft`)
+
+### Code level changes
+
+* [Structured geocoding](https://mapzen.com/blog/structured-geocoding/) no longer fails horribly when the `address` parameter consists of only a house number
+
 ## 05 December 2016
 
 ### New features
