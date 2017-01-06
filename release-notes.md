@@ -4,6 +4,12 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 5 January 2017
+
+### Code level changes
+* We are now [considerably more strict](https://github.com/pelias/whosonfirst/pull/178) about read errors when loading Who's on First data. Any read errors, whether due to missing files or invalid JSON will cause the entire importer to fail immediately. This prevents builds from reporting succesful completion when some data is actually missing.
+* The Elasticsearch `index_concurrency` setting has [been removed](https://github.com/pelias/schema/pull/198/commits/7224b1fd4fb5eceab8905c236478f03c6a8f590f). In theory this setting allowed tuning imports for better performance, but in practice it had little effect. It's going away in Elasticsearch 5, so this will make the transition that much easier.
+
 ## 28 December 2016
 
 ### New features
