@@ -12,7 +12,7 @@ Categories need to be mapped from original data sources into a common taxonomy.
 - The filter should accept either a single value or a comma separated list of values
 - When multiple values are provided, the filter should be an **OR** and records with any one of the values should be returned
 
-> :information_source: *User MUST provide `text` for the `/search` endpoint. To perform a categories search without `text`, the user should employ `/reverse`.*
+> :information_source: *User MUST provide `text` for the `/search` endpoint. To perform a categories search without `text`, the user should employ `/nearby`.*
 
 ##### Validation
 Here are examples and possible acceptance tests to validate this feature.
@@ -65,6 +65,18 @@ Use of `categories` list + `point`
 
 > pharmacies AND restaurants near focus point
 
+### Category Mappings
+
+#### OSM Tags
+We have done a perlimenary mapping of common OSM tags to Pelias categories. This list will soon be replaced by the Who's on First Category Taxonomy.
+Until then, use the [this code for reference](https://github.com/pelias/openstreetmap/blob/master/config/category_map.js). You can interpret the structure of that mapping as follows.
+The tags are nested, so for example every record with a `cuisine` tag will be assigned the `food` category. However, if a record with the `cuisine` tag also has additional more detailed tags,
+such as `bagel` or `barbecue`, they will be assigned additional categories such as `food:bagel` or `food:barbecue`. So you could search for `food:barbecue` in an instance of Pelias and get
+back only OSM records that were tagged with `cuisine` and `barbecue`.
+
+#### Geonames
+The mapping for Geonames categories can be found [here](https://github.com/pelias/geonames/blob/master/metadata/category_mapping.json). This mapping shows how we've interpreted the
+geonames category codes.
 
 ### Exceptions and Error Conditions
 It seems like a good idea to help users recognize they've made a mistake, and users are more likely to recognize a mistake if you send back an error instead of a warning. Warnings most often don't get many eyeballs on them.
