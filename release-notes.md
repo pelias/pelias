@@ -4,6 +4,15 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 17 January 2017
+### New features
+* The `/v1/structured` endpoint [now supports](https://github.com/pelias/api/pull/763) the `venue` parameter, which allows for searching for venues with a particular name.
+* We've [improved result balance](https://github.com/pelias/api/pull/729) when using `focus.point` in the autocomplete endpoint. In particular, searching for cities far away from the focus point should work much better. More improvements to `focus.point` are planned for the near future.
+
+## Developer changes
+* We've finished adding Pelias config validation (for example [here](https://github.com/pelias/whosonfirst/pull/182) in the Who's on First importer) to all of our repositories. It should be much harder for simple config errors such as typos to go undetected!
+* The checks run before dropping data using pelias-schem have [been improved](https://github.com/pelias/schema/pull/200). Accidentally deleting all your production data should now be even more difficult than before!
+
 ## 5 January 2017
 
 ### Code level changes
