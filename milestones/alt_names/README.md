@@ -17,23 +17,25 @@ to ensure that the alt-names provided in WOF are curated and ready for consumpti
 
 ## Functionality
 
-- Store admin hierarchy place names in the native language of the parent country
+- Store admin hierarchy place names in the native language of the parent country for `addresses`, `venue`, and `street` layers
   - for example `Кремль, Russia` should be `Кремль, Россия`
-- Import and search nicknames for venues in OSM, such as airport codes for example
-  - for example searching for `JFK` should return `John F Kennedy Int'l Airport`
-- Import and search for WOF venues in many languages
-- Refactor query logic to first search for all the admin areas separately and then use the found GIDs to perform the full place query
-  - for example a query like `Lancaster, PA` will first query all admin layers for `PA` and once that has returned the GID for Pennsylvania another query will be formed to find anything named `Lancaster` that also has `parent.region_gid` equal to the GID from the fist query
+- Store place names in all available languages for WOF places (not venues)
+- Refactor query logic to perform the search in two stages:
+  - 1st: search for all the admin areas separately, locating their GIDs, centroids, and all available names
+  - 2nd: use the found GIDs to perform the full place query, also allowing for a broader search in nearby areas where the centroid of the most granular parent is used as a focus point
+    - e.g.: a query like `Lancaster, PA` will first query all admin layers for `PA` and once that has returned the GID for Pennsylvania another query will be formed to find anything named `Lancaster` that also has `parent.region_gid` equal to the GID from the fist query
 - Search for WOF admin areas in many languages
-- Search for OSM venues in many languages
-- Import and search nicknames for venues in WOF
-- Ensure performance is not diminished
+- Add `language` query parameter that will dictate which language the labels are to be displayed in
+  - consider which endpoints should support this ___(would it make caching ineffective for autocomplete?)___
+  - if no `lang` parameter is specified, default to `eng`
+  - for example if `lang=rus`, the label should be `Кремль, Россия`, and if it's set to `lang=eng` the label should be `Kremlin, Russia`
 
 _Note: GeoNames importers will not be updated as part of this work._
 
 
 ## Operations
 
+- Ensure performance is not diminished
 - Potentially we would need to add more machines to support additional volume of data and more complex query logic
 
 
@@ -41,6 +43,7 @@ _Note: GeoNames importers will not be updated as part of this work._
 
 - A full sweep will be needed
 - Additional examples of searching in different languages
+- Document new `lang` query parameter
 - Blog post (at least one)
 
 
@@ -51,16 +54,27 @@ _Note: GeoNames importers will not be updated as part of this work._
 
 |input query|expected result|
 |---|---|
-| Статуя Свободы | Statue of Liberty, New York |
-| Eiffel Tower | Tour Eiffel |
-| Tour Eiffel | Tour Eiffel |
 | München | Munich |
-| JFK | John F Kennedy International Airport |
-| USA | United States |
 | Кремль, Россия | Кремль, Россия |
 | Кремль, Russia | Кремль, Россия |
 
 
 ## Future Work
 
-At this time we will not be changing the labels in the results.
+- Import and search nicknames for venues in OSM, such as airport codes for example
+  - for example searching for `JFK` should return `John F Kennedy Int'l Airport`
+- Import and search for WOF venues in many languages
+- Search for OSM venues in many languages
+- Import and search nicknames for venues in WOF
+
+
+|input query|expected result|
+|---|---|
+| Статуя Свободы | Statue of Liberty, New York |
+| Eiffel Tower | Tour Eiffel |
+| Tour Eiffel | Tour Eiffel |
+| JFK | John F Kennedy International Airport |
+| USA | United States |
+
+
+
