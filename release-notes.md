@@ -4,6 +4,10 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 1 February 2017
+### New features
+* We're working on some fancy new things in dev so our only new feature released this week is retrying timed-out elasticsearch requests.  By default, Pelias will, by default, retry a timed-out request up to 3 times before failing for good, though this number can be overridden by specifying `api.requestRetries` in your Pelias configuration.  
+
 ## 27 January 2017
 ### New features
 * Big news! 🐯 we have soft launched our new [street interpolation](https://github.com/pelias/api/pull/769) service which includes [TIGER](https://en.wikipedia.org/wiki/Topologically_Integrated_Geographic_Encoding_and_Referencing) data. This allows us to return more address results than before. For more info see https://github.com/pelias/interpolation
