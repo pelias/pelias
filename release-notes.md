@@ -4,6 +4,13 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 27 January 2017
+### New features
+* Big news! 🐯 we have soft launched our new [street interpolation](https://github.com/pelias/api/pull/769) service which includes [TIGER](https://en.wikipedia.org/wiki/Topologically_Integrated_Geographic_Encoding_and_Referencing) data. This allows us to return more address results than before. For more info see https://github.com/pelias/interpolation
+
+## Bug fixes
+* We've [fixed a bug](https://github.com/pelias/api/pull/780) where structured queries would always return 'fallback' as the 'match_type'.
+
 ## 17 January 2017
 ### New features
 * The `/v1/structured` endpoint [now supports](https://github.com/pelias/api/pull/763) the `venue` parameter, which allows for searching for venues with a particular name.
