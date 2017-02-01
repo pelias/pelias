@@ -22,7 +22,7 @@
 
 ## Developer changes
 * We've finished adding Pelias config validation (for example [here](https://github.com/pelias/whosonfirst/pull/182) in the Who's on First importer) to all of our repositories. It should be much harder for simple config errors such as typos to go undetected!
-* The checks run before dropping data using pelias-schem have [been improved](https://github.com/pelias/schema/pull/200). Accidentally deleting all your production data should now be even more difficult than before!
+* The checks run before dropping data using pelias-schema have [been improved](https://github.com/pelias/schema/pull/200). Accidentally deleting all your production data should now be even more difficult than before!
 
 ## 5 January 2017
 
