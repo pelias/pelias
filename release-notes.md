@@ -4,6 +4,25 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+
+## 13 March 2017
+### New Features
+* We've added postalcodes to the Who's on First import process and enabled the postalcode-only query type, so users can now find postalcodes directly!
+    * This update required additions to the Pelias schema as well as query building logic.
+    * The download script in pelias-whosonfirst importer has also been updated to pull down postalcode data by default, so be aware when using that download command and when running the importer.
+    * This also means Who's on First imports will now take roughly 3 times as long, if importing the whole world... Yeah, there are a LOT of postalcodes in the world! `Pelias <3 Postalcodes`
+
+### Code level changes
+* Refactored pelias-wof-admin-lookup and updated to this latest version in all importers.
+    * This is in preparation for the upcoming fixes to our coarse reverse lookups.
+    * Next step will be to direct the API to this new Point-in-Polygon service when available to get more accurate reverse geocoding results.
+* Geonames importer interface has finally been updated to match our other importers.
+
+### Bug fixes 
+* Dependencies should now have alpha3 ISO codes in the country abbreviation (`country_a`) properties, instead of alpha2 as it did previously.
+* Washington DC wasn't getting a region abbreviation at all, but that's water under the [Arlington Memorial Bridge](https://mapzen.com/products/search/?query=Arlington%20Memorial%20Bridge%2C%20Washington%2C%20USA&endpoint=place&gid=openstreetmap%3Astreet%3Apolyline%3A11785717&selectedLat=38.88725&selectedLng=-77.05541&lng=-77.13810&lat=38.88702&zoom=11) now!
+
+
 ## 1 February 2017
 ### New features
 * We're working on some fancy new things in dev so our only new feature released this week is retrying timed-out elasticsearch requests.  By default, Pelias will retry a timed-out request up to 3 times before failing for good, though this number can be overridden by specifying `api.requestRetries` in your Pelias configuration.  
@@ -12,7 +31,7 @@
 ### New features
 * Big news! 🐯 we have soft launched our new [street interpolation](https://github.com/pelias/api/pull/769) service which includes [TIGER](https://en.wikipedia.org/wiki/Topologically_Integrated_Geographic_Encoding_and_Referencing) data. This allows us to return more address results than before. For more info see https://github.com/pelias/interpolation
 
-## Bug fixes
+### Bug fixes
 * We've [fixed a bug](https://github.com/pelias/api/pull/780) where structured queries would always return 'fallback' as the 'match_type'.
 
 ## 17 January 2017
