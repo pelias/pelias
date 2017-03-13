@@ -19,8 +19,8 @@
 * Geonames importer interface has finally been updated to match our other importers.
 
 ### Bug fixes 
-* Dependencies should now have alpha3 ISO codes in the country abbreviation (`country_a`) properties, instead of alpha2 as it did previously.
-* Washington DC wasn't getting a region abbreviation at all, but that's water under the [Arlington Memorial Bridge](https://mapzen.com/products/search/?query=Arlington%20Memorial%20Bridge%2C%20Washington%2C%20USA&endpoint=place&gid=openstreetmap%3Astreet%3Apolyline%3A11785717&selectedLat=38.88725&selectedLng=-77.05541&lng=-77.13810&lat=38.88702&zoom=11) now!
+* Dependencies should now have the proper alpha3 ISO codes of their own in the country abbreviation (`country_a`) properties, instead of alpha2 of the parent country as it did previously. See [San Juan, PR](https://mapzen.com/products/search/?query=San%20Juan%2C%20PRI&endpoint=place&gid=geonames%3Alocality%3A4568127&selectedLat=18.46633&selectedLng=-66.10572&lng=-66.82571&lat=18.25413&zoom=9) for example.
+* Washington DC wasn't getting a region abbreviation at all, but that's water under the [Arlington Memorial Bridge](https://mapzen.com/products/search/?query=Arlington%20Memorial%20Bridge%2C%20Washington%2C%20DC%2C%20USA&endpoint=place&gid=openstreetmap%3Astreet%3Apolyline%3A11785717&selectedLat=38.88725&selectedLng=-77.05541&lng=-77.13810&lat=38.88702&zoom=11) now!
 
 
 ## 1 February 2017
