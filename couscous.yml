@@ -45,11 +45,17 @@ menu:
             name: '#Goals'
             items:
                 current:
+                    text: Q2-2017 Milestones
+                    relativeUrl: quarterly_goals/q2-2017.html
+                q1:
                     text: Q1-2017 Milestones
                     relativeUrl: quarterly_goals/q1-2017.html
                 done:
                     text: Completed Milestones
                     relativeUrl: quarterly_goals/completed.html
+                local_install:
+                    text: Local Install
+                    relativeUrl: milestones/local_install/index.html    
                 alt_names:
                     text: Alt-Names
                     relativeUrl: milestones/alt_names/index.html
