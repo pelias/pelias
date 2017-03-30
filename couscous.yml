@@ -41,6 +41,9 @@ menu:
                 contribute:
                     text: Contribute
                     relativeUrl: contributing.html
+                fun_facts:
+                    text: Fun Facts!
+                    relativeUrl: fun_facts.html
         goals:
             name: '#Goals'
             items:
