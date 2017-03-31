@@ -20,6 +20,8 @@ If you find something thought provoking **we'd love a pull request**!
 > *In Portland, there are Zero-Leading Addresses that are different from non-Zero-Leading addresses. Said another way, there could be two separate residences ~1 mile apart, that have almost the exact same address, with the only differentiation being a leading-zero on the number (not really a number in that case). Trimming off leading zeros from address numbers is not a valid practice for addresses in Portland.*
 >
 > *see: https://en.wikipedia.org/wiki/Portland,_Oregon#Neighborhoods “East-West addresses in this area are denoted with a leading zero (instead of a minus sign). This means 0246 SW California St. is not the same as 246 SW California St. Many mapping programs are unable to distinguish...”*
+>
+> *TriMet*
 
 - [Source](https://github.com/pelias/pelias/issues/524)
 - [Source](https://en.wikipedia.org/wiki/Portland,_Oregon#Neighborhoods)
@@ -30,7 +32,7 @@ If you find something thought provoking **we'd love a pull request**!
 
 > *Agloe is a fictional hamlet in Colchester, Delaware County, New York, that became an actual landmark after mapmakers made up the community as a "copyright trap".*
 >
-> ![](https://en.wikipedia.org/wiki/Agloe,_New_York#/media/File:FictionalAgloeNewYork.PNG)
+> ![](https://upload.wikimedia.org/wikipedia/en/4/40/FictionalAgloeNewYork.PNG)
 >
 > *Wikipedia*
 
