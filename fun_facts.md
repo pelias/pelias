@@ -3,6 +3,8 @@
 Here are just some of the interesting things we've come across in our geocoding travels.
 If you find something thought provoking **we'd love a pull request**!
 
+-----
+
 ### Stravenue
 
 > *A stravenue (portmanteau of street and avenue) is a type of road particular to Tucson, Arizona. The United States Postal Service officially supports the abbreviation STRA for stravenues.[1] A stravenue runs "diagonally between and intersects a Street and an Avenue."[2] By convention in Tucson, streets run east-west while avenues run north-south. However, in a few areas of Tucson, primarily around the central part of the city, which is divided by railroad tracks running diagonally from southeast to northwest, builders created small subdivisions of roads and houses that also are laid out on a diagonal basis rather than the normal east-west or north-south. Most of these subdivisions are located near either Benson Highway or Aviation Highway, which also run southeast to northwest.[3] "The word Stravenue was originally coined by Roy Drachman when he was developing the subdivision called Pueblo Gardens," in 1948.[4]*
@@ -10,6 +12,8 @@ If you find something thought provoking **we'd love a pull request**!
 > *Wikipedia*
 
 - [Source](https://en.m.wikipedia.org/wiki/Stravenue)
+
+-----
 
 ### Leading 0 house numbers
 
@@ -19,3 +23,16 @@ If you find something thought provoking **we'd love a pull request**!
 
 - [Source](https://github.com/pelias/pelias/issues/524)
 - [Source](https://en.wikipedia.org/wiki/Portland,_Oregon#Neighborhoods)
+
+-----
+
+### Stranger than fiction: Agloe, New York
+
+> *Agloe is a fictional hamlet in Colchester, Delaware County, New York, that became an actual landmark after mapmakers made up the community as a "copyright trap".*
+>
+> ![](https://en.wikipedia.org/wiki/Agloe,_New_York#/media/File:FictionalAgloeNewYork.PNG)
+>
+> *Wikipedia*
+
+- [Source](https://en.wikipedia.org/wiki/Agloe,_New_York)
+
