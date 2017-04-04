@@ -33,6 +33,9 @@ In general, Pelias will require:
 * At a minimum 100GB disk space to download, extract, and process data
 * Lots of RAM, 8GB is a good minimum for a small import like a single city. A full North America OSM import just fits in 16GB RAM
 
+### Windows Support
+
+All internal Mapzen development of Pelias is done on Linux and macOS so we strongly recommend setting up Pelias using one of these and not Microsoft Windows.  We implicitly support Linux and all commands in this documentation are written with Linux or Unix (and therefore macOS by extension) in mind.  Due to concerns such as path delimiters and availability of command line tools, Pelias doesn't explicitly not support Windows but we don't have any Windows environments at our disposal and support is very limited.  In the event that using Windows is mandatory, note that git is not pre-installed and we strongly suggest installing [git](https://git-scm.com/download/win) with git bash support.  git bash is a shell that provides a Unix/Linux environment in which to perform all Pelias actions and should be used instead of the Windows command prompt or PowerShell.  Cygwin also provides a bash environment but no internal testing has been performed using it.  
 
 ## Choose your datasets
 
