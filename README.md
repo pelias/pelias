@@ -7,6 +7,7 @@
 Pelias is the project used to power [Mapzen Search](https://mapzen.com/projects/search)
 
 ### What's a geocoder do anyway?
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/pelias/pelias?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Geocoding is the process of transforming input text, such as an address, or a name of a place—to a location on the earth's surface.
 
