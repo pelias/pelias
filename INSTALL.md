@@ -239,18 +239,19 @@ config is sent along to the [elasticsearch-js](https://github.com/elastic/elasti
 any of its [configuration options](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/configuration.html)
 are valid.
 
-The other major section, `imports`, defines settings for each importer. The defaults look like this:
+The other major section, `imports`, defines settings for each importer.  `adminLookup` has it's own section and its value applies to all importers. The defaults look like this:
 
 ```json
 {
- "imports": {
+  "imports": {
+    "adminLookup": {
+      "enabled": true
+    },
     "geonames": {
       "datapath": "./data",
-      "adminLookup": false
     },
     "openstreetmap": {
       "datapath": "/mnt/pelias/openstreetmap",
-	  "adminLookup": false,
       "leveldbpath": "/tmp",
       "import": [{
         "filename": "planet.osm.pbf"
@@ -258,7 +259,6 @@ The other major section, `imports`, defines settings for each importer. The defa
     },
     "openaddresses": {
       "datapath": "/mnt/pelias/openaddresses",
-      "adminLookup": false,
       "files": []
     },
     "whosonfirst": {
@@ -268,8 +268,7 @@ The other major section, `imports`, defines settings for each importer. The defa
 }
 ```
 
-As you can see, the default datapaths are meant to be changed. This is also where you can enable
-admin lookup by overriding the default value.
+As you can see, the default datapaths are meant to be changed.
 
 ### Elasticsearch Configuration
 
