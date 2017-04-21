@@ -4,6 +4,31 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 21 April 2017
+### New features
+* Our first big ticket item is technically a new feature, a code level change, and a bug fix all in one! We've created a standalone microservice whose job it is to handle point-in-polygon requests. So with this release, all reverse queries specifying admin layers will be directed to this new service, instead of going to Elasticsearch like it used to. As a user, you won't see any difference in the interface to these types of requests and you don't have to take any action to use the new functionality. However, faster and better results will be apparent!
+* Our second big ticket item (we know, 2 in one release is awesome sauce!) is the long awaited upgrade to `libpostal 1.0`. This is again a code level change that doesn't have any user interface implications but yeild significant improvements in results. We can tell just by the number of [old issues we were able to resolve](https://github.com/pelias/pelias/milestone/49?closed=1) as a result of this upgrade that this is a big moment for the Pelias engine. High-fives all around!
+* You know how we started supporting search queries with only postalcodes in the, like `/v1/search?text=90210`? Well get excited, because we've added the ability to handle postalcode only queries in `structured` search as well! So queries like `/v1/search/structures?postalcode=90210` will now work. More info [here](https://mapzen.com/documentation/search/structured-geocoding/#postalcode).
+
+### Code level changes
+* For those hosting their own instances of Pelias, the new point-in-polygon service will have some impact on your setup. You can see the [pip-service README.md](https://github.com/pelias/pip-service) for setup details and don't forget to add the url to your new pip service instance to the API section of your Pelias config file. If you don't specify the `pipService` property in config, things will continue to work as they have before and Elasticsearch queries will continue to be used for coarse reverse requests.
+```
+{
+  "api": {
+    "host": "localhost:3100/v1/",
+    "textAnalyzer": "libpostal",
+    "pipService": "url to your pip service instance"
+  },
+  ...
+}
+```
+* All the code is in place for checking the language headers in requests and returning results with admin names in the specified language. The functionality is not yet enabled and requires a link to a [`placeholder`](https://github.com/pelias/placeholder) service to work as expected.
+* We've swapped the order of operation in the case of interpolation queries to deduplicate after interpolation has taken place, not before. When deduplicating before interpolation, street segments were getting removed as duplicates before they could be sent to the interpolation service for evaluation, causing us to miss some addresses.
+
+### Bug fixes
+* We fixed a few minor bugs related to address interpolation. There were cases where the results had a mix of street centroids and addresses and the correct address was not showing up first. More details [here](https://github.com/pelias/pelias/issues/528).
+* There was an [issue with geonames admin records](https://github.com/pelias/pelias/issues/539) having incorrect ids in their admin hierarchy properties. They were basically mascarading as Who's on First ids leading to invalid results and general chaos. Well no more. We fixed it.
+
 
 ## 13 March 2017
 ### New Features
