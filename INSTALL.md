@@ -70,7 +70,7 @@ have the extension `.osm.pbf`. Good sources include the [Mapzen Metro Extracts](
 a few minutes to build), and planet files listed on the [OSM wiki](http://wiki.openstreetmap.org/wiki/Planet.osm).
 A full planet PBF file is about 36GB.
 
-#### Street Data
+#### Street Data (Polylines)
 
 To import street data from OSM, a separate importer is used that operates on a preprocessed dataset
 derived from the OSM planet file. The importer's documentation includes a [download section](https://github.com/pelias/polylines#download-data)
