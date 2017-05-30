@@ -48,3 +48,11 @@ If you find something thought provoking **we'd love a pull request**!
 > *Wikipedia*
 
 - [Source](https://en.wikipedia.org/wiki/Circleville,_Ohio)
+
+### Joint Custody of Pheasant Island
+
+>What's really unusual about Pheasant Island is that Spain and France don't share the territory at the same time. By the terms of the 1659 treaty, they alternate sovereignty. Every February, French representatives meet their counterparts on Pheasant Island to hand it over to the Spaniards; every August, they get it back. This has happened over seven hundred times. Geography buff Frank Jacobs has likened this to a 350-year timeshare, or "an extremely slow game of ping-pong." To me, it sounds more like a divorce custody arrangement. "Is this your weekend to be French? France will pick you up after school."
+>
+> *Conde Nast Traveler*
+
+- [Source](http://www.cntraveler.com/story/why-pheasant-island-is-sometimes-in-france-sometimes-in-spain)
