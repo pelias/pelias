@@ -38,6 +38,7 @@ If you find something thought provoking **we'd love a pull request**!
 
 - [Source](https://en.wikipedia.org/wiki/Agloe,_New_York)
 
+-----
 
 ### Circleville Squaring Company 
 
@@ -49,6 +50,8 @@ If you find something thought provoking **we'd love a pull request**!
 
 - [Source](https://en.wikipedia.org/wiki/Circleville,_Ohio)
 
+-----
+
 ### Joint Custody of Pheasant Island
 
 >What's really unusual about Pheasant Island is that Spain and France don't share the territory at the same time. By the terms of the 1659 treaty, they alternate sovereignty. Every February, French representatives meet their counterparts on Pheasant Island to hand it over to the Spaniards; every August, they get it back. This has happened over seven hundred times. Geography buff Frank Jacobs has likened this to a 350-year timeshare, or "an extremely slow game of ping-pong." To me, it sounds more like a divorce custody arrangement. "Is this your weekend to be French? France will pick you up after school."
@@ -56,3 +59,16 @@ If you find something thought provoking **we'd love a pull request**!
 > *Conde Nast Traveler*
 
 - [Source](http://www.cntraveler.com/story/why-pheasant-island-is-sometimes-in-france-sometimes-in-spain)
+
+-----
+
+### Ice cream lovers beware!
+
+> Carmel-by-the-Sea's one-square mile village is as unique in charm as it is in fun facts. No high heels law*, no street addresses, Clint Eastwood was once mayor, and Doris Day helped make Carmel dog heaven on Earth are a few of the most popular ice breakers when meeting locals and visitors in this European-style town.
+> Also, there are no chain restaurants permitted and an ice cream ordinance.
+>
+> * high heels allowed with permit
+>
+> ![](https://www.carmelcalifornia.com/webart/map3_sm.jpg)
+
+- [Source](http://www.carmelcalifornia.com/fun-facts-about-carmel.htm?PageSpeed=noscript)
