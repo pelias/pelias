@@ -44,8 +44,7 @@ If you find something thought provoking **we'd love a pull request**!
 > Dissatisfaction among residents rose over Circleville's layout, however. During 1837 at the request of the town, the Ohio General Assembly authorized the "Circleville Squaring Company" to convert the town plan into a squared grid, as was typical of other platted towns. 
 >
 > ![](https://upload.wikimedia.org/wikipedia/en/thumb/5/53/CirclevilleOhioSeal.png/100px-CirclevilleOhioSeal.png)
-
-
+>
 > *Wikipedia*
 
 - [Source](https://en.wikipedia.org/wiki/Circleville,_Ohio)
