@@ -4,6 +4,21 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 30 May 2017
+### New features
+* Deduper will now [prefer results with postalcodes](https://github.com/pelias/api/pull/895/commits/512cec994565e9df298e82b7e3f9137d00ecc055), which comes to us courtesy of our friend @kevincennis.
+* WOF Macrohoods have been added to the list of supported hierarchies.
+
+### Code level changes
+* Speaking of updated dependencies, we switched to the latest release of [addressit](https://www.npmjs.com/package/addressit), which has a [fix from, AGAIN, our friend @kevincennis](https://github.com/DamonOehlman/addressit/commit/82ffd24f5a88aa61f61d2e048318ae31d4a4184e)! Hey, @kevincennis, you are awesome and we appreciate you! Thanks!
+* We have removed the `alpha3` field from our schema because it was basically the appendix of Pelias, in that it was leftover from a long time ago and is no longer needed for proper functioning of the system. This data can still be found in each record, but only in the `parent.country_a` field.
+* We've added dependency checks to precommit hooks and travis builds for all repositories.
+* Admin-lookup was refactored and all importers have been updated to support the new interface. As a result, a lot of dependencies have been updated.
+* WOF importer module has been updated to be more generic so it could be used in other importers and packages where we need to download and/or manipulate WOF data.
+* We've also added more stingent checks for WOF records visiting Null Island, so they don't make it into our index.
+* We've updated the fields we use for `population` data from WOF after consulting with the data team.
+* The minimum size of results parameter we send to Elasticsearch has been locked down to 20, which ensures that we get back enough results to cut away results that aren't granular enough and dedupe.
+
 ## 21 April 2017
 ### New features
 * Our first big ticket item is technically a new feature, a code level change, and a bug fix all in one! We've created a standalone microservice whose job it is to handle point-in-polygon requests. So with this release, all reverse queries specifying admin layers will be directed to this new service, instead of going to Elasticsearch like it used to. As a user, you won't see any difference in the interface to these types of requests and you don't have to take any action to use the new functionality. However, faster and better results will be apparent!
