@@ -15,7 +15,7 @@
 * We've added dependency checks to precommit hooks and travis builds for all repositories.
 * Admin-lookup was refactored and all importers have been updated to support the new interface. As a result, a lot of dependencies have been updated.
 * WOF importer module has been updated to be more generic so it could be used in other importers and packages where we need to download and/or manipulate WOF data.
-* We've also added more stingent checks for WOF records visiting Null Island, so they don't make it into our index.
+* We've also added more stringent checks for WOF records visiting Null Island, so they don't make it into our index.
 * We've updated the fields we use for `population` data from WOF after consulting with the data team.
 * The minimum size of results parameter we send to Elasticsearch has been locked down to 20, which ensures that we get back enough results to cut away results that aren't granular enough and dedupe.
 
@@ -58,7 +58,7 @@
     * Next step will be to direct the API to this new Point-in-Polygon service when available to get more accurate reverse geocoding results.
 * Geonames importer interface has finally been updated to match our other importers.
 
-### Bug fixes 
+### Bug fixes
 * Dependencies should now have the proper alpha3 ISO codes of their own in the country abbreviation (`country_a`) properties, instead of alpha2 of the parent country as it did previously. See [San Juan, PR](https://mapzen.com/products/search/?query=San%20Juan%2C%20PRI&endpoint=place&gid=geonames%3Alocality%3A4568127&selectedLat=18.46633&selectedLng=-66.10572&lng=-66.82571&lat=18.25413&zoom=9) for example.
 * Washington DC wasn't getting a region abbreviation at all, but that's water under the [Arlington Memorial Bridge](https://mapzen.com/products/search/?query=Arlington%20Memorial%20Bridge%2C%20Washington%2C%20DC%2C%20USA&endpoint=place&gid=openstreetmap%3Astreet%3Apolyline%3A11785717&selectedLat=38.88725&selectedLng=-77.05541&lng=-77.13810&lat=38.88702&zoom=11) now!
 
