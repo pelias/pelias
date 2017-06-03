@@ -169,7 +169,7 @@ The current Pelias team can be found on Github as [dianashk](https://github.com/
 Members emeritus include:
 * [randyme](https://github.com/randyme)
 * [seejohnrun](https://github.com/seejohnrun)
-* [fdansv](http://github.com/dansv)
+* [fdansv](http://github.com/fdansv)
 * [sevko](https://github.com/sevko)
 * [hkrishna](https://github.com/hkrishna)
 * [riordan](https://github.com/riordan)
