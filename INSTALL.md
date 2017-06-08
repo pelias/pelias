@@ -400,7 +400,7 @@ As soon as you have any data in Elasticsearch, you can start running queries aga
 [Pelias API server](https://github.com/pelias/api/).
 
 Again thanks to `pelias.json`, the API already knows how to connect to Elasticsearch, so all that's
-required to star the API is `npm start`. You can now send queries to Pelias!
+required to start the API is `npm start`. You can now send queries to Pelias!
 
 
 ## Geocode with Pelias
