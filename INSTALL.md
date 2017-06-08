@@ -12,23 +12,27 @@ your setup to a reference. All information on Mapzen Search can be found
 
 ## Installation Overview
 
-The steps for fully installing Pelias look like this:
-
-1. Decide which datasets and settings will be used
-2. Download appropriate data
-3. Download Pelias code, using the appropriate branches
-4. Set up Elasticsearch
-5. Install the Elasticsearch schema using pelias-schema
-6. Use one or more importers to load data into Elasticsearch
-7. Install the libpostal text analyzer (recommended)
-8. Start the API server to begin handling queries
+The steps for fully installing Pelias:
+1. [Decide which datasets](#choose-your-datasets) and [settings](choose-your-import-settings) will be used. Download appropriate data from each external sources
+	1. Who's on First
+	2. Geonames
+	3. OpenAddresses
+	4. OpenStreetMap
+		1. Street Data (Polylines)
+2. [Download Pelias code, using the appropriate branches](#choose-your-pelias-code-branch)
+3. [Customize Pelias Configuration file](#customize-pelias-config)
+4. [Set up Elasticsearch](#elasticsearch-configuration)
+5. [Install the Elasticsearch schema using pelias-schema](#set-up-the-elasticsearch-schema)
+6. [Use one or more importers to load data into Elasticsearch](#run-the-importers)
+7. [Install the libpostal text analyzer (recommended)](#install-libpostal-optional-but-recommended)
+8. [Start the API server to begin handling queries](#start-the-api)
 
 ## System Requirements
 
 In general, Pelias will require:
 
-* A working [Elasticsearch](https://www.elastic.co/products/elasticsearch) 2.3 cluster. It can be on
-  a single machine or across several
+* A working [Elasticsearch](https://www.elastic.co/downloads/past-releases/elasticsearch-2-3-0) 2.3 cluster. It can be on
+  a single machine or across several. This is currently the only version Pelias supports.
 * [Node.js](https://nodejs.org/) 4.0 or newer (the latest in the Node 4 or 6 series is recommended). Node.js 0.10 and 0.12 are no longer supported
 * At a minimum 100GB disk space to download, extract, and process data
 * Lots of RAM, 8GB is a good minimum for a small import like a single city. A full North America OSM import just fits in 16GB RAM
@@ -39,14 +43,16 @@ All internal Mapzen development of Pelias is done on Linux and macOS so we stron
 
 ## Choose your datasets
 
-Pelias can currently import data from four different sources, using five different importers. The contents and description of these
+Pelias can currently import data from four different sources, using five different importers. The contents and description of these 
 sources are available on our [data sources page](https://mapzen.com/documentation/search/data-sources/).
-Here we'll just focus on what to download for each one.
+Here we'll just focus on what to download for each one. 
+
+We recommend creating a `/Data` folder with subfolders to store datasets from each source. (For example, `Data/whosonfirst` can hold data from Who's on First.)
 
 ### Who's on First
 
-The [Who's on First](https://github.com/pelias/whosonfirst#data) importer can download all the Who's
-on First data quickly and easily. See the README for the most up to date instructions.
+The [Who's on First](https://github.com/pelias/whosonfirst#downloading-the-data) importer can download all the Who's
+on First data quickly and easily. You can also just download hierarchy information, which [admin lookup ](#admin-lookup-city-state-etc-information-on-addressesvenues) (city, state, etc information on addresses/venues) depends on. See the README for the most up to date instructions.
 
 ### Geonames
 
@@ -102,7 +108,7 @@ admin lookup are up to 10 times slower than without.
 
 Who's on First, of course, always includes full hierarchy information because it's built into the
 dataset itself, so there's no tradeoff to be made. Who's on First data will always import quite fast
-and with full hierarchy information.
+and with full hierarchy information. 
 
 ### Address Deduplication
 
@@ -190,9 +196,12 @@ development of new features.
 
 ### Download the Pelias repositories
 
-At a minimum, you'll need the Pelias [schema](https://github.com/pelias/schema/) and
-[api](https://github.com/pelias/api/) repositories, as well as at least one of the importers. Here's
-a bash snippet that will download all the repositories (they are all small enough that you don't
+At a minimum, you'll need 
+1. Pelias [schema](https://github.com/pelias/schema/) 
+2. [api](https://github.com/pelias/api/) repositories
+3. at least one of the importers. 
+
+Here's a bash snippet that will download all the repositories (they are all small enough that you don't
 have to worry about the space of the code itself), check out the production branch (which is
 probably the one you want), and install all the node module dependencies.
 
@@ -212,8 +221,7 @@ Nearly all configuration for Pelias is driven through a single config file: `pel
 default, Pelias will look for this file in your home directory, but you can configure where it
 looks. For more details, see the [pelias-config](https://github.com/pelias/config) repository.
 
-The two main things of note to configure are where on the network to find Elasticsearch, and where
-to find the downloaded data files.
+#### Where on the network to find Elasticsearch
 
 Pelias will by default look for Elasticsearch on `localhost` at port 9200 (the standard
 Elasticsearch port).
@@ -239,6 +247,7 @@ config is sent along to the [elasticsearch-js](https://github.com/elastic/elasti
 any of its [configuration options](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/configuration.html)
 are valid.
 
+#### Where to find the downloaded data files.
 The other major section, `imports`, defines settings for each importer.  `adminLookup` has it's own section and its value applies to all importers. The defaults look like this:
 
 ```json
@@ -268,6 +277,7 @@ The other major section, `imports`, defines settings for each importer.  `adminL
 }
 ```
 
+Note: The datapath must be an _absolute path._
 As you can see, the default datapaths are meant to be changed.
 
 ### Elasticsearch Configuration
@@ -297,7 +307,7 @@ Pelias, so please refer to the [official 2.3 install docs](https://www.elastic.c
 Older versions of Elasticsearch are not supported.
 
 Make sure Elasticsearch is running and connectable, and then you can continue with the Pelias
-specific setup and importing. Using a plugin like [head](https://mobz.github.io/elasticsearch-head/)
+specific setup and importing. Using a plugin like [Sense](https://github.com/bleskes/sense) [(Chrome extension)](https://chrome.google.com/webstore/detail/sense-beta/lhjgkmllcaadmopgmanpapmpjgmfcfig?hl=en), [head](https://mobz.github.io/elasticsearch-head/)
 or [Marvel](https://www.elastic.co/products/marvel) can help monitor Elasticsearch as you import
 data.
 
@@ -335,6 +345,12 @@ node scripts/create_index.js
 
 _Note_: Elasticsearch has no analogy to a database migration, so you generally have to delete and
 reindex all your data after making schema changes.
+
+Get Elasticsearch running to be ready for imports.
+```bash
+cd elasticsearch
+bin/elasticsearch
+```
 
 ### Run the importers
 
@@ -397,7 +413,7 @@ NPM module.
 ### Start the API
 
 As soon as you have any data in Elasticsearch, you can start running queries against the
-[Pelias API server](https://github.com/pelias/api/).
+[Pelias API server](https://github.com/pelias/api/). If you installed Libpostal, reinstall the API node modules so that API connects to the text analyzer.
 
 Again thanks to `pelias.json`, the API already knows how to connect to Elasticsearch, so all that's
 required to start the API is `npm start`. You can now send queries to Pelias!
