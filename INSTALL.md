@@ -70,7 +70,7 @@ have the extension `.osm.pbf`. Good sources include the [Mapzen Metro Extracts](
 a few minutes to build), and planet files listed on the [OSM wiki](http://wiki.openstreetmap.org/wiki/Planet.osm).
 A full planet PBF file is about 36GB.
 
-#### Street Data
+#### Street Data (Polylines)
 
 To import street data from OSM, a separate importer is used that operates on a preprocessed dataset
 derived from the OSM planet file. The importer's documentation includes a [download section](https://github.com/pelias/polylines#download-data)
@@ -352,9 +352,19 @@ For the [Geonames](https://github.com/pelias/geonames/) importer, please see its
 instructions.  We are working towards making all the importers have [the same interface](https://github.com/pelias/pelias/issues/255),
 so the Geonames importer will behave the same as the others soon.
 
-Depending on how much data you've imported, now may be a good time to grab a coffee. Without admin
-lookup, the fastest speeds you'll see are around 10,000 records per second. With admin lookup,
+Depending on how much data you've imported, now may be a good time to grab a coffee. Without admin lookup, the fastest speeds you'll see are around 10,000 records per second. With admin lookup,
 expect around 800-2000 inserts per second.
+
+The order of imports do not matter. Multiple importers can be run in parallel to speed up the setup process.
+Each of our importers operates independent of the data that is already in Elasticsearch.
+So you can, for example, import OSM data without first having imported WOF data.
+However, when turning on admin lookup, the WOF data must be on disk, as it's used during the 
+import process to enrich the data with admin information.
+WOF data does not need to be imported for the admin lookup to work.
+
+#### Can I run the importers over the existing pelias index?
+At least for openaddresses and Openstreetmap, you have only one option: delete the index completely
+(perhaps take a snapshot first if you want to save it), recreate the index, and reload all the data.
 
 ### Install Libpostal (optional, but recommended)
 
@@ -378,10 +388,8 @@ to `pelias.json`:
   }
 }
 ```
-
-In the future, libpostal may become the default, and we may drop support for
-[addressit](https://github.com/DamonOehlman/addressit), the current default text parser. Until then,
-the `textAnalyzer` property can be changed back to `addressit` (or removed) to stop using libpostal.
+We’re going to move towards hardening our dependency on libpostal by officially requiring it to be installed at startup, so in the future, libpostal may become the default, and we may drop support for
+[addressit](https://github.com/DamonOehlman/addressit), the current default text parser. Until then, the `textAnalyzer` property can be changed back to `addressit` (or removed) to stop using libpostal.
 
 Once configured, the API will use libpostal via the [node-postal](https://github.com/openvenues/node-postal)
 NPM module.
@@ -392,7 +400,8 @@ As soon as you have any data in Elasticsearch, you can start running queries aga
 [Pelias API server](https://github.com/pelias/api/).
 
 Again thanks to `pelias.json`, the API already knows how to connect to Elasticsearch, so all that's
-required to star the API is `npm start`. You can now send queries to Pelias!
+required to start the API is `npm start`. You can now send queries to Pelias!
+
 
 ## Geocode with Pelias
 
@@ -411,3 +420,25 @@ for the city of London.
 [http://localhost:3100/v1/reverse?point.lon=-73.986027&point.lat=40.748517](http://localhost:3100/v1/reverse?point.lon=-73.986027&point.lat=40.748517): a reverse geocode for results near the Empire State Building in New York City.
 
 For information on the Pelias endpoints and their parameters, see the [Mapzen Search documentation](https://mapzen.com/documentation/search/).
+
+### How searching works internally
+
+1. When we search for an address, we first attempt to find it in the address index in Elasticsearch 
+and if an exact match is found all is well and we simply send that back as a result. In this case, 
+the more addresses we have in the index the better the results will be.
+2. If for some reason we weren’t able to locate that address in the Elasticsearch address layer, 
+we will attempt to find just the street (without the house number) in the Elasticsearch street layer. 
+This is where the polylines import becomes important. If you choose to not import the polylines data, 
+you won’t have this backup option when an address is not found in the first step.
+3. If the street was found successfully we use that street to attempt address interpolation, which is 
+the process of estimating where a housenumber would reside along the street given other housenumbers 
+on that street. For this step to be performed you must have an instance of the interpolation service 
+up and running and the API must be made aware of it via pelias-config. If an address can be 
+interpolated given the street and expected housenumber, we will send that approximated result to the 
+user.
+4. If the interpolation service is not able to help further, we will send back the street centroid as 
+our best guess of where the address might be. This is the same street (and its centroid) that we 
+found in step 2.
+
+You need polylines in order to get street centroids and interpolation in your results. without those 
+you’re relying purely on the data being present in OA or OSM as a point.
