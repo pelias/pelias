@@ -36,7 +36,10 @@ Once you checked that [system requirements](#system-requirements) are met, these
 7. [Install the libpostal text analyzer (recommended)](#install-libpostal-optional-but-recommended)
     1. See Libpostal [installation docs](https://github.com/openvenues/libpostal#installation)
     2. Install node modules for Pelias API `$ cd api; npm install`
-8. [Start the API server to begin handling queries](#start-the-api)
+8. [Install and start additional services (recommended)](#install-point-in-polygon-service-and-interpolation-optional-but-recommended)
+    * [pipService](https://github.com/pelias/pip-service#installation)
+    * [interpolation](https://github.com/pelias/interpolation)
+9. [Start the API server to begin handling queries](#start-the-api)
     1. Thanks to `~/pelias.json`, the API is ready for [queries](#geocode-with-Pelias) with `npm start`!
 
 ## System Requirements
@@ -422,6 +425,47 @@ We’re going to move towards hardening our dependency on libpostal by officiall
 Once configured, the API will use libpostal via the [node-postal](https://github.com/openvenues/node-postal)
 NPM module.
 
+### Install Point-in-Polygon Service and Interpolation (optional, but recommended)
+
+Two additional services improve the accuracy of the search results: Point-in-Polygon and Interpolation.
+
+ The [Admin Lookup](#admin-lookup-city-state-etc-information-on-addressesvenues) process relies [Point-in-Polygon (PiP) Service](https://github.com/pelias/pip-service) to fill in incomplete records with the admin hierarchy information from Who's on First. PiP Service looks up whether a point, such as an housenumber and street name with lat-lon coordinates, is inside, outside, or on the boundary of a polygon. This polygon, a closed area, can be a city, state, or any admin region.
+
+Install the node modules for PiP Service in the API repository. Note that PiP Service requires [Who's on First](#whos-on-first) admin hierarchy data. Configure the Pelias API to use Point-in-Polygon by adding a section like this to `pelias.json` under `"api"`.
+```bash
+{
+	"api": {
+		"services": {
+			"pip": {
+				"url": "http://localhost:3102"
+			}
+	}
+}
+```
+PiP service requires Who's on First admin hierarchy data. Start and keep PiP service running.
+```bash
+cd pip-service
+npm start /path/to/whosonfirstdata 						#assumes you have downloaded WOF data
+```
+
+[Interpolation](https://github.com/pelias/interpolation) is a tool to "fill in the gaps" for streets where house numbers are missing. This step is a [fallback option](#how-searching-works-internally) when the exact address cannot be matched. Interpolation can estimate where the point may be given other house numbers on the street.
+
+The [installation document](https://github.com/pelias/interpolation#workflow) has details on the databases to build. Note that Interpolation requires [Polylines](#street-data-polylines) data. Configure the Pelias API to use Interpolation by adding a section like this to `pelias.json`.
+```bash
+{
+	"interpolation": {
+    "client": {
+      "adapter": "http",
+      "host": "http://localhost:3000"
+    }
+  },
+}
+```
+With the databases created, you can start running Interpolation.
+```bash
+cd interpolation
+./interpolate server address.db street.db
+```
 
 ### Start the API
 
