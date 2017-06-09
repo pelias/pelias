@@ -1,6 +1,6 @@
 # Installing Pelias
 
-These instructions will help you set up the Pelias geocoder from scratch. It assumes some knowlege
+These instructions will help you set up the Pelias geocoder from scratch. It assumes some knowledge
 of the command line and Node.js, but we'd like as many people as possible to be able to install
 Pelias, so if anything is confusing, please don't hesitate to reach out. We'll do what we can to
 help and also improve the documentation.
@@ -12,20 +12,32 @@ your setup to a reference. All information on Mapzen Search can be found
 
 ## Installation Overview
 
-The steps for fully installing Pelias:
-1. [Decide which datasets](#choose-your-datasets) and [settings](choose-your-import-settings) will be used. Download appropriate data from each external sources
-	1. Who's on First
-	2. Geonames
-	3. OpenAddresses
-	4. OpenStreetMap
-		1. Street Data (Polylines)
+Once you checked that [system requirements](#system-requirements) are met, these are the steps for fully installing Pelias:
+
+1. Decide which [datasets](#choose-your-datasets) and [settings](#choose-your-import-settings) will be used. Download appropriate data from each source.
+	* [Who's on First](https://github.com/pelias/whosonfirst#downloading-the-data) (including admin lookup)
+	* [Geonames](https://github.com/pelias/geonames/#installation)
+	* [OpenAddresses](https://results.openaddresses.io/)
+	* [OpenStreetMap](https://mapzen.com/data/metro-extracts/)
+		* [Street Data (Polylines)](https://github.com/pelias/polylines#download-data)
 2. [Download Pelias code, using the appropriate branches](#choose-your-pelias-code-branch)
+    1. Download these repositories: [Pelias Schema](https://github.com/pelias/schema), [API](https://github.com/pelias/api), and importer(s) ([Who's on First](https://github.com/pelias/whosonfirst), [Geonames](https://github.com/pelias/geonames), [OpenAddresses](https://github.com/pelias/openaddresses), [OpenStreetMap](https://github.com/pelias/openstreetmap)) corresponding to downloaded data source
+    2. Git checkout the production branch (recommended) and install all node module dependencies
 3. [Customize Pelias Configuration file](#customize-pelias-config)
-4. [Set up Elasticsearch](#elasticsearch-configuration)
+    1. Create configuration file `~/pelias.json` (recommended placing in home directory). For the default settings, see the [default config file](https://github.com/pelias/config/blob/master/config/defaults.json)
+    2. Specify the absolute path to the data files under `"imports"`. If needed, change the port for Elasticsearch (default: 9200) and number of shards (default: 5)
+4. [Set up Elasticsearch](#install-elasticsearch)
+    1. Download Elasticsearch [2.3.0](https://www.elastic.co/downloads/past-releases/elasticsearch-2-3-0)
 5. [Install the Elasticsearch schema using pelias-schema](#set-up-the-elasticsearch-schema)
+    1. Apply the Pelias schema `$ cd schema; node scripts/create_index.js`
 6. [Use one or more importers to load data into Elasticsearch](#run-the-importers)
+    1. Run Elasticsearch `$ cd elasticsearch; bin/elasticsearch `
+    2. Load data for each importer `$ cd ${importer}; npm start`
 7. [Install the libpostal text analyzer (recommended)](#install-libpostal-optional-but-recommended)
+    1. See Libpostal [installation docs](https://github.com/openvenues/libpostal#installation)
+    2. Install node modules for Pelias API `$ cd api; npm install`
 8. [Start the API server to begin handling queries](#start-the-api)
+    1. Thanks to `~/pelias.json`, the API is ready for [queries](#geocode-with-Pelias) with `npm start`!
 
 ## System Requirements
 
@@ -43,16 +55,16 @@ All internal Mapzen development of Pelias is done on Linux and macOS so we stron
 
 ## Choose your datasets
 
-Pelias can currently import data from four different sources, using five different importers. The contents and description of these 
+Pelias can currently import data from four different sources, using five different importers. The contents and description of these
 sources are available on our [data sources page](https://mapzen.com/documentation/search/data-sources/).
-Here we'll just focus on what to download for each one. 
+Here we'll just focus on what to download for each one.
 
 We recommend creating a `/Data` folder with subfolders to store datasets from each source. (For example, `Data/whosonfirst` can hold data from Who's on First.)
 
 ### Who's on First
 
 The [Who's on First](https://github.com/pelias/whosonfirst#downloading-the-data) importer can download all the Who's
-on First data quickly and easily. You can also just download hierarchy information, which [admin lookup ](#admin-lookup-city-state-etc-information-on-addressesvenues) (city, state, etc information on addresses/venues) depends on. See the README for the most up to date instructions.
+on First data quickly and easily. There is an option to download just the hierarchy information, which [admin lookup ](#admin-lookup-city-state-etc-information-on-addressesvenues) (city, state, etc information on addresses/venues) depends on. See the README for the most up to date instructions.
 
 ### Geonames
 
@@ -108,7 +120,7 @@ admin lookup are up to 10 times slower than without.
 
 Who's on First, of course, always includes full hierarchy information because it's built into the
 dataset itself, so there's no tradeoff to be made. Who's on First data will always import quite fast
-and with full hierarchy information. 
+and with full hierarchy information.
 
 ### Address Deduplication
 
@@ -196,10 +208,10 @@ development of new features.
 
 ### Download the Pelias repositories
 
-At a minimum, you'll need 
-1. Pelias [schema](https://github.com/pelias/schema/) 
-2. [api](https://github.com/pelias/api/) repositories
-3. at least one of the importers. 
+At a minimum, you'll need
+1. [Pelias schema](https://github.com/pelias/schema/)
+2. [API](https://github.com/pelias/api/)
+3. Importer(s)
 
 Here's a bash snippet that will download all the repositories (they are all small enough that you don't
 have to worry about the space of the code itself), check out the production branch (which is
@@ -247,7 +259,7 @@ config is sent along to the [elasticsearch-js](https://github.com/elastic/elasti
 any of its [configuration options](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/configuration.html)
 are valid.
 
-#### Where to find the downloaded data files.
+#### Where to find the downloaded data files
 The other major section, `imports`, defines settings for each importer.  `adminLookup` has it's own section and its value applies to all importers. The defaults look like this:
 
 ```json
@@ -330,7 +342,7 @@ _Note:_ The schema scripts also check for required Elasticsearch plugins, and wi
 install them if not present.
 
 ```bash
-cd schema                      # assuming you've just run the bash snippet to download the repos from earlier
+cd schema                      # assuming you have just run the bash snippet to download the repos from earlier
 node scripts/create_index.js
 ```
 
@@ -374,7 +386,7 @@ expect around 800-2000 inserts per second.
 The order of imports do not matter. Multiple importers can be run in parallel to speed up the setup process.
 Each of our importers operates independent of the data that is already in Elasticsearch.
 So you can, for example, import OSM data without first having imported WOF data.
-However, when turning on admin lookup, the WOF data must be on disk, as it's used during the 
+However, when turning on admin lookup, the WOF data must be on disk, as it is used during the
 import process to enrich the data with admin information.
 WOF data does not need to be imported for the admin lookup to work.
 
@@ -394,7 +406,7 @@ before), to store the needed data for queries.
 First, install libpostal following its [installation docs](https://github.com/openvenues/libpostal#installation).
 This will also download the training data, so be sure to have enough free disk space.
 
-Next, configure the Pelias API to use libpostal (it won't by default) by adding a section like this
+Next, configure the Pelias API to use libpostal (it would not by default) by adding a section like this
 to `pelias.json`:
 
 ```json
@@ -410,12 +422,13 @@ We’re going to move towards hardening our dependency on libpostal by officiall
 Once configured, the API will use libpostal via the [node-postal](https://github.com/openvenues/node-postal)
 NPM module.
 
+
 ### Start the API
 
 As soon as you have any data in Elasticsearch, you can start running queries against the
 [Pelias API server](https://github.com/pelias/api/). If you installed Libpostal, reinstall the API node modules so that API connects to the text analyzer.
 
-Again thanks to `pelias.json`, the API already knows how to connect to Elasticsearch, so all that's
+Again thanks to `pelias.json`, the API already knows how to connect to Elasticsearch, so all that is
 required to start the API is `npm start`. You can now send queries to Pelias!
 
 
@@ -439,22 +452,22 @@ For information on the Pelias endpoints and their parameters, see the [Mapzen Se
 
 ### How searching works internally
 
-1. When we search for an address, we first attempt to find it in the address index in Elasticsearch 
-and if an exact match is found all is well and we simply send that back as a result. In this case, 
+1. When we search for an address, we first attempt to find it in the address index in `Elasticsearch`
+. If an exact match is found all is well and we simply send that back as a result. In this case,
 the more addresses we have in the index the better the results will be.
-2. If for some reason we weren’t able to locate that address in the Elasticsearch address layer, 
-we will attempt to find just the street (without the house number) in the Elasticsearch street layer. 
-This is where the polylines import becomes important. If you choose to not import the polylines data, 
+2. If, for some reason, we weren’t able to locate that address in the Elasticsearch address layer,
+we will attempt to find just the street (without the house number) in the Elasticsearch street layer.
+This is where the `polylines` import becomes important. If you choose to not import the polylines data,
 you won’t have this backup option when an address is not found in the first step.
-3. If the street was found successfully we use that street to attempt address interpolation, which is 
-the process of estimating where a housenumber would reside along the street given other housenumbers 
-on that street. For this step to be performed you must have an instance of the interpolation service 
-up and running and the API must be made aware of it via pelias-config. If an address can be 
-interpolated given the street and expected housenumber, we will send that approximated result to the 
+3. If the street was found successfully we use that street to attempt address interpolation, which is
+the process of estimating where a housenumber would reside along the street given other housenumbers
+on that street. For this step to be performed you must have an instance of the `interpolation` service
+up and running and the API must be made aware of it via pelias-config. If an address can be
+interpolated given the street and expected housenumber, we will send that approximated result to the
 user.
-4. If the interpolation service is not able to help further, we will send back the street centroid as 
-our best guess of where the address might be. This is the same street (and its centroid) that we 
+4. If the interpolation service is not able to help further, we will send back the street centroid as
+our best guess of where the address might be. This is the same street (and its centroid) that we
 found in step 2.
 
-You need polylines in order to get street centroids and interpolation in your results. without those 
+You need polylines in order to get street centroids and interpolation in your results. without those
 you’re relying purely on the data being present in OA or OSM as a point.
