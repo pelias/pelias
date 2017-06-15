@@ -343,7 +343,7 @@ Two additional services improve the accuracy of the search results: Point-in-Pol
 #### Point in Polygon (PiP)
 [Point-in-Polygon (PiP) Service](https://github.com/pelias/pip-service) is used for accurate reverse geocoding queries. Given the latitude and longitude coordinates, PiP Service looks up whether the point is inside, outside, or on the boundary of a neighborhood, city, country, etc depending on granularity.
 
-Install the node modules for PiP Service in the API repository. Note that PiP Service requires [Who's on First](#whos-on-first) admin hierarchy data. Configure the Pelias API to use Point-in-Polygon by adding a section like this to `pelias.json` under `"api"`.
+Note that PiP Service requires [Who's on First](#whos-on-first) admin hierarchy data. Configure the Pelias API to use Point-in-Polygon by adding a section like this to `pelias.json` under `"api"`.
 ```bash
 {
 	"api": {
