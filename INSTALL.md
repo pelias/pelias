@@ -333,6 +333,9 @@ data represents a statistical natural language processing model of address parsi
 OpenStreetMap data. The API will also require about 4GB of memory (it used only a few hundred
 before), to store the needed data for queries.
 
+Install libpostal following its [installation docs](https://github.com/openvenues/libpostal#installation).
+This will also download the training data, so be sure to have enough free disk space.
+
 ### Install Point-in-Polygon Service and Interpolation (optional, but recommended)
 
 Two additional services improve the accuracy of the search results: Point-in-Polygon and Interpolation.
