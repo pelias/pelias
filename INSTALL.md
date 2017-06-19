@@ -84,7 +84,7 @@ derived from the OSM planet file.
 
 As may be evident from the dataset section above, importing all the data in all five supported datasets is
 worthy of its own discussion. Current [full planet builds](https://pelias-dashboard.mapzen.com/pelias)
-weigh in at over 340 million documents, and require about 230GB total storage in Elasticsearch.
+weigh in at over 450 million documents, and require about 330GB total storage in Elasticsearch.
 Needless to say, a full planet build is not likely to succeed on most personal computers.
 
 Fortunately, because of services like AWS and the scalability of Elasticsearch, full planet builds
