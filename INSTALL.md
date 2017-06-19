@@ -22,6 +22,7 @@ These are the steps for fully installing Pelias:
 1. [Set up PiP Service and Interpolation (recommended)](#install-point-in-polygon-service-and-interpolation-optional-but-recommended)
 1. [Start the API server to begin handling queries](#start-the-api)
 
+
 ## System Requirements
 In general, Pelias will require:
 
@@ -151,6 +152,7 @@ At a minimum, you'll need
 1. [Pelias schema](https://github.com/pelias/schema/)
 2. [API](https://github.com/pelias/api/)
 3. Importer(s)
+
 
 Here's a bash snippet that will download all the repositories (they are all small enough that you don't
 have to worry about the space of the code itself), check out the production branch (which is
@@ -423,4 +425,4 @@ user.
 our best guess of where the address might be. This is the same street (and its centroid) that we
 found in step 2.
 You need polylines in order to get street centroids and interpolation in your results. Without those,
-you’re relying purely on the data being present in OpenAddressesA or OpenStreetMap as a point.
+you’re relying purely on the data being present in OpenAddresses or OpenStreetMap as a point.
