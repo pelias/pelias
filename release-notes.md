@@ -4,6 +4,11 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 6 July 2017
+## Milestones
+Today's release has no new code, but it's a big milestone nonetheless. For the first time, we are indexing over 500 million (that's _half a billion_) records, all from open data! We're grateful to all the work from contributors of OpenStreetMap, OpenAddresses, Who's on First, and Geonames that have made this possible and are looking forward to reaching the big _one billion_ mark soon!
+
+
 ## 30 June 2017
 ### Bug fixes
 Our new Placeholder service queries were working great, except they weren't returning confidence scores. Now they [have confidence scores](https://github.com/pelias/api/pull/918) just like all our other queries.
