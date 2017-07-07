@@ -48,6 +48,9 @@ menu:
             name: '#Goals'
             items:
                 current:
+                    text: Q3-2017 Milestones
+                    relativeUrl: quarterly_goals/q3-2017.html
+                q2:
                     text: Q2-2017 Milestones
                     relativeUrl: quarterly_goals/q2-2017.html
                 q1:
