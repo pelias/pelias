@@ -4,6 +4,27 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 6 July 2017
+## Milestones
+Today's release has no new code, but it's a big milestone nonetheless. For the first time, we are indexing over 500 million (that's _half a billion_) records, all from open data! We're grateful to all the work from contributors of OpenStreetMap, OpenAddresses, Who's on First, and Geonames that have made this possible and are looking forward to reaching the big _one billion_ mark soon!
+
+
+## 30 June 2017
+### Bug fixes
+Our new Placeholder service queries were working great, except they weren't returning confidence scores. Now they [have confidence scores](https://github.com/pelias/api/pull/918) just like all our other queries.
+
+## 27 June 2017
+### New features
+* After several months of work we have finally released massively improved admin queries! These use our new service, [Placeholder](https://github.com/pelias/placeholder). Placeholder knows all about cities, countries, and every other type of administrative area, and knows the relationships between them, so it can be used to return much better results.
+
+### Code level changes
+* Our importers now have a [higher Node.js memory limit](https://github.com/pelias/api/pull/918). This should fix issues that were being caused by the ever-increasing amount of open-data available to our admin lookup service.
+
+### Bug fixes
+* We discovered that we were importing every [jetway](https://en.wikipedia.org/wiki/Jetway) from OpenStreetMap, which isn't really something anyone wants to geocode, so we've improved our [whitelists](https://github.com/pelias/openstreetmap/pull/280) for what's allowed. Results from OSM should be a little cleaner now.
+* Autocomplete now works correctly on [very long names](https://github.com/pelias/schema/pull/224).
+
+
 ## 30 May 2017
 ### New features
 * Deduper will now [prefer results with postalcodes](https://github.com/pelias/api/pull/895/commits/512cec994565e9df298e82b7e3f9137d00ecc055), which comes to us courtesy of our friend @kevincennis.
