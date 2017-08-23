@@ -24,7 +24,7 @@ for address queries as well as the query logic sent to Elasticsearch
 * We have added the ability to specify a [default focus point](https://github.com/pelias/pelias/issues/569) within the `pelias-config` for the `api` to allow custom instances of Pelias to always bias results to a specified location
 * After 2 years since the release of `v1` of our API, we've finally done away with the legacy URL configuration and no longer support `/` or any endpoint not containing the `/v1` prefix
 * All the `api` sanitizers have been updated for consistency
-* We got rid of the `alpha3` property in our schema and model... we're not even sure why we needed it all this, so good riddance! 
+* We got rid of the `alpha3` property in our schema and model... we're not even sure why we needed it anymore, so good riddance! 
 
 ## 6 July 2017
 ## Milestones
