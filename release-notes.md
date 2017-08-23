@@ -4,10 +4,31 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 22 August 2017
+### New features
+* We now support the ability to specify the admin hierarchy part of an address query in any language 
+(as long as a name in that language can be found in WOF), for example searching for 
+[30 w 26th st, Нью Йорк, 미국](http://pelias.github.io/compare/#/v1/search%3Ftext=30%20w%2026th%20st,%20%D0%9D%D1%8C%D1%8E%20%D0%99%D0%BE%D1%80%D0%BA,%20%EB%AF%B8%EA%B5%AD) works like magic! 
+* We've added a warning when unexpected query parameters are encountered! This is a big deal because it helps catch misspellings of query parameter names, such as `layer` vs `layers`... we've all been there at least once.
+
+### Bug fixes
+* We found an invalid warning when falling back to a coarse-reverse geocoding strategy about `boundary.circle.radius` not being supported, even though the query didn't specify a value for that parameter. We removed the unwanted warning. If you see that warning going forward, consider it valid and revise your query.   
+* We fixed our production configuration to fully enable language headers (they were only partially available previously). Ooops!
+
+### Code level changes
+* To support the ability to search for addresses using many languages, we've refactored a lot of our `api` execution flow 
+for address queries as well as the query logic sent to Elasticsearch
+    * the new flow goes like this: `libpostal` -> `placeholder` -> `query-with-wof-ids-instead-of-placenames`
+* We finally deleted some old unused code in the `api`, such as the old `details sanitizer`
+* Logging for the microservice-wrapper module used in the `api` has been improved
+* We have added the ability to specify a [default focus point](https://github.com/pelias/pelias/issues/569) within the `pelias-config` for the `api` to allow custom instances of Pelias to always bias results to a specified location
+* After 2 years since the release of `v1` of our API, we've finally done away with the legacy URL configuration and no longer support `/` or any endpoint not containing the `/v1` prefix
+* All the `api` sanitizers have been updated for consistency
+* We got rid of the `alpha3` property in our schema and model... we're not even sure why we needed it anymore, so good riddance! 
+
 ## 6 July 2017
 ## Milestones
 Today's release has no new code, but it's a big milestone nonetheless. For the first time, we are indexing over 500 million (that's _half a billion_) records, all from open data! We're grateful to all the work from contributors of OpenStreetMap, OpenAddresses, Who's on First, and Geonames that have made this possible and are looking forward to reaching the big _one billion_ mark soon!
-
 
 ## 30 June 2017
 ### Bug fixes
@@ -23,7 +44,6 @@ Our new Placeholder service queries were working great, except they weren't retu
 ### Bug fixes
 * We discovered that we were importing every [jetway](https://en.wikipedia.org/wiki/Jetway) from OpenStreetMap, which isn't really something anyone wants to geocode, so we've improved our [whitelists](https://github.com/pelias/openstreetmap/pull/280) for what's allowed. Results from OSM should be a little cleaner now.
 * Autocomplete now works correctly on [very long names](https://github.com/pelias/schema/pull/224).
-
 
 ## 30 May 2017
 ### New features
