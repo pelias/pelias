@@ -4,6 +4,11 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 19 September 2017
+
+### Bug fixes
+* Thanks to [@rabidllama](https://github.com/rabidllama)'s [excellent PR](https://github.com/pelias/api/pull/974), we now support queries with postalcode and region/country combinations.
+
 ## 14 September 2017
 
 ### New features
