@@ -4,6 +4,16 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 29 September 2017
+
+### New features
+
+This release marks a major update of our [Placeholder](https://github.com/pelias/placeholder) service that is in charge of managing administrative area names. All sorts of queries that needs to understand the name of a country, city, county, neighbourhood, or any other administrative area are improved! Especially improved should be queries that use non-English languages. The full details of the code changes are [in the Placeholder pull request](https://github.com/pelias/placeholder/pull/49).
+
+### Bug fixes
+
+Over the last few days we have fixed [several](https://github.com/pelias/api/pull/1006) [regressions](https://github.com/pelias/api/pull/1003) that could cause bad responses from, and sometimes even crash our API server.
+
 ## 19 September 2017
 
 ### Bug fixes
