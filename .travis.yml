@@ -3,8 +3,8 @@ php:
   - 5.4
 env:
   global:
-    secure: DP5nm2y1uts/niMSRp4YtG1M076B87ukT1cZhtxMwxpmBxDMW6nqPpdJuN29GC00fSkF7FiOFCQD0BnO0RX5Me5xK+Cya2Cbpx04dRpUkqu3e5MThSBxaXNqgonf2Go6ndmy3ZSxCu7SpE+PvVU6fGdLClTs1d5RSDdvs5EGsRs=
-
+    secure: >-
+      DP5nm2y1uts/niMSRp4YtG1M076B87ukT1cZhtxMwxpmBxDMW6nqPpdJuN29GC00fSkF7FiOFCQD0BnO0RX5Me5xK+Cya2Cbpx04dRpUkqu3e5MThSBxaXNqgonf2Go6ndmy3ZSxCu7SpE+PvVU6fGdLClTs1d5RSDdvs5EGsRs=
 before_script:
   - composer install --no-progress
 script:
