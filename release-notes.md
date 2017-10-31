@@ -4,6 +4,20 @@
 > code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
 > specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
 
+## 26 October 2017
+
+### Bug fixes
+
+* The `/place` endpoint would sometimes return records from a [different layer than the one you asked for](https://github.com/pelias/api/pull/1036), but no longer!
+* Asking the `/reverse` endpoint to return venues from Geonames used to return an error message. However, it should work, and now [it does](https://github.com/pelias/api/pull/1045)!
+
+### Code changes
+
+* Our [Placeholder](https://github.com/pelias/placeholder/pull/59) and [interpolation](https://github.com/pelias/interpolation/pull/84) services now have access logs. This should make it much easier to diagnose any issues and measure traffic
+* The Point in Polygon service now can download data using the [Who's on First downloader](https://github.com/pelias/pip-service/pull/37) directly. It's a bit easier to set up the PIP service as a result!
+* You can now specify the network interface the Pelias API will [listen on](https://github.com/pelias/api/pull/1031), by setting the `HOST` environment variable. The default is still Node.js's default to listen on all interfaces.
+* It's now easy to tell which parser was used for a query, as the API will set `parser: "libpostal"` when [libpostal was used](https://github.com/pelias/api/pull/1017)
+
 ## 29 September 2017
 
 ### New features
