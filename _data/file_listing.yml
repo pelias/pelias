@@ -1,0 +1,20 @@
+docs_list_title: Pelias
+docs:
+
+- title: Overview
+  url: index.html
+
+- title: Setup
+  url: INSTALL.html
+
+- title: License
+  url: DATA_LICENSES.html
+                
+- title: Code of Conduct
+  url: CODE_OF_CONDUCT.html
+
+- title: Contribute
+  url: CONTRIBUTING.html
+
+- title: Fun Facts!
+  url: fun_facts.html
