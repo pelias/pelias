@@ -1,4 +1,4 @@
-Yesterday Mapzen [announced](https://mapzen.com/blog/shutdown/) it will be shutting down at the end of January 2018. As the maintainers of the Pelias project (and, until now, employees of Mapzen), we want to give an update on the Pelias project and Mapzen Search.
+On January 2nd, Mapzen [announced](https://mapzen.com/blog/shutdown/) it will be shutting down at the end of January 2018. As the maintainers of the Pelias project (and, until now, employees of Mapzen), we want to give an update on the Pelias project and Mapzen Search.
 
 # Pelias Open-Source Project
 
