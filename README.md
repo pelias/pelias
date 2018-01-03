@@ -4,7 +4,7 @@
 
 [![Gitter](https://badges.gitter.im/pelias/pelias.svg)](https://gitter.im/pelias/pelias?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Pelias is the project used to power [Mapzen Search](https://mapzen.com/projects/search)
+**News:** See our [update](./announcements/2018-01-02-pelias-update.md) regarding the Mapzen shutdown.
 
 ### What's a geocoder do anyway?
 
