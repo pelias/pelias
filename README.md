@@ -4,7 +4,7 @@
 
 [![Gitter](https://badges.gitter.im/pelias/pelias.svg)](https://gitter.im/pelias/pelias?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**News:** See our [update](https://github.com/pelias/pelias/tree/master/announcements/2018-01-02-pelias-update/) regarding the Mapzen shutdown.
+## Announcement: See our [update](https://github.com/pelias/pelias/tree/master/announcements/2018-01-02-pelias-update/) regarding the Mapzen shutdown
 
 ### What's a geocoder do anyway?
 
