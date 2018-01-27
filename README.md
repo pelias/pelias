@@ -156,7 +156,7 @@ We built Pelias as an open source project not just because we believe that users
 the source code of tools they use, but to get the community involved in the project itself.
 
 Anything that we can do to make contributing easier, we want to know about.  Feel free to reach out to us via Github,
-[Gitter](https://gitter.im/pelias/pelias), [email](mailto:search@mapzen.com), or [Twitter](https://twitter.com/mapzen])
+[Gitter](https://gitter.im/pelias/pelias), [email](mailto:search@mapzen.com), or [Twitter](https://twitter.com/mapzen)
  We'd love to help people get started working on Pelias, especially
 if you're new to open source or programming in general. Both this [meta-repo](https://github.com/pelias/pelias/issues)
 and the [API repo](https://github.com/pelias/api/issues) are good places to get started looking for tasks to tackle.
