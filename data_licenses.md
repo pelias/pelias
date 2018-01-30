@@ -36,7 +36,7 @@ Layers:
 - `neighbourhood`
 - `coarse` (alias for simultaneously using all the above)
 
-[Who's on First](https://whosonfirst.mapzen.com) is an open-data directory of worldwide administrative places. Created by Mapzen, it is the primary provider of:
+[Who's on First](https://www.whosonfirst.org/) is an open-data directory of worldwide administrative places. Created by Mapzen, it is the primary provider of:
 
 - Countries
 - Macroregions (for example, England is a Macroregion within the United Kingdom)
@@ -82,7 +82,7 @@ Layers:
 - `neighbourhood`
 - `coarse` (alias for simultaneously using all the above)
 
-[Geonames](http://www.geonames.org/) is an aggregation of many authoritative and non-authoritative datasets. It contains information on everything from country borders to airport names to geographical features. While Geonames does not contain any shape data (such as country borders), it does have a powerful and well defined hierarchy to describe the relationships between different records. This custom hierarchy makes it harder to use in combination with data from other sources, but the Mapzen [Who's On First](http://whosonfirst.mapzen.com/) project will help by providing concordance between Geonames and other datasets.
+[Geonames](http://www.geonames.org/) is an aggregation of many authoritative and non-authoritative datasets. It contains information on everything from country borders to airport names to geographical features. While Geonames does not contain any shape data (such as country borders), it does have a powerful and well defined hierarchy to describe the relationships between different records. This custom hierarchy makes it harder to use in combination with data from other sources, but the Mapzen [Who's On First](https://www.whosonfirst.org/) project will help by providing concordance between Geonames and other datasets.
 
 In the meantime, Geonames still provides a wide variety of useful data that helps augment the other datasets.
 

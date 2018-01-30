@@ -33,7 +33,7 @@ Reverse geocoding is the opposite: returning a list of places near a given point
 - Provide accurate search results
 - Give users query suggestions (typeahead in the search box)
 - Account for location bias (places nearer to you appear higher in the results)
-- Support multiple data sources (the defaults are [OpenStreetMap](http://openstreetmap.org/), [OpenAddresses](http://openaddresses.io), [Geonames](http://geonames.org), and [Who's on First](http://whosonfirst.mapzen.com/))
+- Support multiple data sources (the defaults are [OpenStreetMap](http://openstreetmap.org/), [OpenAddresses](http://openaddresses.io), [Geonames](http://geonames.org), and [Who's on First](https://www.whosonfirst.org/))
 - Flexible software architecture
 - Easy to contribute software patches and features to
 - Easy to set up and configure your own instance
