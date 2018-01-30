@@ -13,13 +13,13 @@ All our code on [Github](https://github.com/pelias) will remain. Our infrastruct
 Another point of good news is that [Who's on First](https://www.whosonfirst.org/blog/2018/01/02/chapter-two/), an essential data source for Pelias, will also continue on. Many of the URLs for that project will change, and we would love help tracking down anything that breaks as a result. Please submit an issue or pull request if you have the time.
 
 ## Mapzen Search
-Mapzen Search, however, will be going away. While this doesn't affect Pelias directly, it was very useful to have a full-planet instance of Pelias to look to for testing and as a baseline example.
+Mapzen Search will be going away. While this doesn't affect Pelias directly, many Pelias users were also Mapzen Search customers.
 
 The Mapzen [migration guide](https://mapzen.com/blog/migration/) has some suggestions for current users of Mapzen Search.
 
-Current Mapzen Search users who would like to keep using Pelias, **please reach out to us**. It is _possible_ that we will be able to set up a hosted instance of Pelias to replace Mapzen Search if there is enough interest.
+In particular, some of the team behind Pelias and Mapzen search have created a new company that will offer hosted geocoding using Pelias! It's called [geocode.earth](https://geocode.earth) and is live and ready to take customers.
 
-The Pelias team is also available for consulting work to help teams set up their own instance of Pelias. This not only provide an alternative to Mapzen Search that does not rely on an external hosted service, but also help to fund continued development of Pelias.
+The Pelias team is also available for consulting work to help teams set up their own instance of Pelias. This not only provide an alternative to Mapzen Search that does not rely on an external hosted service, but also will help fund continued development of Pelias.
 
 
 ## Contact info
