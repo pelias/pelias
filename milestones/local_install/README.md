@@ -12,9 +12,9 @@ Implement a simple installation process for a small local instance of Pelias des
 
 #### Area
 User must be able to limit the install process to a region by specifying either of the following:
-    - the area's boudning box
+    - the area's bounding box
     - the area's Who's on First ID
-When the installation is limitted in either of the above ways, only the relevant data should be downloaded and used in the build process.
+When the installation is limited in either of the above ways, only the relevant data should be downloaded and used in the build process.
 
 #### Data Sources
 User must be able to limit the install process to only desired data sources. For instance, one should be able to only import OpenAddresses data and avoid all others.
