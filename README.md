@@ -41,7 +41,13 @@ The Pelias architecture has three main components and several smaller pieces.
 
 #### Data importers
 
-The importers filter, normalize, and ingest geographic datasets into the Pelias database. Currently there are 4 officially supported importers: [OpenStreetMap](https://github.com/pelias/openstreetmap/), [OpenAddresses](https://github.com/pelias/openaddresses/), [Who's on First](https://github.com/pelias/whosonfirst/), and [Geonames](https://github.com/pelias/geonames/).
+The importers filter, normalize, and ingest geographic datasets into the Pelias database. Currently there are five officially supported importers:
+
+* **[OpenStreetMap](https://github.com/pelias/openstreetmap/)**: supports importing nodes and ways from [OpenStreetMap](http://openstreetmap.org/)
+* **[OpenAddresses](https://github.com/pelias/openaddresses/)**: supports importing the hundreds of millions of global addresses collected from various authoritative government sources by [OpenAddresses](https://openaddresses.io/)
+* **[Who's on First](https://github.com/pelias/whosonfirst/)**: supports importing admin areas and venues from [Who's on First](https://www.whosonfirst.org/)
+* **[Geonames](https://github.com/pelias/geonames/)**: supports importing admin records and venues from [Geonames](http://www.geonames.org/)
+* **[Polylines](https://github.com/pelias/polylines)**: supports any data in the [Google Polyline format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm?csw=1). It's mainly used to import roads from OpenStreetMap
 
 We are always discussing [supporting additional datasets](https://github.com/pelias/pelias/issues/254). Pelias users can also write their own importers, for example to import proprietary data into your own instance of Pelias.
 
