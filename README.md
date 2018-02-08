@@ -6,7 +6,7 @@
 
 ### What's a geocoder do anyway?
 
-Geocoding is the process of transforming input text, such as an address, or a name of a place—to a location on the Earth's surface.
+Geocoding is the process of taking input text, such as an address or the name of a place, and returning a latitude/longitude location on the Earth's surface for that place.
 
 ![geocode](https://cloud.githubusercontent.com/assets/4246770/16500453/76d6d8cc-3eb9-11e6-85d8-f57894ba7b73.gif)
 
@@ -18,27 +18,19 @@ Reverse geocoding is the opposite: returning a list of places near a given latit
 
 ### What makes Pelias different from other geocoders?
 
-- It's completely open-source and MIT licensed
-- It's based on open data, so you can run it yourself
-- It's mostly data-agnostic, so if the default open datasets are not enough, you can import your own data
-- You can install it locally and modify it to suit your needs
-- It has an impressive list of features, such as fast autocomplete
-- It has support for many types of results: addresses, venues, cities, countries, and more
-- It's modular, so you don't need to be an expert to make changes
-- It's easy to install and requires minimal external dependencies
+- Completely open-source and MIT licensed
+- Mostly data-agnostic, so if the default open datasets are not enough, you can import your own data
+- Powerful features such as fast autocomplete, interpolation, and multi-language support
+- Supports for many types of results: addresses, venues, cities, countries, and more
+- Modular, so you don't need to be an expert in everything to make changes
+- Easy to install and requires minimal external dependencies
 
 ### What are the main goals of the Pelias project?
 
 - Provide accurate search results
-- Give users query suggestions (typeahead in the search box)
-- Account for location bias (places nearer to you appear higher in the results)
-- Support multiple data sources (the defaults are [OpenStreetMap](http://openstreetmap.org/), [OpenAddresses](http://openaddresses.io), [Geonames](http://geonames.org), and [Who's on First](https://www.whosonfirst.org/))
-- Flexible software architecture
-- Easy to contribute software patches and features to
-- Easy to set up and configure your own instance
-- No external dependencies (such as PostgreSQL)
-- Reliable, configurable & fast import process
 - Work equally well for a small city and the entire planet
+- Be highly configurable, so different use cases can be handled easily and efficiently
+- Provide a friendly, welcoming, helpful community that takes input from people all over the world
 
 ### How does it work?
 
@@ -60,10 +52,10 @@ We've built a tool called [pelias-schema](https://github.com/pelias/schema/) tha
 
 #### Frontend services
 
-This is where the actual geocoding smarts live, and are the components that users interact with when performing geocoding queries. The services are:
+This is where the actual geocoding process happens, and includes the components that users interact with when performing geocoding queries. The services are:
 
   * **[API](https://github.com/pelias/api)**: The API service defines the Pelias API, and talks to Elasticsearch or other services as needed to perform queries.
-  * **[Placeholder](https://github.com/pelias/placeholder)**: A service built specifically to capture the relationship between administrative areas (a catch all term meaning anything like a city, state, country, etc). Elasticsearch does not handle relational data very well, so we built Placeholder specifically to manage this piece. It uses SQLite as a backing store, since the amount of administrative data is fairly small.
+  * **[Placeholder](https://github.com/pelias/placeholder)**: A service built specifically to capture the relationship between administrative areas (a catch-all term meaning anything like a city, state, country, etc). Elasticsearch does not handle relational data very well, so we built Placeholder specifically to manage this piece. It uses SQLite as a backing store, since the amount of administrative data is fairly small.
   * **[PIP](https://github.com/pelias/pip-service)**: For reverse geocoding, it's important to be able to perform [point-in-polygon](https://en.wikipedia.org/wiki/Point_in_polygon)(PIP) calculations quickly. The PIP service is the only component of Pelias that actually understands polygon geometries, and it is very good at quickly determining which admin area polygons a given point lies in.
   * **Libpostal**: Pelias uses the [libpostal](https://github.com/openvenues/libpostal) project for parsing addresses using the power of machine learning. Originally we loaded the 2GB of libpostal data directly in the API service, but this makes scaling harder and causes the API to take about 30 seconds to start, instead of a few milliseconds. We use a [Go service](https://github.com/whosonfirst/go-whosonfirst-libpostal) built by the Who's on First team to make this happen quickly and efficiently.
   * **[Interpolation](https://github.com/pelias/interpolation/)**: This service knows all about addresses and streets. With that knowledge, it is able to supplement the _known_ addresses that are stored directly in Elasticsearch and return fairly accurate estimated address results for many more queries than would otherwise be possible.
@@ -77,8 +69,8 @@ There are lots of these, but here are some important ones:
 * [model](https://github.com/pelias/model): provide a single library for creating documents that fit the Pelias Elasticsearch schema
 * [wof-admin-lookup](https://github.com/pelias/wof-admin-lookup): A library for performing administrative lookup using point-in-polygon math. Previously included in each of the importers but now only used by the PIP service.
 * [query](https://github.com/pelias/query): This is where most of our actual Elasticsearch query generation happens.
-* [config](https://github.com/pelias/config): Pelias is very configurable, and all of it is driven from a single JSON file which we call `pelias.json`. Tools for reading, validating, and working with this configuration live here and are used by almost every other Pelias component
-* [dbclient](https://github.com/pelias/dbclient): A Node.js stream library for quickly and efficiently indexing records into Elasticsearch
+* [config](https://github.com/pelias/config): Pelias is very configurable, and all of it is driven from a single JSON file which we call `pelias.json`. This package provides a library for reading, validating, and working with this configuration. It is used by almost every other Pelias component
+* [dbclient](https://github.com/pelias/dbclient): A Node.js stream library for quickly and efficiently importing records into Elasticsearch
 
 #### Helpful tools
 
@@ -107,7 +99,7 @@ The main documentation lives in the [pelias/documentation](https://github.com/pe
 Additionally, the README file in each of the component repositories listed above provides more detail on that piece.
 
 <details>
-  <summary>Here's an example API response from Pelias so you can see what sort of data is returned</summary>
+  <summary>Here's an example API response for a reverse geocoding query</summary>
 
 ```javascript
 $ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point.lon=-73.99047374725342&api_key={YOUR_API_KEY}" | json
@@ -205,11 +197,11 @@ the source code of tools they use, but to get the community involved in the proj
 Especially with a geocoder with global coverage, it's just not possible for a small team to do it alone. We need you.
 
 Anything that we can do to make contributing easier, we want to know about.  Feel free to reach out to us via Github,
-[Gitter](https://gitter.im/pelias/pelias), [email](mailto:pelias.team@gmail.com), or [Twitter](https://twitter.com/mapzen)
- We'd love to help people get started working on Pelias, especially
-if you're new to open source or programming in general.
+[Gitter](https://gitter.im/pelias/pelias), [email](mailto:pelias.team@gmail.com), or [Twitter](https://twitter.com/m_pzen)
+ We'd love to help people get started working on Pelias, especially if you're
+ new to open source or programming in general.
 
-Both this [meta-repo](https://github.com/pelias/pelias/issues) and the [API repo](https://github.com/pelias/api/issues) are good places to get started
+Both this [meta-repo](https://github.com/pelias/pelias/issues) and the [API service repo](https://github.com/pelias/api/issues) are good places to get started
 looking for tasks to tackle.  You can also look across all of our issues on our [meta-issue tracker](https://waffle.io/pelias/pelias), Waffle.  We also welcome
 reporting issues or suggesting improvements to our [documentation](https://github.com/pelias/documentation).
 
