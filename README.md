@@ -16,14 +16,15 @@ Reverse geocoding is the opposite: returning a list of places near a given latit
 
 ![reverse](https://cloud.githubusercontent.com/assets/4246770/16506005/a2429288-3ed4-11e6-8af0-7ef78824213f.gif)
 
-### What makes Pelias different from other geocoders?
+### What are the most interesting features of Pelias?
 
 - Completely open-source and MIT licensed
-- Mostly data-agnostic, so if the default open datasets are not enough, you can import your own data
-- Powerful features such as fast autocomplete, interpolation, and multi-language support
-- Supports for many types of results: addresses, venues, cities, countries, and more
-- Modular, so you don't need to be an expert in everything to make changes
-- Easy to install and requires minimal external dependencies
+- A powerful data import architecture: Pelias supports many open-data projects out of the box but also works great with private data
+- Support for searching and displaying results in many languages
+- Fast and accurate autocomplete for user-facing geocoding
+- Support for many result types: addresses, venues, cities, countries, and more
+- Modular design, so you don't need to be an expert in everything to make changes
+- Easy installation with minimal external dependencies
 
 ### What are the main goals of the Pelias project?
 
