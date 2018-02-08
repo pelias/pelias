@@ -35,7 +35,7 @@ Reverse geocoding is the opposite: returning a list of places near a given latit
 
 ### How does it work?
 
-Magic! Well, like any geocoder, Pelias essentially combines [full text search](https://en.wikipedia.org/wiki/Full_text_search)
+Magic! (Just kidding) Like any geocoder, Pelias combines [full text search](https://en.wikipedia.org/wiki/Full_text_search)
 techniques with knowledge of geography to quickly search over many millions of records, each representing some sort of location on Earth.
 
 The Pelias architecture has three main components and several smaller pieces.
@@ -65,7 +65,7 @@ This is where the actual geocoding process happens, and includes the components 
   * **[Placeholder](https://github.com/pelias/placeholder)**: A service built specifically to capture the relationship between administrative areas (a catch-all term meaning anything like a city, state, country, etc). Elasticsearch does not handle relational data very well, so we built Placeholder specifically to manage this piece. It uses SQLite as a backing store, since the amount of administrative data is fairly small.
   * **[PIP](https://github.com/pelias/pip-service)**: For reverse geocoding, it's important to be able to perform [point-in-polygon](https://en.wikipedia.org/wiki/Point_in_polygon)(PIP) calculations quickly. The PIP service is the only component of Pelias that actually understands polygon geometries, and it is very good at quickly determining which admin area polygons a given point lies in.
   * **Libpostal**: Pelias uses the [libpostal](https://github.com/openvenues/libpostal) project for parsing addresses using the power of machine learning. Originally we loaded the 2GB of libpostal data directly in the API service, but this makes scaling harder and causes the API to take about 30 seconds to start, instead of a few milliseconds. We use a [Go service](https://github.com/whosonfirst/go-whosonfirst-libpostal) built by the Who's on First team to make this happen quickly and efficiently.
-  * **[Interpolation](https://github.com/pelias/interpolation/)**: This service knows all about addresses and streets. With that knowledge, it is able to supplement the _known_ addresses that are stored directly in Elasticsearch and return fairly accurate estimated address results for many more queries than would otherwise be possible.
+  * **[Interpolation](https://github.com/pelias/interpolation/)**: This service knows all about addresses and streets. With that knowledge, it is able to supplement the _known_ addresses that are stored directly in Elasticsearch and return fairly accurate _estimated_ address results for many more queries than would otherwise be possible.
 
 #### Dependencies
 
@@ -73,7 +73,7 @@ These are software projects that are not used directly but are used by other com
 
 There are lots of these, but here are some important ones:
 
-* [model](https://github.com/pelias/model): provide a single library for creating documents that fit the Pelias Elasticsearch schema
+* [model](https://github.com/pelias/model): provide a single library for creating documents that fit the Pelias Elasticsearch schema. This is a core component of our flexible importer architecture
 * [wof-admin-lookup](https://github.com/pelias/wof-admin-lookup): A library for performing administrative lookup using point-in-polygon math. Previously included in each of the importers but now only used by the PIP service.
 * [query](https://github.com/pelias/query): This is where most of our actual Elasticsearch query generation happens.
 * [config](https://github.com/pelias/config): Pelias is very configurable, and all of it is driven from a single JSON file which we call `pelias.json`. This package provides a library for reading, validating, and working with this configuration. It is used by almost every other Pelias component
