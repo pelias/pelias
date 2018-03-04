@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- if you can read this, you don't need glasses -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
@@ -12,9 +13,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
-    <link href="/css/tipuesearch.css" rel="stylesheet">
-
-    {#<link rel="stylesheet" href="https://mapzen.com/common/styleguide/styles/styleguide.css">#}
 </head>
 <body class="wy-body-for-nav">
 
@@ -26,17 +24,6 @@
             </div>
             <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 {% if menu is defined %}
-
-                {#<form action="{{ baseUrl }}/search.html">#}
-                {#<input type="text" name="q" id="tipue_search_input"  list="search" placeholder="Search the docs" required>#}
-
-                {#<datalist id="search">#}
-                {#<option>Installation</option>#}
-                {#<option>User's Manual</option>#}
-                {#<option>Common Issues</option>#}
-                {#<option>Getting Help</option>#}
-                {#</datalist>#}
-                {#</form>#}
 
                     {% for section in menu.sections %}
                         <p class="menu-section">
@@ -134,25 +121,5 @@
         ga('send', 'pageview');
 
     </script>
-
-    {% if currentMenu == "search" %}
-        <script src="{{ baseUrl }}/js/tipuesearch_set.js"></script>
-        <script src="{{ baseUrl }}/js/tipuesearch.min.js"></script>
-
-
-        <script>
-        $(document).ready(function() {
-             $('#tipue_search_input').tipuesearch({
-                  'mode': 'live',
-                  'liveDescription': 'h1',
-                  'liveContent': '.document'
-             });
-        });
-        </script>
-    {% endif %}
-
-
-
-
 </body>
 </html>

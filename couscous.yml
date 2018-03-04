@@ -1,5 +1,5 @@
 # Any variable you put in this file is also available in the Twig layouts:
-title: 'Pelias'
+title: 'Pelias Geocoder'
 subTitle: 'The organic, sustainable geocoder'
 template:
     directory: website
@@ -15,7 +15,7 @@ cname: pelias.io
 
 # Base URL of the published website (no "/" at the end!)
 # You are advised to set and use this variable to write your links in the HTML layouts
-baseUrl: http://pelias.io
+baseUrl: https://pelias.io
 
 # The left menu bar
 menu:
@@ -61,7 +61,7 @@ menu:
                     relativeUrl: quarterly_goals/completed.html
                 local_install:
                     text: Local Install
-                    relativeUrl: milestones/local_install/index.html    
+                    relativeUrl: milestones/local_install/index.html
                 alt_names:
                     text: Alt-Names
                     relativeUrl: milestones/alt_names/index.html
