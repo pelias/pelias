@@ -2,7 +2,7 @@
 
 > A modular, open-source geocoder built on top of Elasticsearch for fast and accurate global search.
 
-## Announcement: See our [update](https://github.com/pelias/pelias/tree/master/announcements/2018-01-02-pelias-update/) regarding the Mapzen shutdown
+## Announcement: We are starting regular virtual community calls! Our first will be on Wednesday, March 21st
 
 ### What's a geocoder do anyway?
 
@@ -32,6 +32,10 @@ Reverse geocoding is the opposite: returning a list of places near a given latit
 - Work equally well for a small city and the entire planet
 - Be highly configurable, so different use cases can be handled easily and efficiently
 - Provide a friendly, welcoming, helpful community that takes input from people all over the world
+
+### Where did Pelias come from?
+
+Pelias was created in 2014 as an early project at [Mapzen](https://mapzen.com). After Mapzen's shutdown in 2017, Pelias is now [independent]((https://github.com/pelias/pelias/tree/master/announcements/2018-01-02-pelias-update/).
 
 ### How does it work?
 
