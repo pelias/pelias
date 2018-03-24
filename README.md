@@ -44,6 +44,8 @@ techniques with knowledge of geography to quickly search over many millions of r
 
 The Pelias architecture has three main components and several smaller pieces.
 
+![A diagram of the Pelias architecture.](https://raw.githubusercontent.com/pelias/pelias/new-diagram/img/Pelias%20Architecture.png)
+
 #### Data importers
 
 The importers filter, normalize, and ingest geographic datasets into the Pelias database. Currently there are five officially supported importers:
@@ -92,16 +94,6 @@ Notable examples include:
 * [acceptance-tests](https://github.com/pelias/acceptance-tests): A Node.js command line tool for testing a full planet build of Pelias and ensuring everything works. Familiarity with this tool is very important for ensuring Pelias is working. It supports all Pelias features and has special facilities for testing autocomplete queries.
 * [compare](https://github.com/pelias/compare): A web-based tool for comparing different instances of Pelias (for example a production and staging environment). We have a reference instance at [pelias.github.io/compare/](http://pelias.github.io/compare)
 * [dashboard](https://github.com/pelias/dashboard): Another web-based tool for providing statistics about the contents of a Pelias Elasticsearch index such as import speed, number of total records, and a breakdown of records of various types.
-
-
-<hr>
-
-Here's an old diagram of how the Pelias components interact:
-
-![A diagram of the Pelias architecture.](https://cloud.githubusercontent.com/assets/4467604/6944539/3b1cdd0e-d862-11e4-995d-0b376caacad6.png)
-
-Note it doesn't include most of the frontend services. We would love help making a new diagram.
-
 
 ### Documentation
 
