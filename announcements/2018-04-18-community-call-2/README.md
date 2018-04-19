@@ -6,7 +6,7 @@ Last time, we set the time to be convenient for the US east coast, Europe, and A
 
 ## Date and Time
 
-Please join us on [Zoom](https://digitalglobe.zoom.us/j/698468762) on Wednesday April 25th, at 5PM Pacific Daylight Time (GMT-7) for one hour. See [this link](https://www.timeanddate.com/worldclock/converter.html?iso=20180427T000000&p1=202&p2=179&p3=195&p4=95) for the correct time in other timezones.
+Please join us on Zoom (link coming soon) on Wednesday April 25th, at 5PM Pacific Daylight Time (GMT-7) for one hour. See [this link](https://www.timeanddate.com/worldclock/converter.html?iso=20180427T000000&p1=202&p2=179&p3=195&p4=95) for the correct time in other timezones.
 
 ## Meeting Info
 
