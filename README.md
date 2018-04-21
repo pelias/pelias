@@ -2,7 +2,7 @@
 
 > A modular, open-source geocoder built on top of Elasticsearch for fast and accurate global search.
 
-## Announcement: [Our second community will be on Wednesday, April 25th](https://pelias.io/announcements/2018-04-18-community-call-2). Join us!
+## Announcement: [Our second community call will be on Wednesday, April 25th](https://pelias.io/announcements/2018-04-18-community-call-2). Join us!
 
 ### What's a geocoder do anyway?
 
