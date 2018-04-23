@@ -16,7 +16,7 @@ Layers:
 
 OpenAddresses is by far the largest dataset by number of records. Even though it only contains address data (as in no building names or other metadata), it's a great resource for global geocoding.
 
-The license for each individual source within OpenAddresses differs. Many of the sources require [attribution](https://mapzen.com/rights/), and many others have a share-alike clause.
+The license for each individual source within OpenAddresses differs. Many of the sources require [attribution](https://pelias.io/data_licenses.html), and many others have a share-alike clause.
 *Note:* Pelias does _not_ currently return license information directly, but the license and attribution requirements for each source within OpenAddresses can be determined from the machine-readable [state.txt](http://results.openaddresses.io/state.txt) file published on the OpenAddresses website.
 
 ## Who's on First
