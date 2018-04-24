@@ -44,7 +44,7 @@ techniques with knowledge of geography to quickly search over many millions of r
 
 The Pelias architecture has three main components and several smaller pieces.
 
-![A diagram of the Pelias architecture.](https://raw.githubusercontent.com/pelias/pelias/new-diagram/img/Pelias%20Architecture.png)
+![A diagram of the Pelias architecture.](https://raw.githubusercontent.com/pelias/pelias/master/img/Pelias%20Architecture.png)
 
 #### Data importers
 
