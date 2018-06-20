@@ -6,7 +6,7 @@ This call will be held at time friendly for the US east coast, Europe and Africa
 
 ## Date and Time
 
-Please join us on [Zoom](https://digitalglobe.zoom.us/j/412844344) on Wednesday June 27thh, at 13:00 (1PM) UTC for one hour. See [this link](https://www.timeanddate.com/worldclock/converter.html?iso=20180627T130000&p1=202&p2=179&p3=195&p4=95&p5=136&p6=tz_gmt) for the correct time in other timezones.
+Please join us on [Zoom](https://digitalglobe.zoom.us/j/412844344) on Wednesday June 27th, at 13:00 (1PM) UTC for one hour. See [this link](https://www.timeanddate.com/worldclock/converter.html?iso=20180627T130000&p1=202&p2=179&p3=195&p4=95&p5=136&p6=tz_gmt) for the correct time in other timezones.
 
 ## Meeting Info
 
