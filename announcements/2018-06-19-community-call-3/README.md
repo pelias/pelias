@@ -33,7 +33,7 @@ Meeting ID: 412 844 344
 * Personal Intros
 * Pelias Team Announcements
 * Thanks and shout-outs to community members
-* Pelias Roadmap discussion
+* Virtual Fireside chat with Timothy and Nils of [OpenRouteService](https://openrouteservice.org/)
 * Open Q/A
 * Closing remarks
 
