@@ -160,11 +160,11 @@ probably the one you want), and install all the node module dependencies.
 
 ```bash
 for repository in schema api whosonfirst geonames openaddresses openstreetmap polylines; do
-	git clone git@github.com:pelias/${repository}.git    # clone from Github
-	pushd $repository > /dev/null                        # switch into importer directory
-	git checkout production                              # or remove this line to stay with master
-	npm install                                          # install npm dependencies
-	popd > /dev/null                                     # return to code directory
+	git clone https://github.com/pelias/${repository}.git # clone from Github
+	pushd $repository > /dev/null                         # switch into importer directory
+	git checkout production                               # or remove this line to stay with master
+	npm install                                           # install npm dependencies
+	popd > /dev/null                                      # return to code directory
 done
 ```
 
