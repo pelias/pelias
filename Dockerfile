@@ -1,6 +1,6 @@
 # This is a Dockerfile to run the Pelias website :)
 # For some very awesome Dockerfiles to run Pelias itself,
-# see https://github.com/pelias/dockerfiles/
+# see https://github.com/pelias/docker/
 FROM composer:latest
 
 RUN composer global require couscous/couscous

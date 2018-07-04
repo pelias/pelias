@@ -176,7 +176,7 @@ $ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point
 
 ### How can I install my own instance of Pelias?
 
-To try out Pelias quickly, use our [Dockerfiles](https://github.com/pelias/dockerfiles/) setup. It uses Docker and docker-compose to allow you to quickly set up a Pelias instance for a small area (by default Portland, Oregon) in under 30 minutes.
+To try out Pelias quickly, use our [Docker](https://github.com/pelias/docker/) setup. It uses Docker and docker-compose to allow you to quickly set up a Pelias instance for a small area (by default Portland, Oregon) in under 30 minutes.
 
 To do a _real_ installation of Pelias for production use or serious development, read our [full installation docs](http://pelias.io/install.html).
 
