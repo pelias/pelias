@@ -205,8 +205,8 @@ Anything that we can do to make contributing easier, we want to know about.  Fee
  new to open source or programming in general.
 
 Both this [meta-repo](https://github.com/pelias/pelias/issues) and the [API service repo](https://github.com/pelias/api/issues) are good places to get started
-looking for tasks to tackle.  You can also look across all of our issues on our [meta-issue tracker](https://waffle.io/pelias/pelias), Waffle.  We also welcome
-reporting issues or suggesting improvements to our [documentation](https://github.com/pelias/documentation).
+looking for tasks to tackle. We also welcome reporting issues or suggesting
+improvements to our [documentation](https://github.com/pelias/documentation).
 
 The current Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
 [missinglink](https://github.com/missinglink), [orangejulius](https://github.com/orangejulius), and [trescube](https://github.com/trescube).
