@@ -204,8 +204,10 @@ Anything that we can do to make contributing easier, we want to know about.  Fee
  We'd love to help people get started working on Pelias, especially if you're
  new to open source or programming in general.
 
-Both this [meta-repo](https://github.com/pelias/pelias/issues) and the [API service repo](https://github.com/pelias/api/issues) are good places to get started
-looking for tasks to tackle. We also welcome reporting issues or suggesting
+We have a list of [Good First Issues](https://github.com/issues?q=is%3Aopen+is%3Aissue+org%3Apelias+archived%3Afalse+label%3A%22good+first+issue%22) for new contributors.
+
+Both this [meta-repo](https://github.com/pelias/pelias/issues) and the [API service repo](https://github.com/pelias/api/issues) are worth looking at, as
+they're where most issues live. We also welcome reporting issues or suggesting
 improvements to our [documentation](https://github.com/pelias/documentation).
 
 The current Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
