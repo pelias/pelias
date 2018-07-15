@@ -200,7 +200,7 @@ the source code of tools they use, but to get the community involved in the proj
 Especially with a geocoder with global coverage, it's just not possible for a small team to do it alone. We need you.
 
 Anything that we can do to make contributing easier, we want to know about.  Feel free to reach out to us via Github,
-[Gitter](https://gitter.im/pelias/pelias), [email](mailto:pelias.team@gmail.com), or [Twitter](https://twitter.com/m_pzen)
+[Gitter](https://gitter.im/pelias/pelias), [email](mailto:pelias.team@gmail.com), or [Twitter](https://twitter.com/pelias_geocoder)
  We'd love to help people get started working on Pelias, especially if you're
  new to open source or programming in general.
 
