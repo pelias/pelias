@@ -28,13 +28,16 @@ menu:
                     relativeUrl: index.html
                 install:
                     text: Getting Started
-                    relativeUrl: install.html
+                    absoluteUrl: https://github.com/pelias/documentation/blob/master/getting_started_install.md
+                documentation:
+                    text: Documentation
+                    absoluteUrl: https://github.com/pelias/documentation/
                 release_notes:
                     text: Release Notes
-                    relativeUrl: release-notes.html
+                    absoluteUrl: https://github.com/pelias/documentation/blob/master/release-notes.md
                 license:
-                    text: License
-                    relativeUrl: data_licenses.html
+                    text: Data Licenses
+                    absoluteUrl: https://github.com/pelias/documentation/blob/master/data-sources.md
                 conduct:
                     text: Code of Conduct
                     relativeUrl: code_of_conduct.html
