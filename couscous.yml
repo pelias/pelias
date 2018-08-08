@@ -35,6 +35,9 @@ menu:
                 release_notes:
                     text: Release Notes
                     absoluteUrl: https://github.com/pelias/documentation/blob/master/release-notes.md
+                roadmap:
+                    text: Development Roadmap
+                    absoluteUrl: https://github.com/pelias/documentation/blob/master/development_roadmap.md
                 license:
                     text: Data Licenses
                     absoluteUrl: https://github.com/pelias/documentation/blob/master/data-sources.md
