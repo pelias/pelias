@@ -35,6 +35,9 @@ menu:
                 release_notes:
                     text: Release Notes
                     absoluteUrl: https://github.com/pelias/documentation/blob/master/release-notes.md
+                roadmap:
+                    text: Development Roadmap
+                    absoluteUrl: https://github.com/pelias/documentation/blob/master/development_roadmap.md
                 license:
                     text: Data Licenses
                     absoluteUrl: https://github.com/pelias/documentation/blob/master/data-sources.md
@@ -47,39 +50,3 @@ menu:
                 fun_facts:
                     text: Fun Facts!
                     relativeUrl: fun_facts.html
-        goals:
-            name: '#Goals'
-            items:
-                current:
-                    text: Q3-2017 Milestones
-                    relativeUrl: quarterly_goals/q3-2017.html
-                q2:
-                    text: Q2-2017 Milestones
-                    relativeUrl: quarterly_goals/q2-2017.html
-                q1:
-                    text: Q1-2017 Milestones
-                    relativeUrl: quarterly_goals/q1-2017.html
-                done:
-                    text: Completed Milestones
-                    relativeUrl: quarterly_goals/completed.html
-                local_install:
-                    text: Local Install
-                    relativeUrl: milestones/local_install/index.html
-                alt_names:
-                    text: Alt-Names
-                    relativeUrl: milestones/alt_names/index.html
-                interpolation:
-                    text: TIGER Interpolation
-                    relativeUrl: milestones/tiger/index.html
-                coarse_reverse:
-                    text: Coarse Reverse
-                    relativeUrl: milestones/coarse_reverse/index.html
-                wof_venues:
-                    text: WOF Venues Import
-                    relativeUrl: milestones/wof_venues_import/index.html
-                community:
-                    text: Community Building
-                    relativeUrl: milestones/community_building/index.html
-                categories:
-                    text: Category Support
-                    relativeUrl: milestones/categories/index.html
