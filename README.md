@@ -2,8 +2,6 @@
 
 > A modular, open-source geocoder built on top of Elasticsearch for fast and accurate global search.
 
-## Announcement: [Learn about Pelias at State of the Map Milan 🇮🇹](https://pelias.io/announcements/2018-07-25-sotm-milan/).
-
 ### What's a geocoder do anyway?
 
 Geocoding is the process of taking input text, such as an address or the name of a place, and returning a latitude/longitude location on the Earth's surface for that place.
