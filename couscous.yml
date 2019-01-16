@@ -9,7 +9,7 @@ include:
 
 exclude:
     - website
-    - %gitignore%
+    - "%gitignore%"
 
 cname: pelias.io
 
