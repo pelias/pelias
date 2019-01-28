@@ -9,7 +9,12 @@ script:
   - chmod +x couscous.phar
   - sudo mv couscous.phar /usr/local/bin/couscous
   - couscous generate
-  - pip install --user awscli
-  - aws s3 sync .couscous/generated/ "s3://pelias.io-website/"
-branches:
-  - master
+jobs:
+  include:
+    - stage: release
+      php:
+        - '5.6'
+      script:
+        - pip install --user awscli
+        - aws s3 sync .couscous/generated/ "s3://pelias.io-website/"
+      if: (branch = master) AND ( type = push )
