@@ -2,6 +2,8 @@
 
 > A modular, open-source geocoder built on top of Elasticsearch for fast and accurate global search.
 
+## Announcement: Pelias and other Mapzen projects are now [part of the Linux Foundation](https://www.linuxfoundation.org/press-release/2019/01/mapzen-open-source-data-and-software-for-real-time-mapping-applications-to-become-a-linux-foundation-project/)
+
 ### What's a geocoder do anyway?
 
 Geocoding is the process of taking input text, such as an address or the name of a place, and returning a latitude/longitude location on the Earth's surface for that place.
