@@ -2,8 +2,6 @@
 
 > A modular, open-source geocoder built on top of Elasticsearch for fast and accurate global search.
 
-## Announcement: Pelias and other Mapzen projects are now [part of the Linux Foundation](https://www.linuxfoundation.org/press-release/2019/01/mapzen-open-source-data-and-software-for-real-time-mapping-applications-to-become-a-linux-foundation-project/)
-
 ### What's a geocoder do anyway?
 
 Geocoding is the process of taking input text, such as an address or the name of a place, and returning a latitude/longitude location on the Earth's surface for that place.
@@ -178,7 +176,7 @@ $ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point
 
 To try out Pelias quickly, use our [Docker](https://github.com/pelias/docker/) setup. It uses Docker and docker-compose to allow you to quickly set up a Pelias instance for a small area (by default Portland, Oregon) in under 30 minutes.
 
-To do a _real_ installation of Pelias for production use or serious development, read our [full installation docs](https://github.com/pelias/documentation/blob/master/pelias_from_scratch.md).
+Alternatively, for a bit more info on the different pieces of Pelias, read our [full installation docs](https://github.com/pelias/documentation/blob/master/pelias_from_scratch.md).
 
 ### What's it built with?
 Pelias itself (the import pipelines and API) is written in [Node.js](https://nodejs.org/), which makes it highly
@@ -210,10 +208,13 @@ Both this [meta-repo](https://github.com/pelias/pelias/issues) and the [API serv
 they're where most issues live. We also welcome reporting issues or suggesting
 improvements to our [documentation](https://github.com/pelias/documentation).
 
-The current Pelias team can be found on Github as [dianashk](https://github.com/dianashk),
-[missinglink](https://github.com/missinglink), [orangejulius](https://github.com/orangejulius), and [trescube](https://github.com/trescube).
+The current Pelias team can be found on Github as
+[missinglink](https://github.com/missinglink) and
+[orangejulius](https://github.com/orangejulius).
 
 Members emeritus include:
+* [trescube](https://github.com/trescube)
+* [dianashk](https://github.com/dianashk)
 * [randyme](https://github.com/randyme)
 * [seejohnrun](https://github.com/seejohnrun)
 * [fdansv](http://github.com/fdansv)
