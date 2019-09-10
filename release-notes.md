@@ -1,8 +1,6 @@
 ## Release Notes
 
-> These are the release notes for _Pelias_, the open source project. It includes news on the latest
-> code changes as well as new features. There are also [release notes](https://mapzen.com/documentation/search/release-notes/)
-> specifically for the hosted instance of Pelias run by Mapzen, Mapzen Search.
+> As of 2018, summarized release notes are discontinued. Please see the release notes for individual Pelias components on GitHub (for example, https://github.com/pelias/api/releases).
 
 ## 26 October 2017
 
