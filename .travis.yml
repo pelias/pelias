@@ -4,11 +4,6 @@ php:
 dist: xenial
 notifications:
   email: false
-script:
-  - curl -OS http://couscous.io/couscous.phar
-  - chmod +x couscous.phar
-  - sudo mv couscous.phar /usr/local/bin/couscous
-  - couscous generate
 jobs:
   include:
     - stage: build
