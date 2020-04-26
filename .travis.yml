@@ -11,6 +11,14 @@ script:
   - couscous generate
 jobs:
   include:
+    - stage: build
+      php:
+        - '5.6'
+      script:
+        - curl -OS http://couscous.io/couscous.phar
+        - chmod +x couscous.phar
+        - sudo mv couscous.phar /usr/local/bin/couscous
+        - couscous generate
     - stage: release
       php:
         - '5.6'
