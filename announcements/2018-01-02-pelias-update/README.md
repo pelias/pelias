@@ -17,7 +17,7 @@ Mapzen Search will be going away. While this doesn't affect Pelias directly, man
 
 The Mapzen [migration guide](https://mapzen.com/blog/migration/) has some suggestions for current users of Mapzen Search.
 
-In particular, some of the team behind Pelias and Mapzen search have created a new company that will offer hosted geocoding using Pelias! It's called [geocode.earth](https://geocode.earth) and is live and ready to take customers.
+In particular, some of the team behind Pelias and Mapzen search have created a new company that will offer hosted geocoding using Pelias! It's called [Geocode Earth](https://geocode.earth) and is live and ready to take customers.
 
 The Pelias team is also available for consulting work to help teams set up their own instance of Pelias. This not only provide an alternative to Mapzen Search that does not rely on an external hosted service, but also will help fund continued development of Pelias.
 
@@ -26,6 +26,4 @@ The Pelias team is also available for consulting work to help teams set up their
 
 As before, for general Pelias questions don't hesitate to reach out on [Gitter](https://gitter.im/pelias/home).
 
-For anyone looking with help migrating away from Mapzen Search, please reach out to our team directly via email: pelias.team@gmail.com
-
-The Pelias team consists of [Diana](https://github.com/dianashk/), [Peter](https://github.com/missinglink), [Julian](https://github.com/orangejulius), and [Stephen](https://github.com/trescube).
+For anyone looking with help migrating away from Mapzen Search, please reach out to our team directly via email: team@pelias.io
