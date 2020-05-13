@@ -1,0 +1,10 @@
+- name: Getting Started
+  link: https://github.com/pelias/documentation/blob/master/getting_started_install.md
+- name: Cloud Webservice
+  link: https://geocode.earth
+- name: Documentation
+  link: https://github.com/pelias/documentation/
+- name: Release Notes
+  link: https://github.com/pelias/documentation/blob/master/release-notes.md
+- name: Community Chat
+  link: https://gitter.im/pelias/pelias
