@@ -209,3 +209,16 @@ ul.nav {
 td, th {
     padding: 5px;
 }
+
+/* hacks on top of hacks!! */
+/* https://github.com/pelias/pelias/pull/865 */
+
+/* remove height: auto !important */
+img[src="https://raw.githubusercontent.com/pelias/design/master/logo/pelias_github/Github_markdown_hero.png"] {
+  height: 100px !important;
+}
+
+/* fix missing margin-bottom */
+details {
+  margin-bottom: 2rem;
+}
