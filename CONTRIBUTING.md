@@ -1,3 +1,6 @@
+---
+layout: page
+---
 Pelias can't succeed without contributions from community members like you! Contributions come in many different shapes and sizes. In this file we provide guidance around two of the most common types of contributions: opening issues and opening pull requests.
 
 # Community Values 
