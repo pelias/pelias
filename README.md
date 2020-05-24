@@ -4,7 +4,7 @@
 <h3 align="center">A modular, open-source search engine for our world.</h3>
 <p align="center">Pelias is a geocoder powered completely by open data, available freely to everyone.</p>
 <p align="center">
-<a href="https://en.wikipedia.org/wiki/MIT_License"><img src="https://img.shields.io/github/license/pelias/api?style=flat&color=orange" /></a>
+<a href="https://en.wikipedia.org/wiki/MIT_License"><a href="https://opencollective.com/pelias" alt="Financial Contributors on Open Collective"><img src="https://opencollective.com/pelias/all/badge.svg?label=financial+contributors" /></a> <img src="https://img.shields.io/github/license/pelias/api?style=flat&color=orange" /></a>
 <a href="https://hub.docker.com/u/pelias"><img src="https://img.shields.io/docker/pulls/pelias/api?style=flat&color=informational" /></a>
 <a href="https://gitter.im/pelias/pelias"><img src="https://img.shields.io/gitter/room/pelias/pelias?style=flat&color=yellow" /></a>
 </p>
@@ -248,3 +248,33 @@ Members emeritus include:
 * [riordan](https://github.com/riordan)
 * [avulfson17](https://github.com/avulfson17)
 * [tigerlily-he](https://github.com/tigerlily-he)
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/pelias/pelias/graphs/contributors"><img src="https://opencollective.com/pelias/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/pelias/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/pelias"><img src="https://opencollective.com/pelias/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/pelias/contribute)]
+
+<a href="https://opencollective.com/pelias/organization/0/website"><img src="https://opencollective.com/pelias/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/1/website"><img src="https://opencollective.com/pelias/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/2/website"><img src="https://opencollective.com/pelias/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/3/website"><img src="https://opencollective.com/pelias/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/4/website"><img src="https://opencollective.com/pelias/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/5/website"><img src="https://opencollective.com/pelias/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/6/website"><img src="https://opencollective.com/pelias/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/7/website"><img src="https://opencollective.com/pelias/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/8/website"><img src="https://opencollective.com/pelias/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/pelias/organization/9/website"><img src="https://opencollective.com/pelias/organization/9/avatar.svg"></a>
