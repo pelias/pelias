@@ -26,6 +26,6 @@ The Pelias team is also available for consulting work to help teams set up their
 
 ## Contact info
 
-As before, for general Pelias questions don't hesitate to reach out on [Gitter](https://gitter.im/pelias/home).
+As before, for general Pelias questions don't hesitate to reach out on [Gitter](https://gitter.im/pelias/gitter).
 
 For anyone looking with help migrating away from Mapzen Search, please reach out to our team directly via email: team@pelias.io
