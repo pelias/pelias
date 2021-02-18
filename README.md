@@ -201,8 +201,6 @@ $ curl -s "search.mapzen.com/v1/reverse?size=1&point.lat=40.74358294846026&point
 
 To try out Pelias quickly, use our [Docker](https://github.com/pelias/docker/) setup. It uses Docker and docker-compose to allow you to quickly set up a Pelias instance for a small area (by default Portland, Oregon) in under 30 minutes.
 
-Alternatively, for a bit more info on the different pieces of Pelias, read our [full installation docs](https://github.com/pelias/documentation/blob/master/pelias_from_scratch.md).
-
 ### What's it built with?
 Pelias itself (the import pipelines and API) is written in [Node.js](https://nodejs.org/), which makes it highly
 accessible for other developers and performant under heavy I/O. It aims to be modular and is distributed across a
