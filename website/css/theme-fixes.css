@@ -218,7 +218,23 @@ img[src="https://raw.githubusercontent.com/pelias/design/master/logo/pelias_gith
   height: 100px !important;
 }
 
+/* remove width: 100% on images */
+@media screen and (max-width: 768px) {
+  img {
+    width: auto !important;
+  }
+}
+
 /* fix missing margin-bottom */
 details {
   margin-bottom: 2rem;
+}
+
+/* brand colors */
+.wy-menu-vertical a:active,
+.wy-side-nav-search,
+.wy-side-nav-search img,
+.wy-nav-top,
+.wy-nav-top img {
+  background-color: #6563CB;
 }
