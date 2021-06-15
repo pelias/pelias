@@ -19,15 +19,15 @@ Conflation for search is a similar process as for routing and display, the only 
 
 Returning a list of osm ways is not acceptable for search as it will result in an experience such as:
 
-![conflation-problem](http://missinglink.embed.s3.amazonaws.com/search-conflation-problem.png)
+![conflation-problem](/img/interpolation/search-conflation-problem.png)
 
 A better user experience would be to provide 'address ranges' of the street:
 
-![conflation-problem2](http://missinglink.embed.s3.amazonaws.com/search-conflation-problem2.png)
+![conflation-problem2](/img/interpolation/search-conflation-problem2.png)
 
 An ideal experience would be to provide the exact street address:
 
-![conflation-problem3](http://missinglink.embed.s3.amazonaws.com/search-conflation-problem3.png)
+![conflation-problem3](/img/interpolation/search-conflation-problem3.png)
 
 ### Grouping Openstreetmap entities
 
@@ -39,7 +39,7 @@ The most basic streets in Openstreetmap are an ordered collection of 'nodes' gro
 
 | geometry | tags |
 |:-:|:-:|
-| ![osm-street-simple](http://missinglink.embed.s3.amazonaws.com/osm-street-simple.png) | ![osm-street-simple-tags](http://missinglink.embed.s3.amazonaws.com/osm-street-simple-tags.png) |
+| ![osm-street-simple](/img/interpolation/osm-street-simple.png) | ![osm-street-simple-tags](/img/interpolation/osm-street-simple-tags.png) |
 
 These entities are relatively simple to import as they do not contain multiple line segments, some care will need to be taken when computing the centroid value; which should lie on the line string rather than in the center of the bounding-box.
 
@@ -49,9 +49,9 @@ More complex roads require the road be split up in to 2 or more 'ways', such as 
 
 | geometry | tags |
 |:-:|:-:|
-|![osm-street-multiple-1](http://missinglink.embed.s3.amazonaws.com/osm-street-multiple-1.png) | ![osm-street-multiple-1-tags](http://missinglink.embed.s3.amazonaws.com/osm-street-multiple-1-tags.png) |
-|![osm-street-multiple-2](http://missinglink.embed.s3.amazonaws.com/osm-street-multiple-2.png) | ![osm-street-multiple-2-tags](http://missinglink.embed.s3.amazonaws.com/osm-street-multiple-2-tags.png) |
-|![osm-street-multiple-3](http://missinglink.embed.s3.amazonaws.com/osm-street-multiple-3.png) | ![osm-street-multiple-3-tags](http://missinglink.embed.s3.amazonaws.com/osm-street-multiple-3-tags.png) |
+|![osm-street-multiple-1](/img/interpolation/osm-street-multiple-1.png) | ![osm-street-multiple-1-tags](/img/interpolation/osm-street-multiple-1-tags.png) |
+|![osm-street-multiple-2](/img/interpolation/osm-street-multiple-2.png) | ![osm-street-multiple-2-tags](/img/interpolation/osm-street-multiple-2-tags.png) |
+|![osm-street-multiple-3](/img/interpolation/osm-street-multiple-3.png) | ![osm-street-multiple-3-tags](/img/interpolation/osm-street-multiple-3-tags.png) |
 
 These entities are usually related by common 'nodes', usually at the extremes of the constituent line segments.
 
@@ -74,7 +74,7 @@ The most complex case is when two parts of are road a broken up by large spatial
 
 A good example is Golden Gate Park in San Francisco, here you can see that all the north/south avenues are completely disjoined by the park:
 
-![golden-gate](http://missinglink.embed.s3.amazonaws.com/golden-gate-park.png)
+![golden-gate](/img/interpolation/golden-gate-park.png)
 
 New York city has adopted an convention for these disjoined streets, usually prefixing their names with either 'East' or 'West' in order to disambiguate the two sides of the park.
 
@@ -87,13 +87,13 @@ There is much more complexity to this problem than covered here, again great car
 1. a bounding box centroid would result in the centroid being inside the obstacle rather than on the road network.
 2. the road network can be very large, spanning multiple cities/states or countries!
 
-![oresund-bridge](http://missinglink.embed.s3.amazonaws.com/oresund-bridge.png)
+![oresund-bridge](/img/interpolation/oresund-bridge.png)
 
 #### Irregular geometries
 
 The world is a weird and wonderful place, it's best not to assume anything about how road networks are constructed, there will always be unusual geometries to be found, such as this:
 
-![earls-court-sq](http://missinglink.embed.s3.amazonaws.com/earls-court-square.png)
+![earls-court-sq](/img/interpolation/earls-court-square.png)
 
 It's best not to dwell on these unusual geometries as they are the exception rather than the rule.
 
@@ -109,8 +109,8 @@ For this reason, the OSM entity tagged with `addr:housenumber` rarely shares a c
 
 | geometry | tags |
 |:-:|:-:|
-|![earls-court-51-node](http://missinglink.embed.s3.amazonaws.com/earls-court-51-node.png) | ![earls-court-51-node](http://missinglink.embed.s3.amazonaws.com/earls-court-51-node-tags.png) |
-|![earls-court-51-way](http://missinglink.embed.s3.amazonaws.com/earls-court-51-way.png) | ![earls-court-51-way](http://missinglink.embed.s3.amazonaws.com/earls-court-51-way-tags.png) |
+|![earls-court-51-node](/img/interpolation/earls-court-51-node.png) | ![earls-court-51-node](/img/interpolation/earls-court-51-node-tags.png) |
+|![earls-court-51-way](/img/interpolation/earls-court-51-way.png) | ![earls-court-51-way](/img/interpolation/earls-court-51-way-tags.png) |
 
 In order to group these street numbers with the road network to which they belong, we must use the same technique as discussed above:
 
@@ -122,7 +122,7 @@ Similar to the above; except in this case the `addr:housenumber` tag has been ap
 
 | geometry | tags |
 |:-:|:-:|
-|![192-finborough-rd](http://missinglink.embed.s3.amazonaws.com/192-finborough-rd.png) | ![192-finborough-rd](http://missinglink.embed.s3.amazonaws.com/192-finborough-rd-tags.png) |
+|![192-finborough-rd](/img/interpolation/192-finborough-rd.png) | ![192-finborough-rd](/img/interpolation/192-finborough-rd-tags.png) |
 
 #### Openstreetmap interpolation lines
 
@@ -130,9 +130,9 @@ Openstreetmap contains invisible 'interpolation lines'; these ways group a range
 
 | geometry | tags |
 |:-:|:-:|
-|![wetherby-mansions-way](http://missinglink.embed.s3.amazonaws.com/wetherby-mansions-way.png) | ![wetherby-mansions-way](http://missinglink.embed.s3.amazonaws.com/wetherby-mansions-way-tags.png) |
-|![wetherby-mansions-node2](http://missinglink.embed.s3.amazonaws.com/wetherby-mansions-node2.png) | ![wetherby-mansions-node2](http://missinglink.embed.s3.amazonaws.com/wetherby-mansions-node2-tags.png) |
-|![wetherby-mansions-node1](http://missinglink.embed.s3.amazonaws.com/wetherby-mansions-node1.png) | ![wetherby-mansions-node1](http://missinglink.embed.s3.amazonaws.com/wetherby-mansions-node1-tags.png) |
+|![wetherby-mansions-way](/img/interpolation/wetherby-mansions-way.png) | ![wetherby-mansions-way](/img/interpolation/wetherby-mansions-way-tags.png) |
+|![wetherby-mansions-node2](/img/interpolation/wetherby-mansions-node2.png) | ![wetherby-mansions-node2](/img/interpolation/wetherby-mansions-node2-tags.png) |
+|![wetherby-mansions-node1](/img/interpolation/wetherby-mansions-node1.png) | ![wetherby-mansions-node1](/img/interpolation/wetherby-mansions-node1-tags.png) |
 
 These lines can likely be processed after the nodes, if the nodes have already been associated to a road segment then that information can simply be copied to the interpolated address points.
 
@@ -140,4 +140,4 @@ These lines can likely be processed after the nodes, if the nodes have already b
 
 Other datasets which only contain point data can use the same process to create concordances between their house numbers and the road network:
 
-![os-extract.png](http://missinglink.embed.s3.amazonaws.com/oa-extract.png)
+![os-extract.png](/img/interpolation/oa-extract.png)

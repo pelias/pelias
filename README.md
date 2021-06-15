@@ -30,13 +30,13 @@ We think open data, open source, and open strategy win over proprietary solution
 
 Geocoding is the process of taking input text, such as an address or the name of a place, and returning a latitude/longitude location on the Earth's surface for that place.
 
-![geocode](https://cloud.githubusercontent.com/assets/4246770/16500453/76d6d8cc-3eb9-11e6-85d8-f57894ba7b73.gif)
+![geocode](/img/forward-geocoding.gif)
 
 ### ... and a reverse geocoder, what's that?
 
 Reverse geocoding is the opposite: returning a list of places near a given latitude/longitude point.
 
-![reverse](https://cloud.githubusercontent.com/assets/4246770/16506005/a2429288-3ed4-11e6-8af0-7ef78824213f.gif)
+![reverse](/img/reverse-geocoding.gif)
 
 ### What are the most interesting features of Pelias?
 
@@ -66,7 +66,7 @@ techniques with knowledge of geography to quickly search over many millions of r
 
 The Pelias architecture has three main components and several smaller pieces.
 
-![A diagram of the Pelias architecture.](https://raw.githubusercontent.com/pelias/pelias/master/img/Pelias%20Architecture.png)
+![A diagram of the Pelias architecture.](/img/Pelias%20Architecture.png)
 
 #### Data importers
 

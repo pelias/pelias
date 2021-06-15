@@ -50,7 +50,7 @@ note: for a full list of properties see page 79 of the [TIGER technical document
 
 ### Openstreetmap
 
-![osm](http://wiki.openstreetmap.org/w/images/thumb/7/7e/Logo_by_hind_128x128.png/120px-Logo_by_hind_128x128.png)
+![osm](/img/interpolation/Logo_by_hind_128x128.png/120px-Logo_by_hind_128x128.png)
 
 A failed import of TIGER@2005 was attempted during 2005/2006, it was aborted and the data purged due to [data integrity problems](http://wiki.openstreetmap.org/wiki/Old_TIGER_Import_2005/2006).
 
@@ -137,7 +137,7 @@ It's natural to assume that the `addr:interpolation` tag is commonly added to wa
 
 The majority of `addr:interpolation` tags are 'invisible ways' which represent the path along which the houses will sit, on the base map they look like this:
 
-![basemap interpolation](http://missinglink.embed.s3.amazonaws.com/osm-interpolation-tag.png)
+![basemap interpolation](/img/interpolation/osm-interpolation-tag.png)
 
 In the example above the mapper has entered the first node and last note of the sequence, they tagged each with the `addr:street` and `addr:housenumber` tags and then joined the two with [a way](https://www.openstreetmap.org/way/251485113) which contains a single tag `addr:interpolation:odd`, the way is represented by a dashed line.
 
@@ -145,6 +145,6 @@ This seems to be the most common use of the tag, in some cases the mapper is sim
 
 In some areas the interpolation values have been replaced by individual building outlines, in other areas it's more common, such as:
 
-![basemap interpolation](http://missinglink.embed.s3.amazonaws.com/osm-interpolation-coverage.png)
+![basemap interpolation](/img/interpolation/osm-interpolation-coverage.png)
 
 I would be interested in doing more research in to the amount of house numbers available in OSM using `addr:street` and `addr:housenumber` vs. using `addr:interpolation:*`. It would take some time to compute but would make a great blog post.
