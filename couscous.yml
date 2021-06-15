@@ -50,3 +50,6 @@ menu:
                 fun_facts:
                     text: Fun Facts!
                     relativeUrl: fun_facts.html
+                api_key:
+                    text: 🔑 Get an API key
+                    absoluteUrl: https://geocode.earth/
