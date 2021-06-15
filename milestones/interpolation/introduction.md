@@ -107,7 +107,7 @@ In the case where we cannot find the exact house number *but* we know the street
 
 Interpolation is based on numeric 'ranges' of house numbers, it's not as precise as exact locations but can greatly increase the address coverage in the search engine.
 
-![interpolation](http://missinglink.embed.s3.amazonaws.com/tiger-interpolation-basics.png)
+![interpolation](/img/interpolation/tiger-interpolation-basics.png)
 
 Interpolation can be complex due to the shape of the geometry, the offset from the road network, 'holes' in building ranges etc. This will be covered in more detail later in the document.
 

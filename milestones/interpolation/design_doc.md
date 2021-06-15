@@ -41,7 +41,7 @@ Three strategies for conflating the OSM road network were considered:
 
 #### Exporting the Valhalla routing graph
 
-![generic graph image](http://i.stack.imgur.com/JrBdQ.png)
+![generic graph image](https://i.stack.imgur.com/JrBdQ.png)
 
 Valhalla doesn't store OSM ways, it breaks up the source data in to a graph of 'edges'. Each edge is marked up with [meta data such as this](https://gist.github.com/missinglink/b2ac67f51d132b591868a9ef60061c43).
 
@@ -64,7 +64,7 @@ Future work can be planned in v2 to:
 
 ### Point data
 
-![generic house number image](http://wiki.openstreetmap.org/w/images/f/f2/Housenumber_example_kms_2.png)
+![generic house number image](https://wiki.openstreetmap.org/w/images/f/f2/Housenumber_example_kms_2.png)
 
 Point data from Openstreetmap and OpenAddresses will need to be associated to the correct segment of the road network (a single entry from the dump above).
 
@@ -78,7 +78,7 @@ The projected point data is saved along with the original position, one will be 
 
 ### Range data
 
-![range](http://missinglink.embed.s3.amazonaws.com/osm-interpolation-tag.png)
+![range](/img/interpolation/osm-interpolation-tag.png)
 
 Range data from Openstreetmap and TIGER will also need to be associated to the correct segment of the road network.
 
