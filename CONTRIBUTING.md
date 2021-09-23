@@ -36,7 +36,7 @@ It's important to get feedback about the quality of local search results. When i
 Pelias has several miscellaneous standards:
 
 - we use [JSHint](http://jshint.com/docs/) for linting
-- we use [TravisCI](https://travis-ci.org/) for continuous integration
+- we use [Github Actions](https://github.com/) for continuous integration
 - we use [Winston](https://www.npmjs.com/package/winston) for logging
 - we *love* tests, especially when written with [tape](https://github.com/substack/tape)
 - we use [semver](http://semver.org/) for package versioning
