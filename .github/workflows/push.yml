@@ -1,0 +1,23 @@
+name: Website built and deploy
+on: push
+jobs:
+  build:
+    runs-on: '${{ matrix.os }}'
+    strategy:
+      matrix:
+        os:
+          - ubuntu-20.04
+        php-version:
+          - 5.6
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Install PHP {{ matrix.php-version }}'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php-version }}'
+      - name: Build Couscous site
+        run: |
+          curl -OS http://couscous.io/couscous.phar
+          chmod +x couscous.phar
+          sudo mv couscous.phar /usr/local/bin/couscous
+          couscous generate
