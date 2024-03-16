@@ -82,7 +82,7 @@ The importers filter, normalize, and ingest geographic datasets into the Pelias 
 We are always discussing [supporting additional datasets](https://github.com/pelias/pelias/issues/254). Pelias users can also write their own importers, for example to import proprietary data into your own instance of Pelias.
 
 #### Database
-The underlying datastore that does most of the query heavy-lifting and powers our search results. We use [Elasticsearch](https://www.elastic.co/). Currently versions 6 and 7 are supported.
+The underlying datastore that does most of the query heavy-lifting and powers our search results. We use [Elasticsearch](https://www.elastic.co/). Currently versions 7 and 8 are supported.
 
 We've built a tool called [pelias-schema](https://github.com/pelias/schema/) that sets up Elasticsearch indices properly for Pelias.
 
