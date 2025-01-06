@@ -72,7 +72,7 @@ The Pelias architecture has three main components and several smaller pieces.
 
 The importers filter, normalize, and ingest geographic datasets into the Pelias database. Currently there are six officially supported importers:
 
-* **[OpenStreetMap](https://github.com/pelias/openstreetmap/)**: supports importing nodes and ways from [OpenStreetMap](http://openstreetmap.org/)
+* **[OpenStreetMap](https://github.com/pelias/openstreetmap/)**: supports importing nodes, ways and relations from [OpenStreetMap](http://openstreetmap.org/)
 * **[OpenAddresses](https://github.com/pelias/openaddresses/)**: supports importing the hundreds of millions of global addresses collected from various authoritative government sources by [OpenAddresses](https://openaddresses.io/)
 * **[Who's on First](https://github.com/pelias/whosonfirst/)**: supports importing admin areas and venues from [Who's on First](https://www.whosonfirst.org/)
 * **[Geonames](https://github.com/pelias/geonames/)**: supports importing admin records and venues from [Geonames](http://www.geonames.org/)
