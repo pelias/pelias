@@ -250,9 +250,10 @@ input are not welcome**.
 Contributions made completely by AI have essentially no value and do nothing
 but create noise and errors to be discovered and solved. Keep in mind the core
 team also has access to AI tools. So if your idea of helping is to one shot
-"build feature X for Pelias" and then send it to us, we could have done the
-same, except we also have experience and knowledge of our roadmap, what works,
-what doesn't, etc.
+"build feature X for Pelias" and then send it to us, please don't. We could
+have done the same, except we also have experience and knowledge of our
+roadmap, what works, what doesn't, etc. At the very least, reach out first and
+we'll help you write a good prompt.
 
 The generation of code and issue descriptions is not the bottleneck for
 improvement of Pelias. Instead, it's the ability to reliably evaluate changes
